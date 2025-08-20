@@ -3,6 +3,7 @@ from textual.widgets import ListView, Label, ListItem
 
 
 class SelectApp(App[str]):
+    INLINE_PADDING = 0
     CSS = """
     ListItem.-highlight {
         color: white;
