@@ -1,6 +1,9 @@
 from textual.app import ComposeResult
+from textual.containers import Vertical
 from textual.widget import Widget
-from textual.widgets import ListView, Label, ListItem
+from textual.widgets import ListView, Label, ListItem, Static
+
+from inquirer_textual.widgets.Choice import Choice
 
 
 class ChoiceLabel(Label):
@@ -21,12 +24,12 @@ class InquirerSelect(Widget):
             background: transparent;
         }
         #inquirer-select-list-view ListItem.-highlight {
-            color: white;
+            color: $highlight-foreground;
             background: transparent;
         }
         """
 
-    def __init__(self, message: str, choices: list[str]):
+    def __init__(self, message: str, choices: list[Choice]):
         super().__init__()
         self.message = message
         self.choices = choices
@@ -34,7 +37,7 @@ class InquirerSelect(Widget):
         self.selected: ChoiceLabel | None = None
 
     def on_mount(self):
-        self.styles.height = len(self.choices)
+        self.styles.height = min(10, len(self.choices) + 1)
 
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
         if self.selected:
@@ -49,8 +52,9 @@ class InquirerSelect(Widget):
     def compose(self) -> ComposeResult:
         items: list[ListItem] = []
         for choice in self.choices:
-            list_item = ListItem(ChoiceLabel(choice))
+            list_item = ListItem(ChoiceLabel(choice.name))
             items.append(list_item)
         self.list_view = ListView(*items, id='inquirer-select-list-view')
-        # self.list_view.styles.height = len(self.choices)
-        yield self.list_view
+        with Vertical():
+            yield Static(self.message)
+            yield self.list_view

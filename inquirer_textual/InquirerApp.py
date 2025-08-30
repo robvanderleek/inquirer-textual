@@ -26,3 +26,8 @@ class InquirerApp(App[str]):
     def compose(self) -> ComposeResult:
         yield self.widget
         yield Footer()
+
+    def get_theme_variable_defaults(self) -> dict[str, str]:
+        return {
+            'highlight-foreground': '#61afef',
+        }
