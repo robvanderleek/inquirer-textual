@@ -1,5 +1,5 @@
 from textual.app import ComposeResult
-from textual.containers import Vertical
+from textual.containers import Horizontal
 from textual.widget import Widget
 from textual.widgets import ListView, Label, ListItem, Static
 
@@ -24,8 +24,15 @@ class InquirerSelect(Widget):
             background: transparent;
         }
         #inquirer-select-list-view ListItem.-highlight {
-            color: $highlight-foreground;
+            color: $select-list-item-highlight-foreground;
             background: transparent;
+        }
+        #inquirer-select-question-mark {
+            width: 2;
+            color: $select-question-mark;
+        }
+        #inquirer-select-header {
+            height: 1;
         }
         """
 
@@ -55,6 +62,7 @@ class InquirerSelect(Widget):
             list_item = ListItem(ChoiceLabel(choice.name))
             items.append(list_item)
         self.list_view = ListView(*items, id='inquirer-select-list-view')
-        with Vertical():
+        with Horizontal(id='inquirer-select-header'):
+            yield Static('? ', id='inquirer-select-question-mark')
             yield Static(self.message)
-            yield self.list_view
+        yield self.list_view

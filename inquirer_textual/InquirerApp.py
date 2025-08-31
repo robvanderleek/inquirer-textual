@@ -29,5 +29,6 @@ class InquirerApp(App[str]):
 
     def get_theme_variable_defaults(self) -> dict[str, str]:
         return {
-            'highlight-foreground': '#61afef',
+            'select-question-mark': '#e5c07b',
+            'select-list-item-highlight-foreground': '#61afef',
         }
