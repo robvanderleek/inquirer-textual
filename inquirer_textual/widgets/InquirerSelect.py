@@ -44,6 +44,7 @@ class InquirerSelect(Widget):
         self.selected: ChoiceLabel | None = None
 
     def on_mount(self):
+        self.app.bind('v', 'view', description='View')
         self.styles.height = min(10, len(self.choices) + 1)
 
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
