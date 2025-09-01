@@ -4,6 +4,8 @@ from textual.widget import Widget
 from textual.widgets import ListView, Label, ListItem, Static
 
 from inquirer_textual.widgets.Choice import Choice
+from inquirer_textual.widgets.SelectResult import SelectResult
+from inquirer_textual.widgets.Shortcut import Shortcut
 
 
 class ChoiceLabel(Label):
@@ -36,26 +38,34 @@ class InquirerSelect(Widget):
         }
         """
 
-    def __init__(self, message: str, choices: list[Choice]):
+    def __init__(self, message: str, choices: list[Choice], shortcuts: list[Shortcut] | None = None):
         super().__init__()
         self.message = message
         self.choices = choices
         self.list_view: ListView | None = None
-        self.selected: ChoiceLabel | None = None
+        self.selected_label: ChoiceLabel | None = None
+        self.selected_item: Choice | None = None
+        self.shortcuts = shortcuts
 
     def on_mount(self):
-        self.app.bind('v', 'view', description='View')
+        if self.shortcuts:
+            for shortcut in self.shortcuts:
+                self._bindings.bind(shortcut.key, f'shortcut("{shortcut.command}")', description=shortcut.description)
         self.styles.height = min(10, len(self.choices) + 1)
 
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
-        if self.selected:
-            self.selected.remove_pointer()
+        if self.selected_label:
+            self.selected_label.remove_pointer()
         label = event.item.query_one(ChoiceLabel)
         label.add_pointer()
-        self.selected = label
+        self.selected_label = label
+        self.selected_item = next(c for c in self.choices if c.name == label.text)
 
     def on_list_view_selected(self, event: ListView.Selected) -> None:
-        self.app.exit(self.choices[event.index])
+        self.app.exit(SelectResult('select', self.choices[event.index]))
+
+    def action_shortcut(self, command: str):
+        self.app.exit(SelectResult(command, self.selected_item))
 
     def compose(self) -> ComposeResult:
         items: list[ListItem] = []

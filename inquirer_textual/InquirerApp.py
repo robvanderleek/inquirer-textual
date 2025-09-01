@@ -1,12 +1,16 @@
+from typing import TypeVar
+
 from textual.app import App
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.widget import Widget
 from textual.widgets import Footer
 
+T = TypeVar('T')
 
-class InquirerApp(App[str]):
-    INLINE_PADDING = 0
+
+class InquirerApp(App[T]):
+    BINDINGS = [Binding("q", "quit", "Quit", priority=True)]
     CSS = """
         App {
             background: transparent;
@@ -17,7 +21,8 @@ class InquirerApp(App[str]):
             background: transparent;
         }
         """
-    BINDINGS = [Binding("q", "quit", "Quit", priority=True)]
+    ENABLE_COMMAND_PALETTE = False
+    INLINE_PADDING = 0
 
     def __init__(self, widget: Widget):
         super().__init__()

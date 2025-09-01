@@ -3,13 +3,16 @@ from textual.containers import Horizontal
 from textual.widgets import ListItem, ListView, Static, Label
 
 from inquirer_textual.prompts import select, text
+from inquirer_textual.widgets.Shortcut import Shortcut
 
 
 def test_select():
+    shortcuts = [Shortcut('v', 'view', 'View')]
     answer = select('Environment:', [l for l in
                                      ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd',
                                       'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-                                      'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']])
+                                      'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']],
+                    shortcuts)
     print(f'Your answer: {answer}')
 
 
@@ -47,4 +50,5 @@ class TestApp(App):
 
 
 if __name__ == "__main__":
-    TestApp().run(inline=True, inline_no_clear=True)
+    # TestApp().run(inline=True, inline_no_clear=True)
+    test_select()

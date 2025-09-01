@@ -1,7 +1,8 @@
 from dataclasses import dataclass
+from typing import Any
 
 
 @dataclass
 class Choice:
     name: str
-    value: any = None
+    value: Any = None
