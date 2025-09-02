@@ -7,7 +7,7 @@ from inquirer_textual.widgets.Shortcut import Shortcut
 
 
 def test_select():
-    shortcuts = [Shortcut('v', 'view', 'View')]
+    shortcuts = [Shortcut('v', 'view')]
     answer = select('Environment:', [l for l in
                                      ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd',
                                       'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
