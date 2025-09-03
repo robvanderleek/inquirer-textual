@@ -50,7 +50,8 @@ class InquirerSelect(Widget):
     def on_mount(self):
         if self.shortcuts:
             for shortcut in self.shortcuts:
-                self._bindings.bind(shortcut.key, f'shortcut("{shortcut.command}")', description=shortcut.description)
+                self._bindings.bind(shortcut.key, f'shortcut("{shortcut.command}")', description=shortcut.description,
+                                    show=shortcut.show)
         self.styles.height = min(10, len(self.choices) + 1)
 
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:

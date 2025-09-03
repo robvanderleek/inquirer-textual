@@ -50,3 +50,10 @@ def test_shortcut_snapshot(snap_compare):
     app = InquirerApp(widget)
 
     assert snap_compare(app)
+
+
+def test_shortcut_no_description_snapshot(snap_compare):
+    widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')], [Shortcut('v', 'view')])
+    app = InquirerApp(widget)
+
+    assert snap_compare(app)

@@ -2,7 +2,6 @@ from typing import TypeVar
 
 from textual.app import App
 from textual.app import ComposeResult
-from textual.binding import Binding
 from textual.widget import Widget
 from textual.widgets import Footer
 
@@ -10,7 +9,6 @@ T = TypeVar('T')
 
 
 class InquirerApp(App[T]):
-    BINDINGS = [Binding("q", "quit", "Quit", priority=True)]
     CSS = """
         App {
             background: transparent;
