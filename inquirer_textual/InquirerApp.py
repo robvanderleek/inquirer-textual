@@ -3,7 +3,6 @@ from typing import TypeVar
 from textual.app import App
 from textual.app import ComposeResult
 from textual.widget import Widget
-from textual.widgets import Footer
 
 T = TypeVar('T')
 
@@ -28,7 +27,6 @@ class InquirerApp(App[T]):
 
     def compose(self) -> ComposeResult:
         yield self.widget
-        yield Footer()
 
     def get_theme_variable_defaults(self) -> dict[str, str]:
         return {
