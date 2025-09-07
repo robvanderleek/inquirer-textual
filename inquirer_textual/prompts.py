@@ -18,5 +18,5 @@ def select(message: str, choices: list[str | Choice], shortcuts: list[Shortcut] 
     if all(isinstance(c, str) for c in choices):
         choices = [Choice(name=c) for c in choices]
     select_widget = InquirerSelect(message, choices, shortcuts)
-    app: InquirerApp[App[SelectResult]] = InquirerApp(select_widget)
-    return app.run(inline=True, inline_no_clear=True)
+    app: InquirerApp[App[SelectResult]] = InquirerApp(select_widget, show_footer=bool(shortcuts))
+    return app.run(inline=True, inline_no_clear=False)

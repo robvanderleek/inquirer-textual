@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "textual>=5.3.0",
+    "textual>=6.1.0",
 ]
 
 [dependency-groups]

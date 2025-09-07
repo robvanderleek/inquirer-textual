@@ -1,7 +1,7 @@
 from textual.app import ComposeResult
 from textual.containers import Horizontal, VerticalGroup
 from textual.widget import Widget
-from textual.widgets import ListView, Label, ListItem, Static, ContentSwitcher, Footer
+from textual.widgets import ListView, Label, ListItem, Static
 
 from inquirer_textual.widgets.Choice import Choice
 from inquirer_textual.widgets.SelectResult import SelectResult
@@ -62,28 +62,23 @@ class InquirerSelect(Widget):
         self.selected_label = label
         self.selected_item = next(c for c in self.choices if c.name == label.text)
 
-    def on_list_view_selected(self, event: ListView.Selected) -> None:
-        self.query_one(ContentSwitcher).current = 'selected'
-        self.styles.height = 1
-        self.app.call_after_refresh(lambda: self.app.exit(SelectResult('select', self.choices[event.index])))
+    def on_list_view_selected(self, _: ListView.Selected) -> None:
+        self._exit_select('select')
 
     def action_shortcut(self, command: str):
-        self.query_one(ContentSwitcher).current = 'selected'
-        self.styles.height = 1
-        self.app.exit(SelectResult(command, self.selected_item))
+        self._exit_select(command)
+
+    def _exit_select(self, command: str):
+        self.app.call_after_refresh(lambda: self.app.exit(SelectResult(command, self.selected_item)))
 
     def compose(self) -> ComposeResult:
-        with ContentSwitcher(initial='main'):
-            with VerticalGroup(id='main'):
-                items: list[ListItem] = []
-                for choice in self.choices:
-                    list_item = ListItem(ChoiceLabel(choice.name))
-                    items.append(list_item)
-                self.list_view = ListView(*items, id='inquirer-select-list-view')
-                with Horizontal(id='inquirer-select-header'):
-                    yield Static('? ', id='inquirer-select-question-mark')
-                    yield Static(self.message)
-                yield self.list_view
-                yield Footer()
-            with VerticalGroup(id='selected'):
-                yield Static(f'You selected: {self.selected_item.name if self.selected_item else ""}')
+        with VerticalGroup(id='main'):
+            items: list[ListItem] = []
+            for choice in self.choices:
+                list_item = ListItem(ChoiceLabel(choice.name))
+                items.append(list_item)
+            self.list_view = ListView(*items, id='inquirer-select-list-view')
+            with Horizontal(id='inquirer-select-header'):
+                yield Static('? ', id='inquirer-select-question-mark')
+                yield Static(self.message)
+            yield self.list_view
