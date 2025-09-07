@@ -38,7 +38,8 @@ class InquirerSelect(Widget):
         }
         """
 
-    def __init__(self, message: str, choices: list[Choice], shortcuts: list[Shortcut] | None = None):
+    def __init__(self, message: str, choices: list[Choice], shortcuts: list[Shortcut] | None = None,
+                 default: Choice | None = None):
         super().__init__()
         self.message = message
         self.choices = choices
@@ -46,6 +47,7 @@ class InquirerSelect(Widget):
         self.selected_label: ChoiceLabel | None = None
         self.selected_item: Choice | None = None
         self.shortcuts = shortcuts
+        self.default = default
 
     def on_mount(self):
         if self.shortcuts:
@@ -72,12 +74,15 @@ class InquirerSelect(Widget):
         self.app.call_after_refresh(lambda: self.app.exit(SelectResult(command, self.selected_item)))
 
     def compose(self) -> ComposeResult:
-        with VerticalGroup(id='main'):
+        with VerticalGroup():
+            initial_index = 0
             items: list[ListItem] = []
-            for choice in self.choices:
+            for idx, choice in enumerate(self.choices):
                 list_item = ListItem(ChoiceLabel(choice.name))
                 items.append(list_item)
-            self.list_view = ListView(*items, id='inquirer-select-list-view')
+                if self.default and choice == self.default:
+                    initial_index = idx
+            self.list_view = ListView(*items, id='inquirer-select-list-view', initial_index=initial_index)
             with Horizontal(id='inquirer-select-header'):
                 yield Static('? ', id='inquirer-select-question-mark')
                 yield Static(self.message)
