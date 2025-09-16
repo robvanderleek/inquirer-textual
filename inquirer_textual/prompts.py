@@ -2,6 +2,7 @@ from textual.app import App
 
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.widgets.Choice import Choice
+from inquirer_textual.widgets.InquirerNumber import InquirerNumber
 from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 from inquirer_textual.widgets.InquirerText import InquirerText
 from inquirer_textual.widgets.SelectResult import SelectResult
@@ -14,9 +15,16 @@ def text(message: str) -> str:
     return app.run(inline=True)
 
 
-def select(message: str, choices: list[str | Choice], shortcuts: list[Shortcut] | None = None) -> SelectResult | None:
+def number(message: str) -> int:
+    number_widget = InquirerNumber(message)
+    app = InquirerApp(number_widget)
+    return app.run(inline=True)
+
+
+def select(message: str, choices: list[str | Choice], shortcuts: list[Shortcut] | None = None,
+           default: Choice | None = None) -> SelectResult | None:
     if all(isinstance(c, str) for c in choices):
         choices = [Choice(name=c) for c in choices]
-    select_widget = InquirerSelect(message, choices, shortcuts)
+    select_widget = InquirerSelect(message, choices, shortcuts, default)
     app: InquirerApp[App[SelectResult]] = InquirerApp(select_widget, show_footer=bool(shortcuts))
     return app.run(inline=True)

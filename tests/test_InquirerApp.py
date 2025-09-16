@@ -18,14 +18,14 @@ async def test_shortcut():
     assert result.command == 'view'
 
 
-def test_shortcut_snapshot(snap_compare):
+def test_snapshot_shortcut(snap_compare):
     widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')], [Shortcut('v', 'view', 'View')])
     app = InquirerApp(widget, show_footer=True)
 
     assert snap_compare(app)
 
 
-def test_shortcut_no_description_snapshot(snap_compare):
+def test_snapshot_shortcut_no_description(snap_compare):
     widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')], [Shortcut('v', 'view')])
     app = InquirerApp(widget, show_footer=True)
 

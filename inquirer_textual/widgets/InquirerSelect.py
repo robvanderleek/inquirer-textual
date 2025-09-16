@@ -1,9 +1,10 @@
 from textual.app import ComposeResult
-from textual.containers import Horizontal, VerticalGroup
+from textual.containers import VerticalGroup
 from textual.widget import Widget
-from textual.widgets import ListView, Label, ListItem, Static
+from textual.widgets import ListView, Label, ListItem
 
 from inquirer_textual.widgets.Choice import Choice
+from inquirer_textual.widgets.PromptMessage import PromptMessage
 from inquirer_textual.widgets.SelectResult import SelectResult
 from inquirer_textual.widgets.Shortcut import Shortcut
 
@@ -28,13 +29,6 @@ class InquirerSelect(Widget):
         #inquirer-select-list-view ListItem.-highlight {
             color: $select-list-item-highlight-foreground;
             background: transparent;
-        }
-        #inquirer-select-question-mark {
-            width: 2;
-            color: $select-question-mark;
-        }
-        #inquirer-select-header {
-            height: 1;
         }
         """
 
@@ -83,7 +77,5 @@ class InquirerSelect(Widget):
                 if self.default and choice == self.default:
                     initial_index = idx
             self.list_view = ListView(*items, id='inquirer-select-list-view', initial_index=initial_index)
-            with Horizontal(id='inquirer-select-header'):
-                yield Static('? ', id='inquirer-select-question-mark')
-                yield Static(self.message)
+            yield PromptMessage(self.message)
             yield self.list_view

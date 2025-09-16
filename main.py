@@ -1,29 +1,35 @@
 from textual.app import App
 from textual.widgets import Static
 
-from inquirer_textual.prompts import select, text
+from inquirer_textual import prompts
 from inquirer_textual.widgets.Shortcut import Shortcut
 
 
 def test_select():
     shortcuts = [Shortcut('v', 'view')]
-    answer = select('Environment:', [l for l in
-                                     ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd',
-                                      'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-                                      'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']],
-                    shortcuts)
-    print(f'Your answer: {answer}')
-    answer = select('Environment:', [l for l in
-                                     ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd',
-                                      'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-                                      'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-                                      'l']],
-                    shortcuts)
+    answer = prompts.select('Environment:', [l for l in
+                                             ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'a', 'b', 'c',
+                                              'd',
+                                              'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd', 'e', 'f', 'g',
+                                              'h',
+                                              'i', 'j', 'k', 'l', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+                                              'l']],
+                            shortcuts)
     print(f'Your answer: {answer}')
 
 
 def test_text():
-    answer = text("Enter your name:")
+    answer = prompts.text("Enter your name:")
+    print(f'Your answer: {answer}')
+
+
+def test_number():
+    answer = prompts.number(
+        message="Enter integer:",
+        # min_allowed=-2,
+        # max_allowed=10,
+        # validate=EmptyInputValidator(),
+    )
     print(f'Your answer: {answer}')
 
 
@@ -50,4 +56,6 @@ class TestApp(App):
 
 if __name__ == "__main__":
     # TestApp().run(inline=True)
-    test_select()
+    # test_select()
+    # test_text()
+    test_number()

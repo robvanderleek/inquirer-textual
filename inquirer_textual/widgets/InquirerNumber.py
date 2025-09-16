@@ -6,11 +6,15 @@ from textual.widgets import Input
 from inquirer_textual.widgets.PromptMessage import PromptMessage
 
 
-class InquirerText(Widget):
+class InquirerNumber(Widget):
     DEFAULT_CSS = """
-    #inquirer-text-input {
+    InquirerNumber {
+        height: auto;
+    }
+    #inquirer-number-input {
         border: none;
         background: transparent;
+        color: $input-color;
         padding: 0;
         height: 1;
     }
@@ -26,4 +30,4 @@ class InquirerText(Widget):
     def compose(self) -> ComposeResult:
         with HorizontalGroup():
             yield PromptMessage(self.message)
-            yield Input(id="inquirer-text-input")
+            yield Input(id="inquirer-number-input", type="integer")

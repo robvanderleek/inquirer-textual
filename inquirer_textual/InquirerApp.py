@@ -17,6 +17,7 @@ class InquirerApp(App[T]):
             border-top: none;
             border-bottom: none;
             background: transparent;
+            height: auto;
         }
         """
     ENABLE_COMMAND_PALETTE = False
@@ -36,4 +37,5 @@ class InquirerApp(App[T]):
         return {
             'select-question-mark': '#e5c07b',
             'select-list-item-highlight-foreground': '#61afef',
+            'input-color': '#98c379'
         }
