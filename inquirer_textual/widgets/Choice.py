@@ -6,3 +6,6 @@ from typing import Any
 class Choice:
     name: str
     value: Any = None
+
+    def __str__(self):
+        return self.name
