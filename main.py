@@ -5,7 +5,7 @@ from inquirer_textual import prompts
 from inquirer_textual.widgets.Shortcut import Shortcut
 
 
-def test_select():
+def example_select():
     shortcuts = [Shortcut('v', 'view')]
     answer = prompts.select('Environment:', [l for l in
                                              ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'a', 'b', 'c',
@@ -18,14 +18,17 @@ def test_select():
     print(f'Your answer: {answer}')
 
 
-def test_text():
-    answer = prompts.text("Enter your name:")
+def example_text():
+    shortcuts = [Shortcut('escape', 'select')]
+    answer = prompts.text("Enter your name:", shortcuts)
     print(f'Your answer: {answer}')
 
 
-def test_number():
+def example_number():
+    shortcuts = [Shortcut('escape', 'select')]
     answer = prompts.number(
         message="Enter integer:",
+        shortcuts=shortcuts
         # min_allowed=-2,
         # max_allowed=10,
         # validate=EmptyInputValidator(),
@@ -56,6 +59,6 @@ class TestApp(App):
 
 if __name__ == "__main__":
     # TestApp().run(inline=True)
-    # test_select()
-    # test_text()
-    test_number()
+    example_text()
+    example_select()
+    example_number()

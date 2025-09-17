@@ -1,12 +1,14 @@
+from textual import getters
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
-from textual.widget import Widget
 from textual.widgets import Input
 
+from inquirer_textual.InquirerApp import InquirerApp
+from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 from inquirer_textual.widgets.PromptMessage import PromptMessage
 
 
-class InquirerNumber(Widget):
+class InquirerNumber(InquirerWidget):
     DEFAULT_CSS = """
     InquirerNumber {
         height: auto;
@@ -19,15 +21,21 @@ class InquirerNumber(Widget):
         height: 1;
     }
     """
+    app = getters.app(InquirerApp)
 
     def __init__(self, message: str):
         super().__init__()
         self.message = message
+        self.input: Input | None = None
 
-    def on_input_submitted(self, event: Input.Submitted):
-        self.app.exit(event.value)
+    def current_value(self):
+        return self.input.value
+
+    def on_input_submitted(self, _: Input.Submitted):
+        self.app.select_current()
 
     def compose(self) -> ComposeResult:
         with HorizontalGroup():
             yield PromptMessage(self.message)
-            yield Input(id="inquirer-number-input", type="integer")
+            self.input = Input(id="inquirer-number-input", type="integer")
+            yield self.input

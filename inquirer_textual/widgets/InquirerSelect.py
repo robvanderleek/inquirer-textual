@@ -1,12 +1,12 @@
+from textual import getters
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup
-from textual.widget import Widget
 from textual.widgets import ListView, Label, ListItem
 
+from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.widgets.Choice import Choice
+from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 from inquirer_textual.widgets.PromptMessage import PromptMessage
-from inquirer_textual.widgets.SelectResult import SelectResult
-from inquirer_textual.widgets.Shortcut import Shortcut
 
 
 class ChoiceLabel(Label):
@@ -21,7 +21,7 @@ class ChoiceLabel(Label):
         self.update(f'  {self.text}')
 
 
-class InquirerSelect(Widget):
+class InquirerSelect(InquirerWidget):
     DEFAULT_CSS = """
         #inquirer-select-list-view {
             background: transparent;
@@ -31,23 +31,18 @@ class InquirerSelect(Widget):
             background: transparent;
         }
         """
+    app = getters.app(InquirerApp)
 
-    def __init__(self, message: str, choices: list[Choice], shortcuts: list[Shortcut] | None = None,
-                 default: Choice | None = None):
+    def __init__(self, message: str, choices: list[Choice], default: Choice | None = None):
         super().__init__()
         self.message = message
         self.choices = choices
         self.list_view: ListView | None = None
         self.selected_label: ChoiceLabel | None = None
         self.selected_item: Choice | None = None
-        self.shortcuts = shortcuts
         self.default = default
 
     def on_mount(self):
-        if self.shortcuts:
-            for shortcut in self.shortcuts:
-                self._bindings.bind(shortcut.key, f'shortcut("{shortcut.command}")', description=shortcut.description,
-                                    show=shortcut.show)
         self.styles.height = min(10, len(self.choices) + 1)
 
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
@@ -59,13 +54,10 @@ class InquirerSelect(Widget):
         self.selected_item = next(c for c in self.choices if c.name == label.text)
 
     def on_list_view_selected(self, _: ListView.Selected) -> None:
-        self._exit_select('select')
+        self.app.select_current()
 
-    def action_shortcut(self, command: str):
-        self._exit_select(command)
-
-    def _exit_select(self, command: str):
-        self.app.call_after_refresh(lambda: self.app.exit(SelectResult(command, self.selected_item)))
+    def current_value(self):
+        return self.selected_item
 
     def compose(self) -> ComposeResult:
         with VerticalGroup():

@@ -1,7 +1,7 @@
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.widgets.Choice import Choice
 from inquirer_textual.widgets.InquirerSelect import InquirerSelect
-from inquirer_textual.widgets.SelectResult import SelectResult
+from inquirer_textual.widgets.Result import Result
 
 
 async def test_select_entry():
@@ -12,9 +12,9 @@ async def test_select_entry():
         assert widget.selected_item.name == 'a'
         await pilot.press("down")
         await pilot.press("enter")
-    result: SelectResult = app._return_value
+    result: Result[Choice] = app._return_value
 
-    assert result.choice.name == 'b'
+    assert result.value.name == 'b'
     assert result.command == 'select'
 
 

@@ -2,13 +2,16 @@ from typing import TypeVar
 
 from textual.app import App
 from textual.app import ComposeResult
-from textual.widget import Widget
 from textual.widgets import Footer
+
+from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.Result import Result
+from inquirer_textual.widgets.Shortcut import Shortcut
 
 T = TypeVar('T')
 
 
-class InquirerApp(App[T]):
+class InquirerApp(App[Result[T]]):
     CSS = """
         App {
             background: transparent;
@@ -23,10 +26,27 @@ class InquirerApp(App[T]):
     ENABLE_COMMAND_PALETTE = False
     INLINE_PADDING = 0
 
-    def __init__(self, widget: Widget, show_footer: bool = False):
+    def __init__(self, widget: InquirerWidget, shortcuts: list[Shortcut] | None = None, show_footer: bool = False):
         super().__init__()
         self.widget = widget
+        self.shortcuts = shortcuts
         self.show_footer = show_footer
+
+    def on_mount(self) -> None:
+        if self.shortcuts:
+            for shortcut in self.shortcuts:
+                self._bindings.bind(shortcut.key, f'shortcut("{shortcut.command}")',
+                                    description=shortcut.description,
+                                    show=shortcut.show)
+
+    def action_shortcut(self, command: str):
+        self._exit_select(command)
+
+    def select_current(self):
+        self._exit_select('select')
+
+    def _exit_select(self, command: str):
+        self.call_after_refresh(lambda: self.app.exit(Result(command, self.widget.current_value())))
 
     def compose(self) -> ComposeResult:
         yield self.widget
