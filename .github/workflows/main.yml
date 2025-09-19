@@ -1,0 +1,25 @@
+name: main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cicd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v5
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        run: uv sync --locked --dev
+
+      - name: Run unit-tests
+        run: uv run pytest
+
+      - name: Deploy documentation
+        run: mkdocs gh-deploy --force

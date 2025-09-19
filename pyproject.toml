@@ -1,9 +1,12 @@
 [project]
 name = "inquirer-textual"
 version = "0.1.0"
-description = "Add your description here"
+description = "Inquirer based on Textual"
+authors = [{ name = "Rob van der Leek", email = "robvanderleek@gmail.com" }]
 readme = "README.md"
+license = "GPL-3.0-or-later"
 requires-python = ">=3.10"
+
 dependencies = [
     "textual>=6.1.0",
 ]
@@ -14,6 +17,8 @@ dev = [
     "pytest-asyncio>=1.1.0",
     "pytest-textual-snapshot>=1.1.0",
     "textual-dev>=1.7.0",
+    "mkdocs-material>=9.5.10",
+    "mkdocs-glightbox>=0.3.7",
 ]
 
 [tool.pytest.ini_options]
