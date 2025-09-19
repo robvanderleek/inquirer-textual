@@ -1,24 +1,13 @@
 from textual import getters
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup
-from textual.widgets import ListView, Label, ListItem
+from textual.widgets import ListView, ListItem
 
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.widgets.Choice import Choice
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 from inquirer_textual.widgets.PromptMessage import PromptMessage
-
-
-class ChoiceLabel(Label):
-    def __init__(self, text: str):
-        super().__init__('  ' + text)
-        self.text = text
-
-    def add_pointer(self):
-        self.update(f'\u276f {self.text}')
-
-    def remove_pointer(self):
-        self.update(f'  {self.text}')
+from inquirer_textual.widgets.select.ChoiceLabel import ChoiceLabel
 
 
 class InquirerSelect(InquirerWidget):
@@ -33,7 +22,7 @@ class InquirerSelect(InquirerWidget):
         """
     app = getters.app(InquirerApp)
 
-    def __init__(self, message: str, choices: list[Choice], default: Choice | None = None):
+    def __init__(self, message: str, choices: list[str | Choice], default: Choice | None = None):
         super().__init__()
         self.message = message
         self.choices = choices
@@ -51,7 +40,7 @@ class InquirerSelect(InquirerWidget):
         label = event.item.query_one(ChoiceLabel)
         label.add_pointer()
         self.selected_label = label
-        self.selected_item = next(c for c in self.choices if c.name == label.text)
+        self.selected_item = label.item
 
     def on_list_view_selected(self, _: ListView.Selected) -> None:
         self.app.select_current()
@@ -64,7 +53,7 @@ class InquirerSelect(InquirerWidget):
             initial_index = 0
             items: list[ListItem] = []
             for idx, choice in enumerate(self.choices):
-                list_item = ListItem(ChoiceLabel(choice.name))
+                list_item = ListItem(ChoiceLabel(choice))
                 items.append(list_item)
                 if self.default and choice == self.default:
                     initial_index = idx
