@@ -2,6 +2,7 @@ from textual.app import App
 
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.widgets.Choice import Choice
+from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerNumber import InquirerNumber
 from inquirer_textual.widgets.InquirerText import InquirerText
 from inquirer_textual.widgets.Result import Result
@@ -18,6 +19,12 @@ def text(message: str, shortcuts: list[Shortcut] | None = None) -> Result[str]:
 
 def number(message: str, shortcuts: list[Shortcut] | None = None) -> Result[int]:
     widget = InquirerNumber(message)
+    app: InquirerApp[int] = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
+    return app.run(inline=True)
+
+
+def confirm(message: str, shortcuts: list[Shortcut] | None = None) -> Result[bool]:
+    widget = InquirerConfirm(message)
     app = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
     return app.run(inline=True)
 

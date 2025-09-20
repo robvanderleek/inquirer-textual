@@ -1,0 +1,34 @@
+from inquirer_textual.InquirerApp import InquirerApp
+from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
+from inquirer_textual.widgets.Result import Result
+
+
+def test_snapshot(snap_compare):
+    widget = InquirerConfirm('Are you sure?')
+    app = InquirerApp(widget)
+
+    assert snap_compare(app)
+
+
+async def test_confirm_yes():
+    widget = InquirerConfirm('Are you sure?')
+    app = InquirerApp(widget)
+
+    async with app.run_test() as pilot:
+        assert widget.value is None
+        await pilot.press("y")
+    result: Result[bool] = app._return_value
+
+    assert result.value
+
+
+async def test_confirm_no():
+    widget = InquirerConfirm('Are you sure?')
+    app = InquirerApp(widget)
+
+    async with app.run_test() as pilot:
+        assert widget.value is None
+        await pilot.press("n")
+    result: Result[bool] = app._return_value
+
+    assert not result.value
