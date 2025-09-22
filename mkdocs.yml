@@ -23,6 +23,8 @@ theme:
     - navigation.footer
     - content.code.copy
 plugins:
+  - mkdocstrings:
+      default_handler: python
   - glightbox:
       draggable: false
       background: none
@@ -31,6 +33,10 @@ plugins:
 markdown_extensions:
   - abbr
   - attr_list
+  - pymdownx.highlight
   - pymdownx.snippets
+  - pymdownx.superfences
 nav:
-    - Inquirer Textual: 'index.md'
+  - Inquirer Textual: 'index.md'
+  - Reference:
+    - Confirm: 'reference/confirm.md'

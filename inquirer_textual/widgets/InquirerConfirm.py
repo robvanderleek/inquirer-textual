@@ -9,6 +9,7 @@ from inquirer_textual.widgets.PromptMessage import PromptMessage
 
 
 class InquirerConfirm(InquirerWidget):
+    """A simple clickable button."""
     DEFAULT_CSS = """
     InquirerText {
         height: auto;
@@ -23,14 +24,17 @@ class InquirerConfirm(InquirerWidget):
     app = getters.app(InquirerApp)
     can_focus = True
 
-    def __init__(self, message: str):
+    def __init__(self, message: str, confirm_character: str = 'y', reject_character: str = 'n', default=False):
         super().__init__()
+        if len(confirm_character) != 1 or len(reject_character) != 1:
+            raise ValueError("confirm_character and reject_character must be a single character")
+        if confirm_character.lower() == reject_character.lower():
+            raise ValueError("confirm_character and reject_character must be different")
         self.message = message
-        self.label = Label('(y/n)')
-        self.value: bool | None = None
-
-    # def on_mount(self) -> None:
-    #     self.focus()
+        c = confirm_character if not default else confirm_character.upper()
+        r = reject_character if default else reject_character.upper()
+        self.label = Label(f'({c}/{r})')
+        self.value: bool = default
 
     def on_key(self, event: events.Key):
         if event.key.lower() == 'y':

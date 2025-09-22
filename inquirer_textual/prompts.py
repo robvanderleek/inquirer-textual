@@ -1,5 +1,3 @@
-from textual.app import App
-
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.widgets.Choice import Choice
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm

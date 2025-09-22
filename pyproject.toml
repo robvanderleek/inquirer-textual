@@ -19,6 +19,7 @@ dev = [
     "textual-dev>=1.7.0",
     "mkdocs-material>=9.5.10",
     "mkdocs-glightbox>=0.3.7",
+    "mkdocstrings[python]>=0.30.1",
 ]
 
 [tool.pytest.ini_options]
