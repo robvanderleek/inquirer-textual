@@ -1,4 +1,4 @@
-ame: code-analysis
+name: code-analysis
 
 on:
   push:
