@@ -1,1 +1,27 @@
-# Hello world
+<style>
+.md-content .md-typeset h1 { display: none; }
+</style>
+
+<div align="center">
+    <img src="assets/logo-light.png"/>
+</div>
+
+<p align="center"> <em>Versatile library for terminal user input in Python</em>
+</p>
+
+## About
+
+All programs start small. Some stay small, and some become incredibly big. The
+goal of this Python library is to make user input simple for small programs,
+yet remain flexible when programs grow.  
+
+This library is based on the sophisticated and mature
+[Textual](https://textual.textualize.io/) TUI framework.
+
+## Key features and design principles
+
+* **Keep simple things simple**: High-level prompts API for getting user input
+* **Support evolving programs**: From small scripts to full-featured TUI
+  applications
+* **Inquirer-like syntax**: API similar to many other Inquirer libraries
+* **Single dependency**: The Textual TUI framework
