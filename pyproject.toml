@@ -5,7 +5,7 @@ description = "Inquirer based on Textual"
 authors = [{ name = "Rob van der Leek", email = "robvanderleek@gmail.com" }]
 readme = "README.md"
 license = "GPL-3.0-or-later"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 
 dependencies = [
     "textual>=6.1.0",

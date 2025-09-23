@@ -23,7 +23,7 @@ def number(message: str, shortcuts: list[Shortcut] | None = None) -> Result[int]
 
 def confirm(message: str, shortcuts: list[Shortcut] | None = None) -> Result[bool]:
     widget = InquirerConfirm(message)
-    app = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
+    app: InquirerApp[bool] = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
     return app.run(inline=True)
 
 

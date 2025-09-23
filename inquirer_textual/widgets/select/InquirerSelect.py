@@ -22,7 +22,7 @@ class InquirerSelect(InquirerWidget):
         """
     app = getters.app(InquirerApp)
 
-    def __init__(self, message: str, choices: list[str | Choice], default: Choice | None = None):
+    def __init__(self, message: str, choices: list[str | Choice], default: str | Choice | None = None):
         super().__init__()
         self.message = message
         self.choices = choices
