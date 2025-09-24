@@ -1,4 +1,5 @@
 from inquirer_textual.InquirerApp import InquirerApp
+from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 from inquirer_textual.widgets.Choice import Choice
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerNumber import InquirerNumber
@@ -11,6 +12,12 @@ from inquirer_textual.widgets.select.InquirerSelect import InquirerSelect
 
 def text(message: str, shortcuts: list[Shortcut] | None = None) -> Result[str]:
     widget = InquirerText(message)
+    app: InquirerApp[str] = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
+    return app.run(inline=True)
+
+
+def secret(message: str, shortcuts: list[Shortcut] | None = None) -> Result[str]:
+    widget = InquirerSecret(message)
     app: InquirerApp[str] = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
     return app.run(inline=True)
 
