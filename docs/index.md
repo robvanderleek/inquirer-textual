@@ -9,6 +9,18 @@
 <p align="center"> <em>Versatile library for terminal user input in Python</em>
 </p>
 
+<div align="center">
+    <a href="https://github.com/robvanderleek/inquirer-textual/actions/workflows/main.yml" target="_blank">
+        <img src="https://github.com/robvanderleek/inquirer-textual/actions/workflows/main.yml/badge.svg" alt="Badge" class="off-glb">
+    </a>
+    <a href="https://mypy-lang.org/" target="_blank">
+        <img src="https://www.mypy-lang.org/static/mypy_badge.svg" alt="Badge" class="off-glb">
+    </a>
+    <a href="https://github.com/astral-sh/ruff" target="_blank">
+        <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json" alt="Badge" class="off-glb">
+    </a>
+</div>
+
 ## About
 
 All programs start small. Some stay small, and some become incredibly big. The
