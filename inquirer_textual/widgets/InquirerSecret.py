@@ -1,3 +1,5 @@
+from typing import Self
+
 from textual import getters
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
@@ -10,10 +12,10 @@ from inquirer_textual.widgets.PromptMessage import PromptMessage
 
 class InquirerSecret(InquirerWidget):
     DEFAULT_CSS = """
-    InquirerNumber {
+    InquirerSecret {
         height: auto;
     }
-    #inquirer-number-input {
+    #inquirer-secret-input {
         border: none;
         background: transparent;
         color: $input-color;
@@ -28,15 +30,15 @@ class InquirerSecret(InquirerWidget):
         self.message = message
         self.input: Input | None = None
 
-    def current_value(self):
-        return self.input.value
-
     def on_input_submitted(self, _: Input.Submitted):
-        self.app.select_current()
+        self.post_message(InquirerWidget.Submit(self.input.value))
+
+    def focus(self, scroll_visible: bool = True) -> Self:
+        return self.input.focus(scroll_visible)
 
     def compose(self) -> ComposeResult:
         with HorizontalGroup():
             yield PromptMessage(self.message)
-            self.input = Input(id="inquirer-number-input")
+            self.input = Input(id="inquirer-secret-input")
             self.input.password = True
             yield self.input

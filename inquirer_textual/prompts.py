@@ -1,9 +1,13 @@
+from typing import Any
+
 from inquirer_textual.InquirerApp import InquirerApp
+from inquirer_textual.widgets.InquirerMulti import InquirerMulti
 from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 from inquirer_textual.widgets.Choice import Choice
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerNumber import InquirerNumber
 from inquirer_textual.widgets.InquirerText import InquirerText
+from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 from inquirer_textual.widgets.Result import Result
 from inquirer_textual.widgets.Shortcut import Shortcut
 from inquirer_textual.widgets.checkbox.InquirerCheckbox import InquirerCheckbox
@@ -45,4 +49,9 @@ def checkbox(message: str, choices: list[str | Choice], shortcuts: list[Shortcut
              enabled: list[str | Choice] | None = None) -> Result[list[str | Choice]]:
     widget = InquirerCheckbox(message, choices, enabled)
     app: InquirerApp[list[str | Choice]] = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
+    return app.run(inline=True)
+
+def multi(widgets: list[InquirerWidget], shortcuts: list[Shortcut] | None = None) -> Result[list[Any]]:
+    widget = InquirerMulti(widgets)
+    app: InquirerApp[list[Any]] = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
     return app.run(inline=True)

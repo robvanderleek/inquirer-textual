@@ -42,6 +42,9 @@ class InquirerApp(App[Result[T]]):
     def action_shortcut(self, command: str):
         self._exit_select(command)
 
+    def on_inquirer_widget_submit(self, event: InquirerWidget.Submit) -> None:
+        self.call_after_refresh(lambda: self.app.exit(Result('select', event.value)))
+
     def select_current(self):
         self._exit_select('select')
 

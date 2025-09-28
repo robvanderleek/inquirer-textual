@@ -41,5 +41,7 @@ nav:
   - Prompts:
     - Text: 'prompts/text.md'
     - Secret: 'prompts/secret.md'
+    - Number: 'prompts/number.md'
+    - Confirm: 'prompts/confirm.md'
   - Reference:
     - Confirm: 'reference/confirm.md'
