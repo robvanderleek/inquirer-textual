@@ -1,9 +1,9 @@
-from textual import getters
+from typing import Self
+
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup
 from textual.widgets import ListView, ListItem
 
-from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.widgets.Choice import Choice
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 from inquirer_textual.widgets.PromptMessage import PromptMessage
@@ -20,7 +20,6 @@ class InquirerSelect(InquirerWidget):
             background: transparent;
         }
         """
-    app = getters.app(InquirerApp)
 
     def __init__(self, message: str, choices: list[str | Choice], default: str | Choice | None = None):
         super().__init__()
@@ -42,8 +41,14 @@ class InquirerSelect(InquirerWidget):
         self.selected_label = label
         self.selected_item = label.item
 
-    def on_list_view_selected(self, _: ListView.Selected) -> None:
-        self.app.select_current()
+    def on_list_view_selected(self, _: ListView.Selected):
+        self.post_message(InquirerWidget.Submit(self.selected_item))
+
+    def focus(self, scroll_visible: bool = True) -> Self:
+        if self.list_view:
+            return self.list_view.focus(scroll_visible)
+        else:
+            return super().focus(scroll_visible)
 
     def current_value(self):
         return self.selected_item

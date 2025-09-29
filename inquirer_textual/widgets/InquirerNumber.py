@@ -1,11 +1,9 @@
 from typing import Self
 
-from textual import getters
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
 from textual.widgets import Input
 
-from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 from inquirer_textual.widgets.PromptMessage import PromptMessage
 
@@ -23,7 +21,6 @@ class InquirerNumber(InquirerWidget):
         height: 1;
     }
     """
-    app = getters.app(InquirerApp)
 
     def __init__(self, message: str):
         super().__init__()
@@ -38,6 +35,9 @@ class InquirerNumber(InquirerWidget):
             return self.input.focus(scroll_visible)
         else:
             return super().focus(scroll_visible)
+
+    def current_value(self):
+        return self.input.value if self.input else None
 
     def compose(self) -> ComposeResult:
         with HorizontalGroup():

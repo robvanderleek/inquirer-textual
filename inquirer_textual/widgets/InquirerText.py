@@ -36,6 +36,9 @@ class InquirerText(InquirerWidget):
         else:
             return super().focus(scroll_visible)
 
+    def current_value(self):
+        return self.input.value if self.input else None
+
     def compose(self) -> ComposeResult:
         with HorizontalGroup():
             yield PromptMessage(self.message)

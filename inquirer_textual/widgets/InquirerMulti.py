@@ -7,6 +7,12 @@ from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
 class InquirerMulti(InquirerWidget):
+    DEFAULT_CSS = """
+        InquirerMulti {
+            height: auto;
+        }
+    """
+
     def __init__(self, widgets: list[InquirerWidget]) -> None:
         super().__init__()
         self.widgets = widgets

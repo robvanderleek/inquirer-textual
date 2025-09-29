@@ -1,9 +1,8 @@
-from textual import getters, events
+from textual import events
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
 from textual.widgets import Label
 
-from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 from inquirer_textual.widgets.PromptMessage import PromptMessage
 
@@ -11,17 +10,10 @@ from inquirer_textual.widgets.PromptMessage import PromptMessage
 class InquirerConfirm(InquirerWidget):
     """A simple clickable button."""
     DEFAULT_CSS = """
-    InquirerText {
+    InquirerConfirm {
         height: auto;
     }
-    #inquirer-text-input {
-        border: none;
-        background: transparent;
-        padding: 0;
-        height: 1;
-    }
     """
-    app = getters.app(InquirerApp)
     can_focus = True
 
     def __init__(self, message: str, confirm_character: str = 'y', reject_character: str = 'n', default=False):
@@ -39,14 +31,14 @@ class InquirerConfirm(InquirerWidget):
     def on_key(self, event: events.Key):
         if event.key.lower() == 'y':
             self.value = True
-            self.app.select_current()
+            self.post_message(InquirerWidget.Submit(self.value))
         elif event.key.lower() == 'n':
             self.value = False
-            self.app.select_current()
+            self.post_message(InquirerWidget.Submit(self.value))
         elif event.key == 'enter':
             if self.value is None:
                 self.value = True
-            self.app.select_current()
+            self.post_message(InquirerWidget.Submit(self.value))
 
     def current_value(self):
         return self.value
