@@ -30,11 +30,14 @@ class InquirerSecret(InquirerWidget):
         self.message = message
         self.input: Input | None = None
 
-    def on_input_submitted(self, _: Input.Submitted):
-        self.post_message(InquirerWidget.Submit(self.input.value))
+    def on_input_submitted(self, submitted: Input.Submitted):
+        self.post_message(InquirerWidget.Submit(submitted.value))
 
     def focus(self, scroll_visible: bool = True) -> Self:
-        return self.input.focus(scroll_visible)
+        if self.input:
+            return self.input.focus(scroll_visible)
+        else:
+            return super().focus(scroll_visible)
 
     def compose(self) -> ComposeResult:
         with HorizontalGroup():

@@ -28,7 +28,7 @@ async def test_current_value():
 
     async with app.run_test() as pilot:
         await pilot.press('h', 'e', 'l', 'l', 'o')
-        assert widget.current_value() == 'hello'
+        assert widget.input.value == 'hello'
         await pilot.press("enter")
     result: Result[str] = app._return_value
 
