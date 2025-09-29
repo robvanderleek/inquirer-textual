@@ -1,11 +1,9 @@
 from typing import Self
 
-from textual import getters
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
 from textual.widgets import Input
 
-from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 from inquirer_textual.widgets.PromptMessage import PromptMessage
 
@@ -23,7 +21,6 @@ class InquirerSecret(InquirerWidget):
         height: 1;
     }
     """
-    app = getters.app(InquirerApp)
 
     def __init__(self, message: str):
         super().__init__()

@@ -1,3 +1,5 @@
+from typing import Self
+
 from textual import getters
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
@@ -28,11 +30,14 @@ class InquirerNumber(InquirerWidget):
         self.message = message
         self.input: Input | None = None
 
-    def current_value(self):
-        return self.input.value
+    def on_input_submitted(self, submitted: Input.Submitted):
+        self.post_message(InquirerWidget.Submit(submitted.value))
 
-    def on_input_submitted(self, _: Input.Submitted):
-        self.app.select_current()
+    def focus(self, scroll_visible: bool = True) -> Self:
+        if self.input:
+            return self.input.focus(scroll_visible)
+        else:
+            return super().focus(scroll_visible)
 
     def compose(self) -> ComposeResult:
         with HorizontalGroup():
