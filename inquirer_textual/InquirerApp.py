@@ -1,16 +1,17 @@
 from typing import TypeVar
 
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
-from inquirer_textual.widgets.Result import Result
-from inquirer_textual.widgets.Shortcut import Shortcut
 from textual.app import App
 from textual.app import ComposeResult
 from textual.widgets import Footer
 
+from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.Result import Result
+from inquirer_textual.widgets.Shortcut import Shortcut
+
 T = TypeVar('T')
 
 
-class InquirerApp(App[Result[T]], inherit_bindings=False):
+class InquirerApp(App[Result[T]], inherit_bindings=False): # type: ignore[call-arg]
     CSS = """
         App {
             background: transparent;

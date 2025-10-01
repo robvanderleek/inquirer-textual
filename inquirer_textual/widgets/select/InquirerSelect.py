@@ -1,12 +1,13 @@
 from typing import Self
 
+from textual.app import ComposeResult
+from textual.containers import VerticalGroup
+from textual.widgets import ListView, ListItem
+
 from inquirer_textual.widgets.Choice import Choice
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 from inquirer_textual.widgets.PromptMessage import PromptMessage
 from inquirer_textual.widgets.select.ChoiceLabel import ChoiceLabel
-from textual.app import ComposeResult
-from textual.containers import VerticalGroup
-from textual.widgets import ListView, ListItem
 
 
 class InquirerSelect(InquirerWidget):
@@ -34,7 +35,7 @@ class InquirerSelect(InquirerWidget):
     def on_mount(self):
         self.styles.height = min(10, len(self.choices) + 1)
         if not self.mandatory:
-            self._bindings.bind('ctrl+c', f'exit', show=False)
+            self._bindings.bind('ctrl+c', 'exit', show=False)
 
     def action_exit(self):
         self.post_message(InquirerWidget.Submit(None, None))

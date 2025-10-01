@@ -6,7 +6,7 @@ T = TypeVar('T')
 
 @dataclass
 class Result[T]:
-    command: str
+    command: str | None
     value: T
 
     def __str__(self):
