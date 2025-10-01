@@ -39,8 +39,8 @@ def confirm(message: str, shortcuts: list[Shortcut] | None = None) -> Result[boo
 
 
 def select(message: str, choices: list[str | Choice], shortcuts: list[Shortcut] | None = None,
-           default: str | Choice | None = None) -> Result | None:
-    widget = InquirerSelect(message, choices, default)
+           default: str | Choice | None = None, mandatory: bool = True) -> Result | None:
+    widget = InquirerSelect(message, choices, default, mandatory)
     app: InquirerApp[str | Choice] = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
     return app.run(inline=True)
 

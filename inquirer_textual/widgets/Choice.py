@@ -5,4 +5,5 @@ from typing import Any
 @dataclass
 class Choice:
     name: str
-    value: Any = None
+    data: Any = None
+    command: str = 'select'
