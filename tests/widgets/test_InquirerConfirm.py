@@ -54,7 +54,7 @@ async def test_mandatory():
 
     async with app.run_test() as pilot:
         await pilot.press("ctrl+c")
-    result: Result[Choice] = app._return_value
+    result: Result[bool] = app._return_value
 
     assert result is None
 
@@ -65,7 +65,7 @@ async def test_not_mandatory():
 
     async with app.run_test() as pilot:
         await pilot.press("ctrl+c")
-    result: Result[Choice] = app._return_value
+    result: Result[bool] = app._return_value
 
     assert result.command is None
     assert result.value is None
