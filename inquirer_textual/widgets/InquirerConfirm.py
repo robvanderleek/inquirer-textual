@@ -1,10 +1,9 @@
+from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.PromptMessage import PromptMessage
 from textual import events
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
 from textual.widgets import Label
-
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
-from inquirer_textual.widgets.PromptMessage import PromptMessage
 
 
 class InquirerConfirm(InquirerWidget):
@@ -16,8 +15,9 @@ class InquirerConfirm(InquirerWidget):
     """
     can_focus = True
 
-    def __init__(self, message: str, confirm_character: str = 'y', reject_character: str = 'n', default=False):
-        super().__init__()
+    def __init__(self, message: str, confirm_character: str = 'y', reject_character: str = 'n', default=False,
+                 mandatory: bool = True):
+        super().__init__(mandatory)
         if len(confirm_character) != 1 or len(reject_character) != 1:
             raise ValueError("confirm_character and reject_character must be a single character")
         if confirm_character.lower() == reject_character.lower():

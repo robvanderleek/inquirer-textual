@@ -1,11 +1,11 @@
 from typing import Any
 
 from inquirer_textual.InquirerApp import InquirerApp
-from inquirer_textual.widgets.InquirerMulti import InquirerMulti
-from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 from inquirer_textual.widgets.Choice import Choice
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
+from inquirer_textual.widgets.InquirerMulti import InquirerMulti
 from inquirer_textual.widgets.InquirerNumber import InquirerNumber
+from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 from inquirer_textual.widgets.InquirerText import InquirerText
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 from inquirer_textual.widgets.Result import Result
@@ -32,14 +32,14 @@ def number(message: str, shortcuts: list[Shortcut] | None = None) -> Result[int]
     return app.run(inline=True)
 
 
-def confirm(message: str, shortcuts: list[Shortcut] | None = None) -> Result[bool]:
-    widget = InquirerConfirm(message)
+def confirm(message: str, shortcuts: list[Shortcut] | None = None, mandatory: bool = True) -> Result[bool]:
+    widget = InquirerConfirm(message, mandatory=mandatory)
     app: InquirerApp[bool] = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
     return app.run(inline=True)
 
 
 def select(message: str, choices: list[str | Choice], shortcuts: list[Shortcut] | None = None,
-           default: str | Choice | None = None, mandatory: bool = True) -> Result | None:
+           default: str | Choice | None = None, mandatory: bool = True) -> Result[str | Choice]:
     widget = InquirerSelect(message, choices, default, mandatory)
     app: InquirerApp[str | Choice] = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
     return app.run(inline=True)
@@ -50,6 +50,7 @@ def checkbox(message: str, choices: list[str | Choice], shortcuts: list[Shortcut
     widget = InquirerCheckbox(message, choices, enabled)
     app: InquirerApp[list[str | Choice]] = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
     return app.run(inline=True)
+
 
 def multi(widgets: list[InquirerWidget], shortcuts: list[Shortcut] | None = None) -> Result[list[Any]]:
     widget = InquirerMulti(widgets)

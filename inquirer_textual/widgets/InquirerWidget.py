@@ -11,5 +11,16 @@ class InquirerWidget(Widget):
             self.value = value
             self.command = command
 
+    def __init__(self, mandatory: bool = True):
+        super().__init__()
+        self.mandatory = mandatory
+
+    def on_mount(self):
+        if not self.mandatory:
+            self._bindings.bind('ctrl+c', 'exit_now', show=False)
+
+    def action_exit_now(self):
+        self.post_message(InquirerWidget.Submit(None, None))
+
     def current_value(self):
         raise NotImplementedError("Subclasses must implement current_value method")
