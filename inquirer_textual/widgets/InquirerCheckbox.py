@@ -1,13 +1,11 @@
-from textual import getters
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup
 from textual.widgets import ListItem, ListView
 
-from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.common.Choice import Choice
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
-from inquirer_textual.common.PromptMessage import PromptMessage
 from inquirer_textual.common.ChoiceCheckboxLabel import ChoiceCheckboxLabel
+from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
 class InquirerCheckbox(InquirerWidget):
@@ -23,7 +21,6 @@ class InquirerCheckbox(InquirerWidget):
     BINDINGS = [
         ("space", "toggle_selected", "Toggle selection"),
     ]
-    app = getters.app(InquirerApp)
 
     def __init__(self, message: str, choices: list[str | Choice], enabled: list[str | Choice] | None = None):
         super().__init__()
@@ -32,6 +29,7 @@ class InquirerCheckbox(InquirerWidget):
         self.enabled = enabled
         self.list_view: ListView | None = None
         self.selected_label: ChoiceCheckboxLabel | None = None
+        self.selected_item: str | Choice | None = None
 
     def on_mount(self):
         self.styles.height = min(10, len(self.choices) + 1)
@@ -43,9 +41,10 @@ class InquirerCheckbox(InquirerWidget):
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
         label = event.item.query_one(ChoiceCheckboxLabel)
         self.selected_label = label
+        self.selected_item = label.item
 
     def on_list_view_selected(self, _: ListView.Selected) -> None:
-        self.app.select_current()
+        self.post_message(InquirerWidget.Submit(self.current_value()))
 
     def current_value(self):
         labels = self.query(ChoiceCheckboxLabel)

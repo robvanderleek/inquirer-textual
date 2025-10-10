@@ -43,5 +43,7 @@ nav:
     - Secret: 'prompts/secret.md'
     - Number: 'prompts/number.md'
     - Confirm: 'prompts/confirm.md'
+    - Select: 'prompts/select.md'
+    - Checkbox: 'prompts/checkbox.md'
   - Reference:
     - Confirm: 'reference/confirm.md'

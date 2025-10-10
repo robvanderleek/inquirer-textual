@@ -4,14 +4,14 @@ from textual.app import App
 from textual.app import ComposeResult
 from textual.widgets import Footer
 
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 from inquirer_textual.common.Result import Result
 from inquirer_textual.common.Shortcut import Shortcut
+from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 T = TypeVar('T')
 
 
-class InquirerApp(App[Result[T]], inherit_bindings=False): # type: ignore[call-arg]
+class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-arg]
     CSS = """
         App {
             background: transparent;
@@ -44,9 +44,6 @@ class InquirerApp(App[Result[T]], inherit_bindings=False): # type: ignore[call-a
 
     def on_inquirer_widget_submit(self, event: InquirerWidget.Submit) -> None:
         self.call_after_refresh(lambda: self.app.exit(Result(event.command, event.value)))
-
-    def select_current(self):
-        self._exit_select('select')
 
     def _exit_select(self, command: str):
         self.call_after_refresh(lambda: self.app.exit(Result(command, self.widget.current_value())))
