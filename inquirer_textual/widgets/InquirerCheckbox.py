@@ -1,3 +1,5 @@
+from typing import Self
+
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup
 from textual.widgets import ListItem, ListView
@@ -9,6 +11,8 @@ from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
 class InquirerCheckbox(InquirerWidget):
+    """A checkbox widget that allows multiple selections from a list of choices."""
+
     DEFAULT_CSS = """
             #inquirer-checkbox-list-view {
                 background: transparent;
@@ -23,6 +27,12 @@ class InquirerCheckbox(InquirerWidget):
     ]
 
     def __init__(self, message: str, choices: list[str | Choice], enabled: list[str | Choice] | None = None):
+        """
+            Args:
+                message (str): The prompt message to display.
+                choices (list[str | Choice]): A list of choices to present to the user.
+                enabled (list[str | Choice] | None): A list of choices that should be pre-selected.
+        """
         super().__init__()
         self.message = message
         self.choices = choices
@@ -45,6 +55,12 @@ class InquirerCheckbox(InquirerWidget):
 
     def on_list_view_selected(self, _: ListView.Selected) -> None:
         self.post_message(InquirerWidget.Submit(self.current_value()))
+
+    def focus(self, scroll_visible: bool = True) -> Self:
+        if self.list_view:
+            return self.list_view.focus(scroll_visible)
+        else:
+            return super().focus(scroll_visible)
 
     def current_value(self):
         labels = self.query(ChoiceCheckboxLabel)

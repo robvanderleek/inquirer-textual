@@ -25,6 +25,10 @@ theme:
 plugins:
   - mkdocstrings:
       default_handler: python
+      handlers:
+        python:
+          options:
+            show_source: false
   - glightbox:
       draggable: false
       background: none
@@ -39,11 +43,18 @@ markdown_extensions:
 nav:
   - Inquirer Textual: 'index.md'
   - Prompts:
-    - Text: 'prompts/text.md'
-    - Secret: 'prompts/secret.md'
-    - Number: 'prompts/number.md'
-    - Confirm: 'prompts/confirm.md'
-    - Select: 'prompts/select.md'
     - Checkbox: 'prompts/checkbox.md'
+    - Confirm: 'prompts/confirm.md'
+    - Multi: 'prompts/multi.md'
+    - Number: 'prompts/number.md'
+    - Secret: 'prompts/secret.md'
+    - Select: 'prompts/select.md'
+    - Text: 'prompts/text.md'
   - Reference:
+    - Checkbox: 'reference/checkbox.md'
     - Confirm: 'reference/confirm.md'
+    - Multi: 'reference/multi.md'
+    - Number: 'reference/number.md'
+    - Secret: 'reference/secret.md'
+    - Select: 'reference/select.md'
+    - Text: 'reference/text.md'

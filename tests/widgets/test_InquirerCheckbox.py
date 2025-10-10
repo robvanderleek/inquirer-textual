@@ -3,7 +3,7 @@ from inquirer_textual.common.Result import Result
 from inquirer_textual.widgets.InquirerCheckbox import InquirerCheckbox
 
 
-async def test_select_entry():
+async def test_select_entries():
     widget = InquirerCheckbox('Choice:', ['a', 'b', 'c'])
     app = InquirerApp(widget)
 

@@ -7,7 +7,8 @@ from textual.widgets import Label
 
 
 class InquirerConfirm(InquirerWidget):
-    """A simple clickable button."""
+    """A confirmation prompt that allows the user to confirm or reject."""
+
     DEFAULT_CSS = """
     InquirerConfirm {
         height: auto;
@@ -17,6 +18,14 @@ class InquirerConfirm(InquirerWidget):
 
     def __init__(self, message: str, confirm_character: str = 'y', reject_character: str = 'n', default=False,
                  mandatory: bool = True):
+        """
+        Args:
+            message (str): The prompt message to display.
+            confirm_character (str): The character to use for confirmation.
+            reject_character (str): The character to use for rejection.
+            default (bool): The default value if the user presses Enter without input.
+            mandatory (bool): Whether a response is mandatory.
+        """
         super().__init__(mandatory)
         if len(confirm_character) != 1 or len(reject_character) != 1:
             raise ValueError("confirm_character and reject_character must be a single character")
@@ -36,8 +45,7 @@ class InquirerConfirm(InquirerWidget):
             self.value = False
             self.post_message(InquirerWidget.Submit(self.value))
         elif event.key == 'enter':
-            if self.value is None:
-                self.value = True
+            event.stop()
             self.post_message(InquirerWidget.Submit(self.value))
 
     def current_value(self):

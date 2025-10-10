@@ -10,6 +10,8 @@ from textual.widgets import ListView, ListItem
 
 
 class InquirerSelect(InquirerWidget):
+    """A select widget that allows a single selection from a list of choices."""
+
     DEFAULT_CSS = """
         #inquirer-select-list-view {
             background: transparent;
@@ -22,6 +24,13 @@ class InquirerSelect(InquirerWidget):
 
     def __init__(self, message: str, choices: list[str | Choice], default: str | Choice | None = None,
                  mandatory: bool = True):
+        """
+        Args:
+            message (str): The prompt message to display.
+            choices (list[str | Choice]): A list of choices to present to the user.
+            default (str | Choice | None): The default choice to pre-select.
+            mandatory (bool): Whether a response is mandatory.
+        """
         super().__init__(mandatory)
         self.message = message
         self.choices = choices

@@ -1,4 +1,5 @@
 from inquirer_textual import prompts
+from inquirer_textual.widgets.InquirerCheckbox import InquirerCheckbox
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerNumber import InquirerNumber
 from inquirer_textual.widgets.InquirerSecret import InquirerSecret
@@ -11,5 +12,7 @@ if __name__ == '__main__':
     number_widget = InquirerNumber('Memory:')
     confirm_widget = InquirerConfirm('Proceed?')
     select_widget = InquirerSelect('Planet?', ['Earth', 'Mars', 'Venus'], default='Mars')
-    answer = prompts.multi([text_widget, password_widget, number_widget, confirm_widget, select_widget])
+    checkbox_widget = InquirerCheckbox("People?", choices=['Alice', 'Bob', 'Charlie'])
+    answer = prompts.multi(
+        [text_widget, password_widget, number_widget, confirm_widget, select_widget, checkbox_widget])
     print(answer)

@@ -9,6 +9,8 @@ from inquirer_textual.common.PromptMessage import PromptMessage
 
 
 class InquirerNumber(InquirerWidget):
+    """A number input widget that allows the user to input a numerical value."""
+
     DEFAULT_CSS = """
     InquirerNumber {
         height: auto;
@@ -23,6 +25,10 @@ class InquirerNumber(InquirerWidget):
     """
 
     def __init__(self, message: str):
+        """
+        Args:
+            message (str): The prompt message to display.
+        """
         super().__init__()
         self.message = message
         self.input: Input | None = None

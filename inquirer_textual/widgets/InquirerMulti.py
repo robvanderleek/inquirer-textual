@@ -7,6 +7,8 @@ from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
 class InquirerMulti(InquirerWidget):
+    """A prompt that allows the user to answer multiple prompts in sequence."""
+
     DEFAULT_CSS = """
         InquirerMulti {
             height: auto;
@@ -14,6 +16,10 @@ class InquirerMulti(InquirerWidget):
     """
 
     def __init__(self, widgets: list[InquirerWidget]) -> None:
+        """
+        Args:
+            widgets (list[InquirerWidget]): A list of InquirerWidget instances to present in sequence.
+        """
         super().__init__()
         self.widgets = widgets
         self._current_widget_index = 0

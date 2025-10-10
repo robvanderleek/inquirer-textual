@@ -10,6 +10,8 @@ from inquirer_textual.common.PromptMessage import PromptMessage
 
 
 class InquirerText(InquirerWidget):
+    """A text input prompt that allows the user to enter a string."""
+
     DEFAULT_CSS = """
     InquirerText {
         height: auto;
@@ -24,6 +26,13 @@ class InquirerText(InquirerWidget):
     """
 
     def __init__(self, message: str, default: str = '', validators: Validator | Iterable[Validator] | None = None):
+        """
+        Args:
+            message (str): The prompt message to display.
+            default (str): The default value if the user presses Enter without input.
+            validators (Validator | Iterable[Validator] | None): A validator or list of validators to validate the
+                input.
+        """
         super().__init__()
         self.message = message
         self.input: Input | None = None
