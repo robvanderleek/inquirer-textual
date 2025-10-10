@@ -14,7 +14,7 @@ T = TypeVar('T')
 class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-arg]
     CSS = """
         App {
-            background: transparent;
+            background: black;
         }
         Screen {
             border-top: none;
