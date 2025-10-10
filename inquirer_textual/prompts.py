@@ -1,21 +1,23 @@
-from typing import Any
+from typing import Any, Iterable
 
 from inquirer_textual.InquirerApp import InquirerApp
-from inquirer_textual.widgets.Choice import Choice
+from inquirer_textual.common.Choice import Choice
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerMulti import InquirerMulti
 from inquirer_textual.widgets.InquirerNumber import InquirerNumber
 from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 from inquirer_textual.widgets.InquirerText import InquirerText
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
-from inquirer_textual.widgets.Result import Result
-from inquirer_textual.widgets.Shortcut import Shortcut
-from inquirer_textual.widgets.checkbox.InquirerCheckbox import InquirerCheckbox
-from inquirer_textual.widgets.select.InquirerSelect import InquirerSelect
+from inquirer_textual.common.Result import Result
+from inquirer_textual.common.Shortcut import Shortcut
+from inquirer_textual.widgets.InquirerCheckbox import InquirerCheckbox
+from inquirer_textual.widgets.InquirerSelect import InquirerSelect
+from textual.validation import Validator
 
 
-def text(message: str, shortcuts: list[Shortcut] | None = None) -> Result[str]:
-    widget = InquirerText(message)
+def text(message: str, shortcuts: list[Shortcut] | None = None,
+         validators: Validator | Iterable[Validator] | None = None) -> Result[str]:
+    widget = InquirerText(message, validators=validators)
     app: InquirerApp[str] = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
     return app.run(inline=True)
 
@@ -32,8 +34,9 @@ def number(message: str, shortcuts: list[Shortcut] | None = None) -> Result[int]
     return app.run(inline=True)
 
 
-def confirm(message: str, shortcuts: list[Shortcut] | None = None, mandatory: bool = True) -> Result[bool]:
-    widget = InquirerConfirm(message, mandatory=mandatory)
+def confirm(message: str, shortcuts: list[Shortcut] | None = None, default: bool = False, mandatory: bool = True) -> \
+        Result[bool]:
+    widget = InquirerConfirm(message, default=default, mandatory=mandatory)
     app: InquirerApp[bool] = InquirerApp(widget, shortcuts, show_footer=bool(shortcuts))
     return app.run(inline=True)
 

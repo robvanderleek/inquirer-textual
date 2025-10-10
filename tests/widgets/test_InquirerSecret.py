@@ -1,6 +1,6 @@
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.widgets.InquirerSecret import InquirerSecret
-from inquirer_textual.widgets.Result import Result
+from inquirer_textual.common.Result import Result
 
 
 def test_snapshot(snap_compare):

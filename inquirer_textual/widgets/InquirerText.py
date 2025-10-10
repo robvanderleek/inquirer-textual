@@ -1,11 +1,12 @@
-from typing import Self
+from typing import Self, Iterable
 
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
+from textual.validation import Validator
 from textual.widgets import Input
 
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
-from inquirer_textual.widgets.PromptMessage import PromptMessage
+from inquirer_textual.common.PromptMessage import PromptMessage
 
 
 class InquirerText(InquirerWidget):
@@ -22,13 +23,20 @@ class InquirerText(InquirerWidget):
     }
     """
 
-    def __init__(self, message: str):
+    def __init__(self, message: str, default: str = '', validators: Validator | Iterable[Validator] | None = None):
         super().__init__()
         self.message = message
         self.input: Input | None = None
+        self.default = default
+        self.validators = validators
+
+    def on_mount(self):
+        super().on_mount()
+        self.input.value = self.default
 
     def on_input_submitted(self, submitted: Input.Submitted):
-        self.post_message(InquirerWidget.Submit(submitted.value))
+        if self.validators is None or submitted.validation_result.is_valid:
+            self.post_message(InquirerWidget.Submit(submitted.value))
 
     def focus(self, scroll_visible: bool = True) -> Self:
         if self.input:
@@ -42,5 +50,5 @@ class InquirerText(InquirerWidget):
     def compose(self) -> ComposeResult:
         with HorizontalGroup():
             yield PromptMessage(self.message)
-            self.input = Input(id="inquirer-text-input")
+            self.input = Input(id="inquirer-text-input", validators=self.validators)
             yield self.input

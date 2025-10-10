@@ -5,8 +5,8 @@ from textual.app import ComposeResult
 from textual.widgets import Footer
 
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
-from inquirer_textual.widgets.Result import Result
-from inquirer_textual.widgets.Shortcut import Shortcut
+from inquirer_textual.common.Result import Result
+from inquirer_textual.common.Shortcut import Shortcut
 
 T = TypeVar('T')
 

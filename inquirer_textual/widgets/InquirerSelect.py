@@ -1,9 +1,9 @@
 from typing import Self
 
-from inquirer_textual.widgets.Choice import Choice
+from inquirer_textual.common.Choice import Choice
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
-from inquirer_textual.widgets.PromptMessage import PromptMessage
-from inquirer_textual.widgets.select.ChoiceLabel import ChoiceLabel
+from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.common.ChoiceLabel import ChoiceLabel
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup
 from textual.widgets import ListView, ListItem

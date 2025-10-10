@@ -1,7 +1,7 @@
 from inquirer_textual.InquirerApp import InquirerApp
-from inquirer_textual.widgets.Choice import Choice
-from inquirer_textual.widgets.Result import Result
-from inquirer_textual.widgets.select.InquirerSelect import InquirerSelect
+from inquirer_textual.common.Choice import Choice
+from inquirer_textual.common.Result import Result
+from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 
 
 async def test_select_entry():

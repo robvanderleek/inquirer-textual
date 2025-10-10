@@ -4,7 +4,7 @@ from inquirer_textual.widgets.InquirerMulti import InquirerMulti
 from inquirer_textual.widgets.InquirerNumber import InquirerNumber
 from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 from inquirer_textual.widgets.InquirerText import InquirerText
-from inquirer_textual.widgets.select.InquirerSelect import InquirerSelect
+from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 
 
 def test_snapshot(snap_compare):

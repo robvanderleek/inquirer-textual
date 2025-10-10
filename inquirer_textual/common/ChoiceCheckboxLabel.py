@@ -1,6 +1,6 @@
 from textual.widgets import Label
 
-from inquirer_textual.widgets.Choice import Choice
+from inquirer_textual.common.Choice import Choice
 
 
 class ChoiceCheckboxLabel(Label):

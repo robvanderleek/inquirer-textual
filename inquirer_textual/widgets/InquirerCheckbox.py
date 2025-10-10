@@ -4,10 +4,10 @@ from textual.containers import VerticalGroup
 from textual.widgets import ListItem, ListView
 
 from inquirer_textual.InquirerApp import InquirerApp
-from inquirer_textual.widgets.Choice import Choice
+from inquirer_textual.common.Choice import Choice
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
-from inquirer_textual.widgets.PromptMessage import PromptMessage
-from inquirer_textual.widgets.checkbox.ChoiceCheckboxLabel import ChoiceCheckboxLabel
+from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.common.ChoiceCheckboxLabel import ChoiceCheckboxLabel
 
 
 class InquirerCheckbox(InquirerWidget):

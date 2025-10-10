@@ -3,7 +3,7 @@ from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerNumber import InquirerNumber
 from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 from inquirer_textual.widgets.InquirerText import InquirerText
-from inquirer_textual.widgets.select.InquirerSelect import InquirerSelect
+from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 
 if __name__ == '__main__':
     text_widget = InquirerText('Name:')

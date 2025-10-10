@@ -5,7 +5,7 @@ from textual.containers import HorizontalGroup
 from textual.widgets import Input
 
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
-from inquirer_textual.widgets.PromptMessage import PromptMessage
+from inquirer_textual.common.PromptMessage import PromptMessage
 
 
 class InquirerSecret(InquirerWidget):
