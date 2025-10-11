@@ -23,12 +23,29 @@
 
 ## About
 
-All programs start small. Some stay small, and some become incredibly big. The
-goal of this Python library is to make user input simple for small programs,
-yet remain flexible when programs grow.  
+All terminal programs start small. Some stay small, and some become incredibly
+big. The goal of this Python library is to make user input simple for small
+programs, yet offer a smooth transition to a comprehensive UI library as your
+program grows.
 
-This library is based on the sophisticated and mature
+This library is based on the sophisticated
 [Textual](https://textual.textualize.io/) TUI framework.
+
+## Example
+
+![Example](prompts/checkbox.gif)
+
+The Python code for the example above:
+
+```python
+--8<-- "examples/prompts/checkbox.py"
+```
+
+With `uv` you can run the example out of the box:
+
+```shell
+uv run --with inquirer-textual checkbox.py
+```
 
 ## Key features and design principles
 

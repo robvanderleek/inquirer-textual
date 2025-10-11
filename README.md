@@ -8,11 +8,22 @@
 
 <div align="center">
 
+  *Versatile library for user input in Python 🎙️*
+
+</div>
+
+<div align="center">
+
 [![main](https://github.com/robvanderleek/inquirer-textual/actions/workflows/main.yml/badge.svg)](https://github.com/robvanderleek/inquirer-textual/actions/workflows/main.yml)
 [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
 [![Linting: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 </div>
+
+All terminal programs start small. Some stay small, and some become incredibly
+big. The goal of this Python library is to make user input simple for small
+programs, yet offer a smooth transition to a comprehensive UI library as your
+program grows.
 
 ## Development
 
