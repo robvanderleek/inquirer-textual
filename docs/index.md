@@ -25,8 +25,8 @@
 
 All terminal programs start small. Some stay small, and some become incredibly
 big. The goal of this Python library is to make user input simple for small
-programs, yet offer a smooth transition to a comprehensive UI library as your
-program grows.
+programs, but also support a smooth transition to a comprehensive UI library as
+your program grows.
 
 This library is based on the sophisticated
 [Textual](https://textual.textualize.io/) TUI framework.
