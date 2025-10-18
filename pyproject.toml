@@ -8,7 +8,7 @@ license = "GPL-3.0-or-later"
 requires-python = ">=3.12"
 
 dependencies = [
-    "textual>=6.2.1",
+    "textual>=6.3.0",
 ]
 
 [project.urls]
