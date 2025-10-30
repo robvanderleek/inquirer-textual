@@ -1,12 +1,14 @@
-from typing import Self
+from __future__ import annotations
 
-from inquirer_textual.common.Choice import Choice
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
-from inquirer_textual.common.PromptMessage import PromptMessage
-from inquirer_textual.common.ChoiceLabel import ChoiceLabel
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup
 from textual.widgets import ListView, ListItem
+from typing_extensions import Self
+
+from inquirer_textual.common.Choice import Choice
+from inquirer_textual.common.ChoiceLabel import ChoiceLabel
+from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
 class InquirerSelect(InquirerWidget):
