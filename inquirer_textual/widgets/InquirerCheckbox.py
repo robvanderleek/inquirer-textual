@@ -1,8 +1,9 @@
-from typing import Self
+from __future__ import annotations
 
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup
 from textual.widgets import ListItem, ListView
+from typing_extensions import Self
 
 from inquirer_textual.common.Choice import Choice
 from inquirer_textual.common.ChoiceCheckboxLabel import ChoiceCheckboxLabel

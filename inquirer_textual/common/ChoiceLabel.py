@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from textual.widgets import Label
 
 from inquirer_textual.common.Choice import Choice

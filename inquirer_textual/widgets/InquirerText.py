@@ -1,12 +1,15 @@
-from typing import Self, Iterable
+from __future__ import annotations
+
+from typing import Iterable
 
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
 from textual.validation import Validator
 from textual.widgets import Input
+from typing_extensions import Self
 
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
 class InquirerText(InquirerWidget):

@@ -1,8 +1,9 @@
-from typing import Self
+from __future__ import annotations
 
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
 from textual.widgets import Input
+from typing_extensions import Self
 
 from inquirer_textual.common.PromptMessage import PromptMessage
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget

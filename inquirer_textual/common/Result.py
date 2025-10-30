@@ -1,11 +1,13 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import TypeVar
+from typing import TypeVar, Generic
 
 T = TypeVar('T')
 
 
 @dataclass
-class Result[T]:
+class Result(Generic[T]):
     command: str | None
     value: T
 
