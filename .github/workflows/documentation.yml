@@ -1,0 +1,19 @@
+name: documentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy_documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v5
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Deploy documentation
+        run: uv run mkdocs gh-deploy --force
