@@ -7,5 +7,5 @@ A prompt that allows the user to answer multiple prompts in sequence.
 ![Example](multi.gif)
 
 ```python
---8<-- "examples/prompts/multi.py"
+--8<-- "examples/prompt_multi.py"
 ```

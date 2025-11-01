@@ -1,7 +1,7 @@
-Output checkbox.gif
+Output docs/prompts/checkbox.gif
 Set Shell zsh
 Set Theme { "background": "#000000" }
-Type "uv run examples/prompts/checkbox.py"
+Type "uv run examples/prompt_checkbox.py"
 Enter
 Sleep 1s
 Down

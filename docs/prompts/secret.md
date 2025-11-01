@@ -8,5 +8,5 @@ password).
 ![Example](secret.gif)
 
 ```python
---8<-- "examples/prompts/secret.py"
+--8<-- "examples/prompt_secret.py"
 ```

@@ -38,7 +38,7 @@ This library is based on the sophisticated
 The Python code for the example above:
 
 ```python
---8<-- "examples/prompts/checkbox.py"
+--8<-- "examples/prompt_checkbox.py"
 ```
 
 With `uv` you can run the example out of the box:

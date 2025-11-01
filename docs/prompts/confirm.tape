@@ -1,7 +1,7 @@
-Output confirm.gif
+Output docs/prompts/confirm.gif
 Set Shell zsh
 Set Theme { "background": "#000000" }
-Type "uv run examples/prompts/confirm.py"
+Type "uv run examples/prompt_confirm.py"
 Enter
 Sleep 1s
 Type y

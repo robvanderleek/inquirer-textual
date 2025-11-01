@@ -26,6 +26,7 @@ dev = [
     "mkdocs-glightbox>=0.5.2",
     "mkdocstrings[python]>=0.30.1",
     "python-semantic-release>=9.21.0",
+    "poethepoet>=0.37.0",
 ]
 
 [tool.pytest.ini_options]
@@ -41,3 +42,15 @@ version_toml = [ "pyproject.toml:project.version" ]
 version_variables = [ "inquirer_textual/version.py:version" ]
 upload_to_repository = false
 upload_to_release = false
+
+[tool.poe.tasks.gifs]
+help = "Generate documentation gifs"
+shell = """
+    vhs docs/prompts/checkbox.tape
+    vhs docs/prompts/confirm.tape
+    vhs docs/prompts/multi.tape
+    vhs docs/prompts/number.tape
+    vhs docs/prompts/secret.tape
+    vhs docs/prompts/select.tape
+    vhs docs/prompts/text.tape
+"""

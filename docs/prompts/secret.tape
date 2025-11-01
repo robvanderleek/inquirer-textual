@@ -1,7 +1,7 @@
-Output secret.gif
+Output docs/prompts/secret.gif
 Set Shell zsh
 Set Theme { "background": "#000000" }
-Type "uv run examples/prompts/secret.py"
+Type "uv run examples/prompt_secret.py"
 Enter
 Sleep 1s
 Type helloworld

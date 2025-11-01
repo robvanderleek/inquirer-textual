@@ -7,5 +7,5 @@ A number input widget that allows the user to input a numerical value.
 ![Example](number.gif)
 
 ```python
---8<-- "examples/prompts/number.py"
+--8<-- "examples/prompt_number.py"
 ```

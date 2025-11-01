@@ -1,7 +1,7 @@
-Output number.gif
+Output docs/prompts/number.gif
 Set Shell zsh
 Set Theme { "background": "#000000" }
-Type "uv run examples/prompts/number.py"
+Type "uv run examples/prompt_number.py"
 Enter
 Sleep 1s
 Type "1024"
