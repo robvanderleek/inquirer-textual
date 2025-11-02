@@ -3,7 +3,7 @@ Set Shell zsh
 Set Theme { "background": "#000000" }
 Type "uv run examples/prompt_number.py"
 Enter
-Sleep 1s
+Sleep 2s
 Type "1024"
 Sleep 1s
 Enter

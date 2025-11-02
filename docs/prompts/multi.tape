@@ -3,7 +3,7 @@ Set Shell zsh
 Set Theme { "background": "#000000" }
 Type "uv run examples/prompt_multi.py"
 Enter
-Sleep 1s
+Sleep 2s
 Type Rob
 Sleep 1s
 Enter

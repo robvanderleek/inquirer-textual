@@ -3,7 +3,7 @@ Set Shell zsh
 Set Theme { "background": "#000000" }
 Type "uv run examples/prompt_checkbox.py"
 Enter
-Sleep 1s
+Sleep 2s
 Down
 Sleep 0.5s
 Down
