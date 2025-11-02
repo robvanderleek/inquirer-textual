@@ -1,32 +1,37 @@
 from inquirer_textual.InquirerApp import InquirerApp
+from inquirer_textual.common.InquirerContext import InquirerContext
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.common.Result import Result
 
 
 def test_snapshot(snap_compare):
     widget = InquirerConfirm('Are you sure?')
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     assert snap_compare(app)
 
 
 def test_snapshot_default_yes(snap_compare):
     widget = InquirerConfirm('Are you sure?', default=True)
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     assert snap_compare(app)
 
 
 def test_snapshot_custom_chars(snap_compare):
     widget = InquirerConfirm('Are you sure?', confirm_character='a', reject_character='b')
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     assert snap_compare(app)
 
 
 async def test_confirm_yes():
     widget = InquirerConfirm('Are you sure?')
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async with app.run_test() as pilot:
         assert widget.value is False
@@ -38,7 +43,8 @@ async def test_confirm_yes():
 
 async def test_confirm_no():
     widget = InquirerConfirm('Are you sure?')
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async with app.run_test() as pilot:
         assert widget.value is False
@@ -50,7 +56,8 @@ async def test_confirm_no():
 
 async def test_mandatory():
     widget = InquirerConfirm('Are you sure?', mandatory=True)
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async with app.run_test() as pilot:
         await pilot.press("ctrl+c")
@@ -61,7 +68,8 @@ async def test_mandatory():
 
 async def test_not_mandatory():
     widget = InquirerConfirm('Are you sure?', mandatory=False)
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async with app.run_test() as pilot:
         await pilot.press("ctrl+c")

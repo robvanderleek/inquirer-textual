@@ -7,7 +7,7 @@ from textual.app import ComposeResult
 from textual.widgets import Footer
 
 from inquirer_textual.common.Result import Result
-from inquirer_textual.common.Shortcut import Shortcut
+from inquirer_textual.common.InquirerContext import InquirerContext
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 T = TypeVar('T')
@@ -28,15 +28,13 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
     ENABLE_COMMAND_PALETTE = False
     INLINE_PADDING = 0
 
-    def __init__(self, widget: InquirerWidget, shortcuts: list[Shortcut] | None = None, show_footer: bool = False):
+    def __init__(self, context: InquirerContext):
+        self.context = context
         super().__init__()
-        self.widget = widget
-        self.shortcuts = shortcuts
-        self.show_footer = show_footer
 
     def on_mount(self) -> None:
-        if self.shortcuts:
-            for shortcut in self.shortcuts:
+        if self.context.shortcuts:
+            for shortcut in self.context.shortcuts:
                 self._bindings.bind(shortcut.key, f'shortcut("{shortcut.command}")',
                                     description=shortcut.description,
                                     show=shortcut.show)
@@ -48,11 +46,11 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
         self.call_after_refresh(lambda: self.app.exit(Result(event.command, event.value)))
 
     def _exit_select(self, command: str):
-        self.call_after_refresh(lambda: self.app.exit(Result(command, self.widget.current_value())))
+        self.call_after_refresh(lambda: self.app.exit(Result(command, self.context.widget.current_value())))
 
     def compose(self) -> ComposeResult:
-        yield self.widget
-        if self.show_footer:
+        yield self.context.widget
+        if self.context.show_footer:
             yield Footer()
 
     def get_theme_variable_defaults(self) -> dict[str, str]:

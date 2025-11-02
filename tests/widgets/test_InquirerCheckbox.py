@@ -1,11 +1,13 @@
 from inquirer_textual.InquirerApp import InquirerApp
+from inquirer_textual.common.InquirerContext import InquirerContext
 from inquirer_textual.common.Result import Result
 from inquirer_textual.widgets.InquirerCheckbox import InquirerCheckbox
 
 
 async def test_select_entries():
     widget = InquirerCheckbox('Choice:', ['a', 'b', 'c'])
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async with app.run_test() as pilot:
         assert widget.selected_item == 'a'
@@ -22,7 +24,8 @@ async def test_select_entries():
 
 def test_snapshot(snap_compare):
     widget = InquirerCheckbox('Choice:', ['a', 'b', 'c'])
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async def run_before(pilot) -> None:
         await pilot.press("space")

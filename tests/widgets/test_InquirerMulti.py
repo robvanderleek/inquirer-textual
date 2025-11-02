@@ -1,4 +1,5 @@
 from inquirer_textual.InquirerApp import InquirerApp
+from inquirer_textual.common.InquirerContext import InquirerContext
 from inquirer_textual.widgets.InquirerCheckbox import InquirerCheckbox
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerMulti import InquirerMulti
@@ -13,7 +14,8 @@ def test_snapshot(snap_compare):
     password_widget = InquirerSecret('Password:')
     number_widget = InquirerNumber('Memory:')
     widget = InquirerMulti([text_widget, password_widget, number_widget])
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     assert snap_compare(app)
 
@@ -23,7 +25,8 @@ def test_snapshot_second_input(snap_compare):
     password_widget = InquirerSecret('Password:')
     number_widget = InquirerNumber('Memory:')
     widget = InquirerMulti([text_widget, password_widget, number_widget])
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async def run_before(pilot) -> None:
         await pilot.press('r', 'o', 'b')
@@ -37,7 +40,8 @@ def test_snapshot_third_input(snap_compare):
     password_widget = InquirerSecret('Password:')
     number_widget = InquirerNumber('Memory:')
     widget = InquirerMulti([text_widget, password_widget, number_widget])
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async def run_before(pilot) -> None:
         await pilot.press('r', 'o', 'b')
@@ -54,7 +58,8 @@ def test_snapshot_fourth_input(snap_compare):
     number_widget = InquirerNumber('Memory:')
     confirm_widget = InquirerConfirm('Proceed?')
     widget = InquirerMulti([text_widget, password_widget, number_widget, confirm_widget])
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async def run_before(pilot) -> None:
         await pilot.press('r', 'o', 'b')
@@ -74,7 +79,8 @@ def test_snapshot_fifth_input(snap_compare):
     confirm_widget = InquirerConfirm('Proceed?')
     select_widget = InquirerSelect('Planet?', ['Earth', 'Mars', 'Venus'], default='Mars')
     widget = InquirerMulti([text_widget, password_widget, number_widget, confirm_widget, select_widget])
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async def run_before(pilot) -> None:
         await pilot.press('r', 'o', 'b')
@@ -98,7 +104,8 @@ def test_snapshot_fifth_input_pick_default(snap_compare):
     checkbox_widget = InquirerCheckbox("People?", choices=['Alice', 'Bob', 'Charlie'])
     widget = InquirerMulti(
         [text_widget, password_widget, number_widget, confirm_widget, select_widget, checkbox_widget])
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async def run_before(pilot) -> None:
         await pilot.press('r', 'o', 'b')

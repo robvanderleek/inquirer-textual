@@ -5,20 +5,23 @@ from typing import Iterable
 from textual.validation import Validator, ValidationResult
 
 from inquirer_textual.InquirerApp import InquirerApp
+from inquirer_textual.common.InquirerContext import InquirerContext
 from inquirer_textual.widgets.InquirerText import InquirerText
 from inquirer_textual.common.Result import Result
 
 
 def test_snapshot(snap_compare):
     widget = InquirerText('Name:')
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     assert snap_compare(app)
 
 
 def test_snapshot_with_default_value(snap_compare):
     widget = InquirerText('Name:', default='John Doe')
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     assert snap_compare(app)
 
@@ -33,7 +36,8 @@ async def test_validator_success():
             return self.failure() if value in self.existing_names else self.success()
 
     widget = InquirerText('Name:', validators=UniqueNameValidator(['Alice', 'Bob']))
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async with app.run_test() as pilot:
         await pilot.press('C', 'h', 'a', 'r', 'l', 'i', 'e')
@@ -54,7 +58,8 @@ async def test_validator_failure():
             return self.failure() if value in self.existing_names else self.success()
 
     widget = InquirerText('Name:', validators=UniqueNameValidator(['Alice', 'Bob']))
-    app = InquirerApp(widget)
+    context = InquirerContext(widget)
+    app = InquirerApp(context)
 
     async with app.run_test() as pilot:
         await pilot.press('B', 'o', 'b')
