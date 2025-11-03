@@ -58,3 +58,4 @@ nav:
     - Secret: 'reference/secret.md'
     - Select: 'reference/select.md'
     - Text: 'reference/text.md'
+  - FAQ: 'faq.md'
