@@ -5,7 +5,6 @@ from typing import Iterable
 from textual.validation import Validator, ValidationResult
 
 from inquirer_textual.InquirerApp import InquirerApp
-from inquirer_textual.common.Result import Result
 from inquirer_textual.widgets.InquirerText import InquirerText
 
 
@@ -40,7 +39,7 @@ async def test_validator_success():
         await pilot.press('C', 'h', 'a', 'r', 'l', 'i', 'e')
         assert widget.input.value == 'Charlie'
         await pilot.press("enter")
-    result: Result[str] = app._return_value
+    result = app._return_value
 
     assert result.value == 'Charlie'
 
@@ -62,6 +61,6 @@ async def test_validator_failure():
         await pilot.press('B', 'o', 'b')
         assert widget.input.value == 'Bob'
         await pilot.press("enter")
-    result: Result[str] = app._return_value
+    result = app._return_value
 
     assert result is None

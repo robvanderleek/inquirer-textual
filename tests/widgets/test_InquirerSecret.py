@@ -1,5 +1,4 @@
 from inquirer_textual.InquirerApp import InquirerApp
-from inquirer_textual.common.Result import Result
 from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 
 
@@ -29,6 +28,6 @@ async def test_current_value():
     async with app.run_test() as pilot:
         await pilot.press('h', 'e', 'l', 'l', 'o')
         await pilot.press("enter")
-    result: Result[str] = app._return_value
+    result = app._return_value
 
     assert result.value == 'hello'

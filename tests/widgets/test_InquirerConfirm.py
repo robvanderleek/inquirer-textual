@@ -1,5 +1,4 @@
 from inquirer_textual.InquirerApp import InquirerApp
-from inquirer_textual.common.Result import Result
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 
 
@@ -30,7 +29,7 @@ async def test_confirm_yes():
 
     async with app.run_test() as pilot:
         await pilot.press("y")
-    result: Result[bool] = app._return_value
+    result = app._return_value
 
     assert result.value
 
@@ -41,7 +40,7 @@ async def test_confirm_no():
 
     async with app.run_test() as pilot:
         await pilot.press("n")
-    result: Result[bool] = app._return_value
+    result = app._return_value
 
     assert not result.value
 
@@ -52,7 +51,7 @@ async def test_mandatory():
 
     async with app.run_test() as pilot:
         await pilot.press("ctrl+c")
-    result: Result[bool] = app._return_value
+    result = app._return_value
 
     assert result is None
 
@@ -63,7 +62,7 @@ async def test_not_mandatory():
 
     async with app.run_test() as pilot:
         await pilot.press("ctrl+c")
-    result: Result[bool] = app._return_value
+    result = app._return_value
 
     assert result.command is None
     assert result.value is None

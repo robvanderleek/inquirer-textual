@@ -1,6 +1,5 @@
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.common.Choice import Choice
-from inquirer_textual.common.Result import Result
 from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 
 
@@ -11,7 +10,7 @@ async def test_select_entry():
     async with app.run_test() as pilot:
         await pilot.press("down")
         await pilot.press("enter")
-    result: Result[Choice] = app._return_value
+    result = app._return_value
 
     assert result.value.name == 'b'
     assert result.command == 'select'
@@ -48,7 +47,7 @@ async def test_choice_with_command():
     async with app.run_test() as pilot:
         assert widget.selected_item.name == 'a'
         await pilot.press("enter")
-    result: Result[Choice] = app._return_value
+    result = app._return_value
 
     assert result.command == 'create'
 
@@ -58,7 +57,7 @@ async def test_mandatory():
     app.widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')], mandatory=True)
     async with app.run_test() as pilot:
         await pilot.press("ctrl+c")
-    result: Result[Choice] = app._return_value
+    result = app._return_value
 
     assert result is None
 
@@ -69,7 +68,7 @@ async def test_not_mandatory():
 
     async with app.run_test() as pilot:
         await pilot.press("ctrl+c")
-    result: Result[Choice] = app._return_value
+    result = app._return_value
 
     assert result.command is None
     assert result.value is None

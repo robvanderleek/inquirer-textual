@@ -1,5 +1,4 @@
 from inquirer_textual.InquirerApp import InquirerApp
-from inquirer_textual.common.Result import Result
 from inquirer_textual.widgets.InquirerCheckbox import InquirerCheckbox
 
 
@@ -13,7 +12,7 @@ async def test_select_entries():
         await pilot.press("down")
         await pilot.press("space")
         await pilot.press("enter")
-    result: Result[list[str]] = app._return_value
+    result = app._return_value
 
     assert result.value == ['a', 'c']
     assert result.command == 'select'

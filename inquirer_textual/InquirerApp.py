@@ -4,7 +4,7 @@ from asyncio import AbstractEventLoop
 from threading import Thread, Event
 from typing import TypeVar, Callable, Any
 
-from textual.app import App, AutopilotCallbackType, ReturnType
+from textual.app import App, AutopilotCallbackType
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.widgets import Footer
@@ -34,11 +34,11 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
         Binding("ctrl+d", "quit", "Quit", show=False, priority=True)
     ]
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.widget: InquirerWidget | None = None
         self.shortcuts: list[Shortcut] | None = None
         self.show_footer: bool = False
-        self.result: Result | None = None
+        self.result: Result[T] | None = None
         self.result_ready: Event | None = None
         self.inquiry_func: Callable[[InquirerApp[T]], None] | None = None
         super().__init__()
@@ -64,7 +64,8 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
             self.call_after_refresh(lambda: self.app.exit(Result(event.command, event.value)))
 
     def _exit_select(self, command: str):
-        self.call_after_refresh(lambda: self.app.exit(Result(command, self.widget.current_value())))
+        value = self.widget.current_value() if self.widget else None
+        self.call_after_refresh(lambda: self.app.exit(Result(command, value)))
 
     def _exit_value(self, value: Any):
         self.call_after_refresh(lambda: self.app.exit(value))
@@ -80,7 +81,7 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
         if self.widget:
             self.call_after_refresh(self.widget.focus)
 
-    def prompt(self, widget: InquirerWidget) -> Result[T]:
+    def prompt(self, widget: InquirerWidget) -> Result[T] | None:
         self.widget = widget
         if not self.result_ready:
             self.result_ready = Event()
@@ -107,7 +108,7 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
             auto_pilot: AutopilotCallbackType | None = None,
             loop: AbstractEventLoop | None = None,
             inquiry_func: Callable[[InquirerApp[T]], None] | None = None,
-    ) -> ReturnType | None:
+    ) -> Result[T]:
         self.inquiry_func = inquiry_func
         return super().run(
             headless=headless,

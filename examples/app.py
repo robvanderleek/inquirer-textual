@@ -9,7 +9,7 @@ def wizard(app: InquirerApp):
                                          ['python', 'javascript', 'rust', 'go']))
     what = app.prompt(InquirerSelect(f'And what do you like so much about {language}?',
                                      ['Syntax', 'Performance', 'Community', 'Libraries']))
-    app.stop([name.value, language.value, what.value])
+    app.stop([name.value if name else None, language.value if language else None, what.value if what else None])
 
 
 def main():

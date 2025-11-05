@@ -1,15 +1,12 @@
-from textual.app import App
-
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.common.Choice import Choice
-from inquirer_textual.common.Result import Result
 from inquirer_textual.common.Shortcut import Shortcut
 from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 
 
 async def test_shortcut():
     widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')])
-    app: InquirerApp[App[Result[Choice]]] = InquirerApp()
+    app = InquirerApp()
     app.widget = widget
     app.shortcuts = [Shortcut('v', 'view', 'View')]
 
