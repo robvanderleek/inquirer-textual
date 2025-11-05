@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from asyncio import AbstractEventLoop
 from threading import Thread, Event
-from typing import TypeVar, Callable
+from typing import TypeVar, Callable, Any
 
 from textual.app import App, AutopilotCallbackType, ReturnType
 from textual.app import ComposeResult
@@ -66,6 +66,9 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
     def _exit_select(self, command: str):
         self.call_after_refresh(lambda: self.app.exit(Result(command, self.widget.current_value())))
 
+    def _exit_value(self, value: Any):
+        self.call_after_refresh(lambda: self.app.exit(value))
+
     def compose(self) -> ComposeResult:
         if self.widget:
             yield self.widget
@@ -87,8 +90,11 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
         self.result_ready.clear()
         return self.result
 
-    def stop(self):
-        self.call_from_thread(self.exit)
+    def stop(self, value: Any = None):
+        if value:
+            self.call_from_thread(self._exit_value, value)
+        else:
+            self.call_from_thread(self.exit)
 
     def run(
             self,
