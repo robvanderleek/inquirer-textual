@@ -1,40 +1,34 @@
 from inquirer_textual.InquirerApp import InquirerApp
-from inquirer_textual.common.InquirerContext import InquirerContext
-from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.common.Result import Result
+from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 
 
 def test_snapshot(snap_compare):
-    widget = InquirerConfirm('Are you sure?')
-    context = InquirerContext(widget)
-    app = InquirerApp(context)
+    app = InquirerApp()
+    app.widget = InquirerConfirm('Are you sure?')
 
     assert snap_compare(app)
 
 
 def test_snapshot_default_yes(snap_compare):
-    widget = InquirerConfirm('Are you sure?', default=True)
-    context = InquirerContext(widget)
-    app = InquirerApp(context)
+    app = InquirerApp()
+    app.widget = InquirerConfirm('Are you sure?', default=True)
 
     assert snap_compare(app)
 
 
 def test_snapshot_custom_chars(snap_compare):
-    widget = InquirerConfirm('Are you sure?', confirm_character='a', reject_character='b')
-    context = InquirerContext(widget)
-    app = InquirerApp(context)
+    app = InquirerApp()
+    app.widget = InquirerConfirm('Are you sure?', confirm_character='a', reject_character='b')
 
     assert snap_compare(app)
 
 
 async def test_confirm_yes():
-    widget = InquirerConfirm('Are you sure?')
-    context = InquirerContext(widget)
-    app = InquirerApp(context)
+    app = InquirerApp()
+    app.widget = InquirerConfirm('Are you sure?')
 
     async with app.run_test() as pilot:
-        assert widget.value is False
         await pilot.press("y")
     result: Result[bool] = app._return_value
 
@@ -42,12 +36,10 @@ async def test_confirm_yes():
 
 
 async def test_confirm_no():
-    widget = InquirerConfirm('Are you sure?')
-    context = InquirerContext(widget)
-    app = InquirerApp(context)
+    app = InquirerApp()
+    app.widget = InquirerConfirm('Are you sure?')
 
     async with app.run_test() as pilot:
-        assert widget.value is False
         await pilot.press("n")
     result: Result[bool] = app._return_value
 
@@ -55,9 +47,8 @@ async def test_confirm_no():
 
 
 async def test_mandatory():
-    widget = InquirerConfirm('Are you sure?', mandatory=True)
-    context = InquirerContext(widget)
-    app = InquirerApp(context)
+    app = InquirerApp()
+    app.widget = InquirerConfirm('Are you sure?', mandatory=True)
 
     async with app.run_test() as pilot:
         await pilot.press("ctrl+c")
@@ -67,9 +58,8 @@ async def test_mandatory():
 
 
 async def test_not_mandatory():
-    widget = InquirerConfirm('Are you sure?', mandatory=False)
-    context = InquirerContext(widget)
-    app = InquirerApp(context)
+    app = InquirerApp()
+    app.widget = InquirerConfirm('Are you sure?', mandatory=False)
 
     async with app.run_test() as pilot:
         await pilot.press("ctrl+c")

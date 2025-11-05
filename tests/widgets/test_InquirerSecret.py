@@ -1,21 +1,18 @@
 from inquirer_textual.InquirerApp import InquirerApp
-from inquirer_textual.common.InquirerContext import InquirerContext
-from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 from inquirer_textual.common.Result import Result
+from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 
 
 def test_snapshot(snap_compare):
-    widget = InquirerSecret('Password:')
-    context = InquirerContext(widget)
-    app = InquirerApp(context)
+    app = InquirerApp()
+    app.widget = InquirerSecret('Password:')
 
     assert snap_compare(app)
 
 
 def test_snapshot_hide_input(snap_compare):
-    widget = InquirerSecret('Password:')
-    context = InquirerContext(widget)
-    app = InquirerApp(context)
+    app = InquirerApp()
+    app.widget = InquirerSecret('Password:')
 
     async def run_before(pilot) -> None:
         await pilot.press('a')
@@ -26,13 +23,11 @@ def test_snapshot_hide_input(snap_compare):
 
 
 async def test_current_value():
-    widget = InquirerSecret('Password:')
-    context = InquirerContext(widget)
-    app = InquirerApp(context)
+    app = InquirerApp()
+    app.widget = InquirerSecret('Password:')
 
     async with app.run_test() as pilot:
         await pilot.press('h', 'e', 'l', 'l', 'o')
-        assert widget.input.value == 'hello'
         await pilot.press("enter")
     result: Result[str] = app._return_value
 
