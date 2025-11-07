@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from asyncio import AbstractEventLoop
+from multiprocessing.pool import worker
 from threading import Thread, Event
 from typing import TypeVar, Callable, Any
 
+from textual import work
 from textual.app import App, AutopilotCallbackType
 from textual.app import ComposeResult
 from textual.binding import Binding
@@ -50,8 +52,11 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
                                     description=shortcut.description,
                                     show=shortcut.show)
         if self.inquiry_func:
-            thread = Thread(target=self.inquiry_func, args=(self,))
-            thread.start()
+            self.run_worker(self.inquiry_func_worker, thread=True)
+
+    def inquiry_func_worker(self):
+        if self.inquiry_func:
+            self.inquiry_func(self)
 
     def action_shortcut(self, command: str):
         self._exit_select(command)
@@ -81,7 +86,7 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
         if self.widget:
             self.call_after_refresh(self.widget.focus)
 
-    def prompt(self, widget: InquirerWidget) -> Result[T] | None:
+    def prompt(self, widget: InquirerWidget) -> Result[T]:
         self.widget = widget
         if not self.result_ready:
             self.result_ready = Event()
