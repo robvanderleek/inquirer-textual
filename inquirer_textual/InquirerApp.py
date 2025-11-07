@@ -1,11 +1,9 @@
 from __future__ import annotations
 
 from asyncio import AbstractEventLoop
-from multiprocessing.pool import worker
-from threading import Thread, Event
+from threading import Event
 from typing import TypeVar, Callable, Any
 
-from textual import work
 from textual.app import App, AutopilotCallbackType
 from textual.app import ComposeResult
 from textual.binding import Binding
@@ -94,7 +92,7 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
         self.call_from_thread(self.focus_widget)
         self.result_ready.wait()
         self.result_ready.clear()
-        return self.result
+        return self.result # type: ignore[return-value]
 
     def stop(self, value: Any = None):
         if value:
