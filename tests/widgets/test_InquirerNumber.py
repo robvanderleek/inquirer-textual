@@ -3,8 +3,7 @@ from inquirer_textual.widgets.InquirerNumber import InquirerNumber
 
 
 def test_snapshot(snap_compare):
-    widget = InquirerNumber('Repeat:')
-    app = InquirerApp(widget)
+    app = InquirerApp()
+    app.widget = InquirerNumber('Repeat:')
 
     assert snap_compare(app)
-
