@@ -42,14 +42,17 @@ markdown_extensions:
   - pymdownx.superfences
 nav:
   - Inquirer Textual: 'index.md'
-  - Prompts:
-    - Checkbox: 'prompts/checkbox.md'
-    - Confirm: 'prompts/confirm.md'
-    - Multi: 'prompts/multi.md'
-    - Number: 'prompts/number.md'
-    - Secret: 'prompts/secret.md'
-    - Select: 'prompts/select.md'
-    - Text: 'prompts/text.md'
+  - Examples:
+    - Prompts:
+      - Checkbox: 'examples/prompts/checkbox.md'
+      - Confirm: 'examples/prompts/confirm.md'
+      - Multi: 'examples/prompts/multi.md'
+      - Number: 'examples/prompts/number.md'
+      - Secret: 'examples/prompts/secret.md'
+      - Select: 'examples/prompts/select.md'
+      - Text: 'examples/prompts/text.md'
+    - Apps:
+      - App: 'examples/apps/app.md'
   - Reference:
     - Checkbox: 'reference/checkbox.md'
     - Confirm: 'reference/confirm.md'

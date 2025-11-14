@@ -1,4 +1,4 @@
-Output docs/prompts/checkbox.gif
+Output docs/examples/prompts/checkbox.gif
 Set Shell zsh
 Set Theme { "background": "#000000" }
 Type "uv run examples/prompt_checkbox.py"

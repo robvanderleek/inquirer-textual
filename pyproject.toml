@@ -46,11 +46,12 @@ upload_to_release = false
 [tool.poe.tasks.gifs]
 help = "Generate documentation gifs"
 shell = """
-    vhs docs/prompts/checkbox.tape
-    vhs docs/prompts/confirm.tape
-    vhs docs/prompts/multi.tape
-    vhs docs/prompts/number.tape
-    vhs docs/prompts/secret.tape
-    vhs docs/prompts/select.tape
-    vhs docs/prompts/text.tape
+    vhs docs/examples/prompts/checkbox.tape
+    vhs docs/examples/prompts/confirm.tape
+    vhs docs/examples/prompts/multi.tape
+    vhs docs/examples/prompts/number.tape
+    vhs docs/examples/prompts/secret.tape
+    vhs docs/examples/prompts/select.tape
+    vhs docs/examples/prompts/text.tape
+    vhs docs/examples/apps/app.tape
 """

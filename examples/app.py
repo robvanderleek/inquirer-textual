@@ -6,9 +6,9 @@ from inquirer_textual.widgets.InquirerText import InquirerText
 def wizard(app: InquirerApp):
     name = app.prompt(InquirerText('What is your name?'))
     language = app.prompt(InquirerSelect(f'Hi {name}, what is your favorite programming language?',
-                                         ['python', 'javascript', 'rust', 'go']))
+                                         ['go', 'javascript', 'python', 'rust']))
     why = app.prompt(InquirerSelect(f'And what do you like so much about {language}?',
-                                    ['Syntax', 'Performance', 'Community', 'Libraries']))
+                                    ['Community', 'Libraries', 'Performance', 'Syntax']))
     app.stop({'name': name.value, 'language': language.value, 'why': why.value})
 
 
