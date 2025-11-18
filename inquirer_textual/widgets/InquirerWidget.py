@@ -22,7 +22,7 @@ class InquirerWidget(Widget):
             self._bindings.bind('ctrl+c', 'exit_now', show=False)
 
     def action_exit_now(self):
-        self.post_message(InquirerWidget.Submit(None, None))
+        self.post_message(InquirerWidget.Submit(None, 'ctrl+c'))
 
     def current_value(self):
         raise NotImplementedError("Subclasses must implement current_value method")

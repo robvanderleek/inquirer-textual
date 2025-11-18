@@ -41,6 +41,7 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
         self.result: Result[T] | None = None
         self.result_ready: Event | None = None
         self.inquiry_func: Callable[[InquirerApp[T]], None] | None = None
+        self.inquiry_func_stop: bool = False
         super().__init__()
 
     def on_mount(self) -> None:
@@ -59,19 +60,31 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
     def action_shortcut(self, command: str):
         self._exit_select(command)
 
+    async def action_quit(self):
+        self._exit_value(None)
+
     def on_inquirer_widget_submit(self, event: InquirerWidget.Submit) -> None:
         if self.result_ready is not None:
             self.result = Result(event.command, event.value)
             self.result_ready.set()
         else:
-            self.call_after_refresh(lambda: self.app.exit(Result(event.command, event.value)))
+            self.call_after_refresh(lambda: self._terminate(event.command, event.value))
 
     def _exit_select(self, command: str):
         value = self.widget.current_value() if self.widget else None
-        self.call_after_refresh(lambda: self.app.exit(Result(command, value)))
+        self.call_after_refresh(lambda: self._terminate(command, value))
 
     def _exit_value(self, value: Any):
-        self.call_after_refresh(lambda: self.app.exit(value))
+        self.call_after_refresh(lambda: self._terminate(value=value))
+
+    def _terminate(self, command: str | None = None, value: Any | None = None):
+        self.inquiry_func_stop = True
+        if self.result_ready:
+            self.result_ready.set()
+        if command is not None:
+            self.app.exit(Result(command, value))
+        else:
+            self.exit(value)
 
     def compose(self) -> ComposeResult:
         if self.widget:
@@ -84,7 +97,10 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
         if self.widget:
             self.call_after_refresh(self.widget.focus)
 
-    def prompt(self, widget: InquirerWidget) -> Result[T]:
+    def prompt(self, widget: InquirerWidget, shortcuts: list[Shortcut] | None = None) -> Result[T]:
+        if shortcuts:
+            self.shortcuts = shortcuts
+            self.show_footer = True
         self.widget = widget
         if not self.result_ready:
             self.result_ready = Event()
@@ -92,7 +108,9 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
         self.call_from_thread(self.focus_widget)
         self.result_ready.wait()
         self.result_ready.clear()
-        return self.result # type: ignore[return-value]
+        if self.inquiry_func_stop:
+            raise RuntimeError("InquirerApp has been stopped.")
+        return self.result  # type: ignore[return-value]
 
     def stop(self, value: Any = None):
         if value:

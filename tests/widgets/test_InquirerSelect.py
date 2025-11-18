@@ -70,7 +70,7 @@ async def test_not_mandatory():
         await pilot.press("ctrl+c")
     result = app._return_value
 
-    assert result.command is None
+    assert result.command == 'ctrl+c'
     assert result.value is None
 
 
