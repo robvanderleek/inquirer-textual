@@ -4,7 +4,7 @@ from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 
 
 def wizard(app: InquirerApp):
-    language = app.prompt(InquirerSelect(f'What is your favorite programming language?',
+    language = app.prompt(InquirerSelect('What is your favorite programming language?',
                                          ['go', 'javascript', 'python', 'rust']),
                           shortcuts=[Shortcut('c', 'select', 'Choose')])
     app.stop({'language': language.value})
