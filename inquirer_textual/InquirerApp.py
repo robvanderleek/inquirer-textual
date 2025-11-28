@@ -6,7 +6,7 @@ from typing import TypeVar, Callable, Any
 
 from textual.app import App, AutopilotCallbackType
 from textual.app import ComposeResult
-from textual.binding import Binding
+from textual.binding import Binding, BindingsMap
 from textual.widgets import Footer
 
 from inquirer_textual.common.Result import Result
@@ -45,13 +45,17 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
         super().__init__()
 
     def on_mount(self) -> None:
+        self._update_bindings()
+        if self.inquiry_func:
+            self.run_worker(self.inquiry_func_worker, thread=True)
+
+    def _update_bindings(self) -> None:
+        self._bindings = BindingsMap()
         if self.shortcuts:
             for shortcut in self.shortcuts:
                 self._bindings.bind(shortcut.key, f'shortcut("{shortcut.command}")',
                                     description=shortcut.description,
                                     show=shortcut.show)
-        if self.inquiry_func:
-            self.run_worker(self.inquiry_func_worker, thread=True)
 
     def inquiry_func_worker(self):
         if self.inquiry_func:
@@ -101,6 +105,7 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
         if shortcuts:
             self.shortcuts = shortcuts
             self.show_footer = True
+        self._update_bindings()
         self.widget = widget
         if not self.result_ready:
             self.result_ready = Event()
@@ -130,7 +135,8 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
             loop: AbstractEventLoop | None = None,
             inquiry_func: Callable[[InquirerApp[T]], None] | None = None,
     ) -> Result[T]:
-        self.inquiry_func = inquiry_func
+        if not self.inquiry_func:
+            self.inquiry_func = inquiry_func
         return super().run(
             headless=headless,
             inline=inline,
