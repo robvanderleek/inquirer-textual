@@ -98,8 +98,8 @@ def test_snapshot_not_mandatory(snap_compare):
 def test_snapshot_fullscreen(snap_compare):
     app = InquirerApp()
     choices: list[Choice] = []
-    for l in string.ascii_lowercase:
-        choices.append(Choice(l))
+    for letter in string.ascii_lowercase:
+        choices.append(Choice(letter))
     app.widget = InquirerSelect('Environment:', choices, mandatory=True)
 
     assert snap_compare(app)

@@ -75,7 +75,7 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
 
     def _handle_result(self, command: str | None, value: Any | None):
         if self.result_ready is not None:
-            self.result = Result(command, value)
+            self.result = Result(command, value) # type: ignore[arg-type]
             self.result_ready.set()
         else:
             self.call_after_refresh(lambda: self._terminate(command, value))
