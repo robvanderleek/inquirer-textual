@@ -42,6 +42,7 @@ version_toml = [ "pyproject.toml:project.version" ]
 version_variables = [ "inquirer_textual/version.py:version" ]
 upload_to_repository = false
 upload_to_release = false
+allow_zero_version = true
 
 [tool.poe.tasks.gifs]
 help = "Generate documentation gifs"
