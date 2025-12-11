@@ -1,6 +1,6 @@
 [project]
 name = "inquirer-textual"
-version = "0.1.0"
+version = "0.2.0"
 description = "Inquirer based on Textual"
 authors = [{ name = "Rob van der Leek", email = "robvanderleek@gmail.com" }]
 readme = "README.md"
