@@ -1,6 +1,7 @@
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.common.Choice import Choice
 from inquirer_textual.widgets.InquirerSelect import InquirerSelect
+import string
 
 
 async def test_select_entry():
@@ -92,3 +93,13 @@ def test_snapshot_not_mandatory(snap_compare):
         await pilot.press('ctrl+c')
 
     assert snap_compare(app, run_before=run_before)
+
+
+def test_snapshot_fullscreen(snap_compare):
+    app = InquirerApp()
+    choices: list[Choice] = []
+    for l in string.ascii_lowercase:
+        choices.append(Choice(l))
+    app.widget = InquirerSelect('Environment:', choices, mandatory=True)
+
+    assert snap_compare(app)

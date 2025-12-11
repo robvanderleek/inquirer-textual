@@ -9,6 +9,7 @@ from textual.app import ComposeResult
 from textual.binding import Binding, BindingsMap
 from textual.widgets import Footer
 
+from inquirer_textual.common.InquirerHeader import InquirerHeader
 from inquirer_textual.common.Result import Result
 from inquirer_textual.common.Shortcut import Shortcut
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
@@ -37,6 +38,7 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
     def __init__(self) -> None:
         self.widget: InquirerWidget | None = None
         self.shortcuts: list[Shortcut] | None = None
+        self.header: str | list[str] | None = None
         self.show_footer: bool = False
         self.result: Result[T] | None = None
         self.result_ready: Event | None = None
@@ -62,24 +64,21 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
             self.inquiry_func(self)
 
     def action_shortcut(self, command: str):
-        self._exit_select(command)
+        value = self.widget.current_value() if self.widget else None
+        self._handle_result(command, value)
 
     async def action_quit(self):
-        self._exit_value(None)
+        self._handle_result('quit', None)
 
     def on_inquirer_widget_submit(self, event: InquirerWidget.Submit) -> None:
+        self._handle_result(event.command, event.value)
+
+    def _handle_result(self, command: str | None, value: Any | None):
         if self.result_ready is not None:
-            self.result = Result(event.command, event.value)
+            self.result = Result(command, value)
             self.result_ready.set()
         else:
-            self.call_after_refresh(lambda: self._terminate(event.command, event.value))
-
-    def _exit_select(self, command: str):
-        value = self.widget.current_value() if self.widget else None
-        self.call_after_refresh(lambda: self._terminate(command, value))
-
-    def _exit_value(self, value: Any):
-        self.call_after_refresh(lambda: self._terminate(value=value))
+            self.call_after_refresh(lambda: self._terminate(command, value))
 
     def _terminate(self, command: str | None = None, value: Any | None = None):
         self.inquiry_func_stop = True
@@ -91,6 +90,8 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
             self.exit(value)
 
     def compose(self) -> ComposeResult:
+        if self.header is not None:
+            yield InquirerHeader(self.header)
         if self.widget:
             yield self.widget
             self.widget.focus()
@@ -119,7 +120,7 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
 
     def stop(self, value: Any = None):
         if value:
-            self.call_from_thread(self._exit_value, value)
+            self.call_after_refresh(lambda: self._terminate(value=value))
         else:
             self.call_from_thread(self.exit)
 

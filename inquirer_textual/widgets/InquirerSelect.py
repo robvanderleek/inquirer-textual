@@ -43,7 +43,10 @@ class InquirerSelect(InquirerWidget):
 
     def on_mount(self):
         super().on_mount()
-        self.styles.height = min(10, len(self.choices) + 1)
+        if self.app.is_inline:
+            self.styles.height = min(10, len(self.choices) + 1)
+        else:
+            self.styles.height = '1fr'
 
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
         if self.selected_label:
