@@ -17,7 +17,7 @@ class InquirerConfirm(InquirerWidget):
     can_focus = True
 
     def __init__(self, message: str, confirm_character: str = 'y', reject_character: str = 'n', default=False,
-                 mandatory: bool = True):
+                 mandatory: bool = False):
         """
         Args:
             message (str): The prompt message to display.

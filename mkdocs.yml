@@ -46,6 +46,7 @@ nav:
     - Prompts:
       - Checkbox: 'examples/prompts/checkbox.md'
       - Confirm: 'examples/prompts/confirm.md'
+      - Editor: 'examples/prompts/editor.md'
       - Multi: 'examples/prompts/multi.md'
       - Number: 'examples/prompts/number.md'
       - Secret: 'examples/prompts/secret.md'
@@ -56,6 +57,7 @@ nav:
   - Reference:
     - Checkbox: 'reference/checkbox.md'
     - Confirm: 'reference/confirm.md'
+    - Editor: 'reference/editor.md'
     - Multi: 'reference/multi.md'
     - Number: 'reference/number.md'
     - Secret: 'reference/secret.md'
