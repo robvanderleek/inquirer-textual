@@ -34,3 +34,17 @@ Add this library as an editable local dependency to another project using `uv`:
 ```shell
 uv add --editable <path-to-inquirer-textual>
 ```
+
+### Static documentation
+
+Generating the static documentation:
+
+```shell
+uv run mkdocs build
+```
+
+Viewing the static documentation:
+
+```shell
+uv run mkdocs serve
+```
