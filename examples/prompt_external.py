@@ -16,20 +16,19 @@ class InquirerSlider(InquirerWidget):
     }
     """
 
-    def __init__(self, message: str):
+    def __init__(self, message: str, min_val: int, max_val: int, step: int):
         super().__init__()
         self.message = message
-        self.slider: Slider | None = None
+        self.slider = Slider(min=min_val, max=max_val, step=step, id="slider")
 
     def current_value(self):
-        return self.slider.value if self.slider else None
+        return self.slider.value
 
     def compose(self) -> ComposeResult:
         with VerticalGroup():
             with HorizontalGroup():
                 yield PromptMessage(self.message)
                 yield Label(id="slider-value")
-            self.slider = Slider(min=0, max=1024, step=16, id="slider")
             yield self.slider
 
     def on_mount(self) -> None:
@@ -48,5 +47,5 @@ class InquirerSlider(InquirerWidget):
 
 
 if __name__ == '__main__':
-    answer = prompts.external(InquirerSlider('Memory:'))
+    answer = prompts.external(InquirerSlider('Memory:', 0, 1024, 16))
     print(answer)
