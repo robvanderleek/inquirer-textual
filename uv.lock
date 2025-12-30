@@ -574,6 +574,11 @@ dependencies = [
     { name = "textual" },
 ]
 
+[package.optional-dependencies]
+examples = [
+    { name = "textual-slider" },
+]
+
 [package.dev-dependencies]
 dev = [
     { name = "mkdocs-glightbox" },
@@ -587,7 +592,11 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "textual", specifier = ">=6.11.0" }]
+requires-dist = [
+    { name = "textual", specifier = ">=6.11.0" },
+    { name = "textual-slider", marker = "extra == 'examples'", specifier = ">=0.2.0" },
+]
+provides-extras = ["examples"]
 
 [package.metadata.requires-dev]
 dev = [
@@ -1720,6 +1729,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/27/41/09d5695b050d592ff58422be2ca5c9915787f59ff576ca91d9541d315406/textual_serve-1.1.2.tar.gz", hash = "sha256:0ccaf9b9df9c08d4b2d7a0887cad3272243ba87f68192c364f4bed5b683e4bd4", size = 892959, upload-time = "2025-04-16T12:11:41.746Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/7c/fb/0006f86960ab8a2f69c9f496db657992000547f94f53a2f483fd611b4bd2/textual_serve-1.1.2-py3-none-any.whl", hash = "sha256:147d56b165dccf2f387203fe58d43ce98ccad34003fe3d38e6d2bc8903861865", size = 447326, upload-time = "2025-04-16T12:11:43.176Z" },
+]
+
+[[package]]
+name = "textual-slider"
+version = "0.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "textual" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/40/aa/2019bbb5218e4c3461248281cef0a1dbc827995ba940a6fb1f929e34725d/textual_slider-0.2.0.tar.gz", hash = "sha256:cdf28cc764ff1163a2f03655a31253a2c4b4966ddff3d0de53c4df10593277c7", size = 16878, upload-time = "2025-01-24T18:28:08.408Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/23/f3/9faea1513c81a1efd9c16f71ed1d72e6645032d07c82b3b01f1967e2d6fa/textual_slider-0.2.0-py3-none-any.whl", hash = "sha256:2e36f33bae5cfe968deeb5c61880c76c6a66448ee733683bd74d73c93825d4e6", size = 16768, upload-time = "2025-01-24T18:28:07.096Z" },
 ]
 
 [[package]]

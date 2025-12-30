@@ -11,6 +11,11 @@ dependencies = [
     "textual>=6.11.0",
 ]
 
+[project.optional-dependencies]
+examples = [
+    "textual-slider>=0.2.0",
+]
+
 [project.urls]
 Changelog = "https://github.com/robvanderleek/inquirer-textual/blob/master/CHANGELOG.md"
 Documentation = "https://robvanderleek.github.io/inquirer-textual/"
@@ -48,6 +53,8 @@ help = "Generate documentation gifs"
 shell = """
     vhs docs/examples/prompts/checkbox.tape
     vhs docs/examples/prompts/confirm.tape
+    vhs docs/examples/prompts/editor.tape
+    vhs docs/examples/prompts/external.tape
     vhs docs/examples/prompts/multi.tape
     vhs docs/examples/prompts/number.tape
     vhs docs/examples/prompts/secret.tape

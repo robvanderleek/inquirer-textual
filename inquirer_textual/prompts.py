@@ -41,6 +41,14 @@ def editor(message: str) -> Result[str]:
     return app.run()
 
 
+def external(widget: InquirerWidget, shortcuts: list[Shortcut] | None = None) -> Result[int]:
+    app: InquirerApp[int] = InquirerApp()
+    app.widget = widget
+    app.shortcuts = shortcuts
+    app.show_footer = bool(shortcuts)
+    return app.run(inline=True)
+
+
 def multi(widgets: list[InquirerWidget], shortcuts: list[Shortcut] | None = None) -> Result[list[Any]]:
     app: InquirerApp[list[Any]] = InquirerApp()
     app.widget = InquirerMulti(widgets)
