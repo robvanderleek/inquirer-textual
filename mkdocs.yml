@@ -47,6 +47,7 @@ nav:
       - Checkbox: 'examples/prompts/checkbox.md'
       - Confirm: 'examples/prompts/confirm.md'
       - Editor: 'examples/prompts/editor.md'
+      - External: 'examples/prompts/external.md'
       - Multi: 'examples/prompts/multi.md'
       - Number: 'examples/prompts/number.md'
       - Secret: 'examples/prompts/secret.md'
