@@ -28,7 +28,8 @@ class InquirerText(InquirerWidget):
     }
     """
 
-    def __init__(self, message: str, default: str = '', validators: Validator | Iterable[Validator] | None = None):
+    def __init__(self, message: str, default: str = '', validators: Validator | Iterable[Validator] | None = None,
+                 mandatory: bool = False):
         """
         Args:
             message (str): The prompt message to display.
@@ -36,7 +37,7 @@ class InquirerText(InquirerWidget):
             validators (Validator | Iterable[Validator] | None): A validator or list of validators to validate the
                 input.
         """
-        super().__init__()
+        super().__init__(mandatory=mandatory)
         self.message = message
         self.input: Input | None = None
         self.default = default

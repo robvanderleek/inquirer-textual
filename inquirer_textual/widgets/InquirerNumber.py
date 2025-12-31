@@ -26,12 +26,12 @@ class InquirerNumber(InquirerWidget):
     }
     """
 
-    def __init__(self, message: str):
+    def __init__(self, message: str, mandatory: bool = False):
         """
         Args:
             message (str): The prompt message to display.
         """
-        super().__init__()
+        super().__init__(mandatory=mandatory)
         self.message = message
         self.input: Input | None = None
 

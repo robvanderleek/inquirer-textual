@@ -27,14 +27,15 @@ class InquirerCheckbox(InquirerWidget):
         ("space", "toggle_selected", "Toggle selection"),
     ]
 
-    def __init__(self, message: str, choices: list[str | Choice], enabled: list[str | Choice] | None = None):
+    def __init__(self, message: str, choices: list[str | Choice], enabled: list[str | Choice] | None = None,
+                 mandatory: bool = False):
         """
             Args:
                 message (str): The prompt message to display.
                 choices (list[str | Choice]): A list of choices to present to the user.
                 enabled (list[str | Choice] | None): A list of choices that should be pre-selected.
         """
-        super().__init__()
+        super().__init__(mandatory=mandatory)
         self.message = message
         self.choices = choices
         self.enabled = enabled

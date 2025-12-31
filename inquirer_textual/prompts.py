@@ -18,9 +18,9 @@ from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
 def checkbox(message: str, choices: list[str | Choice], shortcuts: list[Shortcut] | None = None,
-             enabled: list[str | Choice] | None = None) -> Result[list[str | Choice]]:
+             enabled: list[str | Choice] | None = None, mandatory: bool = False) -> Result[list[str | Choice]]:
     app: InquirerApp[list[str | Choice]] = InquirerApp()
-    app.widget = InquirerCheckbox(message, choices, enabled)
+    app.widget = InquirerCheckbox(message, choices, enabled, mandatory=mandatory)
     app.shortcuts = shortcuts
     app.show_footer = bool(shortcuts)
     return app.run(inline=True)
@@ -57,17 +57,17 @@ def multi(widgets: list[InquirerWidget], shortcuts: list[Shortcut] | None = None
     return app.run(inline=True)
 
 
-def number(message: str, shortcuts: list[Shortcut] | None = None) -> Result[int]:
+def number(message: str, shortcuts: list[Shortcut] | None = None, mandatory: bool = False) -> Result[int]:
     app: InquirerApp[int] = InquirerApp()
-    app.widget = InquirerNumber(message)
+    app.widget = InquirerNumber(message, mandatory=mandatory)
     app.shortcuts = shortcuts
     app.show_footer = bool(shortcuts)
     return app.run(inline=True)
 
 
-def secret(message: str, shortcuts: list[Shortcut] | None = None) -> Result[str]:
+def secret(message: str, shortcuts: list[Shortcut] | None = None, mandatory: bool = False) -> Result[str]:
     app: InquirerApp[str] = InquirerApp()
-    app.widget = InquirerSecret(message)
+    app.widget = InquirerSecret(message, mandatory=mandatory)
     app.shortcuts = shortcuts
     app.show_footer = bool(shortcuts)
     return app.run(inline=True)
@@ -76,16 +76,16 @@ def secret(message: str, shortcuts: list[Shortcut] | None = None) -> Result[str]
 def select(message: str, choices: list[str | Choice], shortcuts: list[Shortcut] | None = None,
            default: str | Choice | None = None, mandatory: bool = False) -> Result[str | Choice]:
     app: InquirerApp[str | Choice] = InquirerApp()
-    app.widget = InquirerSelect(message, choices, default, mandatory)
+    app.widget = InquirerSelect(message, choices, default, mandatory=mandatory)
     app.shortcuts = shortcuts
     app.show_footer = bool(shortcuts)
     return app.run(inline=True)
 
 
 def text(message: str, shortcuts: list[Shortcut] | None = None,
-         validators: Validator | Iterable[Validator] | None = None) -> Result[str]:
+         validators: Validator | Iterable[Validator] | None = None, mandatory: bool = False) -> Result[str]:
     app: InquirerApp[str] = InquirerApp()
-    app.widget = InquirerText(message, validators=validators)
+    app.widget = InquirerText(message, validators=validators, mandatory=mandatory)
     app.shortcuts = shortcuts
     app.show_footer = bool(shortcuts)
     return app.run(inline=True)
