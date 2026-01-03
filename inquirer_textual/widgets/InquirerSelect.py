@@ -58,9 +58,9 @@ class InquirerSelect(InquirerWidget):
 
     def on_list_view_selected(self, _: ListView.Selected):
         if isinstance(self.selected_item, Choice):
-            self.post_message(InquirerWidget.Submit(self.selected_item, self.selected_item.command))
+            self.submit_current_value(self.selected_item.command)
         else:
-            self.post_message(InquirerWidget.Submit(self.selected_item))
+            self.submit_current_value()
 
     def focus(self, scroll_visible: bool = True) -> Self:
         if self.list_view:

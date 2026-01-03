@@ -12,6 +12,7 @@ from textual.widgets import Footer
 from inquirer_textual.common.InquirerHeader import InquirerHeader
 from inquirer_textual.common.Result import Result
 from inquirer_textual.common.Shortcut import Shortcut
+from inquirer_textual.common.StandardTheme import StandardTheme
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 T = TypeVar('T')
@@ -75,7 +76,7 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
 
     def _handle_result(self, command: str | None, value: Any | None):
         if self.result_ready is not None:
-            self.result = Result(command, value) # type: ignore[arg-type]
+            self.result = Result(command, value)  # type: ignore[arg-type]
             self.result_ready.set()
         else:
             self.call_after_refresh(lambda: self._terminate(command, value))
@@ -150,7 +151,7 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
 
     def get_theme_variable_defaults(self) -> dict[str, str]:
         return {
-            'select-question-mark': '#e5c07b',
-            'select-list-item-highlight-foreground': '#61afef',
-            'input-color': '#98c379'
+            'select-question-mark': StandardTheme.select_question_mark,
+            'select-list-item-highlight-foreground': StandardTheme.select_list_item_highlight_foreground,
+            'input-color': StandardTheme.input_color,
         }

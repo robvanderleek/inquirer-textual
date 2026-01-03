@@ -9,6 +9,7 @@ from inquirer_textual.common.Shortcut import Shortcut
 from inquirer_textual.widgets.InquirerCheckbox import InquirerCheckbox
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerEditor import InquirerEditor
+from inquirer_textual.widgets.InquirerFuzzy import InquirerFuzzy
 from inquirer_textual.widgets.InquirerMulti import InquirerMulti
 from inquirer_textual.widgets.InquirerNumber import InquirerNumber
 from inquirer_textual.widgets.InquirerSecret import InquirerSecret
@@ -44,6 +45,15 @@ def editor(message: str) -> Result[str]:
 def external(widget: InquirerWidget, shortcuts: list[Shortcut] | None = None) -> Result[int]:
     app: InquirerApp[int] = InquirerApp()
     app.widget = widget
+    app.shortcuts = shortcuts
+    app.show_footer = bool(shortcuts)
+    return app.run(inline=True)
+
+
+def fuzzy(message: str, choices: list[str | Choice], shortcuts: list[Shortcut] | None = None,
+          default: str | Choice | None = None, mandatory: bool = False) -> Result[str | Choice]:
+    app: InquirerApp[str | Choice] = InquirerApp()
+    app.widget = InquirerFuzzy(message, choices, default, mandatory=mandatory)
     app.shortcuts = shortcuts
     app.show_footer = bool(shortcuts)
     return app.run(inline=True)

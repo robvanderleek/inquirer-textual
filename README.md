@@ -35,6 +35,20 @@ Add this library as an editable local dependency to another project using `uv`:
 uv add --editable <path-to-inquirer-textual>
 ```
 
+### Textual console
+
+1. Open the Textual Development Console:
+
+```shell
+uv run textual console
+```
+
+2. Run application in development mode:
+
+```shell
+uv run textual run --dev examples/prompt_fuzzy.py
+```
+
 ### Static documentation
 
 Generating the static documentation:
