@@ -15,8 +15,8 @@ from inquirer_textual.common.StandardTheme import StandardTheme
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
-class InquirerFuzzy(InquirerWidget):
-    """A select widget that allows a single selection from a list of choices with fuzzy searching."""
+class InquirerPattern(InquirerWidget):
+    """A select widget that allows a single selection from a list of choices with pattern filtering."""
 
     DEFAULT_CSS = """
         #inquirer-fuzzy-list-view {
@@ -93,8 +93,8 @@ class InquirerFuzzy(InquirerWidget):
             self.submit_current_value()
 
     def focus(self, scroll_visible: bool = True) -> Self:
-        if self.list_view:
-            return self.list_view.focus(scroll_visible)
+        if self.query:
+            return self.query.focus(scroll_visible)
         else:
             return super().focus(scroll_visible)
 
@@ -104,7 +104,7 @@ class InquirerFuzzy(InquirerWidget):
     def _collect_list_items(self):
         items: list[ListItem] = []
         for candidate in self.candidates:
-            list_item = ListItem(ChoiceLabel(candidate))
+            list_item = ListItem(ChoiceLabel(candidate, self.query.value if self.query else None))
             items.append(list_item)
         return items
 
@@ -148,6 +148,9 @@ class InquirerFuzzy(InquirerWidget):
         elif event.key == 'up':
             event.stop()
             self.list_view.action_cursor_up()
+        elif event.key == 'enter':
+            event.stop()
+            self.list_view.action_select_cursor()
 
     def compose(self) -> ComposeResult:
         with VerticalGroup():

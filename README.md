@@ -46,7 +46,7 @@ uv run textual console
 2. Run application in development mode:
 
 ```shell
-uv run textual run --dev examples/prompt_fuzzy.py
+uv run textual run --dev examples/prompt_pattern.py
 ```
 
 ### Static documentation
