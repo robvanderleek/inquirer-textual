@@ -19,18 +19,18 @@ class InquirerPattern(InquirerWidget):
     """A select widget that allows a single selection from a list of choices with pattern filtering."""
 
     DEFAULT_CSS = """
-        #inquirer-fuzzy-list-view {
+        #inquirer-pattern-list-view {
             background: transparent;
         }
-        #inquirer-fuzzy-list-view ListItem.-highlight {
+        #inquirer-pattern-list-view ListItem.-highlight {
             color: $select-list-item-highlight-foreground;
             background: transparent;
         }
-        #inquirer-fuzzy-query-container {
+        #inquirer-pattern-query-container {
             width: auto;
             # border: red;
         }
-        #inquirer-fuzzy-query {
+        #inquirer-pattern-query {
             border: none;
             background: transparent;
             color: $input-color;
@@ -38,8 +38,9 @@ class InquirerPattern(InquirerWidget):
             height: 1;
             width: 20;
         }
-        #inquirer-fuzzy-query-pointer {
+        #inquirer-pattern-query-pointer {
             width: auto;
+            color: $prompt-color;
         }
         """
 
@@ -115,7 +116,7 @@ class InquirerPattern(InquirerWidget):
                 initial_index = idx
         return initial_index
 
-    @on(Input.Changed, '#inquirer-fuzzy-query')
+    @on(Input.Changed, '#inquirer-pattern-query')
     async def handle_query_changed(self, event: Input.Changed):
         query = event.value.lower()
         if query == '':
@@ -136,7 +137,7 @@ class InquirerPattern(InquirerWidget):
     def watch_candidates(self, candidates: list[str | Choice]) -> None:
         count_suffix = f'[{len(candidates)}/{len(self.choices)}]'
         try:
-            count_widget = self.query_one('#inquirer-fuzzy-query-count-suffix', Static)
+            count_widget = self.query_one('#inquirer-pattern-query-count-suffix', Static)
             count_widget.update(count_suffix)
         except NoMatches:
             pass
@@ -154,13 +155,13 @@ class InquirerPattern(InquirerWidget):
 
     def compose(self) -> ComposeResult:
         with VerticalGroup():
-            self.list_view = ListView(*self._collect_list_items(), id='inquirer-fuzzy-list-view',
+            self.list_view = ListView(*self._collect_list_items(), id='inquirer-pattern-list-view',
                                       initial_index=self._find_initial_index())
             with HorizontalGroup():
                 yield PromptMessage(self.message)
-                yield Static(f'[{len(self.candidates)}/{len(self.choices)}]', id='inquirer-fuzzy-query-count-suffix')
-            with HorizontalGroup(id='inquirer-fuzzy-query-container'):
-                yield Static(f'{StandardTheme.pointer_character} ', id='inquirer-fuzzy-query-pointer')
-                self.query = Input(id="inquirer-fuzzy-query")
+                yield Static(f'[{len(self.candidates)}/{len(self.choices)}]', id='inquirer-pattern-query-count-suffix')
+            with HorizontalGroup(id='inquirer-pattern-query-container'):
+                yield Static(f'{StandardTheme.pointer_character} ', id='inquirer-pattern-query-pointer')
+                self.query = Input(id="inquirer-pattern-query")
                 yield self.query
             yield self.list_view

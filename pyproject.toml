@@ -57,6 +57,7 @@ shell = """
     vhs docs/examples/prompts/external.tape
     vhs docs/examples/prompts/multi.tape
     vhs docs/examples/prompts/number.tape
+    vhs docs/examples/prompts/pattern.tape
     vhs docs/examples/prompts/secret.tape
     vhs docs/examples/prompts/select.tape
     vhs docs/examples/prompts/text.tape
