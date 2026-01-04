@@ -24,4 +24,4 @@ class ChoiceLabel(Label):
         self.update(Text(f'{StandardTheme.pointer_character} ').append_text(self._text))
 
     def remove_pointer(self):
-        self.update(Text(f'  ').append_text(self._text))
+        self.update(Text('  ').append_text(self._text))

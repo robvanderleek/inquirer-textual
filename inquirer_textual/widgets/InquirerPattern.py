@@ -128,6 +128,7 @@ class InquirerPattern(InquirerWidget):
                 if query in name.lower():
                     filtered.append(choice)
             self.candidates = filtered
+        assert isinstance(self.list_view, ListView)
         await self.list_view.clear()
         list_items = self._collect_list_items()
         await self.list_view.extend(list_items)
@@ -143,6 +144,7 @@ class InquirerPattern(InquirerWidget):
             pass
 
     def on_key(self, event: events.Key):
+        assert isinstance(self.list_view, ListView)
         if event.key == 'down':
             event.stop()
             self.list_view.action_cursor_down()

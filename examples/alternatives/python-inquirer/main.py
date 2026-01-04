@@ -6,8 +6,6 @@
 # ]
 # ///
 
-import re
-
 import inquirer
 
 def editor():
