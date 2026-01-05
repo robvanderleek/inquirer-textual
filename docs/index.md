@@ -21,7 +21,7 @@
     </a>
 </div>
 
-## About
+## Introduction
 
 All terminal programs start small. Some stay small, and some become incredibly
 big. The goal of this Python library is to make user input simple for small
@@ -45,6 +45,15 @@ With `uv` you can run the example out of the box:
 
 ```shell
 uv run --with inquirer-textual checkbox.py
+```
+
+## Installation
+
+Create and activate a virtual environment (for example with
+[uv](https://docs.astral.sh/uv/)), and then install this package:
+
+```shell
+pip install inquirer-textual
 ```
 
 ## Key features and design principles
