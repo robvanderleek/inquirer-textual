@@ -1,7 +1,7 @@
 # External
 
-Embed external widgets in a prompt, for example a
-[slider](https://github.com/TomJGooding/textual-slider).
+Embed external widgets in a prompt, for example a slider from
+[TomJGooding/textual-slider](https://github.com/TomJGooding/textual-slider).
 
 ## Example
 

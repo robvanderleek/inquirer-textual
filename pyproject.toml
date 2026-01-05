@@ -36,6 +36,9 @@ dev = [
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 
+[tool.mypy]
+exclude = 'examples/alternatives'
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
@@ -57,6 +60,7 @@ shell = """
     vhs docs/examples/prompts/external.tape
     vhs docs/examples/prompts/multi.tape
     vhs docs/examples/prompts/number.tape
+    vhs docs/examples/prompts/pattern.tape
     vhs docs/examples/prompts/secret.tape
     vhs docs/examples/prompts/select.tape
     vhs docs/examples/prompts/text.tape
