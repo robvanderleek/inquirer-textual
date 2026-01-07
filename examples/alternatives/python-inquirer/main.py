@@ -20,5 +20,15 @@ def text():
     ]
     return inquirer.prompt(questions)
 
+def path():
+    questions = [
+        inquirer.Path('log_file',
+            message="Where logs should be located?",
+            exists=True,
+            path_type=inquirer.Path.DIRECTORY,
+        )
+    ]
+    return inquirer.prompt(questions)
+
 if __name__ == "__main__":
-    print(text())
+    print(path())
