@@ -21,13 +21,12 @@ def test_snapshot_with_default_value(snap_compare):
 
 
 def test_validation_failure(snap_compare):
-    with NamedTemporaryFile(delete=True) as tmpfile:
-        widget = InquirerPath('Output directory:', path_type=PathType.DIRECTORY, exists=True)
-        app = InquirerApp()
-        app.widget = widget
+    widget = InquirerPath('Output directory:', exists=True)
+    app = InquirerApp()
+    app.widget = widget
 
-        async def run_before(pilot) -> None:
-            await pilot.press(*[c for c in tmpfile.name])
-            await pilot.press("enter")
+    async def run_before(pilot) -> None:
+        await pilot.press(*[c for c in "/should-not-exist.txt"])
+        await pilot.press("enter")
 
-        assert snap_compare(app, run_before=run_before)
+    assert snap_compare(app, run_before=run_before)
