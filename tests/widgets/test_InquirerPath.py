@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from tempfile import NamedTemporaryFile
-
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.widgets.InquirerPath import InquirerPath, PathType
 
