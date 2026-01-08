@@ -152,7 +152,8 @@ class InquirerApp(App[Result[T]], inherit_bindings=False):  # type: ignore[call-
     def get_theme_variable_defaults(self) -> dict[str, str]:
         return {
             'input-color': StandardTheme.input_color,
+            'prompt-color': StandardTheme.prompt_color,
+            'error-color': StandardTheme.error_color,
             'select-list-item-highlight-foreground': StandardTheme.select_list_item_highlight_foreground,
             'select-question-mark': StandardTheme.select_question_mark,
-            'prompt-color': StandardTheme.prompt_color,
         }

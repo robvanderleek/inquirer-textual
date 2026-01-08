@@ -11,6 +11,7 @@ from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerEditor import InquirerEditor
 from inquirer_textual.widgets.InquirerMulti import InquirerMulti
 from inquirer_textual.widgets.InquirerNumber import InquirerNumber
+from inquirer_textual.widgets.InquirerPath import InquirerPath, PathType
 from inquirer_textual.widgets.InquirerPattern import InquirerPattern
 from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 from inquirer_textual.widgets.InquirerSelect import InquirerSelect
@@ -72,6 +73,15 @@ def multi(widgets: list[InquirerWidget], app_config: AppConfig = AppConfig()) ->
 def number(message: str, mandatory: bool = False, app_config: AppConfig = AppConfig()) -> Result[int]:
     app: InquirerApp[int] = InquirerApp()
     app.widget = InquirerNumber(message, mandatory=mandatory)
+    app.shortcuts = app_config.shortcuts
+    app.show_footer = bool(app_config.shortcuts)
+    return app.run(inline=app_config.inline)
+
+
+def path(message: str, exists: bool = False, path_type: PathType = PathType.ANY, is_dir: bool = True,
+         mandatory: bool = False, app_config: AppConfig = AppConfig()) -> Result[str]:
+    app: InquirerApp[str] = InquirerApp()
+    app.widget = InquirerPath(message, exists=exists, path_type=path_type, mandatory=mandatory)
     app.shortcuts = app_config.shortcuts
     app.show_footer = bool(app_config.shortcuts)
     return app.run(inline=app_config.inline)
