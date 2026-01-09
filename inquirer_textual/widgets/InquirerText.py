@@ -28,7 +28,8 @@ class InquirerText(InquirerWidget):
     }
     """
 
-    def __init__(self, message: str, default: str = '', validators: Validator | Iterable[Validator] | None = None,
+    def __init__(self, message: str, name: str | None = None, default: str = '',
+                 validators: Validator | Iterable[Validator] | None = None,
                  mandatory: bool = False):
         """
         Args:
@@ -37,7 +38,7 @@ class InquirerText(InquirerWidget):
             validators (Validator | Iterable[Validator] | None): A validator or list of validators to validate the
                 input.
         """
-        super().__init__(mandatory=mandatory)
+        super().__init__(name=name, mandatory=mandatory)
         self.message = message
         self.input: Input | None = None
         self.default = default
@@ -49,7 +50,7 @@ class InquirerText(InquirerWidget):
 
     def on_input_submitted(self, submitted: Input.Submitted):
         if self.validators is None or submitted.validation_result.is_valid:
-            self.post_message(InquirerWidget.Submit(submitted.value))
+            self.submit_current_value()
 
     def focus(self, scroll_visible: bool = True) -> Self:
         if self.input:

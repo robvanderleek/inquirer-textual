@@ -26,7 +26,7 @@ class InquirerConfirm(InquirerWidget):
             default (bool): The default value if the user presses Enter without input.
             mandatory (bool): Whether a response is mandatory.
         """
-        super().__init__(mandatory)
+        super().__init__(mandatory=mandatory)
         if len(confirm_character) != 1 or len(reject_character) != 1:
             raise ValueError("confirm_character and reject_character must be a single character")
         if confirm_character.lower() == reject_character.lower():

@@ -5,7 +5,7 @@ from textual.validation import Validator
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.common.AppConfig import AppConfig
 from inquirer_textual.common.Choice import Choice
-from inquirer_textual.common.Result import Result
+from inquirer_textual.common.InquirerResult import InquirerResult
 from inquirer_textual.widgets.InquirerCheckbox import InquirerCheckbox
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerEditor import InquirerEditor
@@ -19,17 +19,19 @@ from inquirer_textual.widgets.InquirerText import InquirerText
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
-def checkbox(message: str, choices: list[str | Choice], enabled: list[str | Choice] | None = None,
-             mandatory: bool = False, app_config: AppConfig = AppConfig()) -> Result[list[str | Choice]]:
+def checkbox(message: str, choices: list[str | Choice], name: str | None = None,
+             enabled: list[str | Choice] | None = None, mandatory: bool = False, app_config: AppConfig = AppConfig()) \
+        -> \
+                InquirerResult[list[str | Choice]]:
     app: InquirerApp[list[str | Choice]] = InquirerApp()
-    app.widget = InquirerCheckbox(message, choices, enabled, mandatory=mandatory)
+    app.widget = InquirerCheckbox(message, choices, name=name, enabled=enabled, mandatory=mandatory)
     app.shortcuts = app_config.shortcuts
     app.show_footer = bool(app_config.shortcuts)
     return app.run(inline=app_config.inline)
 
 
 def confirm(message: str, default: bool = False, mandatory: bool = False, app_config: AppConfig = AppConfig()) -> \
-        Result[bool]:
+        InquirerResult[bool]:
     app: InquirerApp[bool] = InquirerApp()
     app.widget = InquirerConfirm(message, default=default, mandatory=mandatory)
     app.shortcuts = app_config.shortcuts
@@ -37,7 +39,7 @@ def confirm(message: str, default: bool = False, mandatory: bool = False, app_co
     return app.run(inline=app_config.inline)
 
 
-def editor(message: str, app_config: AppConfig = AppConfig()) -> Result[str]:
+def editor(message: str, app_config: AppConfig = AppConfig()) -> InquirerResult[str]:
     app: InquirerApp[str] = InquirerApp()
     app.widget = InquirerEditor(message)
     app.shortcuts = app_config.shortcuts
@@ -45,7 +47,7 @@ def editor(message: str, app_config: AppConfig = AppConfig()) -> Result[str]:
     return app.run(inline=False)
 
 
-def external(widget: InquirerWidget, app_config: AppConfig = AppConfig()) -> Result[int]:
+def external(widget: InquirerWidget, app_config: AppConfig = AppConfig()) -> InquirerResult[int]:
     app: InquirerApp[int] = InquirerApp()
     app.widget = widget
     app.shortcuts = app_config.shortcuts
@@ -53,16 +55,7 @@ def external(widget: InquirerWidget, app_config: AppConfig = AppConfig()) -> Res
     return app.run(inline=app_config.inline)
 
 
-def pattern(message: str, choices: list[str | Choice], default: str | Choice | None = None, mandatory: bool = False,
-            app_config: AppConfig = AppConfig()) -> Result[str | Choice]:
-    app: InquirerApp[str | Choice] = InquirerApp()
-    app.widget = InquirerPattern(message, choices, default, mandatory=mandatory)
-    app.shortcuts = app_config.shortcuts
-    app.show_footer = bool(app_config.shortcuts)
-    return app.run(inline=app_config.inline)
-
-
-def multi(widgets: list[InquirerWidget], app_config: AppConfig = AppConfig()) -> Result[list[Any]]:
+def multi(widgets: list[InquirerWidget], app_config: AppConfig = AppConfig()) -> InquirerResult[list[Any]]:
     app: InquirerApp[list[Any]] = InquirerApp()
     app.widget = InquirerMulti(widgets)
     app.shortcuts = app_config.shortcuts
@@ -70,44 +63,57 @@ def multi(widgets: list[InquirerWidget], app_config: AppConfig = AppConfig()) ->
     return app.run(inline=app_config.inline)
 
 
-def number(message: str, mandatory: bool = False, app_config: AppConfig = AppConfig()) -> Result[int]:
+def number(message: str, name: str | None = None, mandatory: bool = False, app_config: AppConfig = AppConfig()) -> \
+        InquirerResult[int]:
     app: InquirerApp[int] = InquirerApp()
-    app.widget = InquirerNumber(message, mandatory=mandatory)
+    app.widget = InquirerNumber(message, name=name, mandatory=mandatory)
     app.shortcuts = app_config.shortcuts
     app.show_footer = bool(app_config.shortcuts)
     return app.run(inline=app_config.inline)
 
 
-def path(message: str, exists: bool = False, path_type: PathType = PathType.ANY, is_dir: bool = True,
-         mandatory: bool = False, app_config: AppConfig = AppConfig()) -> Result[str]:
+def path(message: str, name: str | None = None, exists: bool = False, path_type: PathType = PathType.ANY,
+         is_dir: bool = True,
+         mandatory: bool = False, app_config: AppConfig = AppConfig()) -> InquirerResult[str]:
     app: InquirerApp[str] = InquirerApp()
-    app.widget = InquirerPath(message, exists=exists, path_type=path_type, mandatory=mandatory)
+    app.widget = InquirerPath(message, name=name, exists=exists, path_type=path_type, mandatory=mandatory)
     app.shortcuts = app_config.shortcuts
     app.show_footer = bool(app_config.shortcuts)
     return app.run(inline=app_config.inline)
 
 
-def secret(message: str, mandatory: bool = False, app_config: AppConfig = AppConfig()) -> Result[str]:
-    app: InquirerApp[str] = InquirerApp()
-    app.widget = InquirerSecret(message, mandatory=mandatory)
-    app.shortcuts = app_config.shortcuts
-    app.show_footer = bool(app_config.shortcuts)
-    return app.run(inline=app_config.inline)
-
-
-def select(message: str, choices: list[str | Choice], default: str | Choice | None = None, mandatory: bool = False,
-           app_config: AppConfig = AppConfig()) -> Result[str | Choice]:
+def pattern(message: str, choices: list[str | Choice], name: str | None = None, default: str | Choice | None = None,
+            mandatory: bool = False, app_config: AppConfig = AppConfig()) -> InquirerResult[str | Choice]:
     app: InquirerApp[str | Choice] = InquirerApp()
-    app.widget = InquirerSelect(message, choices, default, mandatory=mandatory)
+    app.widget = InquirerPattern(message, choices, name=name, default=default, mandatory=mandatory)
     app.shortcuts = app_config.shortcuts
     app.show_footer = bool(app_config.shortcuts)
     return app.run(inline=app_config.inline)
 
 
-def text(message: str, validators: Validator | Iterable[Validator] | None = None, mandatory: bool = False,
-         app_config: AppConfig = AppConfig()) -> Result[str]:
+def secret(message: str, name: str | None = None, mandatory: bool = False, app_config: AppConfig = AppConfig()) -> \
+        InquirerResult[str]:
     app: InquirerApp[str] = InquirerApp()
-    app.widget = InquirerText(message, validators=validators, mandatory=mandatory)
+    app.widget = InquirerSecret(message, name=name, mandatory=mandatory)
+    app.shortcuts = app_config.shortcuts
+    app.show_footer = bool(app_config.shortcuts)
+    return app.run(inline=app_config.inline)
+
+
+def select(message: str, choices: list[str | Choice], name: str | None = None, default: str | Choice | None = None,
+           mandatory: bool = False, app_config: AppConfig = AppConfig()) -> InquirerResult[str | Choice]:
+    app: InquirerApp[str | Choice] = InquirerApp()
+    app.widget = InquirerSelect(message, choices, name=name, default=default, mandatory=mandatory)
+    app.shortcuts = app_config.shortcuts
+    app.show_footer = bool(app_config.shortcuts)
+    return app.run(inline=app_config.inline)
+
+
+def text(message: str, name: str | None = None, default: str = '',
+         validators: Validator | Iterable[Validator] | None = None, mandatory: bool = False,
+         app_config: AppConfig = AppConfig()) -> InquirerResult[str]:
+    app: InquirerApp[str] = InquirerApp()
+    app.widget = InquirerText(message, name=name, default=default, validators=validators, mandatory=mandatory)
     app.shortcuts = app_config.shortcuts
     app.show_footer = bool(app_config.shortcuts)
     return app.run(inline=app_config.inline)

@@ -27,15 +27,17 @@ class InquirerCheckbox(InquirerWidget):
         ("space", "toggle_selected", "Toggle selection"),
     ]
 
-    def __init__(self, message: str, choices: list[str | Choice], enabled: list[str | Choice] | None = None,
-                 mandatory: bool = False):
+    def __init__(self, message: str, choices: list[str | Choice], name: str | None = None,
+                 enabled: list[str | Choice] | None = None, mandatory: bool = False):
         """
             Args:
                 message (str): The prompt message to display.
                 choices (list[str | Choice]): A list of choices to present to the user.
+                name (str | None): The name of the input field.
                 enabled (list[str | Choice] | None): A list of choices that should be pre-selected.
+                mandatory (bool): Whether at least one selection is mandatory.
         """
-        super().__init__(mandatory=mandatory)
+        super().__init__(name=name, mandatory=mandatory)
         self.message = message
         self.choices = choices
         self.enabled = enabled
@@ -56,7 +58,7 @@ class InquirerCheckbox(InquirerWidget):
         self.selected_item = label.item
 
     def on_list_view_selected(self, _: ListView.Selected) -> None:
-        self.post_message(InquirerWidget.Submit(self.current_value()))
+        self.submit_current_value()
 
     def focus(self, scroll_visible: bool = True) -> Self:
         if self.list_view:

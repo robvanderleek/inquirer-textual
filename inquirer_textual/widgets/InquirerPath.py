@@ -38,7 +38,7 @@ class InquirerPath(InquirerWidget):
     }
     """
 
-    def __init__(self, message: str, default: str = '', exists: bool = False,
+    def __init__(self, message: str, name: str | None = None, default: str = '', exists: bool = False,
                  path_type: PathType = PathType.ANY, mandatory: bool = False):
         """
         Args:
@@ -46,7 +46,7 @@ class InquirerPath(InquirerWidget):
             default (str): The default value if the user presses Enter without input.
             exists (bool): If True, validate that the entered path exists.
         """
-        super().__init__(mandatory=mandatory)
+        super().__init__(name=name, mandatory=mandatory)
         self.message = message
         self.input: Input | None = None
         self.default = default
@@ -70,7 +70,7 @@ class InquirerPath(InquirerWidget):
             if self.path_type == PathType.DIRECTORY and not path.is_dir():
                 self._show_validation_error("The specified path is not a directory.")
                 return
-        self.post_message(InquirerWidget.Submit(submitted.value))
+        self.submit_current_value()
 
     def _show_validation_error(self, message: str):
         error_message = self.query_one('#inquirer-path-error-message', Static)

@@ -46,8 +46,8 @@ class InquirerPattern(InquirerWidget):
 
     candidates: reactive[list[str | Choice]] = reactive([])
 
-    def __init__(self, message: str, choices: list[str | Choice], default: str | Choice | None = None,
-                 mandatory: bool = True):
+    def __init__(self, message: str, choices: list[str | Choice], name: str | None = None,
+                 default: str | Choice | None = None, mandatory: bool = True):
         """
         Args:
             message (str): The prompt message to display.
@@ -55,7 +55,7 @@ class InquirerPattern(InquirerWidget):
             default (str | Choice | None): The default choice to pre-select.
             mandatory (bool): Whether a response is mandatory.
         """
-        super().__init__(mandatory)
+        super().__init__(name=name, mandatory=mandatory)
         self.message = message
         self.choices = choices
         self.candidates = choices.copy()

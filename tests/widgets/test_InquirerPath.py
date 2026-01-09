@@ -28,3 +28,17 @@ def test_validation_failure(snap_compare):
         await pilot.press("enter")
 
     assert snap_compare(app, run_before=run_before)
+
+async def test_named():
+    widget = InquirerPath('Output directory:', name="dir")
+    app = InquirerApp()
+    app.widget = widget
+
+    async with app.run_test() as pilot:
+        await pilot.press(*[c for c in "/should-not-exist.txt"])
+        await pilot.press("enter")
+    result = app._return_value
+
+    assert result.value == "/should-not-exist.txt"
+    assert result.command == 'select'
+    assert result.name == 'dir'

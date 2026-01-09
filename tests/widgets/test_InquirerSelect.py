@@ -103,3 +103,17 @@ def test_snapshot_fullscreen(snap_compare):
     app.widget = InquirerSelect('Environment:', choices, mandatory=True)
 
     assert snap_compare(app)
+
+
+async def test_named():
+    widget = InquirerSelect('Environment:', [Choice('a', command='create'), Choice('b')], name='env')
+    app = InquirerApp()
+    app.widget = widget
+
+    async with app.run_test() as pilot:
+        await pilot.press("enter")
+    result = app._return_value
+
+    assert result.name == 'env'
+    assert result.value.name == 'a'
+    assert result.command == 'create'

@@ -31,4 +31,4 @@ def path():
     return inquirer.prompt(questions)
 
 if __name__ == "__main__":
-    print(path())
+    print(text())

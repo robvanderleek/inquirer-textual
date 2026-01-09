@@ -29,3 +29,20 @@ def test_snapshot(snap_compare):
         await pilot.press("space")
 
     assert snap_compare(app, run_before=run_before)
+
+
+async def test_named():
+    app = InquirerApp()
+    app.widget = InquirerCheckbox('Choice:', ['a', 'b', 'c'], name='choices')
+
+    async with app.run_test() as pilot:
+        await pilot.press("space")
+        await pilot.press("down")
+        await pilot.press("down")
+        await pilot.press("space")
+        await pilot.press("enter")
+    result = app._return_value
+
+    assert result.name == 'choices'
+    assert result.value == ['a', 'c']
+    assert result.command == 'select'

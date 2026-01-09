@@ -37,3 +37,16 @@ def test_snapshot_pattern_search(snap_compare):
         await pilot.press('i', 'u', 'm')
 
     assert snap_compare(app, run_before=run_before)
+
+
+async def test_named():
+    app = InquirerApp()
+    app.widget = InquirerPattern('Environment:', [Choice('a'), Choice('b'), Choice('c')], name='env')
+
+    async with app.run_test() as pilot:
+        await pilot.press("enter")
+    result = app._return_value
+
+    assert result.value.name == 'a'
+    assert result.command == 'select'
+    assert result.name == 'env'

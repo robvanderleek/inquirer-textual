@@ -31,3 +31,15 @@ async def test_current_value():
     result = app._return_value
 
     assert result.value == 'hello'
+
+async def test_named():
+    app = InquirerApp()
+    app.widget = InquirerSecret('Password:', name='password')
+
+    async with app.run_test() as pilot:
+        await pilot.press('h', 'e', 'l', 'l', 'o')
+        await pilot.press("enter")
+    result = app._return_value
+
+    assert result.value == 'hello'
+    assert result.name == 'password'
