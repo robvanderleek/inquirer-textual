@@ -23,21 +23,26 @@ class InquirerMulti(InquirerWidget):
         super().__init__()
         self.widgets = widgets
         self._current_widget_index = 0
-        self._return_values: list[Any] = []
+        self._return_values_list: list[Any] = []
+        self._return_values_dict: dict[str, Any] = {}
 
     def on_mount(self):
         self.query_one(ContentSwitcher).current = f'widget-{self._current_widget_index}'
         self.query_one(ContentSwitcher).visible_content.focus()
 
     def on_inquirer_widget_submit(self, message: InquirerWidget.Submit) -> None:
-        self._return_values.append(message.value)
+        self._return_values_list.append(message.value)
+        current_widget = self.widgets[self._current_widget_index]
+        if current_widget.name:
+            self._return_values_dict[current_widget.name] = message.value
         self._current_widget_index += 1
         if self._current_widget_index < len(self.widgets):
             message.stop()
             self.query_one(ContentSwitcher).current = f'widget-{self._current_widget_index}'
             self.query_one(ContentSwitcher).visible_content.focus()
         else:
-            message.value = self._return_values
+            message.value = self._return_values_dict if len(self._return_values_dict) == len(
+                self.widgets) else self._return_values_list
 
     def compose(self) -> ComposeResult:
         with ContentSwitcher(initial=f'widget-{self._current_widget_index}'):

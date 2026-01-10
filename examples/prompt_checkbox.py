@@ -1,8 +1,8 @@
 from inquirer_textual import prompts
 
 if __name__ == '__main__':
-    answer = prompts.checkbox("Planets:", choices=[
-        'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 
+    result = prompts.checkbox("Planets:", choices=[
+        'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn',
         'Uranus', 'Neptune'
     ])
-    print(answer)
+    print(result.value)

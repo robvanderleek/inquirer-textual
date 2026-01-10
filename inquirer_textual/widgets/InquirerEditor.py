@@ -22,12 +22,13 @@ class InquirerEditor(InquirerWidget):
         """
     can_focus = True
 
-    def __init__(self, message: str | None = None):
+    def __init__(self, message: str | None = None, name: str | None = None):
         """
         Args:
             message (str): The prompt message to display.
+            name (str): The name of the prompt.
         """
-        super().__init__()
+        super().__init__(name=name)
         self.message = message
 
     def on_mount(self):

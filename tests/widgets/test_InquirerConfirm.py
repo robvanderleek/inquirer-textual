@@ -66,3 +66,15 @@ async def test_not_mandatory():
 
     assert result.command == 'ctrl+c'
     assert result.value is None
+
+
+async def test_named():
+    app = InquirerApp()
+    app.widget = InquirerConfirm('Are you sure?', name='confirm_prompt')
+
+    async with app.run_test() as pilot:
+        await pilot.press("y")
+    result = app._return_value
+
+    assert result.value
+    assert result.name == 'confirm_prompt'

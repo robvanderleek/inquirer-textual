@@ -25,12 +25,12 @@ class InquirerSecret(InquirerWidget):
     }
     """
 
-    def __init__(self, message: str, mandatory: bool = False):
+    def __init__(self, message: str, name: str | None = None, mandatory: bool = False):
         """
         Args:
             message (str): The prompt message to display.
         """
-        super().__init__(mandatory=mandatory)
+        super().__init__(name=name, mandatory=mandatory)
         self.message = message
         self.input: Input | None = None
 

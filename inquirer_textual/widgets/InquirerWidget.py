@@ -13,8 +13,8 @@ class InquirerWidget(Widget):
             self.value = value
             self.command = command
 
-    def __init__(self, mandatory: bool = False):
-        super().__init__()
+    def __init__(self, name: str | None = None, mandatory: bool = False):
+        super().__init__(name=name)
         self.mandatory = mandatory
 
     def on_mount(self):

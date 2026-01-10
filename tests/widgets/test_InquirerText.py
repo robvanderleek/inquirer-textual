@@ -64,3 +64,17 @@ async def test_validator_failure():
     result = app._return_value
 
     assert result is None
+
+
+async def test_named():
+    widget = InquirerText('Name:', name='username')
+    app = InquirerApp()
+    app.widget = widget
+
+    async with app.run_test() as pilot:
+        await pilot.press('C', 'h', 'a', 'r', 'l', 'i', 'e')
+        await pilot.press("enter")
+    result = app._return_value
+
+    assert result.name == 'username'
+    assert result.value == 'Charlie'

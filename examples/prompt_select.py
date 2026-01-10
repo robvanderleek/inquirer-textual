@@ -1,6 +1,6 @@
 from inquirer_textual import prompts
 
 if __name__ == '__main__':
-    answer = prompts.select('Planet:', ['Mercury', 'Venus', 'Earth', 'Mars', 
+    result = prompts.select('Planet:', ['Mercury', 'Venus', 'Earth', 'Mars',
         'Jupiter', 'Saturn', 'Uranus', 'Neptune'], mandatory=True)
-    print(answer)
+    print(result.value)
