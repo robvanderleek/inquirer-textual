@@ -15,4 +15,4 @@ if __name__ == '__main__':
     checkbox_widget = InquirerCheckbox("People?", choices=['Alice', 'Bob', 'Charlie'])
     answer = prompts.multi(
         [text_widget, password_widget, number_widget, confirm_widget, select_widget, checkbox_widget])
-    print(answer)
+    print(answer.value)

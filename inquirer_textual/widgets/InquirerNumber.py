@@ -49,7 +49,7 @@ class InquirerNumber(InquirerWidget):
             return super().focus(scroll_visible)
 
     def current_value(self):
-        if self.input:
+        if self.input and self.input.value:
             if self.input_type == 'integer':
                 return int(self.input.value)
             elif self.input_type == 'number':

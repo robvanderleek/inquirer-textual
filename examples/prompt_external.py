@@ -48,4 +48,4 @@ class InquirerSlider(InquirerWidget):
 
 if __name__ == '__main__':
     answer = prompts.external(InquirerSlider('Memory:', 0, 1024, 16))
-    print(answer)
+    print(answer.value)

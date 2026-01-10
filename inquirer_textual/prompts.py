@@ -30,18 +30,18 @@ def checkbox(message: str, choices: list[str | Choice], name: str | None = None,
     return app.run(inline=app_config.inline)
 
 
-def confirm(message: str, default: bool = False, mandatory: bool = False, app_config: AppConfig = AppConfig()) -> \
-        InquirerResult[bool]:
+def confirm(message: str, name: str | None = None, default: bool = False, mandatory: bool = False,
+            app_config: AppConfig = AppConfig()) -> InquirerResult[bool]:
     app: InquirerApp[bool] = InquirerApp()
-    app.widget = InquirerConfirm(message, default=default, mandatory=mandatory)
+    app.widget = InquirerConfirm(message, name=name, default=default, mandatory=mandatory)
     app.shortcuts = app_config.shortcuts
     app.show_footer = bool(app_config.shortcuts)
     return app.run(inline=app_config.inline)
 
 
-def editor(message: str, app_config: AppConfig = AppConfig()) -> InquirerResult[str]:
+def editor(message: str, name: str | None = None, app_config: AppConfig = AppConfig()) -> InquirerResult[str]:
     app: InquirerApp[str] = InquirerApp()
-    app.widget = InquirerEditor(message)
+    app.widget = InquirerEditor(message, name=name)
     app.shortcuts = app_config.shortcuts
     app.show_footer = bool(app_config.shortcuts)
     return app.run(inline=False)
@@ -73,7 +73,6 @@ def number(message: str, name: str | None = None, mandatory: bool = False, app_c
 
 
 def path(message: str, name: str | None = None, exists: bool = False, path_type: PathType = PathType.ANY,
-         is_dir: bool = True,
          mandatory: bool = False, app_config: AppConfig = AppConfig()) -> InquirerResult[str]:
     app: InquirerApp[str] = InquirerApp()
     app.widget = InquirerPath(message, name=name, exists=exists, path_type=path_type, mandatory=mandatory)

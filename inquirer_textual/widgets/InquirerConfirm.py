@@ -16,17 +16,18 @@ class InquirerConfirm(InquirerWidget):
     """
     can_focus = True
 
-    def __init__(self, message: str, confirm_character: str = 'y', reject_character: str = 'n', default=False,
-                 mandatory: bool = False):
+    def __init__(self, message: str, confirm_character: str = 'y', reject_character: str = 'n', name: str | None = None,
+                 default=False,mandatory: bool = False):
         """
         Args:
             message (str): The prompt message to display.
             confirm_character (str): The character to use for confirmation.
             reject_character (str): The character to use for rejection.
+            name (str | None): The name of the prompt.
             default (bool): The default value if the user presses Enter without input.
             mandatory (bool): Whether a response is mandatory.
         """
-        super().__init__(mandatory=mandatory)
+        super().__init__(name=name, mandatory=mandatory)
         if len(confirm_character) != 1 or len(reject_character) != 1:
             raise ValueError("confirm_character and reject_character must be a single character")
         if confirm_character.lower() == reject_character.lower():
