@@ -1,9 +1,12 @@
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
-from inquirer_textual.common.PromptMessage import PromptMessage
+from __future__ import annotations
+
 from textual import events
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
 from textual.widgets import Label
+
+from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
 class InquirerConfirm(InquirerWidget):
@@ -17,7 +20,7 @@ class InquirerConfirm(InquirerWidget):
     can_focus = True
 
     def __init__(self, message: str, confirm_character: str = 'y', reject_character: str = 'n', name: str | None = None,
-                 default=False,mandatory: bool = False):
+                 default=False, mandatory: bool = False):
         """
         Args:
             message (str): The prompt message to display.

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from textual import events
 from textual.app import ComposeResult
 from textual.widgets import Input
