@@ -3,9 +3,7 @@ from typing import Any, Iterable
 from textual.validation import Validator
 
 from inquirer_textual.InquirerApp import InquirerApp
-from inquirer_textual.common.AppConfig import AppConfig
 from inquirer_textual.common.Choice import Choice
-from inquirer_textual.common.InquirerResult import InquirerResult
 from inquirer_textual.widgets.InquirerCheckbox import InquirerCheckbox
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerEditor import InquirerEditor
