@@ -25,7 +25,7 @@
 
 All terminal programs start small. Some stay small, and some become incredibly
 big. The goal of this Python library is to make user input simple for small
-programs, but also support a smooth transition to a comprehensive UI library as
+programs, while enabling a smooth transition to a comprehensive UI library as
 your program grows.
 
 This library is based on the sophisticated

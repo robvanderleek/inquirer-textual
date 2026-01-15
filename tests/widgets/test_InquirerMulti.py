@@ -9,21 +9,23 @@ from inquirer_textual.widgets.InquirerText import InquirerText
 
 
 def test_snapshot(snap_compare):
-    text_widget = InquirerText('Name:')
-    password_widget = InquirerSecret('Password:')
-    number_widget = InquirerNumber('Memory:')
     app = InquirerApp()
-    app.widget = InquirerMulti([text_widget, password_widget, number_widget])
+    app.widget = InquirerMulti([
+        ('name', InquirerText('Name:')),
+        ('password', InquirerSecret('Password:')),
+        ('memory', InquirerNumber('Memory:'))
+    ])
 
     assert snap_compare(app)
 
 
 def test_snapshot_second_input(snap_compare):
-    text_widget = InquirerText('Name:')
-    password_widget = InquirerSecret('Password:')
-    number_widget = InquirerNumber('Memory:')
     app = InquirerApp()
-    app.widget = InquirerMulti([text_widget, password_widget, number_widget])
+    app.widget = InquirerMulti([
+        ('name', InquirerText('Name:')),
+        ('password', InquirerSecret('Password:')),
+        ('memory', InquirerNumber('Memory:'))
+    ])
 
     async def run_before(pilot) -> None:
         await pilot.press('r', 'o', 'b')
@@ -33,11 +35,12 @@ def test_snapshot_second_input(snap_compare):
 
 
 def test_snapshot_third_input(snap_compare):
-    text_widget = InquirerText('Name:')
-    password_widget = InquirerSecret('Password:')
-    number_widget = InquirerNumber('Memory:')
     app = InquirerApp()
-    app.widget = InquirerMulti([text_widget, password_widget, number_widget])
+    app.widget = InquirerMulti([
+        ('name', InquirerText('Name:')),
+        ('password', InquirerSecret('Password:')),
+        ('memory', InquirerNumber('Memory:'))
+    ])
 
     async def run_before(pilot) -> None:
         await pilot.press('r', 'o', 'b')
@@ -49,12 +52,13 @@ def test_snapshot_third_input(snap_compare):
 
 
 def test_snapshot_fourth_input(snap_compare):
-    text_widget = InquirerText('Name:')
-    password_widget = InquirerSecret('Password:')
-    number_widget = InquirerNumber('Memory:')
-    confirm_widget = InquirerConfirm('Proceed?')
     app = InquirerApp()
-    app.widget = InquirerMulti([text_widget, password_widget, number_widget, confirm_widget])
+    app.widget = InquirerMulti([
+        ('name', InquirerText('Name:')),
+        ('password', InquirerSecret('Password:')),
+        ('memory', InquirerNumber('Memory:')),
+        ('proceed', InquirerConfirm('Proceed?'))
+    ])
 
     async def run_before(pilot) -> None:
         await pilot.press('r', 'o', 'b')
@@ -68,13 +72,14 @@ def test_snapshot_fourth_input(snap_compare):
 
 
 def test_snapshot_fifth_input(snap_compare):
-    text_widget = InquirerText('Name:')
-    password_widget = InquirerSecret('Password:')
-    number_widget = InquirerNumber('Memory:')
-    confirm_widget = InquirerConfirm('Proceed?')
-    select_widget = InquirerSelect('Planet?', ['Earth', 'Mars', 'Venus'], default='Mars')
     app = InquirerApp()
-    app.widget = InquirerMulti([text_widget, password_widget, number_widget, confirm_widget, select_widget])
+    app.widget = InquirerMulti([
+        ('name', InquirerText('Name:')),
+        ('password', InquirerSecret('Password:')),
+        ('memory', InquirerNumber('Memory:')),
+        ('proceed', InquirerConfirm('Proceed?')),
+        ('planet', InquirerSelect('Planet?', ['Earth', 'Mars', 'Venus'], default='Mars'))
+    ])
 
     async def run_before(pilot) -> None:
         await pilot.press('r', 'o', 'b')
@@ -90,15 +95,15 @@ def test_snapshot_fifth_input(snap_compare):
 
 
 def test_snapshot_fifth_input_pick_default(snap_compare):
-    text_widget = InquirerText('Name:')
-    password_widget = InquirerSecret('Password:')
-    number_widget = InquirerNumber('Memory:')
-    confirm_widget = InquirerConfirm('Proceed?')
-    select_widget = InquirerSelect('Planet?', ['Earth', 'Mars', 'Venus'], default='Mars')
-    checkbox_widget = InquirerCheckbox("People?", choices=['Alice', 'Bob', 'Charlie'])
     app = InquirerApp()
-    app.widget = InquirerMulti(
-        [text_widget, password_widget, number_widget, confirm_widget, select_widget, checkbox_widget])
+    app.widget = InquirerMulti([
+        ('name', InquirerText('Name:')),
+        ('password', InquirerSecret('Password:')),
+        ('memory', InquirerNumber('Memory:')),
+        ('proceed', InquirerConfirm('Proceed?')),
+        ('planet', InquirerSelect('Planet?', ['Earth', 'Mars', 'Venus'], default='Mars')),
+        ('people', InquirerCheckbox("People?", choices=['Alice', 'Bob', 'Charlie']))
+    ])
 
     async def run_before(pilot) -> None:
         await pilot.press('r', 'o', 'b')

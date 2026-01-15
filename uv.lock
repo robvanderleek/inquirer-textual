@@ -593,7 +593,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "textual", specifier = ">=6.11.0" },
+    { name = "textual", specifier = ">=7.1.0" },
     { name = "textual-slider", marker = "extra == 'examples'", specifier = ">=0.2.0" },
 ]
 provides-extras = ["examples"]
@@ -1680,7 +1680,7 @@ wheels = [
 
 [[package]]
 name = "textual"
-version = "6.11.0"
+version = "7.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "markdown-it-py", version = "3.0.0", source = { registry = "https://pypi.org/simple" }, extra = ["linkify"], marker = "python_full_version < '3.10'" },
@@ -1693,9 +1693,9 @@ dependencies = [
     { name = "rich" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/55/06/906f86bbc59ec7cd3fb424250e19ce670406d1f28e49e86c2221e9fd7ed2/textual-6.11.0.tar.gz", hash = "sha256:08237ebda0cfbbfd1a4e2fd3039882b35894a73994f6f0fcc12c5b0d78acf3cc", size = 1584292, upload-time = "2025-12-18T10:48:38.033Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/71/13/b5cb4995d1390dd6e43c89bfa879ae41fc1b97551ce1f6d29bd01d0f9395/textual-7.1.0.tar.gz", hash = "sha256:3c7148ef00a9277b45fd78a1a6adc7c419c451d3ed714a0b015b16eaa2a8a73b", size = 1582455, upload-time = "2026-01-10T10:32:36.791Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b5/fc/5e2988590ff2e0128eea6446806c904445a44e17256c67141573ea16b5a5/textual-6.11.0-py3-none-any.whl", hash = "sha256:9e663b73ed37123a9b13c16a0c85e09ef917a4cfded97814361ed5cccfa40f89", size = 714886, upload-time = "2025-12-18T10:48:36.269Z" },
+    { url = "https://files.pythonhosted.org/packages/a9/f4/48e4a4c77ab7eea48d3b0a77f8dea0be101c83421abc64da0888c77c47cf/textual-7.1.0-py3-none-any.whl", hash = "sha256:9209dd0d1d958316832f7e59328f3911112f8e951abef7c3fbe54effd4e4caed", size = 715555, upload-time = "2026-01-10T10:32:35.117Z" },
 ]
 
 [[package]]

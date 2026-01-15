@@ -42,6 +42,7 @@ markdown_extensions:
   - pymdownx.superfences
 nav:
   - Inquirer Textual: 'index.md'
+  - Getting Started: 'getting-started/index.md'
   - Examples:
     - Prompts:
       - Checkbox: 'examples/prompts/checkbox.md'

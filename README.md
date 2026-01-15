@@ -22,10 +22,19 @@
 
 All terminal programs start small. Some stay small, and some become incredibly
 big. The goal of this Python library is to make user input simple for small
-programs, but also support a smooth transition to a comprehensive UI library as
+programs, while enabling a smooth transition to a comprehensive UI library as
 your program grows.
 
 Read the [documentation here](https://robvanderleek.github.io/inquirer-textual/)
+
+## Installation
+
+Create and activate a virtual environment (for example with
+[uv](https://docs.astral.sh/uv/)), and then install this package:
+
+```shell
+pip install inquirer-textual
+```
 
 ## Development
 

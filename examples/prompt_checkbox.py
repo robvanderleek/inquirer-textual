@@ -5,4 +5,4 @@ if __name__ == '__main__':
         'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn',
         'Uranus', 'Neptune'
     ])
-    print(result.value)
+    print(result)
