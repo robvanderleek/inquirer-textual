@@ -15,11 +15,17 @@ pip install inquirer-textual
 The prompt API is very straightforward, for example to get a text input:
 
 ```python
-from inquirer_textual import prompts
-
-if __name__ == "__main__":
-    name = prompts.text('Enter your name:')
-    print(f'Hello, {name}! 👋')
+--8<-- "docs/getting-started/simple_text_prompt.py"
 ```
 
 ![Simple text prompt](simple_text_prompt.gif)
+
+## Multiple prompts
+
+By calling the prompt API multiple times, a form-like inquiry can be done:
+
+```python
+--8<-- "docs/getting-started/simple_text_prompts.py"
+```
+
+![Simple text prompts](simple_text_prompts.gif)

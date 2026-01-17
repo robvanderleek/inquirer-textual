@@ -65,4 +65,6 @@ shell = """
     vhs docs/examples/prompts/select.tape
     vhs docs/examples/prompts/text.tape
     vhs docs/examples/apps/app.tape
+    vhs docs/getting-started/simple_text_prompt.tape
+    vhs docs/getting-started/simple_text_prompts.tape
 """
