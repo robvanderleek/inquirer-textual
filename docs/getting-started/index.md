@@ -29,3 +29,11 @@ By calling the prompt API multiple times, a form-like inquiry can be done:
 ```
 
 ![Simple text prompts](simple_text_prompts.gif)
+
+It's also possible to use a single multi prompt:
+
+```python
+--8<-- "docs/getting-started/simple_multi_prompt.py"
+```
+
+![Simple multi prompt](simple_multi_prompt.gif)

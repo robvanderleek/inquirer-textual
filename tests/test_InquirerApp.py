@@ -35,3 +35,4 @@ def test_snapshot_shortcut_no_description(snap_compare):
     app.show_footer = True
 
     assert snap_compare(app)
+

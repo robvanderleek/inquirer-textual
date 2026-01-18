@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from textual.app import ComposeResult
-from textual.containers import VerticalGroup
-from textual.widgets import ListItem, ListView
+from textual.containers import VerticalGroup, HorizontalGroup
+from textual.widgets import ListItem, ListView, Static
 from typing_extensions import Self
 
 from inquirer_textual.common.Choice import Choice
@@ -44,6 +44,8 @@ class InquirerCheckbox(InquirerWidget):
         self.list_view: ListView | None = None
         self.selected_label: ChoiceCheckboxLabel | None = None
         self.selected_item: str | Choice | None = None
+        self.selected_value: list[str | Choice] | None = None
+        self.show_selected_value: bool = False
 
     def on_mount(self):
         self.styles.height = min(10, len(self.choices) + 1)
@@ -70,12 +72,23 @@ class InquirerCheckbox(InquirerWidget):
         labels = self.query(ChoiceCheckboxLabel)
         return [label.item for label in labels if label.checked]
 
+    async def set_selected_value(self, value: list[str | Choice]) -> None:
+        self.selected_value = value
+        self.styles.height = 1
+        self.show_selected_value = True
+        await self.recompose()
+
     def compose(self) -> ComposeResult:
-        with VerticalGroup():
-            items: list[ListItem] = []
-            for idx, choice in enumerate(self.choices):
-                list_item = ListItem(ChoiceCheckboxLabel(choice))
-                items.append(list_item)
-            self.list_view = ListView(*items, id='inquirer-checkbox-list-view')
-            yield PromptMessage(self.message)
-            yield self.list_view
+        if self.show_selected_value:
+            with HorizontalGroup():
+                yield PromptMessage(self.message)
+                yield Static(str(self.selected_value))
+        else:
+            with VerticalGroup():
+                items: list[ListItem] = []
+                for idx, choice in enumerate(self.choices):
+                    list_item = ListItem(ChoiceCheckboxLabel(choice))
+                    items.append(list_item)
+                self.list_view = ListView(*items, id='inquirer-checkbox-list-view')
+                yield PromptMessage(self.message)
+                yield self.list_view

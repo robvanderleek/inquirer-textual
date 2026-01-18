@@ -64,22 +64,24 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
         if self.inquiry_func:
             self.inquiry_func(self)
 
-    def action_shortcut(self, command: str):
+    async def action_shortcut(self, command: str):
         value = self.widget.current_value() if self.widget else None
-        self._handle_result(command, value)
+        await self._handle_result(command, value)
 
     async def action_quit(self):
-        self._handle_result('quit', None)
+        await self._handle_result('quit', None)
 
-    def on_inquirer_widget_submit(self, event: InquirerWidget.Submit) -> None:
-        self._handle_result(event.command, event.value)
+    async def on_inquirer_widget_submit(self, event: InquirerWidget.Submit) -> None:
+        await self._handle_result(event.command, event.value)
 
-    def _handle_result(self, command: str | None, value: Any | None):
+    async def _handle_result(self, command: str | None, value: Any | None):
         if self.result_ready is not None:
             self.result = InquirerResult(self.widget.name if self.widget else None, value,  # type: ignore[arg-type]
                                          command)
             self.result_ready.set()
         else:
+            if self.widget:
+                await self.widget.set_selected_value(value)
             self.call_after_refresh(lambda: self._terminate(command, value))
 
     def _terminate(self, command: str | None = None, value: Any | None = None):

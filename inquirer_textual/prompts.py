@@ -18,70 +18,71 @@ from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
 def checkbox(message: str, choices: list[str | Choice], enabled: list[str | Choice] | None = None,
-             mandatory: bool = False) -> list[str | Choice]:
+             mandatory: bool = False, clear: bool = False) -> list[str | Choice]:
     app: InquirerApp[list[str | Choice]] = InquirerApp()
     app.widget = InquirerCheckbox(message, choices, enabled=enabled, mandatory=mandatory)
-    return app.run(inline=True).value
+    return app.run(inline=True, inline_no_clear=not clear).value
 
 
-def confirm(message: str, default: bool = False, mandatory: bool = False) -> bool:
+def confirm(message: str, default: bool = False, mandatory: bool = False, clear: bool = False) -> bool:
     app: InquirerApp[bool] = InquirerApp()
     app.widget = InquirerConfirm(message, default=default, mandatory=mandatory)
-    return app.run(inline=True).value
+    return app.run(inline=True, inline_no_clear=not clear).value
 
 
-def editor(message: str) -> str:
+def editor(message: str, clear: bool = False) -> str:
     app: InquirerApp[str] = InquirerApp()
     app.widget = InquirerEditor(message)
-    return app.run(inline=True).value
+    return app.run(inline=True, inline_no_clear=not clear).value
 
 
-def external(widget: InquirerWidget) -> Any:
+def external(widget: InquirerWidget, clear: bool = False) -> Any:
     app: InquirerApp[Any] = InquirerApp()
     app.widget = widget
-    return app.run(inline=True).value
+    return app.run(inline=True, inline_no_clear=not clear).value
 
 
-def multi(widgets: list[tuple[str, InquirerWidget]]) -> dict[str, Any]:
+def multi(widgets: list[tuple[str, InquirerWidget]], clear: bool = False) -> dict[str, Any]:
     app: InquirerApp[dict[str, Any]] = InquirerApp()
     app.widget = InquirerMulti(widgets)
-    return app.run(inline=True).value
+    return app.run(inline=True, inline_no_clear=not clear).value
 
 
-def number(message: str, mandatory: bool = False) -> int:
+def number(message: str, mandatory: bool = False, clear: bool = False) -> int:
     app: InquirerApp[int] = InquirerApp()
     app.widget = InquirerNumber(message, mandatory=mandatory)
-    return app.run(inline=True).value
+    return app.run(inline=True, inline_no_clear=not clear).value
 
 
-def path(message: str, exists: bool = False, path_type: PathType = PathType.ANY, mandatory: bool = False) -> str:
+def path(message: str, exists: bool = False, path_type: PathType = PathType.ANY, mandatory: bool = False,
+         clear: bool = False) -> str:
     app: InquirerApp[str] = InquirerApp()
     app.widget = InquirerPath(message, exists=exists, path_type=path_type, mandatory=mandatory)
-    return app.run(inline=True).value
+    return app.run(inline=True, inline_no_clear=not clear).value
 
 
 def pattern(message: str, choices: list[str | Choice], default: str | Choice | None = None,
-            mandatory: bool = False) -> str | Choice:
+            mandatory: bool = False, clear: bool = False) -> str | Choice:
     app: InquirerApp[str | Choice] = InquirerApp()
     app.widget = InquirerPattern(message, choices, default=default, mandatory=mandatory)
-    return app.run(inline=True).value
+    return app.run(inline=True, inline_no_clear=not clear).value
 
 
-def secret(message: str, mandatory: bool = False) -> str:
+def secret(message: str, mandatory: bool = False, clear: bool = False) -> str:
     app: InquirerApp[str] = InquirerApp()
     app.widget = InquirerSecret(message, mandatory=mandatory)
-    return app.run(inline=True).value
+    return app.run(inline=True, inline_no_clear=not clear).value
 
 
 def select(message: str, choices: list[str | Choice], default: str | Choice | None = None,
-           mandatory: bool = False) -> str | Choice:
+           mandatory: bool = False, clear: bool = False) -> str | Choice:
     app: InquirerApp[str | Choice] = InquirerApp()
     app.widget = InquirerSelect(message, choices, default=default, mandatory=mandatory)
-    return app.run(inline=True).value
+    return app.run(inline=True, inline_no_clear=not clear).value
 
 
 def text(message: str, default: str = '', validators: Validator | Iterable[Validator] | None = None,
-         mandatory: bool = False) -> str:
+         mandatory: bool = False, clear: bool = False) -> str:
     app: InquirerApp[str] = InquirerApp()
     app.widget = InquirerText(message, default=default, validators=validators, mandatory=mandatory)
-    return app.run(inline=True).value
+    return app.run(inline=True, inline_no_clear=not clear).value

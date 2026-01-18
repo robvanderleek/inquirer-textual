@@ -27,5 +27,8 @@ class InquirerWidget(Widget):
     def current_value(self):
         raise NotImplementedError("Subclasses must implement current_value method")
 
+    async def set_selected_value(self, value: Any) -> None:
+        pass
+
     def submit_current_value(self, command: str | None = "select"):
         self.post_message(InquirerWidget.Submit(self.current_value(), command))

@@ -50,6 +50,8 @@ class InquirerText(InquirerWidget):
 
     def on_input_submitted(self, submitted: Input.Submitted):
         if self.validators is None or submitted.validation_result.is_valid:
+            if self.input:
+                self.input._cursor_visible = False
             self.submit_current_value()
 
     def focus(self, scroll_visible: bool = True) -> Self:

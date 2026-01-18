@@ -18,7 +18,7 @@ async def test_select_entries():
     assert result.command == 'select'
 
 
-def test_snapshot(snap_compare):
+def test_snapshot_select_items(snap_compare):
     app = InquirerApp()
     app.widget = InquirerCheckbox('Choice:', ['a', 'b', 'c'])
 
@@ -27,6 +27,20 @@ def test_snapshot(snap_compare):
         await pilot.press("down")
         await pilot.press("down")
         await pilot.press("space")
+
+    assert snap_compare(app, run_before=run_before)
+
+
+def test_snapshot_select_value(snap_compare):
+    app = InquirerApp()
+    app.widget = InquirerCheckbox('Choice:', ['a', 'b', 'c'])
+
+    async def run_before(pilot) -> None:
+        await pilot.press("space")
+        await pilot.press("down")
+        await pilot.press("down")
+        await pilot.press("space")
+        await pilot.press("enter")
 
     assert snap_compare(app, run_before=run_before)
 
