@@ -10,8 +10,8 @@ from typing_extensions import Self
 
 from inquirer_textual.common.Choice import Choice
 from inquirer_textual.common.ChoiceLabel import ChoiceLabel
+from inquirer_textual.common.defaults import POINTER_CHARACTER
 from inquirer_textual.common.PromptMessage import PromptMessage
-from inquirer_textual.common.StandardTheme import StandardTheme
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
@@ -20,27 +20,26 @@ class InquirerPattern(InquirerWidget):
 
     DEFAULT_CSS = """
         #inquirer-pattern-list-view {
-            background: transparent;
+            background: $inquirer-textual-background;
         }
         #inquirer-pattern-list-view ListItem.-highlight {
-            color: $select-list-item-highlight-foreground;
-            background: transparent;
+            color: $inquirer-textual-highlight-foreground;
+            background: $inquirer-textual-highlight-background;
         }
         #inquirer-pattern-query-container {
             width: auto;
-            # border: red;
         }
         #inquirer-pattern-query {
             border: none;
-            background: transparent;
-            color: $input-color;
+            background: $inquirer-textual-background;
+            color: $inquirer-textual-input-color;
             padding: 0;
             height: 1;
             width: 20;
         }
         #inquirer-pattern-query-pointer {
             width: auto;
-            color: $prompt-color;
+            color: $inquirer-textual-prompt-color;
         }
         """
 
@@ -163,7 +162,7 @@ class InquirerPattern(InquirerWidget):
                 yield PromptMessage(self.message)
                 yield Static(f'[{len(self.candidates)}/{len(self.choices)}]', id='inquirer-pattern-query-count-suffix')
             with HorizontalGroup(id='inquirer-pattern-query-container'):
-                yield Static(f'{StandardTheme.pointer_character} ', id='inquirer-pattern-query-pointer')
+                yield Static(f'{POINTER_CHARACTER} ', id='inquirer-pattern-query-pointer')
                 self.query = Input(id="inquirer-pattern-query")
                 yield self.query
             yield self.list_view

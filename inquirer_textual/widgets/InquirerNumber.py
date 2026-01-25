@@ -18,8 +18,8 @@ class InquirerNumber(InquirerWidget):
     }
     #inquirer-number-input {
         border: none;
-        background: transparent;
-        color: $input-color;
+        background: $inquirer-textual-background;
+        color: $inquirer-textual-input-color;
         padding: 0;
         height: 1;
     }

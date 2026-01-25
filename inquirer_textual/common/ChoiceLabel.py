@@ -4,7 +4,7 @@ from rich.text import Text
 from textual.widgets import Label
 
 from inquirer_textual.common.Choice import Choice
-from inquirer_textual.common.StandardTheme import StandardTheme
+from inquirer_textual.common.defaults import DEFAULT_THEME, POINTER_CHARACTER
 
 
 class ChoiceLabel(Label):
@@ -17,11 +17,12 @@ class ChoiceLabel(Label):
     def _get_text(cls, item: str | Choice, pattern: str | None = None) -> Text:
         result = Text(item if isinstance(item, str) else item.name)
         if pattern:
-            result.highlight_words([pattern], style=StandardTheme.prompt_color, case_sensitive=False)
+            result.highlight_words([pattern], style=DEFAULT_THEME.variables['inquirer-textual-prompt-color'],
+                                   case_sensitive=False)
         return result
 
     def add_pointer(self):
-        self.update(Text(f'{StandardTheme.pointer_character} ').append_text(self._text))
+        self.update(Text(f'{POINTER_CHARACTER} ').append_text(self._text))
 
     def remove_pointer(self):
         self.update(Text('  ').append_text(self._text))

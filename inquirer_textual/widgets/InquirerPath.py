@@ -28,12 +28,12 @@ class InquirerPath(InquirerWidget):
     #inquirer-path-input {
         border: none;
         background: transparent;
-        color: $input-color;
+        color: $inquirer-textual-input-color;
         padding: 0;
         height: 1;
     }
     #inquirer-path-error-message {
-        color: $error-color;
+        color: $error;
         height: auto;
     }
     """
@@ -70,6 +70,9 @@ class InquirerPath(InquirerWidget):
             if self.path_type == PathType.DIRECTORY and not path.is_dir():
                 self._show_validation_error("The specified path is not a directory.")
                 return
+        self._show_validation_error('')
+        if self.input:
+            self.input._cursor_visible = False
         self.submit_current_value()
 
     def _show_validation_error(self, message: str):

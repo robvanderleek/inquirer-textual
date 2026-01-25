@@ -19,7 +19,7 @@ class InquirerCheckbox(InquirerWidget):
                 background: transparent;
             }
             #inquirer-checkbox-list-view ListItem.-highlight {
-                color: $select-list-item-highlight-foreground;
+                color: $inquirer-textual-highlight-foreground;
                 background: transparent;
             }
             """

@@ -12,7 +12,7 @@ from textual.widgets import Footer
 from inquirer_textual.common.InquirerHeader import InquirerHeader
 from inquirer_textual.common.InquirerResult import InquirerResult
 from inquirer_textual.common.Shortcut import Shortcut
-from inquirer_textual.common.StandardTheme import StandardTheme
+from inquirer_textual.common.defaults import DEFAULT_THEME
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 T = TypeVar('T')
@@ -48,6 +48,8 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
         super().__init__()
 
     def on_mount(self) -> None:
+        self.register_theme(DEFAULT_THEME)
+        self.theme = DEFAULT_THEME.name
         self._update_bindings()
         if self.inquiry_func:
             self.run_worker(self.inquiry_func_worker, thread=True)
@@ -154,9 +156,11 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
 
     def get_theme_variable_defaults(self) -> dict[str, str]:
         return {
-            'input-color': StandardTheme.input_color,
-            'prompt-color': StandardTheme.prompt_color,
-            'error-color': StandardTheme.error_color,
-            'select-list-item-highlight-foreground': StandardTheme.select_list_item_highlight_foreground,
-            'select-question-mark': StandardTheme.select_question_mark,
+            'inquirer-textual-app-background': self.theme_variables.get('background', 'initial'),
+            'inquirer-textual-background': self.theme_variables.get('background', 'initial'),
+            'inquirer-textual-question-mark': '#e5c07b',  # self.theme_variables.get('foreground', 'initial'),
+            'inquirer-textual-input-color': '#98c379', # self.theme_variables.get('foreground', 'initial'),
+            'inquirer-textual-prompt-color': self.theme_variables.get('foreground', 'initial'),
+            'inquirer-textual-highlight-foreground': self.theme_variables.get('primary', 'initial'),
+            'inquirer-textual-highlight-background': self.theme_variables.get('background', 'initial'),
         }

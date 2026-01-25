@@ -16,7 +16,7 @@ class PromptMessage(Widget):
         }
         #prompt-message-question-mark {
             width: auto;
-            color: $select-question-mark;
+            color: $inquirer-textual-question-mark;
         }
         """
 

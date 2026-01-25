@@ -16,11 +16,12 @@ class InquirerSelect(InquirerWidget):
 
     DEFAULT_CSS = """
         #inquirer-select-list-view {
-            background: transparent;
+            background: $inquirer-textual-background;
         }
+        
         #inquirer-select-list-view ListItem.-highlight {
-            color: $select-list-item-highlight-foreground;
-            background: transparent;
+            color: $inquirer-textual-highlight-foreground;
+            background: $inquirer-textual-highlight-background;
         }
         """
 
