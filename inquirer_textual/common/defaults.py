@@ -4,20 +4,20 @@ DEFAULT_THEME = Theme(
     name="inquirer-textual-default",
     primary="#0178D4",
     secondary="#004578",
-    accent="#ffa62b",
+    accent="#c678dd",
     warning="#ffa62b",
     error="#e06c75",
     success="#4EBF71",
     foreground="#e0e0e0",
     background="black",
+    surface="transparent",
     variables={
-        'inquirer-textual-app-background': 'black',
-        'inquirer-textual-background': 'transparent',
+        'block-cursor-foreground': '#61afef',
+        'block-cursor-background': 'transparent',
+        'block-cursor-blurred-foreground': '#61afef',
+        'block-cursor-blurred-background': 'transparent',
         'inquirer-textual-question-mark': '#e5c07b',
         'inquirer-textual-input-color': '#98c379',
-        'inquirer-textual-prompt-color': '#c678dd',
-        'inquirer-textual-highlight-foreground': '#61afef',
-        'inquirer-textual-highlight-background': 'transparent',
     }
 )
 

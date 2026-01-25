@@ -19,19 +19,11 @@ class InquirerPattern(InquirerWidget):
     """A select widget that allows a single selection from a list of choices with pattern filtering."""
 
     DEFAULT_CSS = """
-        #inquirer-pattern-list-view {
-            background: $inquirer-textual-background;
-        }
-        #inquirer-pattern-list-view ListItem.-highlight {
-            color: $inquirer-textual-highlight-foreground;
-            background: $inquirer-textual-highlight-background;
-        }
         #inquirer-pattern-query-container {
             width: auto;
         }
         #inquirer-pattern-query {
             border: none;
-            background: $inquirer-textual-background;
             color: $inquirer-textual-input-color;
             padding: 0;
             height: 1;
@@ -39,7 +31,7 @@ class InquirerPattern(InquirerWidget):
         }
         #inquirer-pattern-query-pointer {
             width: auto;
-            color: $inquirer-textual-prompt-color;
+            color: $accent;
         }
         """
 

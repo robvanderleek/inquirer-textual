@@ -14,17 +14,6 @@ from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 class InquirerSelect(InquirerWidget):
     """A select widget that allows a single selection from a list of choices."""
 
-    DEFAULT_CSS = """
-        #inquirer-select-list-view {
-            background: $inquirer-textual-background;
-        }
-        
-        #inquirer-select-list-view ListItem.-highlight {
-            color: $inquirer-textual-highlight-foreground;
-            background: $inquirer-textual-highlight-background;
-        }
-        """
-
     def __init__(self, message: str, choices: list[str | Choice], name: str | None = None,
                  default: str | Choice | None = None, mandatory: bool = True):
         """

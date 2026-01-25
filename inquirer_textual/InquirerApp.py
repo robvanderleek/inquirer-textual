@@ -20,13 +20,9 @@ T = TypeVar('T')
 
 class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: ignore[call-arg]
     CSS = """
-        App {
-            background: black;
-        }
         Screen {
             border-top: none;
             border-bottom: none;
-            background: transparent;
             height: auto;
         }
         """
@@ -36,7 +32,8 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
         Binding("ctrl+d", "quit", "Quit", show=False, priority=True)
     ]
 
-    def __init__(self) -> None:
+    def __init__(self, theme: str = 'inquirer-textual-default') -> None:
+        self._theme = theme
         self.widget: InquirerWidget | None = None
         self.shortcuts: list[Shortcut] | None = None
         self.header: str | list[str] | None = None
@@ -49,7 +46,7 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
 
     def on_mount(self) -> None:
         self.register_theme(DEFAULT_THEME)
-        self.theme = DEFAULT_THEME.name
+        self.theme = self._theme
         self._update_bindings()
         if self.inquiry_func:
             self.run_worker(self.inquiry_func_worker, thread=True)
@@ -156,11 +153,6 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
 
     def get_theme_variable_defaults(self) -> dict[str, str]:
         return {
-            'inquirer-textual-app-background': self.theme_variables.get('background', 'initial'),
-            'inquirer-textual-background': self.theme_variables.get('background', 'initial'),
-            'inquirer-textual-question-mark': '#e5c07b',  # self.theme_variables.get('foreground', 'initial'),
-            'inquirer-textual-input-color': '#98c379', # self.theme_variables.get('foreground', 'initial'),
-            'inquirer-textual-prompt-color': self.theme_variables.get('foreground', 'initial'),
-            'inquirer-textual-highlight-foreground': self.theme_variables.get('primary', 'initial'),
-            'inquirer-textual-highlight-background': self.theme_variables.get('background', 'initial'),
+            'inquirer-textual-question-mark': self.current_theme.foreground or 'initial',
+            'inquirer-textual-input-color': self.current_theme.foreground or 'initial',
         }

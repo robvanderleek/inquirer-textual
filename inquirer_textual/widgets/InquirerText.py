@@ -21,7 +21,6 @@ class InquirerText(InquirerWidget):
     }
     #inquirer-text-input {
         border: none;
-        background: $inquirer-textual-background;
         color: $inquirer-textual-input-color;
         padding: 0;
         height: 1;

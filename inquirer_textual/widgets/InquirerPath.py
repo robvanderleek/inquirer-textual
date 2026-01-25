@@ -27,7 +27,6 @@ class InquirerPath(InquirerWidget):
     }
     #inquirer-path-input {
         border: none;
-        background: transparent;
         color: $inquirer-textual-input-color;
         padding: 0;
         height: 1;

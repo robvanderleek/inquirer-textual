@@ -9,15 +9,14 @@ from inquirer_textual.common.defaults import DEFAULT_THEME, POINTER_CHARACTER
 
 class ChoiceLabel(Label):
     def __init__(self, item: str | Choice, pattern: str | None = None):
-        self._text = ChoiceLabel._get_text(item, pattern)
+        self._text = self._get_text(item, pattern)
         super().__init__(Text('  ').append_text(self._text))
         self.item = item
 
-    @classmethod
-    def _get_text(cls, item: str | Choice, pattern: str | None = None) -> Text:
+    def _get_text(self, item: str | Choice, pattern: str | None = None) -> Text:
         result = Text(item if isinstance(item, str) else item.name)
         if pattern:
-            result.highlight_words([pattern], style=DEFAULT_THEME.variables['inquirer-textual-prompt-color'],
+            result.highlight_words([pattern], style=self.app.current_theme.accent or DEFAULT_THEME.accent,
                                    case_sensitive=False)
         return result
 

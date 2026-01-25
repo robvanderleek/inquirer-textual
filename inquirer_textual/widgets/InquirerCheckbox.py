@@ -14,15 +14,6 @@ from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 class InquirerCheckbox(InquirerWidget):
     """A checkbox widget that allows multiple selections from a list of choices."""
 
-    DEFAULT_CSS = """
-            #inquirer-checkbox-list-view {
-                background: transparent;
-            }
-            #inquirer-checkbox-list-view ListItem.-highlight {
-                color: $inquirer-textual-highlight-foreground;
-                background: transparent;
-            }
-            """
     BINDINGS = [
         ("space", "toggle_selected", "Toggle selection"),
     ]
