@@ -7,12 +7,12 @@ from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 from inquirer_textual.widgets.InquirerText import InquirerText
 
 if __name__ == '__main__':
-    answers = prompts.multi([
-        ('name', InquirerText('Name:')),
-        ('password', InquirerSecret('Password:')),
-        ('memory', InquirerNumber('Memory:')),
-        ('proceed', InquirerConfirm('Proceed?')),
-        ('planet', InquirerSelect('Planet?', ['Earth', 'Mars', 'Venus'], default='Mars')),
-        ('people', InquirerCheckbox("People?", choices=['Alice', 'Bob', 'Charlie']))
-    ])
+    answers = prompts.multi({
+        'name': InquirerText('Name:'),
+        'password': InquirerSecret('Password:'),
+        'memory': InquirerNumber('Memory:'),
+        'proceed': InquirerConfirm('Proceed?'),
+        'planet': InquirerSelect('Planet?', ['Earth', 'Mars', 'Venus'], default='Mars'),
+        'people': InquirerCheckbox("People?", choices=['Alice', 'Bob', 'Charlie'])
+    })
     print(answers)

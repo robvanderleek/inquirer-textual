@@ -18,7 +18,8 @@ class InquirerMulti(InquirerWidget):
     def __init__(self, widgets: dict[str, InquirerWidget]) -> None:
         """
         Args:
-            widgets (list[InquirerWidget]): A list of InquirerWidget instances to present in sequence.
+            widgets (dict[str, InquirerWidget]): A dictionary of InquirerWidget instances to present in sequence of
+            definition.
         """
         super().__init__()
         self.widgets = widgets
