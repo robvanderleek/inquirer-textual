@@ -15,7 +15,7 @@ class InquirerMulti(InquirerWidget):
         }
     """
 
-    def __init__(self, widgets: list[tuple[str, InquirerWidget]]) -> None:
+    def __init__(self, widgets: dict[str, InquirerWidget]) -> None:
         """
         Args:
             widgets (list[InquirerWidget]): A list of InquirerWidget instances to present in sequence.
@@ -30,7 +30,7 @@ class InquirerMulti(InquirerWidget):
         self.query_one(ContentSwitcher).visible_content.focus()
 
     def on_inquirer_widget_submit(self, message: InquirerWidget.Submit) -> None:
-        current_widget = self.widgets[self._current_widget_index]
+        current_widget = list(self.widgets.items())[self._current_widget_index]
         self._return_values_dict[current_widget[0]] = message.value
         self._current_widget_index += 1
         if self._current_widget_index < len(self.widgets):
@@ -42,6 +42,6 @@ class InquirerMulti(InquirerWidget):
 
     def compose(self) -> ComposeResult:
         with ContentSwitcher(initial=f'widget-{self._current_widget_index}'):
-            for idx, widget in enumerate(self.widgets):
+            for idx, widget in enumerate(self.widgets.items()):
                 widget[1].id = f'widget-{idx}'
                 yield widget[1]

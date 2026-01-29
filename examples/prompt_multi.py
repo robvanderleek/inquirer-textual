@@ -7,7 +7,7 @@ from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 from inquirer_textual.widgets.InquirerText import InquirerText
 
 if __name__ == '__main__':
-    answer = prompts.multi([
+    answers = prompts.multi([
         ('name', InquirerText('Name:')),
         ('password', InquirerSecret('Password:')),
         ('memory', InquirerNumber('Memory:')),
@@ -15,4 +15,4 @@ if __name__ == '__main__':
         ('planet', InquirerSelect('Planet?', ['Earth', 'Mars', 'Venus'], default='Mars')),
         ('people', InquirerCheckbox("People?", choices=['Alice', 'Bob', 'Charlie']))
     ])
-    print(answer)
+    print(answers)
