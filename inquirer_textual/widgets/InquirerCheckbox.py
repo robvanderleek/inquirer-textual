@@ -7,7 +7,7 @@ from typing_extensions import Self
 
 from inquirer_textual.common.Choice import Choice
 from inquirer_textual.common.ChoiceCheckboxLabel import ChoiceCheckboxLabel
-from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
@@ -72,7 +72,7 @@ class InquirerCheckbox(InquirerWidget):
     def compose(self) -> ComposeResult:
         if self.show_selected_value:
             with HorizontalGroup():
-                yield PromptMessage(self.message)
+                yield Prompt(self.message)
                 yield Static(str(self.selected_value))
         else:
             with VerticalGroup():
@@ -81,5 +81,5 @@ class InquirerCheckbox(InquirerWidget):
                     list_item = ListItem(ChoiceCheckboxLabel(choice))
                     items.append(list_item)
                 self.list_view = ListView(*items, id='inquirer-checkbox-list-view')
-                yield PromptMessage(self.message)
+                yield Prompt(self.message)
                 yield self.list_view

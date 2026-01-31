@@ -8,7 +8,7 @@ from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
 from textual.widgets import Static
 
-from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
@@ -54,7 +54,7 @@ class InquirerEditor(InquirerWidget):
     def compose(self) -> ComposeResult:
         if self.message:
             with HorizontalGroup():
-                yield PromptMessage(self.message)
+                yield Prompt(self.message)
                 yield Static('[dim]Press <enter> to launch editor[/dim]')
         else:
             super().compose()

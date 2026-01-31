@@ -5,9 +5,10 @@ from textual.containers import VerticalGroup, HorizontalGroup
 from textual.widgets import ListView, ListItem, Static
 from typing_extensions import Self
 
+from inquirer_textual.common.Answer import Answer
 from inquirer_textual.common.Choice import Choice
 from inquirer_textual.common.ChoiceLabel import ChoiceLabel
-from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
@@ -72,8 +73,8 @@ class InquirerSelect(InquirerWidget):
     def compose(self) -> ComposeResult:
         if self.show_selected_value:
             with HorizontalGroup():
-                yield PromptMessage(self.message)
-                yield Static(str(self.selected_value))
+                yield Prompt(self.message)
+                yield Answer(str(self.selected_value))
         else:
             with VerticalGroup():
                 initial_index = 0
@@ -84,5 +85,5 @@ class InquirerSelect(InquirerWidget):
                     if self.default and choice == self.default:
                         initial_index = idx
                 self.list_view = ListView(*items, id='inquirer-select-list-view', initial_index=initial_index)
-                yield PromptMessage(self.message)
+                yield Prompt(self.message)
                 yield self.list_view

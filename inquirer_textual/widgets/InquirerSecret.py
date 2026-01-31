@@ -5,7 +5,7 @@ from textual.containers import HorizontalGroup
 from textual.widgets import Input
 from typing_extensions import Self
 
-from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
@@ -47,7 +47,7 @@ class InquirerSecret(InquirerWidget):
 
     def compose(self) -> ComposeResult:
         with HorizontalGroup():
-            yield PromptMessage(self.message)
+            yield Prompt(self.message)
             self.input = Input(id="inquirer-secret-input")
             self.input.password = True
             yield self.input

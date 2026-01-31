@@ -39,6 +39,17 @@ def test_snapshot_pattern_search(snap_compare):
     assert snap_compare(app, run_before=run_before)
 
 
+def test_snapshot_select(snap_compare):
+    app = InquirerApp()
+    app.widget = InquirerPattern('Environment:', ['Hydrogen', 'Helium', 'Lithium', 'Beryllium', 'Boron', 'Carbon'])
+
+    async def run_before(pilot) -> None:
+        await pilot.press('i', 'u', 'm')
+        await pilot.press('enter')
+
+    assert snap_compare(app, run_before=run_before)
+
+
 async def test_named():
     app = InquirerApp()
     app.widget = InquirerPattern('Environment:', [Choice('a'), Choice('b'), Choice('c')], name='env')

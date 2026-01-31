@@ -4,9 +4,9 @@ from textual.widget import Widget
 from textual.widgets import Static, Label
 
 
-class PromptMessage(Widget):
+class Prompt(Widget):
     DEFAULT_CSS = """
-        PromptMessage {
+        Prompt {
             width: auto;
             height: auto;
         }

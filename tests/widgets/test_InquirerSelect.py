@@ -1,7 +1,8 @@
+import string
+
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.common.Choice import Choice
 from inquirer_textual.widgets.InquirerSelect import InquirerSelect
-import string
 
 
 async def test_select_entry():
@@ -73,6 +74,17 @@ async def test_not_mandatory():
 
     assert result.command == 'ctrl+c'
     assert result.value is None
+
+
+def test_snapshot_select(snap_compare):
+    app = InquirerApp()
+    app.widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')], mandatory=False)
+
+    async def run_before(pilot) -> None:
+        await pilot.press('down')
+        await pilot.press('enter')
+
+    assert snap_compare(app, run_before=run_before)
 
 
 def test_snapshot_mandatory(snap_compare):

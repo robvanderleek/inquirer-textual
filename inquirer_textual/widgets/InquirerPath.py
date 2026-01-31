@@ -8,7 +8,7 @@ from textual.containers import HorizontalGroup
 from textual.widgets import Input, Static
 from typing_extensions import Self
 
-from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
@@ -89,7 +89,7 @@ class InquirerPath(InquirerWidget):
 
     def compose(self) -> ComposeResult:
         with HorizontalGroup():
-            yield PromptMessage(self.message)
+            yield Prompt(self.message)
             self.input = Input(id="inquirer-path-input")
             yield self.input
         yield Static("", id="inquirer-path-error-message")
