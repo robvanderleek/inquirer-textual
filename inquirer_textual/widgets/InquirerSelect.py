@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from textual.app import ComposeResult
-from textual.containers import VerticalGroup
-from textual.widgets import ListView, ListItem
+from textual.containers import VerticalGroup, HorizontalGroup
+from textual.widgets import ListView, ListItem, Static
 from typing_extensions import Self
 
 from inquirer_textual.common.Choice import Choice
@@ -30,6 +30,8 @@ class InquirerSelect(InquirerWidget):
         self.selected_label: ChoiceLabel | None = None
         self.selected_item: str | Choice | None = None
         self.default = default
+        self.selected_value: str | Choice | None = None
+        self.show_selected_value: bool = False
 
     def on_mount(self):
         super().on_mount()
@@ -61,15 +63,26 @@ class InquirerSelect(InquirerWidget):
     def current_value(self):
         return self.selected_item
 
+    async def set_selected_value(self, value: str | Choice) -> None:
+        self.selected_value = value
+        self.styles.height = 1
+        self.show_selected_value = True
+        await self.recompose()
+
     def compose(self) -> ComposeResult:
-        with VerticalGroup():
-            initial_index = 0
-            items: list[ListItem] = []
-            for idx, choice in enumerate(self.choices):
-                list_item = ListItem(ChoiceLabel(choice))
-                items.append(list_item)
-                if self.default and choice == self.default:
-                    initial_index = idx
-            self.list_view = ListView(*items, id='inquirer-select-list-view', initial_index=initial_index)
-            yield PromptMessage(self.message)
-            yield self.list_view
+        if self.show_selected_value:
+            with HorizontalGroup():
+                yield PromptMessage(self.message)
+                yield Static(str(self.selected_value))
+        else:
+            with VerticalGroup():
+                initial_index = 0
+                items: list[ListItem] = []
+                for idx, choice in enumerate(self.choices):
+                    list_item = ListItem(ChoiceLabel(choice))
+                    items.append(list_item)
+                    if self.default and choice == self.default:
+                        initial_index = idx
+                self.list_view = ListView(*items, id='inquirer-select-list-view', initial_index=initial_index)
+                yield PromptMessage(self.message)
+                yield self.list_view
