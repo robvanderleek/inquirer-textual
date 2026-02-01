@@ -5,6 +5,7 @@ from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
 from textual.widgets import Label
 
+from inquirer_textual.common.Answer import Answer
 from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
@@ -36,26 +37,41 @@ class InquirerConfirm(InquirerWidget):
         if confirm_character.lower() == reject_character.lower():
             raise ValueError("confirm_character and reject_character must be different")
         self.message = message
+        self.confirm_character = confirm_character
+        self.reject_character = reject_character
         c = confirm_character if not default else confirm_character.upper()
         r = reject_character if default else reject_character.upper()
         self.label = Label(f'({c}/{r})')
         self.value: bool = default
+        self.selected_value: bool | None = None
+        self.show_selected_value: bool = False
 
     def on_key(self, event: events.Key):
         if event.key.lower() == 'y':
             self.value = True
-            self.post_message(InquirerWidget.Submit(self.value))
+            self.submit_current_value()
         elif event.key.lower() == 'n':
             self.value = False
-            self.post_message(InquirerWidget.Submit(self.value))
+            self.submit_current_value()
         elif event.key == 'enter':
             event.stop()
-            self.post_message(InquirerWidget.Submit(self.value))
+            self.submit_current_value()
 
     def current_value(self):
         return self.value
 
+    async def set_selected_value(self, value: bool) -> None:
+        self.selected_value = value
+        self.styles.height = 1
+        self.show_selected_value = True
+        await self.recompose()
+
     def compose(self) -> ComposeResult:
-        with HorizontalGroup():
-            yield Prompt(self.message)
-            yield self.label
+        if self.show_selected_value:
+            with HorizontalGroup():
+                yield Prompt(self.message)
+                yield Answer(self.confirm_character if self.selected_value else self.reject_character)
+        else:
+            with HorizontalGroup():
+                yield Prompt(self.message)
+                yield self.label
