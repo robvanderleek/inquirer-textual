@@ -8,7 +8,7 @@ from textual.containers import HorizontalGroup
 from textual.widgets import Input, Static
 from typing_extensions import Self
 
-from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
@@ -27,13 +27,12 @@ class InquirerPath(InquirerWidget):
     }
     #inquirer-path-input {
         border: none;
-        background: transparent;
-        color: $input-color;
+        color: $inquirer-textual-input-color;
         padding: 0;
         height: 1;
     }
     #inquirer-path-error-message {
-        color: $error-color;
+        color: $error;
         height: auto;
     }
     """
@@ -70,6 +69,9 @@ class InquirerPath(InquirerWidget):
             if self.path_type == PathType.DIRECTORY and not path.is_dir():
                 self._show_validation_error("The specified path is not a directory.")
                 return
+        self._show_validation_error('')
+        if self.input:
+            self.input._cursor_visible = False
         self.submit_current_value()
 
     def _show_validation_error(self, message: str):
@@ -87,7 +89,7 @@ class InquirerPath(InquirerWidget):
 
     def compose(self) -> ComposeResult:
         with HorizontalGroup():
-            yield PromptMessage(self.message)
+            yield Prompt(self.message)
             self.input = Input(id="inquirer-path-input")
             yield self.input
         yield Static("", id="inquirer-path-error-message")

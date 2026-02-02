@@ -8,7 +8,7 @@ from textual.validation import Validator
 from textual.widgets import Input
 from typing_extensions import Self
 
-from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
@@ -21,8 +21,7 @@ class InquirerText(InquirerWidget):
     }
     #inquirer-text-input {
         border: none;
-        background: transparent;
-        color: $input-color;
+        color: $inquirer-textual-input-color;
         padding: 0;
         height: 1;
     }
@@ -65,6 +64,6 @@ class InquirerText(InquirerWidget):
 
     def compose(self) -> ComposeResult:
         with HorizontalGroup():
-            yield PromptMessage(self.message)
+            yield Prompt(self.message)
             self.input = Input(id="inquirer-text-input", validators=self.validators)
             yield self.input

@@ -2,27 +2,19 @@ from __future__ import annotations
 
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup, HorizontalGroup
-from textual.widgets import ListItem, ListView, Static
+from textual.widgets import ListItem, ListView
 from typing_extensions import Self
 
+from inquirer_textual.common.Answer import Answer
 from inquirer_textual.common.Choice import Choice
 from inquirer_textual.common.ChoiceCheckboxLabel import ChoiceCheckboxLabel
-from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
 class InquirerCheckbox(InquirerWidget):
     """A checkbox widget that allows multiple selections from a list of choices."""
 
-    DEFAULT_CSS = """
-            #inquirer-checkbox-list-view {
-                background: transparent;
-            }
-            #inquirer-checkbox-list-view ListItem.-highlight {
-                color: $select-list-item-highlight-foreground;
-                background: transparent;
-            }
-            """
     BINDINGS = [
         ("space", "toggle_selected", "Toggle selection"),
     ]
@@ -81,8 +73,8 @@ class InquirerCheckbox(InquirerWidget):
     def compose(self) -> ComposeResult:
         if self.show_selected_value:
             with HorizontalGroup():
-                yield PromptMessage(self.message)
-                yield Static(str(self.selected_value))
+                yield Prompt(self.message)
+                yield Answer(str(self.selected_value))
         else:
             with VerticalGroup():
                 items: list[ListItem] = []
@@ -90,5 +82,5 @@ class InquirerCheckbox(InquirerWidget):
                     list_item = ListItem(ChoiceCheckboxLabel(choice))
                     items.append(list_item)
                 self.list_view = ListView(*items, id='inquirer-checkbox-list-view')
-                yield PromptMessage(self.message)
+                yield Prompt(self.message)
                 yield self.list_view

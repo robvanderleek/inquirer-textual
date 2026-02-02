@@ -4,9 +4,9 @@ from textual.widget import Widget
 from textual.widgets import Static, Label
 
 
-class PromptMessage(Widget):
+class Prompt(Widget):
     DEFAULT_CSS = """
-        PromptMessage {
+        Prompt {
             width: auto;
             height: auto;
         }
@@ -16,7 +16,7 @@ class PromptMessage(Widget):
         }
         #prompt-message-question-mark {
             width: auto;
-            color: $select-question-mark;
+            color: $inquirer-textual-question-mark;
         }
         """
 

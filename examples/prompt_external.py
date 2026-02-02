@@ -5,7 +5,7 @@ from textual.widgets import Label
 from textual_slider import Slider
 
 from inquirer_textual import prompts
-from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.common.PromptMessage import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
@@ -27,7 +27,7 @@ class InquirerSlider(InquirerWidget):
     def compose(self) -> ComposeResult:
         with VerticalGroup():
             with HorizontalGroup():
-                yield PromptMessage(self.message)
+                yield Prompt(self.message)
                 yield Label(id="slider-value")
             yield self.slider
 

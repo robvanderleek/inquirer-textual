@@ -68,4 +68,5 @@ shell = """
     vhs docs/getting-started/simple_text_prompt.tape
     vhs docs/getting-started/simple_text_prompts.tape
     vhs docs/getting-started/simple_multi_prompt.tape
+    vhs docs/examples/themes/solarized_light.tape
 """

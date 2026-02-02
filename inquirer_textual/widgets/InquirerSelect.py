@@ -1,28 +1,19 @@
 from __future__ import annotations
 
 from textual.app import ComposeResult
-from textual.containers import VerticalGroup
+from textual.containers import VerticalGroup, HorizontalGroup
 from textual.widgets import ListView, ListItem
 from typing_extensions import Self
 
+from inquirer_textual.common.Answer import Answer
 from inquirer_textual.common.Choice import Choice
 from inquirer_textual.common.ChoiceLabel import ChoiceLabel
-from inquirer_textual.common.PromptMessage import PromptMessage
+from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
 class InquirerSelect(InquirerWidget):
     """A select widget that allows a single selection from a list of choices."""
-
-    DEFAULT_CSS = """
-        #inquirer-select-list-view {
-            background: transparent;
-        }
-        #inquirer-select-list-view ListItem.-highlight {
-            color: $select-list-item-highlight-foreground;
-            background: transparent;
-        }
-        """
 
     def __init__(self, message: str, choices: list[str | Choice], name: str | None = None,
                  default: str | Choice | None = None, mandatory: bool = True):
@@ -40,6 +31,8 @@ class InquirerSelect(InquirerWidget):
         self.selected_label: ChoiceLabel | None = None
         self.selected_item: str | Choice | None = None
         self.default = default
+        self.selected_value: str | Choice | None = None
+        self.show_selected_value: bool = False
 
     def on_mount(self):
         super().on_mount()
@@ -71,15 +64,26 @@ class InquirerSelect(InquirerWidget):
     def current_value(self):
         return self.selected_item
 
+    async def set_selected_value(self, value: str | Choice) -> None:
+        self.selected_value = value
+        self.styles.height = 1
+        self.show_selected_value = True
+        await self.recompose()
+
     def compose(self) -> ComposeResult:
-        with VerticalGroup():
-            initial_index = 0
-            items: list[ListItem] = []
-            for idx, choice in enumerate(self.choices):
-                list_item = ListItem(ChoiceLabel(choice))
-                items.append(list_item)
-                if self.default and choice == self.default:
-                    initial_index = idx
-            self.list_view = ListView(*items, id='inquirer-select-list-view', initial_index=initial_index)
-            yield PromptMessage(self.message)
-            yield self.list_view
+        if self.show_selected_value:
+            with HorizontalGroup():
+                yield Prompt(self.message)
+                yield Answer(str(self.selected_value))
+        else:
+            with VerticalGroup():
+                initial_index = 0
+                items: list[ListItem] = []
+                for idx, choice in enumerate(self.choices):
+                    list_item = ListItem(ChoiceLabel(choice))
+                    items.append(list_item)
+                    if self.default and choice == self.default:
+                        initial_index = idx
+                self.list_view = ListView(*items, id='inquirer-select-list-view', initial_index=initial_index)
+                yield Prompt(self.message)
+                yield self.list_view

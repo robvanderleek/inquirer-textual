@@ -42,7 +42,7 @@ def external(widget: InquirerWidget, clear: bool = False) -> Any:
     return app.run(inline=True, inline_no_clear=not clear).value
 
 
-def multi(widgets: list[tuple[str, InquirerWidget]], clear: bool = False) -> dict[str, Any]:
+def multi(widgets: dict[str, InquirerWidget], clear: bool = False) -> dict[str, Any]:
     app: InquirerApp[dict[str, Any]] = InquirerApp()
     app.widget = InquirerMulti(widgets)
     return app.run(inline=True, inline_no_clear=not clear).value

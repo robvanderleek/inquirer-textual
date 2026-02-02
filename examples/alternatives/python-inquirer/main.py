@@ -30,5 +30,14 @@ def path():
     ]
     return inquirer.prompt(questions)
 
+def select():
+    questions = [
+        inquirer.List('size',
+            message="What size do you need?",
+            choices=['Jumbo', 'Large', 'Standard', 'Medium', 'Small', 'Micro'],
+        ),
+    ]
+    return inquirer.prompt(questions)
+
 if __name__ == "__main__":
-    print(text())
+    print(select())

@@ -1,7 +1,6 @@
 from typing import Any
 
 from textual.app import ComposeResult
-from textual.widgets import ContentSwitcher
 
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
@@ -15,33 +14,32 @@ class InquirerMulti(InquirerWidget):
         }
     """
 
-    def __init__(self, widgets: list[tuple[str, InquirerWidget]]) -> None:
+    def __init__(self, widgets: dict[str, InquirerWidget]) -> None:
         """
         Args:
-            widgets (list[InquirerWidget]): A list of InquirerWidget instances to present in sequence.
+            widgets (dict[str, InquirerWidget]): A dictionary of InquirerWidget instances to present in sequence of definition.
         """
         super().__init__()
         self.widgets = widgets
         self._current_widget_index = 0
         self._return_values_dict: dict[str, Any] = {}
 
-    def on_mount(self):
-        self.query_one(ContentSwitcher).current = f'widget-{self._current_widget_index}'
-        self.query_one(ContentSwitcher).visible_content.focus()
-
-    def on_inquirer_widget_submit(self, message: InquirerWidget.Submit) -> None:
-        current_widget = self.widgets[self._current_widget_index]
-        self._return_values_dict[current_widget[0]] = message.value
+    async def on_inquirer_widget_submit(self, message: InquirerWidget.Submit) -> None:
+        current_item = list(self.widgets.items())[self._current_widget_index]
+        self._return_values_dict[current_item[0]] = message.value
+        await current_item[1].set_selected_value(message.value)
         self._current_widget_index += 1
         if self._current_widget_index < len(self.widgets):
             message.stop()
-            self.query_one(ContentSwitcher).current = f'widget-{self._current_widget_index}'
-            self.query_one(ContentSwitcher).visible_content.focus()
+            next_widget = self.query_one(f'#widget-{self._current_widget_index}')
+            next_widget.styles.display = 'block'
+            next_widget.focus()
         else:
             message.value = self._return_values_dict
 
     def compose(self) -> ComposeResult:
-        with ContentSwitcher(initial=f'widget-{self._current_widget_index}'):
-            for idx, widget in enumerate(self.widgets):
-                widget[1].id = f'widget-{idx}'
-                yield widget[1]
+        for idx, item in enumerate(self.widgets.items()):
+            item[1].id = f'widget-{idx}'
+            if idx > 0:
+                item[1].styles.display = 'none'
+            yield item[1]
