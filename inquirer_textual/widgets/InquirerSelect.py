@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup, HorizontalGroup
-from textual.widgets import ListView, ListItem, Static
+from textual.widgets import ListView, ListItem
 from typing_extensions import Self
 
 from inquirer_textual.common.Answer import Answer

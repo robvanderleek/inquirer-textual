@@ -11,7 +11,7 @@ if __name__ == "__main__":
     print("Hi, welcome to Python Pizza!")
     answers = prompts.multi({
         'toBeDelivered': InquirerConfirm('Is this for delivery?'),
-        'phone': InquirerText('What is your phone number?', validators=Regex('\d+[-]\d+')),
+        'phone': InquirerText('What is your phone number?', validators=Regex('\\d+[-]\\d+')),
         'size': InquirerSelect('What size do you need?', ['Large', 'Medium', 'Small']),
         'quantity': InquirerNumber('How many do you need?'),
         'toppings': InquirerCheckbox('What about the toppings?', choices=['Pepperoni', 'Mushrooms', 'Onions']),
