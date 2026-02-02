@@ -1,3 +1,4 @@
+import sys
 from typing import Any
 
 from textual.validation import Regex
@@ -11,7 +12,17 @@ from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 from inquirer_textual.widgets.InquirerText import InquirerText
 
 if __name__ == '__main__':
-    app: InquirerApp[dict[str, Any]] = InquirerApp(theme='solarized-light')
+    TEXTUAL_THEMES = ['textual-dark', 'textual-light', 'nord', 'gruvbox', 'catppuccin-mocha', 'textual-ansi', 'dracula',
+                      'tokyo-night', 'monokai', 'flexoki', 'catppuccin-latte', 'solarized-light', 'solarized-dark',
+                      'rose-pine', 'rose-pine-moon', 'rose-pine-dawn', 'atom-one-dark', 'atom-one-light']
+    if len(sys.argv) == 0:
+        theme = 'inquirer-textual-default'
+    elif sys.argv[1] in TEXTUAL_THEMES:
+        theme = sys.argv[1]
+    else:
+        print(f"Theme '{sys.argv[1]}' is not recognized. Available themes are: {', '.join(TEXTUAL_THEMES)}")
+        sys.exit(1)
+    app: InquirerApp[dict[str, Any]] = InquirerApp(theme=theme)
     app.widget = InquirerMulti({
         'toBeDelivered': InquirerConfirm('Is this for delivery?'),
         'phone': InquirerText('What is your phone number?', validators=Regex('\d+[-]\d+')),

@@ -2,9 +2,10 @@ from __future__ import annotations
 
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup, HorizontalGroup
-from textual.widgets import ListItem, ListView, Static
+from textual.widgets import ListItem, ListView
 from typing_extensions import Self
 
+from inquirer_textual.common.Answer import Answer
 from inquirer_textual.common.Choice import Choice
 from inquirer_textual.common.ChoiceCheckboxLabel import ChoiceCheckboxLabel
 from inquirer_textual.common.Prompt import Prompt
@@ -73,7 +74,7 @@ class InquirerCheckbox(InquirerWidget):
         if self.show_selected_value:
             with HorizontalGroup():
                 yield Prompt(self.message)
-                yield Static(str(self.selected_value))
+                yield Answer(str(self.selected_value))
         else:
             with VerticalGroup():
                 items: list[ListItem] = []
