@@ -30,10 +30,10 @@ def confirm(message: str, default: bool = False, mandatory: bool = False, clear:
     return app.run(inline=True, inline_no_clear=not clear).value
 
 
-def editor(message: str, clear: bool = False) -> str:
+def editor(message: str) -> str:
     app: InquirerApp[str] = InquirerApp()
     app.widget = InquirerEditor(message)
-    return app.run(inline=True, inline_no_clear=not clear).value
+    return app.run(inline=False).value
 
 
 def external(widget: InquirerWidget, clear: bool = False) -> Any:
