@@ -58,7 +58,7 @@ nav:
       - Text: 'examples/prompts/text.md'
     - Apps:
       - App: 'examples/apps/app.md'
-  - CLI: 'cli.md'
+  - CLI: 'cli/index.md'
   - Themes: 'themes/index.md'
   - Reference:
     - Checkbox: 'reference/checkbox.md'
