@@ -8,7 +8,7 @@ async def test_shortcut():
     widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')])
     app = InquirerApp()
     app.widget = widget
-    app.shortcuts = [Shortcut('v', 'view', 'View')]
+    app._shortcuts = [Shortcut('v', 'view', 'View')]
 
     async with app.run_test() as pilot:
         assert widget.selected_item.name == 'a'
@@ -22,7 +22,7 @@ async def test_shortcut():
 def test_snapshot_shortcut(snap_compare):
     app = InquirerApp()
     app.widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')])
-    app.shortcuts = [Shortcut('v', 'view', 'View')]
+    app._shortcuts = [Shortcut('v', 'view', 'View')]
     app.show_footer = True
 
     assert snap_compare(app)
@@ -31,7 +31,7 @@ def test_snapshot_shortcut(snap_compare):
 def test_snapshot_shortcut_no_description(snap_compare):
     app = InquirerApp()
     app.widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')])
-    app.shortcuts = [Shortcut('v', 'view')]
+    app._shortcuts = [Shortcut('v', 'view')]
     app.show_footer = True
 
     assert snap_compare(app)

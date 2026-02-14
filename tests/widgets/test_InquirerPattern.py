@@ -50,6 +50,19 @@ def test_snapshot_select(snap_compare):
     assert snap_compare(app, run_before=run_before)
 
 
+async def test_choice_with_command():
+    widget = InquirerPattern('Environment:', [Choice('a', command='create'), Choice('b')])
+    app = InquirerApp()
+    app.widget = widget
+
+    async with app.run_test() as pilot:
+        assert widget.selected_item.name == 'a'
+        await pilot.press("enter")
+    result = app._return_value
+
+    assert result.command == 'create'
+
+
 async def test_named():
     app = InquirerApp()
     app.widget = InquirerPattern('Environment:', [Choice('a'), Choice('b'), Choice('c')], name='env')

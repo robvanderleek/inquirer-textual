@@ -34,8 +34,8 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
 
     def __init__(self, theme: str = 'inquirer-textual-default') -> None:
         self._theme = theme
+        self._shortcuts: list[Shortcut] | None = None
         self.widget: InquirerWidget | None = None
-        self.shortcuts: list[Shortcut] | None = None
         self.header: str | list[str] | None = None
         self.show_footer: bool = False
         self.result: InquirerResult[T] | None = None
@@ -43,6 +43,16 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
         self.inquiry_func: Callable[[InquirerApp[T]], None] | None = None
         self.inquiry_func_stop: bool = False
         super().__init__()
+
+    @property
+    def shortcuts(self) -> list[Shortcut] | None:
+        return self._shortcuts
+
+    @shortcuts.setter
+    def shortcuts(self, value: list[Shortcut] | None):
+        self._shortcuts = value
+        if value:
+            self.show_footer = True
 
     def on_mount(self) -> None:
         self.register_theme(DEFAULT_THEME)
@@ -53,8 +63,8 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
 
     def _update_bindings(self) -> None:
         self._bindings = BindingsMap()
-        if self.shortcuts:
-            for shortcut in self.shortcuts:
+        if self._shortcuts:
+            for shortcut in self._shortcuts:
                 self._bindings.bind(shortcut.key, f'shortcut("{shortcut.command}")',
                                     description=shortcut.description,
                                     show=shortcut.show)
@@ -75,22 +85,21 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
 
     async def _handle_result(self, command: str | None, value: Any | None):
         if self.result_ready is not None:
-            self.result = InquirerResult(self.widget.name if self.widget else None, value,  # type: ignore[arg-type]
-                                         command)
+            self.result = InquirerResult(
+                self.widget.name if self.widget else None, value, command)  # type: ignore[arg-type]
             self.result_ready.set()
         else:
             if self.widget:
                 await self.widget.set_selected_value(value)
+            if self.show_footer:
+                self.query_one(Footer).styles.display = 'none'
             self.call_after_refresh(lambda: self._terminate(command, value))
 
-    def _terminate(self, command: str | None = None, value: Any | None = None):
+    async def _terminate(self, command: str | None = None, value: Any | None = None):
         self.inquiry_func_stop = True
         if self.result_ready:
             self.result_ready.set()
-        if command is not None:
-            self.app.exit(InquirerResult(self.widget.name if self.widget else None, value, command))
-        else:
-            self.exit(InquirerResult(None, value, None))
+        self.app.exit(InquirerResult(self.widget.name if self.widget else None, value, command))
 
     def compose(self) -> ComposeResult:
         if self.header is not None:
@@ -107,7 +116,7 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
 
     def prompt(self, widget: InquirerWidget, shortcuts: list[Shortcut] | None = None) -> InquirerResult[T]:
         if shortcuts:
-            self.shortcuts = shortcuts
+            self._shortcuts = shortcuts
             self.show_footer = True
         self._update_bindings()
         self.widget = widget

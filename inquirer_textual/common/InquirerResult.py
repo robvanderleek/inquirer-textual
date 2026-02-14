@@ -13,6 +13,9 @@ class InquirerResult(Generic[T]):
     value: T
     command: str | None
 
+    def __str__(self) -> str:
+        return str(self.value)
+
     def json(self):
         d = {}
         if self.name:
