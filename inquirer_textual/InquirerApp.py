@@ -13,6 +13,7 @@ from inquirer_textual.common.InquirerHeader import InquirerHeader
 from inquirer_textual.common.InquirerResult import InquirerResult
 from inquirer_textual.common.Shortcut import Shortcut
 from inquirer_textual.common.defaults import DEFAULT_THEME
+from inquirer_textual.common.utils import get_cursor_row
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 T = TypeVar('T')
@@ -23,7 +24,7 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
         Screen {
             border-top: none;
             border-bottom: none;
-            height: auto;
+            # height: 1fr;
         }
         """
     ENABLE_COMMAND_PALETTE = False
@@ -42,6 +43,7 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
         self.result_ready: Event | None = None
         self.inquiry_func: Callable[[InquirerApp[T]], None] | None = None
         self.inquiry_func_stop: bool = False
+        self.inline_start_row: int | None = None
         super().__init__()
 
     @property
@@ -60,6 +62,10 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
         self._update_bindings()
         if self.inquiry_func:
             self.run_worker(self.inquiry_func_worker, thread=True)
+        if self.is_inline and self.inline_start_row is not None:
+            inline_height = self._get_inline_height()
+            if self.inline_start_row + 1 + inline_height < self.viewport_size.height:
+                self.screen.styles.height = self.viewport_size.height - self.inline_start_row + 1
 
     def _update_bindings(self) -> None:
         self._bindings = BindingsMap()
@@ -93,6 +99,8 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
                 await self.widget.set_selected_value(value)
             if self.show_footer:
                 self.query_one(Footer).styles.display = 'none'
+            if self.is_inline and self.inline_start_row is not None:
+                self.screen.styles.height = 'auto'
             self.call_after_refresh(lambda: self._terminate(command, value))
 
     async def _terminate(self, command: str | None = None, value: Any | None = None):
@@ -150,6 +158,7 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
     ) -> InquirerResult[T]:
         if not self.inquiry_func:
             self.inquiry_func = inquiry_func
+        self.inline_start_row = get_cursor_row()
         return super().run(
             headless=headless,
             inline=inline,

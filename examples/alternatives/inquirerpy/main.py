@@ -20,6 +20,7 @@ def fuzzy():
         choices=["Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", 
             "Carbon"],
         default="Lithium",
+        long_instruction="Hello world",
     ).execute()
 
 def number():

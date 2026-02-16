@@ -2,6 +2,7 @@ from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.common.Choice import Choice
 from inquirer_textual.common.Shortcut import Shortcut
 from inquirer_textual.widgets.InquirerSelect import InquirerSelect
+from inquirer_textual.widgets.InquirerText import InquirerText
 
 
 async def test_shortcut():
@@ -28,6 +29,19 @@ def test_snapshot_shortcut(snap_compare):
     assert snap_compare(app)
 
 
+def test_snapshot_shortcut_text_input(snap_compare):
+    app = InquirerApp()
+    app.widget = InquirerText('Name:')
+    app._shortcuts = [Shortcut('escape', 'select', 'Select')]
+    app.show_footer = True
+
+    async def run_before(pilot) -> None:
+        await pilot.press('r', 'o', 'b')
+        await pilot.press('escape')
+
+    assert snap_compare(app, run_before=run_before)
+
+
 def test_snapshot_shortcut_no_description(snap_compare):
     app = InquirerApp()
     app.widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')])
@@ -35,4 +49,3 @@ def test_snapshot_shortcut_no_description(snap_compare):
     app.show_footer = True
 
     assert snap_compare(app)
-

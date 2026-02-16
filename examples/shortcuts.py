@@ -1,11 +1,6 @@
-from inquirer_textual.InquirerApp import InquirerApp
+from inquirer_textual import prompts
 from inquirer_textual.common.Shortcut import Shortcut
-from inquirer_textual.widgets.InquirerText import InquirerText
 
 if __name__ == '__main__':
-    app: InquirerApp[str] = InquirerApp()
-    app.widget = InquirerText('Enter your name:')
-    app._shortcuts = [Shortcut('escape', 'select')]
-    app.show_footer = True
-    answer = app.run()
+    answer = prompts.text('Enter your name:', shortcuts=[Shortcut('escape', 'select')])
     print(f'Your answer: {answer}')
