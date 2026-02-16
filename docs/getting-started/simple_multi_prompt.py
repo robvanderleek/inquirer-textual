@@ -6,4 +6,4 @@ if __name__ == "__main__":
         'first_name': InquirerText('First name:'),
         'last_name': InquirerText('Last name:')
     })
-    print(f'Hello, {answers["first_name"]} {answers["last_name"]}! 👋')
+    print(f'Hello, {answers.value["first_name"]} {answers.value["last_name"]}! 👋')

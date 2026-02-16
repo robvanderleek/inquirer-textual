@@ -72,7 +72,7 @@ class InquirerText(InquirerWidget):
         if self.show_selected_value:
             with HorizontalGroup():
                 yield Prompt(self.message)
-                yield Answer(self.selected_value)
+                yield Answer(str(self.selected_value))
         else:
             with HorizontalGroup():
                 yield Prompt(self.message)
