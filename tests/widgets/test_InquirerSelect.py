@@ -118,6 +118,16 @@ def test_snapshot_fullscreen(snap_compare):
     assert snap_compare(app)
 
 
+def test_snapshot_height(snap_compare):
+    app = InquirerApp()
+    choices: list[Choice] = []
+    for letter in string.ascii_lowercase:
+        choices.append(Choice(letter))
+    app.widget = InquirerSelect('Environment:', choices, mandatory=True, height=5)
+
+    assert snap_compare(app)
+
+
 def test_snapshot_shortcuts(snap_compare):
     app = InquirerApp()
     app.widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')])

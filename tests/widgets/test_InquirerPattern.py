@@ -1,3 +1,5 @@
+import string
+
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.common.Choice import Choice
 from inquirer_textual.widgets.InquirerPattern import InquirerPattern
@@ -48,6 +50,16 @@ def test_snapshot_select(snap_compare):
         await pilot.press('enter')
 
     assert snap_compare(app, run_before=run_before)
+
+
+def test_snapshot_height(snap_compare):
+    app = InquirerApp()
+    choices: list[Choice] = []
+    for letter in string.ascii_lowercase:
+        choices.append(Choice(letter))
+    app.widget = InquirerPattern('Environment:', choices, mandatory=True, height=5)
+
+    assert snap_compare(app)
 
 
 async def test_choice_with_command():

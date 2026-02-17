@@ -16,13 +16,15 @@ class InquirerSelect(InquirerWidget):
     """A select widget that allows a single selection from a list of choices."""
 
     def __init__(self, message: str, choices: list[str | Choice], name: str | None = None,
-                 default: str | Choice | None = None, mandatory: bool = True):
+                 default: str | Choice | None = None, mandatory: bool = True, height: int | str | None = None):
         """
         Args:
             message (str): The prompt message to display.
             choices (list[str | Choice]): A list of choices to present to the user.
             default (str | Choice | None): The default choice to pre-select.
             mandatory (bool): Whether a response is mandatory.
+            height (int | str | None): If None, for inline apps the height will be determined based on the number of
+            choices.
         """
         super().__init__(name=name, mandatory=mandatory)
         self.message = message
@@ -33,10 +35,13 @@ class InquirerSelect(InquirerWidget):
         self.default = default
         self.selected_value: str | Choice | None = None
         self.show_selected_value: bool = False
+        self.height = height
 
     def on_mount(self):
         super().on_mount()
-        if self.app.is_inline:
+        if self.height is not None:
+            self.styles.height = self.height
+        elif self.app.is_inline:
             self.styles.height = min(10, len(self.choices) + 1)
         else:
             self.styles.height = '1fr'
