@@ -136,7 +136,7 @@ def test_snapshot_shortcuts(snap_compare):
     assert snap_compare(app)
 
 
-def test_snapshot_shortcuts_select(snap_compare):
+def test_snapshot_shortcuts_quit(snap_compare):
     app = InquirerApp()
     app.widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')])
     app.shortcuts = [Shortcut('q', 'quit', 'Quit')]

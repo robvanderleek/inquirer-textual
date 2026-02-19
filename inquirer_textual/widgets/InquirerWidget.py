@@ -5,6 +5,8 @@ from typing import Any
 from textual.message import Message
 from textual.widget import Widget
 
+from inquirer_textual.common.Choice import COMMAND_SELECT
+
 
 class InquirerWidget(Widget):
     class Submit(Message):
@@ -25,10 +27,10 @@ class InquirerWidget(Widget):
         self.post_message(InquirerWidget.Submit(None, 'ctrl+c'))
 
     def current_value(self):
-        raise NotImplementedError("Subclasses must implement current_value method")
+        raise NotImplementedError('Subclasses must implement current_value method')
 
     async def set_selected_value(self, value: Any) -> None:
         pass
 
-    def submit_current_value(self, command: str | None = "select"):
+    def submit_current_value(self, command: str | None = COMMAND_SELECT):
         self.post_message(InquirerWidget.Submit(self.current_value(), command))
