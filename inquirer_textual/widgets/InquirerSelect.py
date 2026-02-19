@@ -6,7 +6,7 @@ from textual.widgets import ListView, ListItem
 from typing_extensions import Self
 
 from inquirer_textual.common.Answer import Answer
-from inquirer_textual.common.Choice import Choice
+from inquirer_textual.common.Choice import Choice, COMMAND_SELECT
 from inquirer_textual.common.ChoiceLabel import ChoiceLabel
 from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
@@ -34,7 +34,7 @@ class InquirerSelect(InquirerWidget):
         self.selected_item: str | Choice | None = None
         self.default = default
         self.selected_value: str | Choice | None = None
-        self.show_selected_value: bool = False
+        self.show_result: bool = False
         self.height = height
 
     def on_mount(self):
@@ -69,17 +69,18 @@ class InquirerSelect(InquirerWidget):
     def current_value(self):
         return self.selected_item
 
-    async def set_selected_value(self, value: str | Choice) -> None:
-        self.selected_value = value
+    async def on_command(self, command: str | None) -> None:
+        self.selected_value = self.current_value() if command == COMMAND_SELECT else None
         self.styles.height = 1
-        self.show_selected_value = True
+        self.show_result = True
         await self.recompose()
 
     def compose(self) -> ComposeResult:
-        if self.show_selected_value:
+        if self.show_result:
             with HorizontalGroup():
                 yield Prompt(self.message)
-                yield Answer(str(self.selected_value))
+                if self.selected_value is not None:
+                    yield Answer(str(self.selected_value))
         else:
             with VerticalGroup():
                 initial_index = 0

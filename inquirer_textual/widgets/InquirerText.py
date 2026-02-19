@@ -9,6 +9,7 @@ from textual.widgets import Input
 from typing_extensions import Self
 
 from inquirer_textual.common.Answer import Answer
+from inquirer_textual.common.Choice import COMMAND_SELECT
 from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
@@ -44,7 +45,7 @@ class InquirerText(InquirerWidget):
         self.default = default
         self.validators = validators
         self.selected_value: str | None = None
-        self.show_selected_value: bool = False
+        self.show_result: bool = False
 
     def on_mount(self):
         super().on_mount()
@@ -63,16 +64,17 @@ class InquirerText(InquirerWidget):
     def current_value(self):
         return self.input.value if self.input else None
 
-    async def set_selected_value(self, value: str) -> None:
-        self.selected_value = value
-        self.show_selected_value = True
+    async def on_command(self, command: str | None) -> None:
+        self.selected_value = self.current_value() if command == COMMAND_SELECT else None
+        self.show_result = True
         await self.recompose()
 
     def compose(self) -> ComposeResult:
-        if self.show_selected_value:
+        if self.show_result:
             with HorizontalGroup():
                 yield Prompt(self.message)
-                yield Answer(str(self.selected_value))
+                if self.selected_value is not None:
+                    yield Answer(str(self.selected_value))
         else:
             with HorizontalGroup():
                 yield Prompt(self.message)

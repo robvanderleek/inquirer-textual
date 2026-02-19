@@ -6,6 +6,7 @@ from textual.containers import HorizontalGroup
 from textual.widgets import Label
 
 from inquirer_textual.common.Answer import Answer
+from inquirer_textual.common.Choice import COMMAND_SELECT
 from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
@@ -44,7 +45,7 @@ class InquirerConfirm(InquirerWidget):
         self.label = Label(f'({c}/{r})')
         self.value: bool = default
         self.selected_value: bool | None = None
-        self.show_selected_value: bool = False
+        self.show_result: bool = False
 
     def on_key(self, event: events.Key):
         if event.key.lower() == 'y':
@@ -60,17 +61,18 @@ class InquirerConfirm(InquirerWidget):
     def current_value(self):
         return self.value
 
-    async def set_selected_value(self, value: bool) -> None:
-        self.selected_value = value
+    async def on_command(self, command: str | None) -> None:
+        self.selected_value = self.current_value() if command == COMMAND_SELECT else None
         self.styles.height = 1
-        self.show_selected_value = True
+        self.show_result = True
         await self.recompose()
 
     def compose(self) -> ComposeResult:
-        if self.show_selected_value:
+        if self.show_result:
             with HorizontalGroup():
                 yield Prompt(self.message)
-                yield Answer(self.confirm_character if self.selected_value else self.reject_character)
+                if self.selected_value is not None:
+                    yield Answer(self.confirm_character if self.selected_value else self.reject_character)
         else:
             with HorizontalGroup():
                 yield Prompt(self.message)

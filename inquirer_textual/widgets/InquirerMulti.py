@@ -27,7 +27,7 @@ class InquirerMulti(InquirerWidget):
     async def on_inquirer_widget_submit(self, message: InquirerWidget.Submit) -> None:
         current_item = list(self.widgets.items())[self._current_widget_index]
         self._return_values_dict[current_item[0]] = message.value
-        await current_item[1].set_selected_value(message.value)
+        await current_item[1].on_command(message.command)
         self._current_widget_index += 1
         if self._current_widget_index < len(self.widgets):
             message.stop()

@@ -9,7 +9,6 @@ from textual.app import ComposeResult
 from textual.binding import Binding, BindingsMap
 from textual.widgets import Footer
 
-from inquirer_textual.common.Choice import COMMAND_SELECT
 from inquirer_textual.common.InquirerHeader import InquirerHeader
 from inquirer_textual.common.InquirerResult import InquirerResult
 from inquirer_textual.common.Shortcut import Shortcut
@@ -96,8 +95,8 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
                 self.widget.name if self.widget else None, value, command)  # type: ignore[arg-type]
             self.result_ready.set()
         else:
-            if self.widget and command == COMMAND_SELECT:
-                await self.widget.set_selected_value(value)
+            if self.widget:
+                await self.widget.on_command(command)
             if self.show_footer:
                 self.query_one(Footer).styles.display = 'none'
             if self.is_inline and self.inline_start_row is not None:
