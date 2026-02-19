@@ -25,7 +25,7 @@ if __name__ == '__main__':
     app: InquirerApp[dict[str, Any]] = InquirerApp(theme=theme)
     app.widget = InquirerMulti({
         'toBeDelivered': InquirerConfirm('Is this for delivery?'),
-        'phone': InquirerText('What is your phone number?', validators=Regex('\d+[-]\d+')),
+        'phone': InquirerText('What is your phone number?', validators=Regex('\\d+[-]\\d+')),
         'size': InquirerSelect('What size do you need?', ['Large', 'Medium', 'Small']),
         'quantity': InquirerNumber('How many do you need?'),
         'toppings': InquirerCheckbox('What about the toppings?', choices=['Pepperoni', 'Mushrooms', 'Onions']),

@@ -101,7 +101,7 @@ class InquirerPattern(InquirerWidget):
     def current_value(self):
         return self.selected_item
 
-    def _collect_list_items(self):
+    def _collect_list_items(self: InquirerPattern) -> list[ListItem]:
         items: list[ListItem] = []
         for candidate in self.candidates:
             list_item = ListItem(ChoiceLabel(candidate, self.query.value if self.query else None))

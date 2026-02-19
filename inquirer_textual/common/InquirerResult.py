@@ -10,7 +10,7 @@ T = TypeVar('T')
 @dataclass
 class InquirerResult(Generic[T]):
     name: str | None
-    value: T
+    value: T | None
     command: str | None
 
     def __str__(self) -> str:

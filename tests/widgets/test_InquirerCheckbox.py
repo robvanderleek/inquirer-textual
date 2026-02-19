@@ -50,7 +50,7 @@ def test_snapshot_select_value(snap_compare):
 
 def test_snapshot_height(snap_compare):
     app = InquirerApp()
-    choices: list[Choice] = []
+    choices = []
     for letter in string.ascii_lowercase:
         choices.append(Choice(letter))
     app.widget = InquirerCheckbox('Environment:', choices, mandatory=True, height=5)
