@@ -68,6 +68,12 @@ shell = """
     vhs docs/getting-started/simple_text_prompt.tape
     vhs docs/getting-started/simple_text_prompts.tape
     vhs docs/getting-started/simple_multi_prompt.tape
-    vhs docs/examples/themes/solarized_light.tape
+    vhs docs/themes/textual_dark.tape
+    vhs docs/themes/textual_light.tape
+    vhs docs/themes/nord.tape
+    vhs docs/themes/gruvbox.tape
+    vhs docs/themes/catppuccin_mocha.tape
+    vhs docs/themes/textual_ansi.tape
+    vhs docs/themes/solarized_light.tape
     vhs docs/cli/cli.tape
 """

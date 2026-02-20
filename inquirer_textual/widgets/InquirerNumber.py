@@ -24,8 +24,8 @@ class InquirerNumber(InquirerWidget):
     }
     """
 
-    def __init__(self, message: str, name: str | None = None, input_type: Literal['integer', 'number'] = 'integer',
-                 mandatory: bool = False):
+    def __init__(self, message: str, name: str | None = None, default: int | None = None,
+                 input_type: Literal['integer', 'number'] = 'integer', mandatory: bool = False):
         """
         Args:
             message (str): The prompt message to display.
@@ -35,8 +35,14 @@ class InquirerNumber(InquirerWidget):
         """
         super().__init__(name=name, mandatory=mandatory)
         self.message = message
+        self.default = default
         self.input_type = input_type
         self.input: Input | None = None
+
+    def on_mount(self):
+        super().on_mount()
+        if self.default is not None:
+            self.input.value = str(self.default)
 
     def on_input_submitted(self) -> None:
         self.submit_current_value()

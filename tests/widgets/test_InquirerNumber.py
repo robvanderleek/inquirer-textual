@@ -9,6 +9,28 @@ def test_snapshot(snap_compare):
     assert snap_compare(app)
 
 
+async def test_default_value():
+    app = InquirerApp[int]()
+    app.widget = InquirerNumber('Repeat:', default=5)
+
+    async with app.run_test() as pilot:
+        await pilot.press("enter")
+    result = app._return_value
+
+    assert result.value == 5
+
+
+async def test_non_mandatory():
+    app = InquirerApp[int]()
+    app.widget = InquirerNumber('Repeat:')
+
+    async with app.run_test() as pilot:
+        await pilot.press("enter")
+    result = app._return_value
+
+    assert result.value is None
+
+
 async def test_named():
     widget = InquirerNumber('Repeat:', name='repeat')
     app = InquirerApp[int]()

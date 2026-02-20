@@ -28,8 +28,7 @@ class InquirerCheckbox(InquirerWidget):
                 name (str | None): The name of the input field.
                 enabled (list[str | Choice] | None): A list of choices that should be pre-selected.
                 mandatory (bool): Whether at least one selection is mandatory.
-                height (int | str | None): If None, for inline apps the height will be determined based on the number
-                of choices.
+                height (int | str | None): If None, for inline apps the height will be determined based on the number of choices.
         """
         super().__init__(name=name, mandatory=mandatory)
         self.message = message

@@ -1,5 +1,6 @@
 from __future__ import annotations
-from typing import Any, Iterable
+
+from typing import Any, Iterable, Literal
 
 from textual.validation import Validator
 
@@ -60,10 +61,11 @@ def multi(widgets: dict[str, InquirerWidget], shortcuts: list[Shortcut] | None =
     return app.run(inline=True, inline_no_clear=not clear, mouse=mouse)
 
 
-def number(message: str, mandatory: bool = False, shortcuts: list[Shortcut] | None = None, clear: bool = False,
-           mouse: bool = False) -> InquirerResult[int]:
+def number(message: str, default: int | None = None, input_type: Literal['integer', 'number'] = 'integer',
+           mandatory: bool = False, shortcuts: list[Shortcut] | None = None, clear: bool = False,
+           mouse: bool = False) -> InquirerResult[int | float]:
     app: InquirerApp[int] = InquirerApp()
-    app.widget = InquirerNumber(message, mandatory=mandatory)
+    app.widget = InquirerNumber(message, default=default, input_type=input_type, mandatory=mandatory)
     app.shortcuts = shortcuts
     return app.run(inline=True, inline_no_clear=not clear, mouse=mouse)
 

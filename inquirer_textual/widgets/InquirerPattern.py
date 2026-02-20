@@ -46,8 +46,7 @@ class InquirerPattern(InquirerWidget):
             choices (list[str | Choice]): A list of choices to present to the user.
             default (str | Choice | None): The default choice to pre-select.
             mandatory (bool): Whether a response is mandatory.
-            height (int | str | None): If None, for inline apps the height will be determined based on the number of
-            choices.
+            height (int | str | None): If None, for inline apps the height will be determined based on the number of choices.
         """
         super().__init__(name=name, mandatory=mandatory)
         self.message = message
