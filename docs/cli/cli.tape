@@ -1,7 +1,8 @@
 Output docs/cli/cli.gif
 Set Shell zsh
 Set Theme { "background": "#000000" }
-Type 'uvx inq checkbox -m "Choose your toppings" -c Pepperoni -c Mushrooms -c Onions'
+Set Height 500
+Type 'inq checkbox -m "Choose your toppings" -c Pepperoni -c Mushrooms -c Onions'
 Enter
 Sleep 3s
 Down
