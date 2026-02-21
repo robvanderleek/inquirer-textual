@@ -74,6 +74,8 @@ shell = """
     vhs docs/themes/gruvbox.tape
     vhs docs/themes/catppuccin_mocha.tape
     vhs docs/themes/textual_ansi.tape
+    vhs docs/themes/dracula.tape
+    vhs docs/themes/tokyo_night.tape
     vhs docs/themes/solarized_light.tape
     vhs docs/cli/cli.tape
 """
