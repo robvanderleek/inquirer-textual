@@ -1,10 +1,7 @@
 from __future__ import annotations
 
-from typing import Iterable
-
-from textual.validation import Validator, ValidationResult
-
 from inquirer_textual.InquirerApp import InquirerApp
+from inquirer_textual.validators.UniqueValidator import UniqueValidator
 from inquirer_textual.widgets.InquirerText import InquirerText
 
 
@@ -23,15 +20,7 @@ def test_snapshot_with_default_value(snap_compare):
 
 
 async def test_validator_success():
-    class UniqueNameValidator(Validator):
-        def __init__(self, existing_names: Iterable[str] | None = None) -> None:
-            super().__init__()
-            self.existing_names = existing_names if existing_names else []
-
-        def validate(self, value: str) -> ValidationResult:
-            return self.failure() if value in self.existing_names else self.success()
-
-    widget = InquirerText('Name:', validators=UniqueNameValidator(['Alice', 'Bob']))
+    widget = InquirerText('Name:', validators=UniqueValidator(['Alice', 'Bob']))
     app = InquirerApp()
     app.widget = widget
 
@@ -45,15 +34,7 @@ async def test_validator_success():
 
 
 async def test_validator_failure():
-    class UniqueNameValidator(Validator):
-        def __init__(self, existing_names: Iterable[str] | None = None) -> None:
-            super().__init__()
-            self.existing_names = existing_names if existing_names else []
-
-        def validate(self, value: str) -> ValidationResult:
-            return self.failure() if value in self.existing_names else self.success()
-
-    widget = InquirerText('Name:', validators=UniqueNameValidator(['Alice', 'Bob']))
+    widget = InquirerText('Name:', validators=UniqueValidator(['Alice', 'Bob']))
     app = InquirerApp()
     app.widget = widget
 

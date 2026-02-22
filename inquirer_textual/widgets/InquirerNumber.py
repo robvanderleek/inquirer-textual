@@ -24,12 +24,13 @@ class InquirerNumber(InquirerWidget):
     }
     """
 
-    def __init__(self, message: str, name: str | None = None, default: int | None = None,
+    def __init__(self, message: str, name: str | None = None, default: int | float | None = None,
                  input_type: Literal['integer', 'number'] = 'integer', mandatory: bool = False):
         """
         Args:
             message (str): The prompt message to display.
             name (str | None): The name of the input field.
+            default (int | float | None): The default value if the user presses Enter without input.
             input_type (Literal['integer', 'number']): The type of number input ('integer' or 'number').
             mandatory (bool): Whether the input is mandatory.
         """

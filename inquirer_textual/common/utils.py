@@ -2,6 +2,10 @@ from __future__ import annotations
 
 import sys
 
+from rich.console import Console
+
+console = Console()
+
 
 def get_cursor_row() -> int | None:
     if sys.platform == 'win32':
@@ -47,3 +51,7 @@ def get_cursor_row() -> int | None:
                 termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         except (termios.error, OSError):
             return None
+
+
+def clear_screen() -> None:
+    console.clear()

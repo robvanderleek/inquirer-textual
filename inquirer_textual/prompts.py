@@ -61,7 +61,7 @@ def multi(widgets: dict[str, InquirerWidget], shortcuts: list[Shortcut] | None =
     return app.run(inline=True, inline_no_clear=not clear, mouse=mouse)
 
 
-def number(message: str, default: int | None = None, input_type: Literal['integer', 'number'] = 'integer',
+def number(message: str, default: int | float | None = None, input_type: Literal['integer', 'number'] = 'integer',
            mandatory: bool = False, shortcuts: list[Shortcut] | None = None, clear: bool = False,
            mouse: bool = False) -> InquirerResult[int | float]:
     app: InquirerApp[int | float] = InquirerApp()
