@@ -1,4 +1,4 @@
-from examples.validator import UniqueValidator
+from inquirer_textual.validators.UniqueValidator import UniqueValidator
 
 
 def test_success():
