@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Iterable
 
 from textual.validation import Validator, ValidationResult
