@@ -18,6 +18,7 @@ from inquirer_textual.widgets.InquirerPattern import InquirerPattern
 from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 from inquirer_textual.widgets.InquirerText import InquirerText
+from inquirer_textual.widgets.InquirerWaitForKey import InquirerWaitForKey
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
@@ -110,5 +111,13 @@ def text(message: str, default: str = '', validators: Validator | Iterable[Valid
         -> InquirerResult[str]:
     app: InquirerApp[str] = InquirerApp()
     app.widget = InquirerText(message, default=default, validators=validators, mandatory=mandatory)
+    app.shortcuts = shortcuts
+    return app.run(inline=True, inline_no_clear=not clear, mouse=mouse)
+
+
+def wait_for_key(message: str, key: str = 'enter', mandatory: bool = False, shortcuts: list[Shortcut] | None = None,
+                 clear: bool = False, mouse: bool = False) -> InquirerResult[None]:
+    app: InquirerApp[None] = InquirerApp()
+    app.widget = InquirerWaitForKey(message, key=key, mandatory=mandatory)
     app.shortcuts = shortcuts
     return app.run(inline=True, inline_no_clear=not clear, mouse=mouse)

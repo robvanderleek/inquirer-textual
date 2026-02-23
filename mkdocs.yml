@@ -43,21 +43,19 @@ markdown_extensions:
 nav:
   - Inquirer Textual: 'index.md'
   - Getting Started: 'getting-started/index.md'
-  - Examples:
-    - Prompts:
-      - Checkbox: 'examples/prompts/checkbox.md'
-      - Confirm: 'examples/prompts/confirm.md'
-      - Editor: 'examples/prompts/editor.md'
-      - External: 'examples/prompts/external.md'
-      - Multi: 'examples/prompts/multi.md'
-      - Number: 'examples/prompts/number.md'
-      - Path: 'examples/prompts/path.md'
-      - Pattern: 'examples/prompts/pattern.md'
-      - Secret: 'examples/prompts/secret.md'
-      - Select: 'examples/prompts/select.md'
-      - Text: 'examples/prompts/text.md'
-    - Apps:
-      - App: 'examples/apps/app.md'
+  - Prompts:
+    - Checkbox: 'prompts/checkbox.md'
+    - Confirm: 'prompts/confirm.md'
+    - Editor: 'prompts/editor.md'
+    - External: 'prompts/external.md'
+    - Multi: 'prompts/multi.md'
+    - Number: 'prompts/number.md'
+    - Path: 'prompts/path.md'
+    - Pattern: 'prompts/pattern.md'
+    - Secret: 'prompts/secret.md'
+    - Select: 'prompts/select.md'
+    - Text: 'prompts/text.md'
+    - Wait for key: 'prompts/wait_for_key.md'
   - CLI: 'cli/index.md'
   - Themes: 'themes/index.md'
   - Reference:

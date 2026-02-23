@@ -37,3 +37,12 @@ It's also possible to use a single multi prompt:
 ```
 
 ![Simple multi prompt](simple_multi_prompt.gif)
+
+## App
+
+A simple interactive app.
+
+![App example](app.gif)
+
+```python
+--8<-- "docs/getting-started/app.py"

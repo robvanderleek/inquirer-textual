@@ -1,4 +1,4 @@
-Output docs/examples/prompts/external.gif
+Output docs/prompts/external.gif
 Set Shell zsh
 Set Theme { "background": "#000000" }
 Type "uv run examples/prompt_external.py"

@@ -33,7 +33,7 @@ This library is based on the sophisticated
 
 ## Example
 
-![Example](examples/prompts/checkbox.gif)
+![Example](prompts/checkbox.gif)
 
 The Python code for the example above:
 

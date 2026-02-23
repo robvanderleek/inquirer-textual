@@ -1,4 +1,4 @@
-Output docs/examples/prompts/select.gif
+Output docs/prompts/select.gif
 Set Shell zsh
 Set Theme { "background": "#000000" }
 Type "uv run examples/prompt_select.py"
