@@ -1,5 +1,3 @@
-from types import NoneType
-
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.common.Choice import COMMAND_SELECT
 from inquirer_textual.common.InquirerResult import InquirerResult
@@ -34,4 +32,4 @@ async def test_press_other_key():
         await pilot.press('y')
     result = app._return_value
 
-    assert isinstance(result, NoneType)
+    assert isinstance(result, type(None))
