@@ -21,7 +21,7 @@ async def test_press_enter():
         await pilot.press('enter')
     result = app._return_value
 
-    assert type(result) == InquirerResult
+    assert isinstance(result, InquirerResult)
     assert result.command == COMMAND_SELECT
     assert result.value is None
 
@@ -34,4 +34,4 @@ async def test_press_other_key():
         await pilot.press('y')
     result = app._return_value
 
-    assert type(result) == NoneType
+    assert isinstance(result, NoneType)
