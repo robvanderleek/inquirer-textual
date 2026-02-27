@@ -23,13 +23,16 @@
 
 ## Introduction
 
-All terminal programs start small. Some stay small, and some become incredibly
-big. The goal of this Python library is to make user input simple for small
-programs, while enabling a smooth transition to a comprehensive UI library as
-your program grows.
+The goal of this Python library is to make user input simple, using a versatile
+[set of prompts](/prompts/checkbox/).
 
-This library is based on the sophisticated
-[Textual](https://textual.textualize.io/) TUI framework.
+Under the hood, this library uses the sophisticated
+[Textual](https://textual.textualize.io/) TUI framework, which means you get:
+
+- Rich prompts
+- Inline or fullscreen prompts
+- Mouse support
+- Themes
 
 ## Example
 
@@ -56,10 +59,8 @@ Create and activate a virtual environment (for example with
 pip install inquirer-textual
 ```
 
-## Key features and design principles
+## Design principles
 
 * **Keep simple things simple**: High-level prompts API for getting user input
-* **Support evolving programs**: From small scripts to full-featured TUI
-  applications
 * **Inquirer-like syntax**: API similar to many other Inquirer libraries
 * **Single dependency**: The Textual TUI framework
