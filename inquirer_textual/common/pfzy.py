@@ -304,95 +304,22 @@ def _score(needle: str, haystack: str) -> SCORE_INDICES:
 
 
 def _subsequence(needle: str, haystack: str) -> bool:
-    """Check if needle is subsequence of haystack.
-
-    Args:
-        needle: Substring to find in haystack.
-        haystack: String to be searched and scored.
-
-    Returns:
-        Boolean indicating if `needle` is subsequence of `haystack`.
-
-    Examples:
-        >>> _subsequence("as", "bbwi")
-        False
-        >>> _subsequence("as", "bbaiws")
-        True
-        >>> _subsequence("sa", "bbaiws")
-        False
-    """
-    needle, haystack = needle.lower(), haystack.lower()
     if not needle:
         return True
+    haystack_lowwr = haystack.lower()
     offset = 0
-    for char in needle:
-        offset = haystack.find(char, offset) + 1
+    for char in needle.lower():
+        offset = haystack_lowwr.find(char, offset) + 1
         if offset <= 0:
             return False
     return True
 
 
-def fzy_scorer(needle: str, haystack: str) -> SCORE_INDICES:
-    """Use fzy matching algorithem to match needle against haystack.
-
-    Note:
-        The `fzf` unordered search is not supported for performance concern.
-        When the provided `needle` is not a subsequence of `haystack` at all,
-        then `(-inf, None)` is returned.
-
-    See Also:
-        https://github.com/jhawthorn/fzy/blob/master/src/match.c
-
-    Args:
-        needle: Substring to find in haystack.
-        haystack: String to be searched and scored against.
-
-    Returns:
-        A tuple of matching score with a list of matching indices.
-
-    Examples:
-        >>> fzy_scorer("ab", "acb")
-        (0.89, [0, 2])
-        >>> fzy_scorer("ab", "acbabc")
-        (0.98, [3, 4])
-        >>> fzy_scorer("ab", "wc")
-        (-inf, None)
-    """
-    if _subsequence(needle, haystack):
-        return _score(needle, haystack)
-    else:
-        return SCORE_MIN, None
+def fzy_scorer(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]:
+    return _score(needle, haystack) if _subsequence(needle, haystack) else (SCORE_MIN, None)
 
 
-def substr_scorer(needle: str, haystack: str) -> SCORE_INDICES:
-    """Match needle against haystack using :meth:`str.find`.
-
-    Note:
-        Scores may be negative but the higher the score, the higher
-        the match rank. `-inf` score means no match found.
-
-    See Also:
-        https://github.com/aslpavel/sweep.py/blob/3f4a179b708059c12b9e5d76d1eb3c70bf2caadc/sweep.py#L837
-
-    Args:
-        needle: Substring to find in haystack.
-        haystack: String to be searched and scored against.
-
-    Returns:
-        A tuple of matching score with a list of matching indices.
-
-    Example:
-        >>> substr_scorer("ab", "awsab")
-        (-1.3, [3, 4])
-        >>> substr_scorer("ab", "abc")
-        (0.5, [0, 1])
-        >>> substr_scorer("ab", "iop")
-        (-inf, None)
-        >>> substr_scorer("ab", "asdafswabc")
-        (-1.6388888888888888, [7, 8])
-        >>> substr_scorer(" ", "asdf")
-        (0, [])
-    """
+def substr_scorer(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]:
     indices = []
     offset = 0
     needle, haystack = needle.lower(), haystack.lower()

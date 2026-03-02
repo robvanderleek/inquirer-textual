@@ -106,3 +106,40 @@ def test_subsequence():
     assert _subsequence("awc", "abcwc") == True
     assert _subsequence("a ui", "waui wou i") == True
     assert _subsequence("", "waui wou i") == True
+    assert _subsequence('awc', 'AbCwC') == True
+    assert _subsequence('AwC', 'abcwc') == True
+
+
+@pytest.mark.asyncio
+async def test_fuzzy_match():
+    result = await fuzzy_match('i', ['Hydrogen', 'Helium', 'Lithium', 'Berylium', 'Boron', 'Carbon'],
+                               scorer=substr_scorer)
+    assert result[0]['value'] == 'Lithium'
+    assert result[0]['indices'] == [1]
+    assert result[1]['value'] == 'Helium'
+    assert result[1]['indices'] == [3]
+    assert result[2]['value'] == 'Berylium'
+    assert result[2]['indices'] == [5]
+
+
+def test_substr_scorer():
+    result = substr_scorer("ab", "awsab")
+
+    assert result[0] == -1.3
+    assert result[1] == [3, 4]
+
+    result = substr_scorer("ab", "abc")
+    assert result[0] == 0.5
+    assert result[1] == [0, 1]
+
+    result = substr_scorer("ab", "iop")
+    assert result[0] == -float('inf')
+    assert result[1] is None
+
+    result = substr_scorer("ab", "asdafswabc")
+    assert result[0] == -1.6388888888888888
+    assert result[1] == [7, 8]
+
+    result = substr_scorer(" ", "asdf")
+    assert result[0] == 0
+    assert result[1] == []
