@@ -1,116 +1,31 @@
 from __future__ import annotations
 
-import asyncio
-import heapq
 from functools import partial
 from typing import Optional, Any, Callable
 
-SCORE_INDICES = tuple[float, Optional[list[int]]]
-HAYSTACKS = list[str | dict[str, Any]]
+from inquirer_textual.common.Choice import Choice
 
 
-async def _rank_task(
-        scorer: Callable[[str, str], SCORE_INDICES],
-        needle: str,
-        haystacks: list[str | dict[str, Any]],
-        key: str,
-) -> list[dict[str, Any]]:
-    """Calculate the score for needle against given list of haystacks and rank them.
-
-    Args:
-        scorer: Scorer to be used to do the calculation.
-        needle: Substring to search.
-        haystacks: List of dictionary containing the haystack to be searched.
-        key: The key within the `haystacks` dictionary that contains the actual string value.
-
-    Return:
-        Sorted list of haystacks based on the needle score with additional keys for the `score`
-        and `indices`.
-    """
+def _rank_task(scorer: Callable[[str, str], tuple[float, Optional[list[int]]]], needle: str, haystacks: list[str]) -> \
+        list[dict[str, Any]]:
     result = []
     for haystack in haystacks:
-        score, indices = scorer(needle, haystack[key])
+        score, indices = scorer(needle, haystack)
         if indices is None:
             continue
-        result.append(
-            {
-                "score": score,
-                "indices": indices,
-                "haystack": haystack,
-            }
-        )
+        result.append({"score": score, "indices": indices, "haystack": haystack})
     result.sort(key=lambda x: x["score"], reverse=True)
     return result
 
 
-async def fuzzy_match(needle: str, haystacks: HAYSTACKS,
-                      key: str = "",
-                      batch_size: int = 4096,
-                      scorer: Callable[[str, str], SCORE_INDICES] = None,
-                      ) -> list[dict[str, Any]]:
-    """Fuzzy find the needle within list of haystacks and get matched results with matching index.
+def fuzzy_match(needle: str, haystacks: list[str]) -> list[dict[str, Any]]:
+    results = _rank_task(_fzy_scorer, needle, haystacks)
+    return [{"value": candidate["haystack"], "indices": candidate["indices"]} for candidate in results]
 
-    Note:
-        The `key` argument is optional when the provided `haystacks` argument is a list of :class:`str`.
-        It will be given a default key `value` if not present.
 
-    Warning:
-        The `key` argument is required when provided `haystacks` argument is a list of :class:`dict`.
-        If not present, :class:`TypeError` will be raised.
-
-    Args:
-        needle: String to search within the `haystacks`.
-        haystacks: List of haystack/longer strings to be searched.
-        key: If `haystacks` is a list of dictionary, provide the key that
-            can obtain the haystack value to search.
-        batch_size: Number of entry to be processed together.
-        scorer (Callable[[str, str], SCORE_indices]): Desired scorer to use. Currently only
-        :func:`~pfzy.score.fzy_scorer` and :func:`~pfzy.score.substr_scorer` is supported.
-
-    Raises:
-        TypeError: When the argument `haystacks` is :class:`list` of :class:`dict` and the `key` argument
-            is missing, :class:`TypeError` will be raised.
-
-    Returns:
-        List of matching `haystacks` with additional key indices and score.
-
-    Examples:
-        >>> import asyncio
-        >>> asyncio.run(fuzzy_match("ab", ["acb", "acbabc"]))
-        [{'value': 'acbabc', 'indices': [3, 4]}, {'value': 'acb', 'indices': [0, 2]}]
-    """
-    if scorer is None:
-        scorer = fzy_scorer
-
-    for index, haystack in enumerate(haystacks):
-        if not isinstance(haystack, dict):
-            if not key:
-                key = "value"
-            haystacks[index] = {key: haystack}
-
-    if not key:
-        raise TypeError(
-            f"${fuzzy_match.__name__} missing 1 required argument: 'key', 'key' is required when haystacks is an "
-            f"instance of dict"
-        )
-
-    batches = await asyncio.gather(
-        *(
-            _rank_task(
-                scorer,
-                needle,
-                haystacks[offset: offset + batch_size],
-                key,
-            )
-            for offset in range(0, len(haystacks), batch_size)
-        )
-    )
-    results = heapq.merge(*batches, key=lambda x: x["score"], reverse=True)
-    choices = []
-    for candidate in results:
-        candidate["haystack"]["indices"] = candidate["indices"]
-        choices.append(candidate["haystack"])
-    return choices
+def substr_match(key: str, entries: list[str | Choice]) -> list[dict[str, Any]]:
+    results = _rank_task(_substr_scorer, key, entries)
+    return [{"value": res["haystack"], "indices": res["indices"]} for res in results]
 
 
 SCORE_MIN = float("-inf")
@@ -121,24 +36,8 @@ SCORE_GAP_INNER = -0.01
 SCORE_MATCH_CONSECUTIVE = 1.0
 
 
-def _char_range_with(
-        char_start: str, char_stop: str, value, hash_table: dict[str, int | float]
-) -> dict[str, int | float]:
-    """Generate index mapping for `bonus` calculation.
-
-    Args:
-        char_start: Starting char of the range.
-        char_stop: Ending char of the range.
-        value: Value to give to the range of char.
-        hash_table: Base dictionary to add the mapping.
-
-    Returns:
-        A dictionary containing the given range with provided index.
-
-    Examples:
-        >>> _char_range_with("a", "d", 1, {})
-        {'a': 1, 'b': 1, 'c': 1, 'd': 1}
-    """
+def _char_range_with(char_start: str, char_stop: str, value, hash_table: dict[str, int | float]) -> dict[
+    str, int | float]:
     hash_table = hash_table.copy()
     hash_table.update(
         (chr(uni_char), value)
@@ -167,34 +66,6 @@ BONUS_INDEX = digit_with(1, lower_with(1, upper_with(2, {})))
 
 
 def _bonus(haystack: str) -> list[float]:
-    """Calculate bonus score for the given haystack.
-
-    The bonus are applied to each char based on the previous char.
-
-    When previous char is within the `BONUS_MAP` then additional bonus
-    are applied to the current char due to it might be the start of a new
-    word.
-
-    When encountered a mix case character, if the current char is capitalised then
-    if the previous char is normal case or within `BONUS_MAP`, additional bounus are applied.
-
-    Args:
-        haystack: String to calculate bonus.
-
-    Returns:
-        A list of float matching the length of the given haystack
-        with each index representing the bonus score to apply.
-
-    Examples:
-        >>> _bonus("asdf")
-        [0.9, 0, 0, 0]
-        >>> _bonus("asdf asdf")
-        [0.9, 0, 0, 0, 0, 0.8, 0, 0, 0]
-        >>> _bonus("asdf aSdf")
-        [0.9, 0, 0, 0, 0, 0.8, 0.7, 0, 0]
-        >>> _bonus("asdf/aSdf")
-        [0.9, 0, 0, 0, 0, 0.9, 0.7, 0, 0]
-    """
     prev_char = "/"
     bonus = []
     for char in haystack:
@@ -203,7 +74,7 @@ def _bonus(haystack: str) -> list[float]:
     return bonus
 
 
-def _score(needle: str, haystack: str) -> SCORE_INDICES:
+def _score(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]:
     """Use fzy logic to calculate score for `needle` within the given `haystack`.
 
     2 2D array to track the score.
@@ -315,11 +186,11 @@ def _subsequence(needle: str, haystack: str) -> bool:
     return True
 
 
-def fzy_scorer(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]:
+def _fzy_scorer(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]:
     return _score(needle, haystack) if _subsequence(needle, haystack) else (SCORE_MIN, None)
 
 
-def substr_scorer(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]:
+def _substr_scorer(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]:
     indices = []
     offset = 0
     needle, haystack = needle.lower(), haystack.lower()

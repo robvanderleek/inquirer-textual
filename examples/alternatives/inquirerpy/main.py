@@ -19,8 +19,6 @@ def fuzzy():
         message="Select element:",
         choices=["Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", 
             "Carbon"],
-        default="Lithium",
-        match_exact=True,
         long_instruction="Hello world",
     ).execute()
 

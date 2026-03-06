@@ -9,10 +9,12 @@ from textual.widgets import ListView, ListItem, Input, Static
 from typing_extensions import Self
 
 from inquirer_textual.common.Answer import Answer
+from inquirer_textual.common.Candidate import Candidate
 from inquirer_textual.common.Choice import Choice, COMMAND_SELECT
 from inquirer_textual.common.ChoiceLabel import ChoiceLabel
 from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.common.defaults import POINTER_CHARACTER
+from inquirer_textual.common.pfzy import substr_match
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
@@ -51,7 +53,7 @@ class InquirerPattern(InquirerWidget):
         super().__init__(name=name, mandatory=mandatory)
         self.message = message
         self.choices = choices
-        self.candidates = choices.copy()
+        self.candidates: list[Candidate] = [Candidate(c) for c in choices]
         self.list_view: ListView | None = None
         self.selected_label: ChoiceLabel | None = None
         self.selected_item: str | Choice | None = None
@@ -103,7 +105,7 @@ class InquirerPattern(InquirerWidget):
     def _collect_list_items(self: InquirerPattern) -> list[ListItem]:
         items: list[ListItem] = []
         for candidate in self.candidates:
-            list_item = ListItem(ChoiceLabel(candidate, self.query.value if self.query else None))
+            list_item = ListItem(ChoiceLabel(candidate.choice, candidate.match_indices))
             items.append(list_item)
         return items
 
@@ -118,8 +120,10 @@ class InquirerPattern(InquirerWidget):
     async def handle_query_changed(self, event: Input.Changed):
         query = event.value.lower()
         if query == '':
-            self.candidates = self.choices.copy()
+            self.candidates = []
         else:
+            names = [choice.name if isinstance(choice, Choice) else choice for choice in self.choices]
+            substr_match(query, names)
             filtered = []
             for choice in self.choices:
                 name = choice.name if isinstance(choice, Choice) else choice
