@@ -48,7 +48,8 @@ class InquirerPattern(InquirerWidget):
             choices (list[str | Choice]): A list of choices to present to the user.
             default (str | Choice | None): The default choice to pre-select.
             mandatory (bool): Whether a response is mandatory.
-            height (int | str | None): If None, for inline apps the height will be determined based on the number of choices.
+            height (int | str | None): If None, for inline apps the height will be determined based on the number of
+            choices.
         """
         super().__init__(name=name, mandatory=mandatory)
         self.message = message
@@ -120,16 +121,9 @@ class InquirerPattern(InquirerWidget):
     async def handle_query_changed(self, event: Input.Changed):
         query = event.value.lower()
         if query == '':
-            self.candidates = []
+            self.candidates = [Candidate(c) for c in self.choices]
         else:
-            names = [choice.name if isinstance(choice, Choice) else choice for choice in self.choices]
-            substr_match(query, names)
-            filtered = []
-            for choice in self.choices:
-                name = choice.name if isinstance(choice, Choice) else choice
-                if query in name.lower():
-                    filtered.append(choice)
-            self.candidates = filtered
+            self.candidates = substr_match(query, self.choices)
         assert isinstance(self.list_view, ListView)
         await self.list_view.clear()
         list_items = self._collect_list_items()

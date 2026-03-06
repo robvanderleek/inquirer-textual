@@ -3,6 +3,7 @@ from __future__ import annotations
 from functools import partial
 from typing import Optional, Any, Callable
 
+from inquirer_textual.common.Candidate import Candidate
 from inquirer_textual.common.Choice import Choice
 
 
@@ -23,9 +24,9 @@ def fuzzy_match(needle: str, haystacks: list[str]) -> list[dict[str, Any]]:
     return [{"value": candidate["haystack"], "indices": candidate["indices"]} for candidate in results]
 
 
-def substr_match(key: str, entries: list[str | Choice]) -> list[dict[str, Any]]:
+def substr_match(key: str, entries: list[str | Choice]) -> list[Candidate]:
     results = _rank_task(_substr_scorer, key, entries)
-    return [{"value": res["haystack"], "indices": res["indices"]} for res in results]
+    return [Candidate(res["haystack"], res["indices"]) for res in results]
 
 
 SCORE_MIN = float("-inf")
@@ -190,24 +191,18 @@ def _fzy_scorer(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]
     return _score(needle, haystack) if _subsequence(needle, haystack) else (SCORE_MIN, None)
 
 
-def _substr_scorer(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]:
+def _substr_scorer(query: str, entry: str | Choice) -> tuple[float, Optional[list[int]]]:
     indices = []
     offset = 0
-    needle, haystack = needle.lower(), haystack.lower()
-
-    for needle in needle.split(" "):
-        if not needle:
-            continue
-        offset = haystack.find(needle, offset)
-        if offset < 0:
-            return SCORE_MIN, None
-        needle_len = len(needle)
-        indices.extend(range(offset, offset + needle_len))
-        offset += needle_len
-
+    query, entry = query.lower(), str(entry).lower()
+    offset = entry.find(query, offset)
+    if offset < 0:
+        return SCORE_MIN, None
+    needle_len = len(query)
+    indices.extend(range(offset, offset + needle_len))
+    offset += needle_len
     if not indices:
         return 0, indices
-
     return (
         -(indices[-1] + 1 - indices[0]) + 2 / (indices[0] + 1) + 1 / (indices[-1] + 1),
         indices,
