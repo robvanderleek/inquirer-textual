@@ -63,7 +63,7 @@ class InquirerTextArea(InquirerWidget):
 
     async def on_command(self, command: str | None) -> None:
         self.selected_value = self.current_value() if command == COMMAND_SELECT else None
-        self.styles.height = self.text_area.document.line_count
+        self.styles.height = self.text_area.document.line_count if self.text_area else 1
         self.show_result = True
         await self.recompose()
 
