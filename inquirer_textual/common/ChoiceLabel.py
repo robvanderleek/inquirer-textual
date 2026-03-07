@@ -8,16 +8,16 @@ from inquirer_textual.common.defaults import DEFAULT_THEME, POINTER_CHARACTER
 
 
 class ChoiceLabel(Label):
-    def __init__(self, item: str | Choice, pattern: str | None = None):
-        self._text = self._get_text(item, pattern)
+    def __init__(self, item: str | Choice, highlight_indices: list[int] | None = None):
+        self._text = self._get_text(item, highlight_indices)
         super().__init__(Text('  ').append_text(self._text))
         self.item = item
 
-    def _get_text(self, item: str | Choice, pattern: str | None = None) -> Text:
+    def _get_text(self, item: str | Choice, highlight_indices: list[int] | None = None) -> Text:
         result = Text(item if isinstance(item, str) else item.name)
-        if pattern:
-            result.highlight_words([pattern], style=self.app.current_theme.accent or DEFAULT_THEME.accent,
-                                   case_sensitive=False)
+        if highlight_indices:
+            for index in highlight_indices:
+                result.stylize(self.app.current_theme.accent or DEFAULT_THEME.accent, index, index + 1)
         return result
 
     def add_pointer(self):

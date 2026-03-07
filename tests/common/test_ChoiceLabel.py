@@ -28,7 +28,7 @@ def test_snapshot_with_pointer(snap_compare):
 def test_snapshot_with_pattern(snap_compare):
     class TestApp(App):
         def compose(self) -> ComposeResult:
-            label = ChoiceLabel('Hydrogen', 'gen')
+            label = ChoiceLabel('Hydrogen', [5, 6, 7])
             label.add_pointer()
             yield label
 
