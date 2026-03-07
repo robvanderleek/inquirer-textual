@@ -120,16 +120,20 @@ class InquirerPattern(InquirerWidget):
     @on(Input.Changed, '#inquirer-pattern-query')
     async def handle_query_changed(self, event: Input.Changed):
         query = event.value.lower()
-        if query == '':
-            self.candidates = [Candidate(c) for c in self.choices]
-        else:
-            self.candidates = substr_match(query, self.choices)
+        self.candidates = self.filter_candidates(query)
         assert isinstance(self.list_view, ListView)
         await self.list_view.clear()
         list_items = self._collect_list_items()
         await self.list_view.extend(list_items)
         if list_items:
             self.list_view.index = 0
+
+    def filter_candidates(self, query: str) -> list[Candidate]:
+        query = query.lower()
+        if query == '':
+            return [Candidate(c) for c in self.choices]
+        else:
+            return substr_match(query, self.choices)
 
     def watch_candidates(self, candidates: list[str | Choice]) -> None:
         count_suffix = f'[{len(candidates)}/{len(self.choices)}]'

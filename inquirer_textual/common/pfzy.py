@@ -7,7 +7,8 @@ from inquirer_textual.common.Candidate import Candidate
 from inquirer_textual.common.Choice import Choice
 
 
-def _rank_task(scorer: Callable[[str, str], tuple[float, Optional[list[int]]]], needle: str, haystacks: list[str]) -> \
+def _rank_task(scorer: Callable[[str, str | Choice], tuple[float, Optional[list[int]]]], needle: str,
+               haystacks: list[str | Choice]) -> \
         list[dict[str, Any]]:
     result = []
     for haystack in haystacks:
@@ -15,11 +16,15 @@ def _rank_task(scorer: Callable[[str, str], tuple[float, Optional[list[int]]]], 
         if indices is None:
             continue
         result.append({"score": score, "indices": indices, "haystack": haystack})
-    result.sort(key=lambda x: x["score"], reverse=True)
+
+    def key_func(x: dict) -> float:
+        return float(x["score"])
+
+    result.sort(key=key_func, reverse=True)
     return result
 
 
-def fuzzy_match(needle: str, haystacks: list[str]) -> list[dict[str, Any]]:
+def fuzzy_match(needle: str, haystacks: list[str | Choice]) -> list[dict[str, Any]]:
     results = _rank_task(_fzy_scorer, needle, haystacks)
     return [{"value": candidate["haystack"], "indices": candidate["indices"]} for candidate in results]
 
@@ -51,31 +56,28 @@ lower_with = partial(_char_range_with, "a", "z")
 upper_with = partial(_char_range_with, "A", "Z")
 digit_with = partial(_char_range_with, "0", "9")
 
-SCORE_MATCH_SLASH = 0.9
-SCORE_MATCH_WORD = 0.8
 SCORE_MATCH_CAPITAL = 0.7
-SCORE_MATCH_DOT = 0.6
 BONUS_MAP = {
-    "/": SCORE_MATCH_SLASH,
-    "-": SCORE_MATCH_WORD,
-    "_": SCORE_MATCH_WORD,
-    " ": SCORE_MATCH_WORD,
-    ".": SCORE_MATCH_DOT,
+    "/": 0.9,
+    "-": 0.8,
+    "_": 0.8,
+    " ": 0.8,
+    ".": 0.6,
 }
 BONUS_STATES = [{}, BONUS_MAP, lower_with(SCORE_MATCH_CAPITAL, BONUS_MAP)]
 BONUS_INDEX = digit_with(1, lower_with(1, upper_with(2, {})))
 
 
-def _bonus(haystack: str) -> list[float]:
+def _bonus(haystack: str | Choice) -> list[float]:
     prev_char = "/"
     bonus = []
-    for char in haystack:
-        bonus.append(BONUS_STATES[BONUS_INDEX.get(char, 0)].get(prev_char, 0))
+    for char in str(haystack):
+        bonus.append(BONUS_STATES[int(BONUS_INDEX.get(char, 0))].get(prev_char, 0))
         prev_char = char
     return bonus
 
 
-def _score(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]:
+def _score(needle: str, haystack: str | Choice) -> tuple[float, Optional[list[int]]]:
     """Use fzy logic to calculate score for `needle` within the given `haystack`.
 
     2 2D array to track the score.
@@ -96,6 +98,7 @@ def _score(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]:
     Returns:
         A tuple of matching score with a list of matching indices.
     """
+    haystack = str(haystack)
     needle_len, haystack_len = len(needle), len(haystack)
     bonus_score = _bonus(haystack)
 
@@ -175,24 +178,24 @@ def _score(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]:
     return result_score[needle_len - 1][haystack_len - 1], indices
 
 
-def _subsequence(needle: str, haystack: str) -> bool:
+def _subsequence(needle: str, haystack: str | Choice) -> bool:
     if not needle:
         return True
-    haystack_lowwr = haystack.lower()
+    haystack_lower = str(haystack).lower()
     offset = 0
     for char in needle.lower():
-        offset = haystack_lowwr.find(char, offset) + 1
+        offset = haystack_lower.find(char, offset) + 1
         if offset <= 0:
             return False
     return True
 
 
-def _fzy_scorer(needle: str, haystack: str) -> tuple[float, Optional[list[int]]]:
-    return _score(needle, haystack) if _subsequence(needle, haystack) else (SCORE_MIN, None)
+def _fzy_scorer(query: str, entry: str | Choice) -> tuple[float, Optional[list[int]]]:
+    return _score(query, entry) if _subsequence(query, entry) else (SCORE_MIN, None)
 
 
 def _substr_scorer(query: str, entry: str | Choice) -> tuple[float, Optional[list[int]]]:
-    indices = []
+    indices: list[int] = []
     offset = 0
     query, entry = query.lower(), str(entry).lower()
     offset = entry.find(query, offset)

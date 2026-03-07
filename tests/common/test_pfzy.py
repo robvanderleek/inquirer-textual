@@ -91,12 +91,12 @@ def test_score():
 
 
 def test_subsequence():
-    assert _subsequence("awc", "abc") == False
-    assert _subsequence("awc", "abcwc") == True
-    assert _subsequence("a ui", "waui wou i") == True
-    assert _subsequence("", "waui wou i") == True
-    assert _subsequence('awc', 'AbCwC') == True
-    assert _subsequence('AwC', 'abcwc') == True
+    assert not _subsequence("awc", "abc")
+    assert _subsequence("awc", "abcwc")
+    assert _subsequence("a ui", "waui wou i")
+    assert _subsequence("", "waui wou i")
+    assert _subsequence('awc', 'AbCwC')
+    assert _subsequence('AwC', 'abcwc')
 
 
 def test_fuzzy_match():
