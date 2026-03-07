@@ -56,6 +56,7 @@ nav:
     - Secret: 'prompts/secret.md'
     - Select: 'prompts/select.md'
     - Text: 'prompts/text.md'
+    - Text Area: 'prompts/textarea.md'
     - Wait for key: 'prompts/wait_for_key.md'
   - CLI: 'cli/index.md'
   - Themes: 'themes/index.md'
@@ -71,4 +72,5 @@ nav:
     - Secret: 'reference/secret.md'
     - Select: 'reference/select.md'
     - Text: 'reference/text.md'
+    - Text Area: 'reference/textarea.md'
   - FAQ: 'faq.md'

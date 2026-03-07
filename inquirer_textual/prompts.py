@@ -19,6 +19,7 @@ from inquirer_textual.widgets.InquirerPattern import InquirerPattern
 from inquirer_textual.widgets.InquirerSecret import InquirerSecret
 from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 from inquirer_textual.widgets.InquirerText import InquirerText
+from inquirer_textual.widgets.InquirerTextArea import InquirerTextArea
 from inquirer_textual.widgets.InquirerWaitForKey import InquirerWaitForKey
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
@@ -112,6 +113,13 @@ def text(message: str, default: str = '', validators: Validator | Iterable[Valid
          settings: PromptSettings = PromptSettings()) -> InquirerResult[str]:
     app: InquirerApp[str] = InquirerApp()
     app.widget = InquirerText(message, default=default, validators=validators, mandatory=settings.mandatory)
+    app.shortcuts = settings.shortcuts
+    return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
+
+
+def text_area(message: str, default: str = '', settings: PromptSettings = PromptSettings()) -> InquirerResult[str]:
+    app: InquirerApp[str] = InquirerApp()
+    app.widget = InquirerTextArea(message, default=default, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
 
