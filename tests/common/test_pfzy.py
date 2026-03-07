@@ -1,7 +1,7 @@
 from inquirer_textual.common.Candidate import Candidate
 from inquirer_textual.common.pfzy import (_substr_scorer, _rank_task, _fzy_scorer, fuzzy_match, _char_range_with,
                                           _score, \
-    SCORE_MAX, _subsequence, _bonus, substr_match)
+                                          SCORE_MAX, _subsequence, _bonus, substr_match)
 
 
 def test_rank_task() -> None:
@@ -101,18 +101,18 @@ def test_subsequence():
 
 def test_fuzzy_match():
     result = fuzzy_match("a", ["abca"])
-    assert result == [{"value": "abca", "indices": [0]}]
+    assert result == [Candidate("abca", [0])]
 
     result = fuzzy_match("a", ["abca", "aAbc"])
-    assert result == [{"value": "abca", "indices": [0]}, {"value": "aAbc", "indices": [0]}]
+    assert result == [Candidate("abca", [0]), Candidate("aAbc", [0])]
 
     result = fuzzy_match('i', ['Hydrogen', 'Helium', 'Lithium', 'Beryllium', 'Boron', 'Carbon'])
-    assert result[0]['value'] == 'Helium'
-    assert result[0]['indices'] == [3]
-    assert result[1]['value'] == 'Lithium'
-    assert result[1]['indices'] == [4]
-    assert result[2]['value'] == 'Beryllium'
-    assert result[2]['indices'] == [6]
+    assert result[0].choice == 'Helium'
+    assert result[0].match_indices == [3]
+    assert result[1].choice == 'Lithium'
+    assert result[1].match_indices == [4]
+    assert result[2].choice == 'Beryllium'
+    assert result[2].match_indices == [6]
 
 
 def test_substr_match():
