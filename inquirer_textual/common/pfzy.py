@@ -1,3 +1,5 @@
+# Insourced from: https://github.com/kazhala/pfzy
+
 from __future__ import annotations
 
 from functools import partial
