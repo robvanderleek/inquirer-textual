@@ -24,9 +24,9 @@ def _rank_task(scorer: Callable[[str, str | Choice], tuple[float, Optional[list[
     return result
 
 
-def fuzzy_match(needle: str, haystacks: list[str | Choice]) -> list[dict[str, Any]]:
-    results = _rank_task(_fzy_scorer, needle, haystacks)
-    return [{"value": candidate["haystack"], "indices": candidate["indices"]} for candidate in results]
+def fuzzy_match(key: str, entries: list[str | Choice]) -> list[Candidate]:
+    results = _rank_task(_fzy_scorer, key, entries)
+    return [Candidate(res["haystack"], res["indices"]) for res in results]
 
 
 def substr_match(key: str, entries: list[str | Choice]) -> list[Candidate]:

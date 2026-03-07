@@ -11,6 +11,7 @@ from inquirer_textual.common.PromptSettings import PromptSettings
 from inquirer_textual.widgets.InquirerCheckbox import InquirerCheckbox
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerEditor import InquirerEditor
+from inquirer_textual.widgets.InquirerFuzzy import InquirerFuzzy
 from inquirer_textual.widgets.InquirerMulti import InquirerMulti
 from inquirer_textual.widgets.InquirerNumber import InquirerNumber
 from inquirer_textual.widgets.InquirerPath import InquirerPath, PathType
@@ -47,6 +48,14 @@ def editor(message: str, settings: PromptSettings = PromptSettings()) -> Inquire
 def external(widget: InquirerWidget, settings: PromptSettings = PromptSettings()) -> Any:
     app: InquirerApp[Any] = InquirerApp()
     app.widget = widget
+    app.shortcuts = settings.shortcuts
+    return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
+
+
+def fuzzy(message: str, choices: list[str | Choice], default: str | Choice | None = None,
+          settings: PromptSettings = PromptSettings()) -> InquirerResult[str | Choice]:
+    app: InquirerApp[str | Choice] = InquirerApp()
+    app.widget = InquirerFuzzy(message, choices, default=default, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
 
