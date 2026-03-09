@@ -1,7 +1,6 @@
 from inquirer_textual.common.Candidate import Candidate
-from inquirer_textual.common.pfzy import (_substr_scorer, _rank_task, _fzy_scorer, fuzzy_match, _char_range_with,
-                                          _score, \
-                                          SCORE_MAX, _subsequence, _bonus, substr_match)
+from inquirer_textual.common.match_utils import (_substr_scorer, _rank_task, _fzy_scorer, fuzzy_match, _char_range_with,
+                                                 _score, SCORE_MAX, _subsequence, _bonus, substr_match)
 
 
 def test_rank_task() -> None:

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from inquirer_textual.common.Candidate import Candidate
 from inquirer_textual.common.Choice import Choice
-from inquirer_textual.common.pfzy import fuzzy_match
+from inquirer_textual.common.match_utils import fuzzy_match
 from inquirer_textual.widgets.InquirerPattern import InquirerPattern
 
 

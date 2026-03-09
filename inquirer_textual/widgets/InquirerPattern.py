@@ -14,7 +14,7 @@ from inquirer_textual.common.Choice import Choice, COMMAND_SELECT
 from inquirer_textual.common.ChoiceLabel import ChoiceLabel
 from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.common.defaults import POINTER_CHARACTER
-from inquirer_textual.common.pfzy import substr_match
+from inquirer_textual.common.match_utils import substr_match
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 

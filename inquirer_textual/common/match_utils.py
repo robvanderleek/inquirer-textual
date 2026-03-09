@@ -1,4 +1,5 @@
-# Insourced from: https://github.com/kazhala/pfzy
+# Adapted from pfzy by Kevin Zhuang — MIT License
+# https://github.com/kazhala/pfzy
 
 from __future__ import annotations
 
