@@ -30,8 +30,7 @@ class InquirerTextArea(InquirerWidget):
             name (str | None): The name of the prompt, used as the key in the answers dictionary.
             default (str): The default value if the user presses Enter without input.
             mandatory (bool): Whether this prompt is mandatory.
-            height (int | str | None): If None, for inline apps the height will be determined based on the number of
-            choices.
+            height (int | str | None): If None, for inline apps the height will be determined based on the number of choices.
         """
         super().__init__(name=name, mandatory=mandatory)
         self.message = message

@@ -27,27 +27,27 @@ from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 def checkbox(message: str, choices: list[str | Choice], enabled: list[str | Choice] | None = None,
              settings: PromptSettings = PromptSettings()) -> InquirerResult[
     list[str | Choice]]:
-    app: InquirerApp[list[str | Choice]] = InquirerApp()
+    app: InquirerApp[list[str | Choice]] = InquirerApp(theme=settings.theme)
     app.widget = InquirerCheckbox(message, choices, enabled=enabled, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
 
 
 def confirm(message: str, default: bool = False, settings: PromptSettings = PromptSettings()) -> InquirerResult[bool]:
-    app: InquirerApp[bool] = InquirerApp()
+    app: InquirerApp[bool] = InquirerApp(theme=settings.theme)
     app.widget = InquirerConfirm(message, default=default, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
 
 
 def editor(message: str, settings: PromptSettings = PromptSettings()) -> InquirerResult[str]:
-    app: InquirerApp[str] = InquirerApp()
+    app: InquirerApp[str] = InquirerApp(theme=settings.theme)
     app.widget = InquirerEditor(message)
     return app.run(inline=False, mouse=settings.mouse)
 
 
 def external(widget: InquirerWidget, settings: PromptSettings = PromptSettings()) -> Any:
-    app: InquirerApp[Any] = InquirerApp()
+    app: InquirerApp[Any] = InquirerApp(theme=settings.theme)
     app.widget = widget
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
@@ -55,7 +55,7 @@ def external(widget: InquirerWidget, settings: PromptSettings = PromptSettings()
 
 def fuzzy(message: str, choices: list[str | Choice], default: str | Choice | None = None,
           settings: PromptSettings = PromptSettings()) -> InquirerResult[str | Choice]:
-    app: InquirerApp[str | Choice] = InquirerApp()
+    app: InquirerApp[str | Choice] = InquirerApp(theme=settings.theme)
     app.widget = InquirerFuzzy(message, choices, default=default, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
@@ -63,7 +63,7 @@ def fuzzy(message: str, choices: list[str | Choice], default: str | Choice | Non
 
 def multi(widgets: dict[str, InquirerWidget], settings: PromptSettings = PromptSettings()) -> InquirerResult[
     dict[str, Any]]:
-    app: InquirerApp[dict[str, Any]] = InquirerApp()
+    app: InquirerApp[dict[str, Any]] = InquirerApp(theme=settings.theme)
     app.widget = InquirerMulti(widgets)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
@@ -71,7 +71,7 @@ def multi(widgets: dict[str, InquirerWidget], settings: PromptSettings = PromptS
 
 def number(message: str, default: int | float | None = None, input_type: Literal['integer', 'number'] = 'integer',
            settings: PromptSettings = PromptSettings()) -> InquirerResult[int | float]:
-    app: InquirerApp[int | float] = InquirerApp()
+    app: InquirerApp[int | float] = InquirerApp(theme=settings.theme)
     app.widget = InquirerNumber(message, default=default, input_type=input_type, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
@@ -79,7 +79,7 @@ def number(message: str, default: int | float | None = None, input_type: Literal
 
 def path(message: str, exists: bool = False, path_type: PathType = PathType.ANY,
          settings: PromptSettings = PromptSettings()) -> InquirerResult[str]:
-    app: InquirerApp[str] = InquirerApp()
+    app: InquirerApp[str] = InquirerApp(theme=settings.theme)
     app.widget = InquirerPath(message, exists=exists, path_type=path_type, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
@@ -87,14 +87,14 @@ def path(message: str, exists: bool = False, path_type: PathType = PathType.ANY,
 
 def pattern(message: str, choices: list[str | Choice], default: str | Choice | None = None,
             settings: PromptSettings = PromptSettings()) -> InquirerResult[str | Choice]:
-    app: InquirerApp[str | Choice] = InquirerApp()
+    app: InquirerApp[str | Choice] = InquirerApp(theme=settings.theme)
     app.widget = InquirerPattern(message, choices, default=default, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
 
 
 def secret(message: str, settings: PromptSettings = PromptSettings()) -> InquirerResult[str]:
-    app: InquirerApp[str] = InquirerApp()
+    app: InquirerApp[str] = InquirerApp(theme=settings.theme)
     app.widget = InquirerSecret(message, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
@@ -103,7 +103,7 @@ def secret(message: str, settings: PromptSettings = PromptSettings()) -> Inquire
 def select(message: str, choices: list[str | Choice], default: str | Choice | None = None,
            height: int | str | None = None, settings: PromptSettings = PromptSettings()) -> InquirerResult[
     str | Choice]:
-    app: InquirerApp[str | Choice] = InquirerApp()
+    app: InquirerApp[str | Choice] = InquirerApp(theme=settings.theme)
     app.widget = InquirerSelect(message, choices, default=default, mandatory=settings.mandatory, height=height)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
@@ -111,21 +111,21 @@ def select(message: str, choices: list[str | Choice], default: str | Choice | No
 
 def text(message: str, default: str = '', validators: Validator | Iterable[Validator] | None = None,
          settings: PromptSettings = PromptSettings()) -> InquirerResult[str]:
-    app: InquirerApp[str] = InquirerApp()
+    app: InquirerApp[str] = InquirerApp(theme=settings.theme)
     app.widget = InquirerText(message, default=default, validators=validators, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
 
 
 def text_area(message: str, default: str = '', settings: PromptSettings = PromptSettings()) -> InquirerResult[str]:
-    app: InquirerApp[str] = InquirerApp()
+    app: InquirerApp[str] = InquirerApp(theme=settings.theme)
     app.widget = InquirerTextArea(message, default=default, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
 
 
 def wait_for_key(message: str, key: str = 'enter', settings: PromptSettings = PromptSettings()) -> InquirerResult[None]:
-    app: InquirerApp[None] = InquirerApp()
+    app: InquirerApp[None] = InquirerApp(theme=settings.theme)
     app.widget = InquirerWaitForKey(message, key=key, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)

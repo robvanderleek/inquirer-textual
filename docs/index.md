@@ -24,7 +24,7 @@
 ## Introduction
 
 The goal of this Python library is to make user input simple, using a versatile
-[set of prompts](/prompts/checkbox/).
+[set of prompts](prompts/checkbox.md).
 
 Under the hood, this library uses the sophisticated
 [Textual](https://textual.textualize.io/) TUI framework, which means you get:
