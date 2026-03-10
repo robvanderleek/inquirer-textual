@@ -8,6 +8,15 @@ uvx inq checkbox -m "Choose your toppings" -c Pepperoni -c Mushrooms -c Onions`
 
 ![Example](cli.gif)
 
+Choices can also be read from `stdin`.  For example, to select an entry from
+the current directory using fuzzy search:
+
+```
+ls | inq fuzzy
+```
+
+![Example](cli-pipe.gif)
+
 ## Installation
 
 ### uvx

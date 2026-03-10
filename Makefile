@@ -1,9 +1,9 @@
 .PHONY: all
 
-docs/themes/%.gif: docs/themes/%.tape
+%.gif: %.tape
 	vhs $<
 
-tapes := $(wildcard docs/themes/*.tape)
+tapes := $(wildcard docs/cli/*.tape docs/themes/*.tape)
 targets := $(patsubst %.tape,%.gif,$(tapes))
 
 all: $(targets)
