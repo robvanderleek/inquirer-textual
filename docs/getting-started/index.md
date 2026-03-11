@@ -10,39 +10,58 @@ Inside a virtual environemnt, this library can be installed with:
 pip install inquirer-textual
 ```
 
-## Simple text prompt
+Or, if you're using the [`uv`](https://docs.astral.sh/uv/) package manager:
+
+```shell
+uv add inquirer-textual
+```
+
+## Single prompt
 
 The prompt API is very straightforward, for example to get a text input:
 
 ```python
---8<-- "docs/getting-started/simple_text_prompt.py"
+--8<-- "docs/getting-started/single_prompt.py"
 ```
 
-![Simple text prompt](simple_text_prompt.gif)
+![Single prompt](single_prompt.gif)
 
 ## Multiple prompts
 
 By calling the prompt API multiple times, a form-like inquiry can be done:
 
 ```python
---8<-- "docs/getting-started/simple_text_prompts.py"
+--8<-- "docs/getting-started/multiple_prompts.py"
 ```
 
-![Simple text prompts](simple_text_prompts.gif)
+![Multiple prompts](multiple_prompts.gif)
 
 It's also possible to use a single multi prompt:
 
 ```python
---8<-- "docs/getting-started/simple_multi_prompt.py"
+--8<-- "docs/getting-started/multi_prompt.py"
 ```
 
-![Simple multi prompt](simple_multi_prompt.gif)
+![multi prompt](multi_prompt.gif)
 
-## App
+## Prompt settings
 
-A simple interactive app.
+All prompts have a `settings` parameter of type `PromptSettings`.
+The following fields can be configured on this class:
 
-![App example](app.gif)
+### clear
 
-```python
---8<-- "docs/getting-started/app.py"
+A boolean indicating whether to clear the prompt and result from the screen
+after an answer was submitted (`True`), or (`False`, default) leave the prompt
+and answer on the screen.
+
+### mandatory
+
+A boolean indicating whether a prompt needs to be ansewered (`True`), or
+(`False`, default) a prompt can be skipped with `ctrl+C` and a `None` value is
+returned.
+
+### mouse
+
+A boolean indicating whether mouse support is active (`True`), or (`False`,
+default) a mouse is not supported.

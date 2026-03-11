@@ -1,4 +1,4 @@
-Output docs/examples/apps/app.gif
+Output docs/getting-started/app.gif
 Set Shell zsh
 Set Theme { "background": "#000000" }
 Type "uv run examples/app.py"

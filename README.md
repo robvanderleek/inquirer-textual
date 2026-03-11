@@ -17,6 +17,8 @@
 [![main](https://github.com/robvanderleek/inquirer-textual/actions/workflows/main.yml/badge.svg)](https://github.com/robvanderleek/inquirer-textual/actions/workflows/main.yml)
 [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
 [![Linting: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![CodeLimit](https://github.com/robvanderleek/inquirer-textual/blob/_codelimit_reports/main/badge.svg)](https://github.com/robvanderleek/inquirer-textual/blob/_codelimit_reports/main/codelimit.md)
+[![PyPi](https://img.shields.io/pypi/v/inquirer-textual?label=pypi%20package)](https://pypi.org/project/inquirer-textual/)
 
 </div>
 

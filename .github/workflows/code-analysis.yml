@@ -17,3 +17,6 @@ jobs:
 
       - name: Run CAPM
         uses: getcapm/capm-action@v1
+
+      - name: Run CodeLimit
+        uses: getcodelimit/codelimit-action@v1
