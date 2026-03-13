@@ -1,7 +1,7 @@
 {
   "version": "0.21.0",
-  "uuid": "4e5f5c7a-4327-45ac-96fc-4a0aa84f4f47",
-  "timestamp": "2026-03-11T21:37:16+00:00",
+  "uuid": "c473d0fb-2560-4e01-b149-6b5a198565a0",
+  "timestamp": "2026-03-13T12:24:13+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "robvanderleek",
@@ -12,7 +12,7 @@
     "totals": {
       "Python": {
         "files": 63,
-        "lines_of_code": 1010,
+        "lines_of_code": 1011,
         "functions": 160,
         "hard_to_maintain": 2,
         "unmaintainable": 0
@@ -25,7 +25,7 @@
           "inquirer_textual/",
           "examples/"
         ],
-        "profile": [804, 111, 95, 0]
+        "profile": [805, 111, 95, 0]
       },
       "docs/getting-started/": {
         "entries": [
@@ -51,7 +51,7 @@
           "widgets/",
           "validators/"
         ],
-        "profile": [710, 111, 95, 0]
+        "profile": [711, 111, 95, 0]
       },
       "inquirer_textual/common/": {
         "entries": [
@@ -182,10 +182,10 @@
         ]
       },
       "inquirer_textual/prompts.py": {
-        "checksum": "5d8bfafc8d176401922aca60ccba65ff",
+        "checksum": "67b896491a68631853d33353e99a2255",
         "language": "Python",
-        "loc": 79,
-        "profile": [79, 0, 0, 0],
+        "loc": 80,
+        "profile": [80, 0, 0, 0],
         "measurements": [
           {"unit_name": "checkbox", "start": {"line": 27, "column": 1}, "end": {"line": 33, "column": 90}, "value": 7},
           {"unit_name": "confirm", "start": {"line": 36, "column": 1}, "end": {"line": 40, "column": 90}, "value": 5},
@@ -195,12 +195,12 @@
           {"unit_name": "multi", "start": {"line": 64, "column": 1}, "end": {"line": 69, "column": 90}, "value": 6},
           {"unit_name": "number", "start": {"line": 72, "column": 1}, "end": {"line": 77, "column": 90}, "value": 6},
           {"unit_name": "path", "start": {"line": 80, "column": 1}, "end": {"line": 85, "column": 90}, "value": 6},
-          {"unit_name": "pattern", "start": {"line": 88, "column": 1}, "end": {"line": 93, "column": 90}, "value": 6},
-          {"unit_name": "secret", "start": {"line": 96, "column": 1}, "end": {"line": 100, "column": 90}, "value": 5},
-          {"unit_name": "select", "start": {"line": 103, "column": 1}, "end": {"line": 109, "column": 90}, "value": 7},
-          {"unit_name": "text", "start": {"line": 112, "column": 1}, "end": {"line": 117, "column": 90}, "value": 6},
-          {"unit_name": "text_area", "start": {"line": 120, "column": 1}, "end": {"line": 124, "column": 90}, "value": 5},
-          {"unit_name": "wait_for_key", "start": {"line": 127, "column": 1}, "end": {"line": 131, "column": 90}, "value": 5}
+          {"unit_name": "pattern", "start": {"line": 88, "column": 1}, "end": {"line": 94, "column": 90}, "value": 7},
+          {"unit_name": "secret", "start": {"line": 97, "column": 1}, "end": {"line": 101, "column": 90}, "value": 5},
+          {"unit_name": "select", "start": {"line": 104, "column": 1}, "end": {"line": 110, "column": 90}, "value": 7},
+          {"unit_name": "text", "start": {"line": 113, "column": 1}, "end": {"line": 118, "column": 90}, "value": 6},
+          {"unit_name": "text_area", "start": {"line": 121, "column": 1}, "end": {"line": 125, "column": 90}, "value": 5},
+          {"unit_name": "wait_for_key", "start": {"line": 128, "column": 1}, "end": {"line": 132, "column": 90}, "value": 5}
         ]
       },
       "inquirer_textual/InquirerApp.py": {
