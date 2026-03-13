@@ -20,7 +20,7 @@
         <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json" alt="Badge" class="off-glb">
     </a>
     <a href="https://github.com/robvanderleek/inquirer-textual/blob/_codelimit_reports/main/codelimit.md" target="_blank">
-        <img src="https://github.com/robvanderleek/inquirer-textual/blob/_codelimit_reports/main/badge.svg?raw=true" alt="Badge" class="off-glb">
+        <img src="https://raw.githubusercontent.com/robvanderleek/inquirer-textual/refs/heads/_codelimit_reports/main/badge.svg" alt="Badge" class="off-glb">
     </a>
     <a href="https://pypi.org/project/inquirer-textual/" target="_blank">
         <img src="https://img.shields.io/pypi/v/inquirer-textual?label=pypi%20package" alt="Badge" class="off-glb">
