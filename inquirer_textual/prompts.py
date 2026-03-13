@@ -25,10 +25,10 @@ from inquirer_textual.widgets.InquirerWidget import InquirerWidget
 
 
 def checkbox(message: str, choices: list[str | Choice], enabled: list[str | Choice] | None = None,
-             settings: PromptSettings = PromptSettings()) -> InquirerResult[
+             height: int | str | None = None, settings: PromptSettings = PromptSettings()) -> InquirerResult[
     list[str | Choice]]:
     app: InquirerApp[list[str | Choice]] = InquirerApp(theme=settings.theme)
-    app.widget = InquirerCheckbox(message, choices, enabled=enabled, mandatory=settings.mandatory)
+    app.widget = InquirerCheckbox(message, choices, enabled=enabled, mandatory=settings.mandatory, height=height)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
 
@@ -54,9 +54,9 @@ def external(widget: InquirerWidget, settings: PromptSettings = PromptSettings()
 
 
 def fuzzy(message: str, choices: list[str | Choice], default: str | Choice | None = None,
-          settings: PromptSettings = PromptSettings()) -> InquirerResult[str | Choice]:
+          height: int | str | None = None, settings: PromptSettings = PromptSettings()) -> InquirerResult[str | Choice]:
     app: InquirerApp[str | Choice] = InquirerApp(theme=settings.theme)
-    app.widget = InquirerFuzzy(message, choices, default=default, mandatory=settings.mandatory)
+    app.widget = InquirerFuzzy(message, choices, default=default, mandatory=settings.mandatory, height=height)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
 
@@ -86,9 +86,10 @@ def path(message: str, exists: bool = False, path_type: PathType = PathType.ANY,
 
 
 def pattern(message: str, choices: list[str | Choice], default: str | Choice | None = None,
-            settings: PromptSettings = PromptSettings()) -> InquirerResult[str | Choice]:
+            height: int | str | None = None, settings: PromptSettings = PromptSettings()) -> InquirerResult[
+    str | Choice]:
     app: InquirerApp[str | Choice] = InquirerApp(theme=settings.theme)
-    app.widget = InquirerPattern(message, choices, default=default, mandatory=settings.mandatory)
+    app.widget = InquirerPattern(message, choices, default=default, mandatory=settings.mandatory, height=height)
     app.shortcuts = settings.shortcuts
     return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
 

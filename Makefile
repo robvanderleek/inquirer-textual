@@ -4,8 +4,9 @@
 	vhs $<
 
 tapes := $(wildcard \
-	docs/getting-started/*.tape \
 	docs/cli/*.tape \
+	docs/getting-started/*.tape \
+	docs/prompts/*.tape \
 	docs/themes/*.tape)
 targets := $(patsubst %.tape,%.gif,$(tapes))
 
