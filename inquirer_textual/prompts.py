@@ -8,6 +8,7 @@ from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.common.Choice import Choice
 from inquirer_textual.common.InquirerResult import InquirerResult
 from inquirer_textual.common.PromptSettings import PromptSettings
+from inquirer_textual.widgets.InquirerAutocomplete import InquirerAutocomplete
 from inquirer_textual.widgets.InquirerCheckbox import InquirerCheckbox
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
 from inquirer_textual.widgets.InquirerEditor import InquirerEditor
@@ -22,6 +23,14 @@ from inquirer_textual.widgets.InquirerText import InquirerText
 from inquirer_textual.widgets.InquirerTextArea import InquirerTextArea
 from inquirer_textual.widgets.InquirerWaitForKey import InquirerWaitForKey
 from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+
+
+def autocomplete(message: str, candidates: list[str], settings: PromptSettings = PromptSettings()) -> InquirerResult[
+    str]:
+    app: InquirerApp[str] = InquirerApp(theme=settings.theme)
+    app.widget = InquirerAutocomplete(message, candidates)
+    app.shortcuts = settings.shortcuts
+    return app.run(inline=True, inline_no_clear=not settings.clear, mouse=settings.mouse)
 
 
 def checkbox(message: str, choices: list[str | Choice], enabled: list[str | Choice] | None = None,
