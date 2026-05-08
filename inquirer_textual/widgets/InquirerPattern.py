@@ -15,10 +15,10 @@ from inquirer_textual.common.ChoiceLabel import ChoiceLabel
 from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.common.defaults import POINTER_CHARACTER
 from inquirer_textual.common.match_utils import substr_match
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.base.InquirerChoicesWidget import InquirerChoicesWidget
 
 
-class InquirerPattern(InquirerWidget):
+class InquirerPattern(InquirerChoicesWidget):
     """A select widget that allows a single selection from a list of choices with pattern filtering."""
 
     DEFAULT_CSS = """
@@ -48,11 +48,11 @@ class InquirerPattern(InquirerWidget):
             choices (list[str | Choice]): A list of choices to present to the user.
             default (str | Choice | None): The default choice to pre-select.
             mandatory (bool): Whether a response is mandatory.
-            height (int | str | None): If None, for inline apps the height will be determined based on the number of choices.
+            height (int | str | None): If None, for inline apps the height will be determined based on the number of
+            choices.
         """
-        super().__init__(name=name, mandatory=mandatory)
+        super().__init__(choices, name, mandatory, height)
         self.message = message
-        self.choices = choices
         self.candidates: list[Candidate] = [Candidate(c) for c in choices]
         self.list_view: ListView | None = None
         self.selected_label: ChoiceLabel | None = None
@@ -61,16 +61,6 @@ class InquirerPattern(InquirerWidget):
         self.query: Input | None = None
         self.selected_value: str | Choice | None = None
         self.show_result: bool = False
-        self.height = height
-
-    def on_mount(self):
-        super().on_mount()
-        if self.height is not None:
-            self.styles.height = self.height
-        elif self.app.is_inline:
-            self.styles.height = min(10, len(self.choices) + 1)
-        else:
-            self.styles.height = '1fr'
 
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
         if self.selected_label:
@@ -111,7 +101,7 @@ class InquirerPattern(InquirerWidget):
 
     def _find_initial_index(self):
         initial_index = 0
-        for idx, choice in enumerate(self.choices):
+        for idx, choice in enumerate(self._choices):
             if self.default and choice == self.default:
                 initial_index = idx
         return initial_index
@@ -130,12 +120,12 @@ class InquirerPattern(InquirerWidget):
     def filter_candidates(self, query: str) -> list[Candidate]:
         query = query.lower()
         if query == '':
-            return [Candidate(c) for c in self.choices]
+            return [Candidate(c) for c in self._choices]
         else:
-            return substr_match(query, self.choices)
+            return substr_match(query, self._choices)
 
     def watch_candidates(self, candidates: list[str | Choice]) -> None:
-        count_suffix = f'[{len(candidates)}/{len(self.choices)}]'
+        count_suffix = f'[{len(candidates)}/{len(self._choices)}]'
         try:
             count_widget = self.query_one('#inquirer-pattern-query-count-suffix', Static)
             count_widget.update(count_suffix)
@@ -172,7 +162,7 @@ class InquirerPattern(InquirerWidget):
                                           initial_index=self._find_initial_index())
                 with HorizontalGroup():
                     yield Prompt(self.message)
-                    yield Static(f'[{len(self.candidates)}/{len(self.choices)}]',
+                    yield Static(f'[{len(self.candidates)}/{len(self._choices)}]',
                                  id='inquirer-pattern-query-count-suffix')
                 with HorizontalGroup(id='inquirer-pattern-query-container'):
                     yield Static(f'{POINTER_CHARACTER} ', id='inquirer-pattern-query-pointer')

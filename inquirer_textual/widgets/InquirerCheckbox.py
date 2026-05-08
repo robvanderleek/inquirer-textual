@@ -9,10 +9,10 @@ from inquirer_textual.common.Answer import Answer
 from inquirer_textual.common.Choice import Choice, COMMAND_SELECT
 from inquirer_textual.common.ChoiceCheckboxLabel import ChoiceCheckboxLabel
 from inquirer_textual.common.Prompt import Prompt
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.base.InquirerChoicesWidget import InquirerChoicesWidget
 
 
-class InquirerCheckbox(InquirerWidget):
+class InquirerCheckbox(InquirerChoicesWidget):
     """A checkbox widget that allows multiple selections from a list of choices."""
 
     BINDINGS = [
@@ -28,27 +28,17 @@ class InquirerCheckbox(InquirerWidget):
                 name (str | None): The name of the input field.
                 enabled (list[str | Choice] | None): A list of choices that should be pre-selected.
                 mandatory (bool): Whether at least one selection is mandatory.
-                height (int | str | None): If None, for inline apps the height will be determined based on the number of choices.
+                height (int | str | None): If None, for inline apps the height will be determined based on the number
+                of choices.
         """
-        super().__init__(name=name, mandatory=mandatory)
+        super().__init__(choices, name, mandatory, height)
         self.message = message
-        self.choices = choices
         self.enabled = enabled
         self.list_view: ListView | None = None
         self.selected_label: ChoiceCheckboxLabel | None = None
         self.selected_item: str | Choice | None = None
         self.selected_value: list[str | Choice] | None = None
         self.show_result: bool = False
-        self.height = height
-
-    def on_mount(self):
-        super().on_mount()
-        if self.height is not None:
-            self.styles.height = self.height
-        elif self.app.is_inline:
-            self.styles.height = min(10, len(self.choices) + 1)
-        else:
-            self.styles.height = '1fr'
 
     def action_toggle_selected(self) -> None:
         if self.selected_label:
@@ -87,7 +77,7 @@ class InquirerCheckbox(InquirerWidget):
         else:
             with VerticalGroup():
                 items: list[ListItem] = []
-                for idx, choice in enumerate(self.choices):
+                for idx, choice in enumerate(self._choices):
                     list_item = ListItem(ChoiceCheckboxLabel(choice))
                     items.append(list_item)
                 self.list_view = ListView(*items, id='inquirer-checkbox-list-view')

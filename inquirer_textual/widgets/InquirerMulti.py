@@ -2,7 +2,7 @@ from typing import Any
 
 from textual.app import ComposeResult
 
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 
 
 class InquirerMulti(InquirerWidget):

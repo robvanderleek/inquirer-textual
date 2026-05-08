@@ -6,7 +6,7 @@ from textual.widgets import Input
 from typing_extensions import Self, Literal
 
 from inquirer_textual.common.Prompt import Prompt
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 
 
 class InquirerNumber(InquirerWidget):

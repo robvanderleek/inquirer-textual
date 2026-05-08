@@ -88,6 +88,18 @@ def test_snapshot_select(snap_compare):
     assert snap_compare(app, run_before=run_before)
 
 
+def test_snapshot_select_height_auto(snap_compare):
+    app = InquirerApp()
+    app.widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')], mandatory=False, height='auto')
+    app.shortcuts = [Shortcut('q', 'quit', 'Quit')]
+
+    async def run_before(pilot) -> None:
+        await pilot.press('down')
+        await pilot.press('enter')
+
+    assert snap_compare(app, run_before=run_before)
+
+
 def test_snapshot_mandatory(snap_compare):
     app = InquirerApp()
     app.widget = InquirerSelect('Environment:', [Choice('a'), Choice('b'), Choice('c')], mandatory=True)

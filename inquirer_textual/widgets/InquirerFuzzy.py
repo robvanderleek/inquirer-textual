@@ -24,6 +24,6 @@ class InquirerFuzzy(InquirerPattern):
     def filter_candidates(self, query: str) -> list[Candidate]:
         query = query.lower()
         if query == '':
-            return [Candidate(c) for c in self.choices]
+            return [Candidate(c) for c in self._choices]
         else:
-            return fuzzy_match(query, self.choices)
+            return fuzzy_match(query, self._choices)

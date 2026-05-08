@@ -9,7 +9,7 @@ from textual.containers import HorizontalGroup
 from textual.widgets import Static
 
 from inquirer_textual.common.Prompt import Prompt
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 
 
 class InquirerEditor(InquirerWidget):

@@ -5,7 +5,7 @@ from textual.app import ComposeResult
 from textual.widgets import Input
 
 from inquirer_textual.InquirerApp import InquirerApp
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 
 
 async def test_named():

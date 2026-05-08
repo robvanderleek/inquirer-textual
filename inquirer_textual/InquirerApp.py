@@ -14,7 +14,7 @@ from inquirer_textual.common.InquirerResult import InquirerResult
 from inquirer_textual.common.Shortcut import Shortcut
 from inquirer_textual.common.defaults import DEFAULT_THEME
 from inquirer_textual.common.utils import get_cursor_row
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 
 T = TypeVar('T')
 
