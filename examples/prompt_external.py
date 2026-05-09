@@ -6,7 +6,7 @@ from textual_slider import Slider
 
 from inquirer_textual import prompts
 from inquirer_textual.common.PromptMessage import Prompt
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 
 
 class InquirerSlider(InquirerWidget):

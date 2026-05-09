@@ -9,7 +9,7 @@ from textual.widgets import Input, Static
 from typing_extensions import Self
 
 from inquirer_textual.common.Prompt import Prompt
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 
 
 class PathType(Enum):

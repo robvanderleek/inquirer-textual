@@ -22,7 +22,7 @@ from inquirer_textual.widgets.InquirerSelect import InquirerSelect
 from inquirer_textual.widgets.InquirerText import InquirerText
 from inquirer_textual.widgets.InquirerTextArea import InquirerTextArea
 from inquirer_textual.widgets.InquirerWaitForKey import InquirerWaitForKey
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 
 
 def autocomplete(message: str, completions: list[str], settings: PromptSettings = PromptSettings()) -> InquirerResult[

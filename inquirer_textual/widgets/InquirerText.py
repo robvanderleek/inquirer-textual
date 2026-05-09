@@ -11,7 +11,7 @@ from typing_extensions import Self
 from inquirer_textual.common.Answer import Answer
 from inquirer_textual.common.Choice import COMMAND_SELECT
 from inquirer_textual.common.Prompt import Prompt
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 
 
 class InquirerText(InquirerWidget):

@@ -27,4 +27,4 @@ class Prompt(Widget):
     def compose(self) -> ComposeResult:
         with HorizontalGroup(id='prompt-message-container'):
             yield Static('? ', id='prompt-message-question-mark')
-            yield Label(self.message)
+            yield Label(self.message, markup=False)
