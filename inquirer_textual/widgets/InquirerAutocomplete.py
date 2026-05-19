@@ -8,7 +8,7 @@ from textual.widgets.option_list import Option
 from inquirer_textual.common.Candidate import Candidate
 from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.common.match_utils import fuzzy_match
-from inquirer_textual.widgets.InquirerWidget import InquirerWidget
+from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 
 
 class InquirerAutocompleteOption(Option):
@@ -72,6 +72,8 @@ class InquirerAutocomplete(InquirerWidget):
             with self.prevent(Input.Changed):
                 self._input.value = ''
                 self._input.insert_text_at_cursor(option.prompt)
+            self._option_list.styles.display = 'none'
+        elif event.key == 'escape':
             self._option_list.styles.display = 'none'
 
     def on_input_changed(self, changed: Input.Changed):
