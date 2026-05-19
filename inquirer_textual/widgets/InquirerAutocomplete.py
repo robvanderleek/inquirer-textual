@@ -56,7 +56,7 @@ class InquirerAutocomplete(InquirerWidget):
         self._option_list.styles.display = 'none'
 
     def on_key(self, event: events.Key):
-        if self._option_list is None:
+        if self._input is None or self._option_list is None:
             return
         if event.key == 'down':
             if self._option_list.styles.display == 'none':
@@ -78,10 +78,11 @@ class InquirerAutocomplete(InquirerWidget):
 
     def on_input_changed(self, changed: Input.Changed):
         self._align_option_list()
-        self._option_list.clear_options()
-        query = changed.value.strip()
-        candidates = fuzzy_match(query, self._completions)
-        self._option_list.add_options([c.render(self.app) for c in candidates])
+        if self._option_list:
+            self._option_list.clear_options()
+            query = changed.value.strip()
+            candidates = fuzzy_match(query, self._completions)
+            self._option_list.add_options([c.render(self.app) for c in candidates])
 
     def _align_option_list(self):
         offset = self._input.cursor_screen_offset
