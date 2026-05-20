@@ -1,7 +1,7 @@
 {
   "version": "0.21.0",
-  "uuid": "f4a785ec-1846-45b0-a06a-3a0620aeb023",
-  "timestamp": "2026-05-19T21:09:28+00:00",
+  "uuid": "096d5125-b436-4047-84a8-7924856c0c2c",
+  "timestamp": "2026-05-20T20:13:59+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "robvanderleek",
@@ -12,7 +12,7 @@
     "totals": {
       "Python": {
         "files": 68,
-        "lines_of_code": 1076,
+        "lines_of_code": 1080,
         "functions": 171,
         "hard_to_maintain": 2,
         "unmaintainable": 0
@@ -25,7 +25,7 @@
           "docs/",
           "examples/"
         ],
-        "profile": [850, 131, 95, 0]
+        "profile": [854, 131, 95, 0]
       },
       "inquirer_textual/": {
         "entries": [
@@ -37,7 +37,7 @@
           "common/",
           "validators/"
         ],
-        "profile": [749, 131, 95, 0]
+        "profile": [753, 131, 95, 0]
       },
       "inquirer_textual/widgets/": {
         "entries": [
@@ -58,7 +58,7 @@
           "InquirerFuzzy.py",
           "base/"
         ],
-        "profile": [457, 91, 0, 0]
+        "profile": [461, 91, 0, 0]
       },
       "inquirer_textual/widgets/base/": {
         "entries": [
@@ -251,7 +251,7 @@
         ]
       },
       "inquirer_textual/widgets/InquirerPattern.py": {
-        "checksum": "c8ab1b50f52ced7127281fdb96d7e788",
+        "checksum": "440ad37ea825bc19807f99c1d6232694",
         "language": "Python",
         "loc": 94,
         "profile": [75, 19, 0, 0],
@@ -282,22 +282,22 @@
         ]
       },
       "inquirer_textual/widgets/InquirerAutocomplete.py": {
-        "checksum": "13a8e44a0104dc5e2ada756da6bbbc1a",
+        "checksum": "4287e188f63070d9093c6cb930ce0807",
         "language": "Python",
-        "loc": 53,
-        "profile": [33, 20, 0, 0],
+        "loc": 57,
+        "profile": [37, 20, 0, 0],
         "measurements": [
           {"unit_name": "__init__", "start": {"line": 15, "column": 5}, "end": {"line": 17, "column": 35}, "value": 3},
-          {"unit_name": "__init__", "start": {"line": 45, "column": 5}, "end": {"line": 52, "column": 48}, "value": 8},
-          {"unit_name": "on_mount", "start": {"line": 54, "column": 5}, "end": {"line": 56, "column": 50}, "value": 3},
-          {"unit_name": "on_key", "start": {"line": 58, "column": 5}, "end": {"line": 77, "column": 54}, "value": 20},
-          {"unit_name": "on_input_changed", "start": {"line": 79, "column": 5}, "end": {"line": 85, "column": 84}, "value": 7},
-          {"unit_name": "_align_option_list", "start": {"line": 87, "column": 5}, "end": {"line": 89, "column": 79}, "value": 3},
-          {"unit_name": "compose", "start": {"line": 91, "column": 5}, "end": {"line": 99, "column": 32}, "value": 9}
+          {"unit_name": "__init__", "start": {"line": 45, "column": 5}, "end": {"line": 59, "column": 48}, "value": 9},
+          {"unit_name": "on_mount", "start": {"line": 61, "column": 5}, "end": {"line": 63, "column": 50}, "value": 3},
+          {"unit_name": "on_key", "start": {"line": 65, "column": 5}, "end": {"line": 84, "column": 54}, "value": 20},
+          {"unit_name": "on_input_changed", "start": {"line": 86, "column": 5}, "end": {"line": 92, "column": 84}, "value": 7},
+          {"unit_name": "_align_option_list", "start": {"line": 94, "column": 5}, "end": {"line": 97, "column": 83}, "value": 4},
+          {"unit_name": "compose", "start": {"line": 99, "column": 5}, "end": {"line": 109, "column": 33}, "value": 11}
         ]
       },
       "inquirer_textual/widgets/InquirerSelect.py": {
-        "checksum": "a7ebfd074de63a37e40137884e22db72",
+        "checksum": "7cde1e709941df5aa2256ca027fdcd16",
         "language": "Python",
         "loc": 48,
         "profile": [30, 18, 0, 0],
@@ -382,7 +382,7 @@
         ]
       },
       "inquirer_textual/widgets/InquirerCheckbox.py": {
-        "checksum": "bcf25dab05256e5e3705092b977ea9eb",
+        "checksum": "ad34b64dd4579e4ad4cf0206b283e11a",
         "language": "Python",
         "loc": 43,
         "profile": [43, 0, 0, 0],
