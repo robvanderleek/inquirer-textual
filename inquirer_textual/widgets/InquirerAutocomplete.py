@@ -18,6 +18,8 @@ class InquirerAutocompleteOption(Option):
 
 
 class InquirerAutocomplete(InquirerWidget):
+    """An autocomplete widget that allows the user to type a query and select from a list of matching options."""
+
     DEFAULT_CSS = """
         InquirerAutocomplete {
             height: auto;

@@ -44,6 +44,7 @@ nav:
   - Inquirer Textual: 'index.md'
   - Getting Started: 'getting-started/index.md'
   - Prompts:
+    - Autocomplete: 'prompts/autocomplete.md'
     - Checkbox: 'prompts/checkbox.md'
     - Confirm: 'prompts/confirm.md'
     - Editor: 'prompts/editor.md'
