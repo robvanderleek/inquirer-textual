@@ -22,14 +22,14 @@ class InquirerCheckbox(InquirerChoicesWidget):
     def __init__(self, message: str, choices: list[str | Choice], name: str | None = None,
                  enabled: list[str | Choice] | None = None, mandatory: bool = False, height: int | str | None = None):
         """
-            Args:
-                message (str): The prompt message to display.
-                choices (list[str | Choice]): A list of choices to present to the user.
-                name (str | None): The name of the input field.
-                enabled (list[str | Choice] | None): A list of choices that should be pre-selected.
-                mandatory (bool): Whether at least one selection is mandatory.
-                height (int | str | None): If None, for inline apps the height will be determined based on the number
-                of choices.
+        Args:
+            message (str): The prompt message to display.
+            choices (list[str | Choice]): A list of choices to present to the user.
+            name (str | None): The name of the input field.
+            enabled (list[str | Choice] | None): A list of choices that should be pre-selected.
+            mandatory (bool): Whether at least one selection is mandatory.
+            height (int | str | None): If None, for inline apps the height will be determined based on the number of \
+            choices.
         """
         super().__init__(choices, name, mandatory, height)
         self.message = message

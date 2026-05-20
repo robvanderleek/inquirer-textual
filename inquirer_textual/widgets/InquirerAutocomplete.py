@@ -13,7 +13,7 @@ from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 
 class InquirerAutocompleteOption(Option):
     def __init__(self, candidate: Candidate):
-        super().__init__(candidate.choice)
+        super().__init__(str(candidate.choice))
         self.candidate = candidate
 
 
@@ -42,8 +42,15 @@ class InquirerAutocomplete(InquirerWidget):
         }
     """
 
-    def __init__(self, message: str, completions: list[str]):
-        super().__init__()
+    def __init__(self, message: str, completions: list[str], name: str | None = None, mandatory: bool = False):
+        """
+        Args:
+            message (str): The prompt message to display.
+            completions (list[str]): A list of completion options to present to the user.
+            name (str | None): The name of the input field.
+            mandatory (bool): Whether a response is mandatory.
+        """
+        super().__init__(name=name, mandatory=mandatory)
         self._message = message
         self._completions = completions
         self._candidates: list[Candidate] = [Candidate(c) for c in completions]
@@ -71,7 +78,7 @@ class InquirerAutocomplete(InquirerWidget):
             option = self._option_list.get_option_at_index(self._option_list.highlighted)
             with self.prevent(Input.Changed):
                 self._input.value = ''
-                self._input.insert_text_at_cursor(option.prompt)
+                self._input.insert_text_at_cursor(str(option.prompt))
             self._option_list.styles.display = 'none'
         elif event.key == 'escape':
             self._option_list.styles.display = 'none'
@@ -85,15 +92,18 @@ class InquirerAutocomplete(InquirerWidget):
             self._option_list.add_options([c.render(self.app) for c in candidates])
 
     def _align_option_list(self):
-        offset = self._input.cursor_screen_offset
-        self._option_list.absolute_offset = Offset(offset.x - 1, offset.y + 1)
+        if self._input:
+            offset = self._input.cursor_screen_offset
+            self._option_list.absolute_offset = Offset(offset.x - 1, offset.y + 1)
 
     def compose(self) -> ComposeResult:
         with HorizontalGroup():
             yield Prompt(self._message)
-            self._input = Input(id="inquirer-autocomplete-input")
-            yield self._input
-        self._option_list = OptionList(*[c.render(self.app) for c in self._candidates],
-                                       id="inquirer-autocomplete-option-list")
+            input_widget = Input(id="inquirer-autocomplete-input")
+            self._input = input_widget
+            yield input_widget
+        option_list_widget = OptionList(*[c.render(self.app) for c in self._candidates],
+                                        id="inquirer-autocomplete-option-list")
+        self._option_list = option_list_widget
         self._option_list.can_focus = False
-        yield self._option_list
+        yield option_list_widget

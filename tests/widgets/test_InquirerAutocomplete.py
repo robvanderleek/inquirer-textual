@@ -36,3 +36,18 @@ def test_snapshot_hide_option_list(snap_compare):
         await pilot.press('escape')
 
     assert snap_compare(app, run_before=run_before)
+
+
+def test_snapshot_select_option_from_list(snap_compare):
+    app = InquirerApp()
+    app.widget = InquirerAutocomplete('Planet:',
+                                      ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'])
+
+    async def run_before(pilot) -> None:
+        await pilot.press('E', 'r')
+        await pilot.press('down')
+        await pilot.press('down')
+        await pilot.press('down')
+        await pilot.press('enter')
+
+    assert snap_compare(app, run_before=run_before)

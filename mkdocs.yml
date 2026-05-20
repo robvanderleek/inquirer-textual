@@ -61,6 +61,7 @@ nav:
   - CLI: 'cli/index.md'
   - Themes: 'themes/index.md'
   - Reference:
+    - Autocomplete: 'reference/autocomplete.md'
     - Checkbox: 'reference/checkbox.md'
     - Confirm: 'reference/confirm.md'
     - Editor: 'reference/editor.md'
