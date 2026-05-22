@@ -3,14 +3,14 @@
 ### Overview
 | **Language** | **Files** | **Functions** | **Lines of Code** | **⚠** | **⛌** |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Python | 65 | 159 | 997 | 2 | 0 |
+| Python | 68 | 171 | 1085 | 2 | 0 |
 
 ### Summary
 | **Easy / Verbose** | **Hard-to-maintain ⚠** | **Unmaintainable ⛌** |
 | ---: | ---: | ---: |
-| 90% | 10% | 0% |
+| 91% | 9% | 0% |
 
-✅ 90% of the functions are maintainable, no refactoring necessary.
+✅ 91% of the functions are maintainable, no refactoring necessary.
 
 ### Findings
 | **Function** | **Length** | **File** |
