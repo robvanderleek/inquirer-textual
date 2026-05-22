@@ -4,14 +4,14 @@
 from __future__ import annotations
 
 from functools import partial
-from typing import Optional, Any, Callable
+from typing import Optional, Any, Callable, TypeVar
 
 from inquirer_textual.common.Candidate import Candidate
-from inquirer_textual.common.Choice import Choice
 
+T = TypeVar('T')
 
-def _rank_task(scorer: Callable[[str, str | Choice], tuple[float, Optional[list[int]]]], needle: str,
-               haystacks: list[str | Choice]) -> \
+def _rank_task(scorer: Callable[[str, T], tuple[float, Optional[list[int]]]], needle: str,
+               haystacks: list[T]) -> \
         list[dict[str, Any]]:
     result = []
     for haystack in haystacks:
@@ -27,12 +27,12 @@ def _rank_task(scorer: Callable[[str, str | Choice], tuple[float, Optional[list[
     return result
 
 
-def fuzzy_match(key: str, entries: list[str | Choice]) -> list[Candidate]:
+def fuzzy_match(key: str, entries: list[T]) -> list[Candidate]:
     results = _rank_task(_fzy_scorer, key, entries)
     return [Candidate(res["haystack"], res["indices"]) for res in results]
 
 
-def substr_match(key: str, entries: list[str | Choice]) -> list[Candidate]:
+def substr_match(key: str, entries: list[T]) -> list[Candidate]:
     results = _rank_task(_substr_scorer, key, entries)
     return [Candidate(res["haystack"], res["indices"]) for res in results]
 
@@ -71,7 +71,7 @@ BONUS_STATES = [{}, BONUS_MAP, lower_with(SCORE_MATCH_CAPITAL, BONUS_MAP)]
 BONUS_INDEX = digit_with(1, lower_with(1, upper_with(2, {})))
 
 
-def _bonus(haystack: str | Choice) -> list[float]:
+def _bonus(haystack: T) -> list[float]:
     prev_char = "/"
     bonus = []
     for char in str(haystack):
@@ -80,7 +80,7 @@ def _bonus(haystack: str | Choice) -> list[float]:
     return bonus
 
 
-def _score(needle: str, haystack: str | Choice) -> tuple[float, Optional[list[int]]]:
+def _score(needle: str, haystack: T) -> tuple[float, Optional[list[int]]]:
     """Use fzy logic to calculate score for `needle` within the given `haystack`.
 
     2 2D array to track the score.
@@ -101,13 +101,13 @@ def _score(needle: str, haystack: str | Choice) -> tuple[float, Optional[list[in
     Returns:
         A tuple of matching score with a list of matching indices.
     """
-    haystack = str(haystack)
-    needle_len, haystack_len = len(needle), len(haystack)
-    bonus_score = _bonus(haystack)
+    stringified_haystack = str(haystack)
+    needle_len, haystack_len = len(needle), len(stringified_haystack)
+    bonus_score = _bonus(stringified_haystack)
 
     # smart case
     if needle.islower():
-        haystack = haystack.lower()
+        stringified_haystack = stringified_haystack.lower()
 
     # return all values if no query
     if needle_len == 0 or needle_len == haystack_len:
@@ -131,7 +131,7 @@ def _score(needle: str, haystack: str | Choice) -> tuple[float, Optional[list[in
         gap_score = SCORE_GAP_TRAILING if i == needle_len - 1 else SCORE_GAP_INNER
 
         for j in range(haystack_len):
-            if needle[i] == haystack[j]:
+            if needle[i] == stringified_haystack[j]:
                 score = SCORE_MIN
                 if i == 0:
                     score = j * SCORE_GAP_LEADING + bonus_score[j]
@@ -181,7 +181,7 @@ def _score(needle: str, haystack: str | Choice) -> tuple[float, Optional[list[in
     return result_score[needle_len - 1][haystack_len - 1], indices
 
 
-def _subsequence(needle: str, haystack: str | Choice) -> bool:
+def _subsequence(needle: str, haystack: T) -> bool:
     if not needle:
         return True
     haystack_lower = str(haystack).lower()
@@ -193,15 +193,15 @@ def _subsequence(needle: str, haystack: str | Choice) -> bool:
     return True
 
 
-def _fzy_scorer(query: str, entry: str | Choice) -> tuple[float, Optional[list[int]]]:
+def _fzy_scorer(query: str, entry: T) -> tuple[float, Optional[list[int]]]:
     return _score(query, entry) if _subsequence(query, entry) else (SCORE_MIN, None)
 
 
-def _substr_scorer(query: str, entry: str | Choice) -> tuple[float, Optional[list[int]]]:
+def _substr_scorer(query: str, entry: T) -> tuple[float, Optional[list[int]]]:
     indices: list[int] = []
     offset = 0
-    query, entry = query.lower(), str(entry).lower()
-    offset = entry.find(query, offset)
+    query, stringified_entry = query.lower(), str(entry).lower()
+    offset = stringified_entry.find(query, offset)
     if offset < 0:
         return SCORE_MIN, None
     needle_len = len(query)

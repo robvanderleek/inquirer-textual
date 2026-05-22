@@ -1,0 +1,115 @@
+from __future__ import annotations
+
+from textual import events
+from textual.app import ComposeResult
+from textual.containers import HorizontalGroup
+from textual.geometry import Offset
+from textual.widgets import Input, OptionList
+
+from inquirer_textual.common.Candidate import Candidate
+from inquirer_textual.common.Prompt import Prompt
+from inquirer_textual.common.match_utils import fuzzy_match
+from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
+
+
+class InquirerAutocomplete(InquirerWidget):
+    """An autocomplete widget that allows the user to type a query and select from a list of matching options."""
+
+    DEFAULT_CSS = """
+        InquirerAutocomplete {
+            height: auto;
+        }
+        #inquirer-autocomplete-input {
+            border: none;
+            color: $inquirer-textual-input-color;
+            padding: 0;
+            height: 1;
+        }
+        #inquirer-autocomplete-option-list {
+            width: auto;
+            height: auto;
+            max-height: 5;
+            padding: 0;
+            margin: 0;
+            border: none;
+            scrollbar-size-vertical: 1;
+        }
+        .option-list--option-highlighted {
+            color: $block-cursor-blurred-foreground !important;
+        }
+    """
+
+    def __init__(self, message: str, completions: list[str], name: str | None = None, mandatory: bool = False):
+        """
+        Args:
+            message (str): The prompt message to display.
+            completions (list[str]): A list of completion options to present to the user.
+            name (str | None): The name of the input field.
+            mandatory (bool): Whether a response is mandatory.
+        """
+        super().__init__(name=name, mandatory=mandatory)
+        self._message = message
+        self._completions = completions
+        self._candidates: list[Candidate] = [Candidate(c) for c in completions]
+        self._input: Input | None = None
+        self._option_list: OptionList | None = None
+        self._selected_value: str | None = None
+
+    def on_mount(self):
+        super().on_mount()
+        self._option_list.styles.display = 'none'
+
+    def on_key(self, event: events.Key):
+        if self._input is None or self._option_list is None:
+            return
+        if event.key == 'down':
+            event.stop()
+            if self._option_list.styles.display == 'none':
+                self._option_list.styles.display = 'block'
+                self._option_list.highlighted = 0
+                self._align_option_list()
+            else:
+                self._option_list.action_cursor_down()
+        elif event.key == 'up':
+            event.stop()
+            self._option_list.action_cursor_up()
+        elif event.key == 'enter':
+            event.stop()
+            if self._option_list.highlighted is not None:
+                option = self._option_list.get_option_at_index(self._option_list.highlighted)
+                with self.prevent(Input.Changed):
+                    self._input.value = ''
+                    self._input.insert_text_at_cursor(str(option.prompt))
+                self._option_list.styles.display = 'none'
+            self.submit_current_value()
+        elif event.key == 'escape':
+            event.stop()
+            self._option_list.styles.display = 'none'
+
+    def on_input_changed(self, changed: Input.Changed):
+        self._align_option_list()
+        if self._option_list:
+            self._option_list.clear_options()
+            query = changed.value.strip()
+            candidates = fuzzy_match(query, self._completions)
+            self._option_list.add_options([c.render(self.app) for c in candidates])
+
+    def current_value(self):
+        return self._input.value if self._input else None
+
+    def _align_option_list(self):
+        if self._input and self._option_list:
+            offset = self._input.cursor_screen_offset
+            self._option_list.absolute_offset = Offset(offset.x - 1, offset.y + 1)
+
+    def compose(self) -> ComposeResult:
+        with HorizontalGroup():
+            yield Prompt(self._message)
+            input_widget = Input(id="inquirer-autocomplete-input")
+            self._input = input_widget
+            yield input_widget
+        option_list_widget = OptionList(*[c.render(self.app) for c in self._candidates],
+                                        id="inquirer-autocomplete-option-list")
+        self._option_list = option_list_widget
+        self._option_list.can_focus = False
+        yield option_list_widget
