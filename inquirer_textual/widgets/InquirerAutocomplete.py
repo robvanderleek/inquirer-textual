@@ -5,18 +5,11 @@ from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
 from textual.geometry import Offset
 from textual.widgets import Input, OptionList
-from textual.widgets.option_list import Option
 
 from inquirer_textual.common.Candidate import Candidate
 from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.common.match_utils import fuzzy_match
 from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
-
-
-class InquirerAutocompleteOption(Option):
-    def __init__(self, candidate: Candidate):
-        super().__init__(str(candidate.choice))
-        self.candidate = candidate
 
 
 class InquirerAutocomplete(InquirerWidget):
@@ -70,6 +63,7 @@ class InquirerAutocomplete(InquirerWidget):
         if self._input is None or self._option_list is None:
             return
         if event.key == 'down':
+            event.stop()
             if self._option_list.styles.display == 'none':
                 self._option_list.styles.display = 'block'
                 self._option_list.highlighted = 0
@@ -77,14 +71,19 @@ class InquirerAutocomplete(InquirerWidget):
             else:
                 self._option_list.action_cursor_down()
         elif event.key == 'up':
+            event.stop()
             self._option_list.action_cursor_up()
         elif event.key == 'enter':
-            option = self._option_list.get_option_at_index(self._option_list.highlighted)
-            with self.prevent(Input.Changed):
-                self._input.value = ''
-                self._input.insert_text_at_cursor(str(option.prompt))
-            self._option_list.styles.display = 'none'
+            event.stop()
+            if self._option_list.highlighted is not None:
+                option = self._option_list.get_option_at_index(self._option_list.highlighted)
+                with self.prevent(Input.Changed):
+                    self._input.value = ''
+                    self._input.insert_text_at_cursor(str(option.prompt))
+                self._option_list.styles.display = 'none'
+            self.submit_current_value()
         elif event.key == 'escape':
+            event.stop()
             self._option_list.styles.display = 'none'
 
     def on_input_changed(self, changed: Input.Changed):
@@ -95,8 +94,11 @@ class InquirerAutocomplete(InquirerWidget):
             candidates = fuzzy_match(query, self._completions)
             self._option_list.add_options([c.render(self.app) for c in candidates])
 
+    def current_value(self):
+        return self._input.value if self._input else None
+
     def _align_option_list(self):
-        if self._input:
+        if self._input and self._option_list:
             offset = self._input.cursor_screen_offset
             self._option_list.absolute_offset = Offset(offset.x - 1, offset.y + 1)
 

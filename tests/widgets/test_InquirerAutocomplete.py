@@ -51,3 +51,16 @@ def test_snapshot_select_option_from_list(snap_compare):
         await pilot.press('enter')
 
     assert snap_compare(app, run_before=run_before)
+
+
+async def test_submit_selected_option_returns_value():
+    app = InquirerApp()
+    app.widget = InquirerAutocomplete('Planet:',
+                                      ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'])
+
+    async with app.run_test() as pilot:
+        await pilot.press('E', 'a', 'r', 't', 'h')
+        await pilot.press('enter')
+
+    assert app._return_value is not None
+    assert app._return_value.value == 'Earth'

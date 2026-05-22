@@ -28,7 +28,7 @@ from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 def autocomplete(message: str, completions: list[str], settings: PromptSettings = PromptSettings()) -> InquirerResult[
     str]:
     app: InquirerApp[str] = InquirerApp(theme=settings.theme)
-    app.widget = InquirerAutocomplete(message, completions)
+    app.widget = InquirerAutocomplete(message, completions, mandatory=settings.mandatory)
     app.shortcuts = settings.shortcuts
     return app.run(inline=settings.inline, inline_no_clear=not settings.clear, mouse=settings.mouse)
 
