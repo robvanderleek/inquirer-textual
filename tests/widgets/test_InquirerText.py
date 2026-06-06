@@ -19,6 +19,17 @@ def test_snapshot_with_default_value(snap_compare):
     assert snap_compare(app)
 
 
+def test_snapshot_with_answer(snap_compare):
+    app = InquirerApp()
+    app.widget = InquirerText('Name:')
+
+    async def run_before(pilot) -> None:
+        await pilot.press('R', 'o', 'b')
+        await pilot.press('enter')
+
+    assert snap_compare(app, run_before=run_before)
+
+
 async def test_validator_success():
     widget = InquirerText('Name:', validators=UniqueValidator(['Alice', 'Bob']))
     app = InquirerApp()

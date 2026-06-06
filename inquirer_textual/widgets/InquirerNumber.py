@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
 from textual.widgets import Input
-from typing_extensions import Self, Literal
+from typing_extensions import Literal
 
+from inquirer_textual.common.Answer import Answer
+from inquirer_textual.common.Choice import COMMAND_SELECT
 from inquirer_textual.common.Prompt import Prompt
 from inquirer_textual.widgets.base.InquirerWidget import InquirerWidget
 
@@ -39,6 +40,8 @@ class InquirerNumber(InquirerWidget):
         self.default = default
         self.input_type = input_type
         self.input: Input | None = None
+        self.selected_value: int | float | None = None
+        self.show_result: bool = False
 
     def on_mount(self):
         super().on_mount()
@@ -48,11 +51,16 @@ class InquirerNumber(InquirerWidget):
     def on_input_submitted(self) -> None:
         self.submit_current_value()
 
-    def focus(self, scroll_visible: bool = True) -> Self:
+    def focus(self, scroll_visible: bool = True):
         if self.input:
             return self.input.focus(scroll_visible)
         else:
             return super().focus(scroll_visible)
+
+    async def on_command(self, command: str | None) -> None:
+        self.selected_value = self.current_value() if command == COMMAND_SELECT else None
+        self.show_result = True
+        await self.recompose()
 
     def current_value(self):
         if self.input and self.input.value:
@@ -62,8 +70,14 @@ class InquirerNumber(InquirerWidget):
                 return float(self.input.value)
         return None
 
-    def compose(self) -> ComposeResult:
-        with HorizontalGroup():
-            yield Prompt(self.message)
-            self.input = Input(id="inquirer-number-input", type=self.input_type)
-            yield self.input
+    def compose(self):
+        if self.show_result:
+            with HorizontalGroup():
+                yield Prompt(self.message)
+                if self.selected_value is not None:
+                    yield Answer(str(self.selected_value))
+        else:
+            with HorizontalGroup():
+                yield Prompt(self.message)
+                self.input = Input(id="inquirer-number-input", type=self.input_type)
+                yield self.input

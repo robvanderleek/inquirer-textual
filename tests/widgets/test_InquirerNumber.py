@@ -9,6 +9,17 @@ def test_snapshot(snap_compare):
     assert snap_compare(app)
 
 
+def test_snapshot_with_answer(snap_compare):
+    app = InquirerApp()
+    app.widget = InquirerNumber('Memory:')
+
+    async def run_before(pilot) -> None:
+        await pilot.press('1', '0', '2', '4')
+        await pilot.press('enter')
+
+    assert snap_compare(app, run_before=run_before)
+
+
 async def test_default_value():
     app = InquirerApp[int]()
     app.widget = InquirerNumber('Repeat:', default=5)
