@@ -52,7 +52,7 @@ async def test_choice_with_command():
         await pilot.press("enter")
     result = app._return_value
 
-    assert result.command == 'create'
+    assert result.value.command == 'create'
 
 
 async def test_mandatory():
@@ -170,4 +170,4 @@ async def test_named():
 
     assert result.name == 'env'
     assert result.value.name == 'a'
-    assert result.command == 'create'
+    assert result.value.command == 'create'

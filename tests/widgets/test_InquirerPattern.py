@@ -72,7 +72,8 @@ async def test_choice_with_command():
         await pilot.press("enter")
     result = app._return_value
 
-    assert result.command == 'create'
+    assert result.command == 'select'
+    assert result.value.command == 'create'
 
 
 async def test_named():
