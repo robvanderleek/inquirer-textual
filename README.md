@@ -27,6 +27,12 @@ big. The goal of this Python library is to make user input simple for small
 programs, while enabling a smooth transition to a comprehensive UI library as
 your program grows.
 
+<div align="center">
+
+![Logo](https://raw.githubusercontent.com/robvanderleek/inquirer-textual/main/docs/prompts/checkbox.gif)
+
+</div>
+
 Read the [documentation here](https://robvanderleek.github.io/inquirer-textual/)
 
 ## Installation
