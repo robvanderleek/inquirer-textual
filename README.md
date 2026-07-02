@@ -22,10 +22,17 @@
 
 </div>
 
-All terminal programs start small. Some stay small, and some become incredibly
-big. The goal of this Python library is to make user input simple for small
-programs, while enabling a smooth transition to a comprehensive UI library as
-your program grows.
+The goal of this Python library is to make user input simple, using a versatile
+[set of
+prompts](https://robvanderleek.github.io/inquirer-textual/prompts/autocomplete/).
+
+Under the hood, this library uses the sophisticated
+[Textual](https://textual.textualize.io/) TUI framework, which means you get:
+
+- Rich prompts
+- Inline or fullscreen prompts
+- Mouse support
+- Themes
 
 <div align="center">
 
