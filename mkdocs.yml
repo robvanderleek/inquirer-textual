@@ -29,10 +29,6 @@ plugins:
         python:
           options:
             show_source: false
-  - glightbox:
-      draggable: false
-      background: none
-      shadow: false
   - search
 markdown_extensions:
   - abbr

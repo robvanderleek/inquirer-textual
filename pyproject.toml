@@ -28,7 +28,6 @@ dev = [
     "pytest-textual-snapshot>=1.1.0",
     "textual-dev>=1.8.0",
     "mkdocs-material>=9.7.6",
-    "mkdocs-glightbox>=0.5.2",
     "mkdocstrings[python]>=0.30.1",
     "poethepoet>=0.37.0",
 ]
