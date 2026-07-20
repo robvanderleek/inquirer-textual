@@ -11,6 +11,7 @@ from textual.widgets import Footer
 
 from inquirer_textual.common.InquirerHeader import InquirerHeader
 from inquirer_textual.common.InquirerResult import InquirerResult
+from inquirer_textual.common.PromptSettings import PromptSettings
 from inquirer_textual.common.Shortcut import Shortcut
 from inquirer_textual.common.defaults import DEFAULT_THEME
 from inquirer_textual.common.utils import get_cursor_row
@@ -143,6 +144,11 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
             self.call_after_refresh(lambda: self._terminate(value=value))
         else:
             self.call_from_thread(self.exit)
+
+    def run_with_settings(self, settings: PromptSettings) -> InquirerResult[T]:
+        self.header = settings.header
+        self.shortcuts = settings.shortcuts
+        return self.run(inline=settings.inline, inline_no_clear=not settings.clear, mouse=settings.mouse)
 
     def run(
             self,
