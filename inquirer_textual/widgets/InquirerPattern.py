@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Callable, Awaitable
+
 from textual import on, events
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup, HorizontalGroup
@@ -8,7 +10,6 @@ from textual.reactive import reactive
 from textual.widgets import ListView, ListItem, Input, Static
 from typing_extensions import Self
 
-from inquirer_textual.common.Answer import Answer
 from inquirer_textual.common.Candidate import Candidate
 from inquirer_textual.common.Choice import Choice, COMMAND_SELECT
 from inquirer_textual.common.ChoiceLabel import ChoiceLabel
@@ -40,8 +41,9 @@ class InquirerPattern(InquirerChoicesWidget):
 
     candidates: reactive[list[str | Choice]] = reactive([])
 
-    def __init__(self, message: str, choices: list[str | Choice], name: str | None = None,
-                 default: str | Choice | None = None, mandatory: bool = True, height: int | str | None = None):
+    def __init__(self, message: str, choices: list[str | Choice] | Callable[[], Awaitable[list[str | Choice]]],
+                 name: str | None = None, default: str | Choice | None = None, mandatory: bool = True,
+                 height: int | str | None = None):
         """
         Args:
             message (str): The prompt message to display.
@@ -51,16 +53,13 @@ class InquirerPattern(InquirerChoicesWidget):
             height (int | str | None): If None, for inline apps the height will be determined based on the number of \
             choices.
         """
-        super().__init__(choices, name, mandatory, height)
-        self.message = message
-        self.candidates: list[Candidate] = [Candidate(c) for c in choices]
+        super().__init__(message, choices, name, mandatory, height)
+        self.candidates: list[Candidate] = []
         self.list_view: ListView | None = None
         self.selected_label: ChoiceLabel | None = None
         self.selected_item: str | Choice | None = None
         self.default = default
         self.query: Input | None = None
-        self.selected_value: str | Choice | None = None
-        self.show_result: bool = False
 
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
         if self.selected_label:
@@ -147,22 +146,17 @@ class InquirerPattern(InquirerChoicesWidget):
         self.show_result = True
         await self.recompose()
 
-    def compose(self) -> ComposeResult:
-        if self.show_result:
+    def compose_choices_widget(self) -> ComposeResult:
+        with VerticalGroup():
+            self.candidates = [Candidate(c) for c in self._choices]
+            self.list_view = ListView(*self._collect_list_items(), id='inquirer-pattern-list-view',
+                                      initial_index=self._find_initial_index())
             with HorizontalGroup():
                 yield Prompt(self.message)
-                if self.selected_value is not None:
-                    yield Answer(str(self.selected_value))
-        else:
-            with VerticalGroup():
-                self.list_view = ListView(*self._collect_list_items(), id='inquirer-pattern-list-view',
-                                          initial_index=self._find_initial_index())
-                with HorizontalGroup():
-                    yield Prompt(self.message)
-                    yield Static(f'[{len(self.candidates)}/{len(self._choices)}]',
-                                 id='inquirer-pattern-query-count-suffix')
-                with HorizontalGroup(id='inquirer-pattern-query-container'):
-                    yield Static(f'{POINTER_CHARACTER} ', id='inquirer-pattern-query-pointer')
-                    self.query = Input(id="inquirer-pattern-query")
-                    yield self.query
-                yield self.list_view
+                yield Static(f'[{len(self.candidates)}/{len(self._choices)}]',
+                             id='inquirer-pattern-query-count-suffix')
+            with HorizontalGroup(id='inquirer-pattern-query-container'):
+                yield Static(f'{POINTER_CHARACTER} ', id='inquirer-pattern-query-pointer')
+                self.query = Input(id="inquirer-pattern-query")
+                yield self.query
+            yield self.list_view
