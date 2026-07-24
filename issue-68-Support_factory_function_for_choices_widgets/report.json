@@ -1,0 +1,893 @@
+{
+  "version": "0.21.0",
+  "uuid": "5c6742eb-d3b0-42c3-ae46-0f6997d35e9b",
+  "timestamp": "2026-07-24T14:44:36+00:00",
+  "root": "/github/workspace",
+  "repository": {
+    "owner": "robvanderleek",
+    "name": "inquirer-textual",
+    "branch": "issue-68-Support_factory_function_for_choices_widgets"
+  },
+  "codebase": {
+    "totals": {
+      "Python": {
+        "files": 70,
+        "lines_of_code": 1105,
+        "functions": 178,
+        "hard_to_maintain": 2,
+        "unmaintainable": 0
+      }
+    },
+    "tree": {
+      "./": {
+        "entries": [
+          "examples/",
+          "docs/",
+          "inquirer_textual/"
+        ],
+        "profile": [910, 100, 95, 0]
+      },
+      "examples/": {
+        "entries": [
+          "prompt_multi.py",
+          "prompt_autocomplete.py",
+          "prompt_text.py",
+          "app.py",
+          "prompt_select.py",
+          "prompt_external.py",
+          "prompt_fuzzy.py",
+          "pizza.py",
+          "theme-catppuccin-latte.py",
+          "app_shortcuts.py",
+          "prompt_editor.py",
+          "prompt_checkbox.py",
+          "prompt_wait_for_key.py",
+          "app_header.py",
+          "prompt_secret.py",
+          "themes.py",
+          "prompt_choices_factory.py",
+          "shortcuts.py",
+          "prompt_path.py",
+          "prompt_number.py",
+          "validators.py",
+          "prompt_confirm.py",
+          "prompt_textarea.py",
+          "prompt_pattern.py",
+          "alternatives/"
+        ],
+        "profile": [101, 0, 0, 0]
+      },
+      "examples/alternatives/": {
+        "entries": [
+          "inquirerpy.py",
+          "textual-autocomplete.py",
+          "python-inquirer.py"
+        ],
+        "profile": [51, 0, 0, 0]
+      },
+      "docs/getting-started/": {
+        "entries": [
+          "single_prompt.py",
+          "multiple_prompts.py",
+          "multi_prompt.py"
+        ],
+        "profile": [0, 0, 0, 0]
+      },
+      "docs/": {
+        "entries": [
+          "getting-started/"
+        ],
+        "profile": [0, 0, 0, 0]
+      },
+      "inquirer_textual/": {
+        "entries": [
+          "__init__.py",
+          "prompts.py",
+          "version.py",
+          "InquirerApp.py",
+          "common/",
+          "validators/",
+          "widgets/"
+        ],
+        "profile": [809, 100, 95, 0]
+      },
+      "inquirer_textual/common/": {
+        "entries": [
+          "InquirerResult.py",
+          "ChoiceLabel.py",
+          "InquirerHeader.py",
+          "ChoiceCheckboxLabel.py",
+          "Answer.py",
+          "__init__.py",
+          "Candidate.py",
+          "match_utils.py",
+          "Prompt.py",
+          "Shortcut.py",
+          "SpinnerWidget.py",
+          "defaults.py",
+          "Choice.py",
+          "PromptSettings.py",
+          "utils.py"
+        ],
+        "profile": [145, 16, 95, 0]
+      },
+      "inquirer_textual/validators/": {
+        "entries": [
+          "UniqueValidator.py",
+          "__init__.py",
+          "NotEmptyValidator.py"
+        ],
+        "profile": [7, 0, 0, 0]
+      },
+      "inquirer_textual/widgets/": {
+        "entries": [
+          "InquirerPattern.py",
+          "InquirerNumber.py",
+          "InquirerSelect.py",
+          "InquirerTextArea.py",
+          "InquirerCheckbox.py",
+          "__init__.py",
+          "InquirerEditor.py",
+          "InquirerPath.py",
+          "InquirerConfirm.py",
+          "InquirerWaitForKey.py",
+          "InquirerMulti.py",
+          "InquirerSecret.py",
+          "InquirerFuzzy.py",
+          "InquirerText.py",
+          "InquirerAutocomplete.py",
+          "base/"
+        ],
+        "profile": [503, 60, 0, 0]
+      },
+      "inquirer_textual/widgets/base/": {
+        "entries": [
+          "InquirerChoicesWidget.py",
+          "__init__.py",
+          "InquirerWidget.py"
+        ],
+        "profile": [57, 0, 0, 0]
+      }
+    },
+    "files": {
+      "examples/prompt_multi.py": {
+        "checksum": "1bbc5fc37ead04dd3d594892542de079",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/prompt_autocomplete.py": {
+        "checksum": "650df92a265c14dd8dc180ec3c01c2f2",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/prompt_text.py": {
+        "checksum": "8759ab9d707ee5089926d8c1ee728152",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/app.py": {
+        "checksum": "25736b29e5242823afe65987dedaa1a7",
+        "language": "Python",
+        "loc": 10,
+        "profile": [10, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "wizard", "start": {"line": 6, "column": 1}, "end": {"line": 12, "column": 81}, "value": 7},
+          {"unit_name": "main", "start": {"line": 15, "column": 1}, "end": {"line": 17, "column": 18}, "value": 3}
+        ]
+      },
+      "examples/prompt_select.py": {
+        "checksum": "8e9a671ee7d3d95d159dd5d9d171cc36",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/prompt_external.py": {
+        "checksum": "677e9cca6a0b92b9fb6c2d1fe2fb74ce",
+        "language": "Python",
+        "loc": 22,
+        "profile": [22, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 19, "column": 5}, "end": {"line": 22, "column": 79}, "value": 4},
+          {"unit_name": "current_value", "start": {"line": 24, "column": 5}, "end": {"line": 25, "column": 33}, "value": 2},
+          {"unit_name": "compose", "start": {"line": 27, "column": 5}, "end": {"line": 32, "column": 30}, "value": 6},
+          {"unit_name": "on_mount", "start": {"line": 34, "column": 5}, "end": {"line": 36, "column": 51}, "value": 3},
+          {"unit_name": "on_slider_changed", "start": {"line": 39, "column": 5}, "end": {"line": 41, "column": 45}, "value": 3},
+          {"unit_name": "on_key", "start": {"line": 43, "column": 5}, "end": {"line": 46, "column": 40}, "value": 4}
+        ]
+      },
+      "examples/prompt_fuzzy.py": {
+        "checksum": "2d5242b2d6bacd429a5ff15ec467396d",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/pizza.py": {
+        "checksum": "779f6c1f984a460b4eba8b4585379a1e",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/theme-catppuccin-latte.py": {
+        "checksum": "13b5036afae36f73cd4fffd277583be6",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/app_shortcuts.py": {
+        "checksum": "b15e9a5bbeb61e073e8a63f399fe3814",
+        "language": "Python",
+        "loc": 8,
+        "profile": [8, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "wizard", "start": {"line": 6, "column": 1}, "end": {"line": 10, "column": 43}, "value": 5},
+          {"unit_name": "main", "start": {"line": 13, "column": 1}, "end": {"line": 15, "column": 18}, "value": 3}
+        ]
+      },
+      "examples/prompt_editor.py": {
+        "checksum": "3be7bb2252bc1fbb63e6a9cb0f93a951",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/prompt_checkbox.py": {
+        "checksum": "6b4d36689f29ba1a9cca1227711f23e2",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/prompt_wait_for_key.py": {
+        "checksum": "92618abfc75f6dcc3987d1b89d9343aa",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/app_header.py": {
+        "checksum": "560a3560534c74d66ccf9a59c5c04352",
+        "language": "Python",
+        "loc": 10,
+        "profile": [10, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "wizard", "start": {"line": 6, "column": 1}, "end": {"line": 10, "column": 43}, "value": 5},
+          {"unit_name": "main", "start": {"line": 13, "column": 1}, "end": {"line": 17, "column": 18}, "value": 5}
+        ]
+      },
+      "examples/prompt_secret.py": {
+        "checksum": "d4c7669c88f2002f4d3732f12084dc2d",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/themes.py": {
+        "checksum": "b697053b664a82ae0629649a23b389d8",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/prompt_choices_factory.py": {
+        "checksum": "0c882a3b75bfb1ffcc6aa5446ca62dff",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/shortcuts.py": {
+        "checksum": "86caaf6e4dc92b62608d1e1b802a1e69",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/prompt_path.py": {
+        "checksum": "67da500a4e789111b442f1b3070e4a62",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/prompt_number.py": {
+        "checksum": "c6328d7dda4c224ec2485100fb5a8ce4",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/validators.py": {
+        "checksum": "07ff727eebfade433351b1d77f0598d9",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/prompt_confirm.py": {
+        "checksum": "ee22e9181283a8b0d57e4485d5d16dd6",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/prompt_textarea.py": {
+        "checksum": "7506508954728030071ab9c43de62226",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/prompt_pattern.py": {
+        "checksum": "15b4e650e8998ab54494ffdca764baea",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/alternatives/inquirerpy.py": {
+        "checksum": "230612ebfaede749930431b108e9fe18",
+        "language": "Python",
+        "loc": 17,
+        "profile": [17, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "confirm", "start": {"line": 14, "column": 1}, "end": {"line": 15, "column": 81}, "value": 2},
+          {"unit_name": "fuzzy", "start": {"line": 17, "column": 1}, "end": {"line": 24, "column": 16}, "value": 8},
+          {"unit_name": "number", "start": {"line": 26, "column": 1}, "end": {"line": 32, "column": 16}, "value": 7}
+        ]
+      },
+      "examples/alternatives/textual-autocomplete.py": {
+        "checksum": "dc7256466a4dbe3904e18ee273c58cfb",
+        "language": "Python",
+        "loc": 7,
+        "profile": [7, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "compose", "start": {"line": 13, "column": 5}, "end": {"line": 22, "column": 10}, "value": 7}
+        ]
+      },
+      "examples/alternatives/python-inquirer.py": {
+        "checksum": "73228d13ef7d81913dd0de0acad31e82",
+        "language": "Python",
+        "loc": 27,
+        "profile": [27, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "editor", "start": {"line": 11, "column": 1}, "end": {"line": 15, "column": 38}, "value": 5},
+          {"unit_name": "text", "start": {"line": 17, "column": 1}, "end": {"line": 21, "column": 38}, "value": 5},
+          {"unit_name": "path", "start": {"line": 23, "column": 1}, "end": {"line": 31, "column": 38}, "value": 9},
+          {"unit_name": "select", "start": {"line": 33, "column": 1}, "end": {"line": 40, "column": 38}, "value": 8}
+        ]
+      },
+      "docs/getting-started/single_prompt.py": {
+        "checksum": "0e8edf36ccce1823c095864193c41c87",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "docs/getting-started/multiple_prompts.py": {
+        "checksum": "c62884a928bd503ca6c0d50c4c8cb107",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "docs/getting-started/multi_prompt.py": {
+        "checksum": "61f753ca5e9f69f7cd4eaeefdb3772c1",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "inquirer_textual/__init__.py": {
+        "checksum": "d41d8cd98f00b204e9800998ecf8427e",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "inquirer_textual/prompts.py": {
+        "checksum": "811331261d74793593218cbd40d223b1",
+        "language": "Python",
+        "loc": 76,
+        "profile": [76, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "autocomplete", "start": {"line": 28, "column": 1}, "end": {"line": 32, "column": 43}, "value": 5},
+          {"unit_name": "checkbox", "start": {"line": 35, "column": 1}, "end": {"line": 41, "column": 43}, "value": 7},
+          {"unit_name": "confirm", "start": {"line": 44, "column": 1}, "end": {"line": 47, "column": 43}, "value": 4},
+          {"unit_name": "editor", "start": {"line": 50, "column": 1}, "end": {"line": 53, "column": 65}, "value": 4},
+          {"unit_name": "external", "start": {"line": 56, "column": 1}, "end": {"line": 59, "column": 43}, "value": 4},
+          {"unit_name": "fuzzy", "start": {"line": 62, "column": 1}, "end": {"line": 67, "column": 43}, "value": 6},
+          {"unit_name": "multi", "start": {"line": 70, "column": 1}, "end": {"line": 74, "column": 43}, "value": 5},
+          {"unit_name": "number", "start": {"line": 77, "column": 1}, "end": {"line": 81, "column": 43}, "value": 5},
+          {"unit_name": "path", "start": {"line": 84, "column": 1}, "end": {"line": 88, "column": 43}, "value": 5},
+          {"unit_name": "pattern", "start": {"line": 91, "column": 1}, "end": {"line": 97, "column": 43}, "value": 7},
+          {"unit_name": "secret", "start": {"line": 100, "column": 1}, "end": {"line": 103, "column": 43}, "value": 4},
+          {"unit_name": "select", "start": {"line": 106, "column": 1}, "end": {"line": 112, "column": 43}, "value": 7},
+          {"unit_name": "text", "start": {"line": 115, "column": 1}, "end": {"line": 119, "column": 43}, "value": 5},
+          {"unit_name": "text_area", "start": {"line": 122, "column": 1}, "end": {"line": 125, "column": 43}, "value": 4},
+          {"unit_name": "wait_for_key", "start": {"line": 128, "column": 1}, "end": {"line": 131, "column": 43}, "value": 4}
+        ]
+      },
+      "inquirer_textual/version.py": {
+        "checksum": "64d02c76b6c0ef1f5895f0c6f1639464",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "inquirer_textual/InquirerApp.py": {
+        "checksum": "aa4cf94aa87ac208a1bf21b7f07a22a7",
+        "language": "Python",
+        "loc": 102,
+        "profile": [78, 24, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 37, "column": 5}, "end": {"line": 48, "column": 27}, "value": 12},
+          {"unit_name": "shortcuts", "start": {"line": 51, "column": 5}, "end": {"line": 52, "column": 31}, "value": 2},
+          {"unit_name": "shortcuts", "start": {"line": 55, "column": 5}, "end": {"line": 58, "column": 36}, "value": 4},
+          {"unit_name": "on_mount", "start": {"line": 60, "column": 5}, "end": {"line": 69, "column": 98}, "value": 10},
+          {"unit_name": "_update_bindings", "start": {"line": 71, "column": 5}, "end": {"line": 77, "column": 56}, "value": 7},
+          {"unit_name": "inquiry_func_worker", "start": {"line": 79, "column": 5}, "end": {"line": 81, "column": 36}, "value": 3},
+          {"unit_name": "compose", "start": {"line": 113, "column": 5}, "end": {"line": 120, "column": 31}, "value": 8},
+          {"unit_name": "focus_widget", "start": {"line": 122, "column": 5}, "end": {"line": 124, "column": 55}, "value": 3},
+          {"unit_name": "prompt", "start": {"line": 126, "column": 5}, "end": {"line": 140, "column": 27}, "value": 15},
+          {"unit_name": "stop", "start": {"line": 142, "column": 5}, "end": {"line": 146, "column": 45}, "value": 5},
+          {"unit_name": "run_with_settings", "start": {"line": 148, "column": 5}, "end": {"line": 151, "column": 106}, "value": 4},
+          {"unit_name": "run", "start": {"line": 153, "column": 5}, "end": {"line": 176, "column": 10}, "value": 24},
+          {"unit_name": "get_theme_variable_defaults", "start": {"line": 178, "column": 5}, "end": {"line": 182, "column": 10}, "value": 5}
+        ]
+      },
+      "inquirer_textual/common/InquirerResult.py": {
+        "checksum": "1b172d0ca6cdf40b657a04e125a18e47",
+        "language": "Python",
+        "loc": 11,
+        "profile": [11, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__str__", "start": {"line": 16, "column": 5}, "end": {"line": 17, "column": 31}, "value": 2},
+          {"unit_name": "json", "start": {"line": 19, "column": 5}, "end": {"line": 27, "column": 29}, "value": 9}
+        ]
+      },
+      "inquirer_textual/common/ChoiceLabel.py": {
+        "checksum": "2b94ada36ae41181ed9c9743d5dad4ef",
+        "language": "Python",
+        "loc": 14,
+        "profile": [14, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 11, "column": 5}, "end": {"line": 14, "column": 25}, "value": 4},
+          {"unit_name": "_get_text", "start": {"line": 16, "column": 5}, "end": {"line": 21, "column": 22}, "value": 6},
+          {"unit_name": "add_pointer", "start": {"line": 23, "column": 5}, "end": {"line": 24, "column": 75}, "value": 2},
+          {"unit_name": "remove_pointer", "start": {"line": 26, "column": 5}, "end": {"line": 27, "column": 56}, "value": 2}
+        ]
+      },
+      "inquirer_textual/common/InquirerHeader.py": {
+        "checksum": "3990490bdce8f034782196eecf32a5af",
+        "language": "Python",
+        "loc": 9,
+        "profile": [9, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 21, "column": 5}, "end": {"line": 23, "column": 64}, "value": 3},
+          {"unit_name": "on_mount", "start": {"line": 25, "column": 5}, "end": {"line": 26, "column": 45}, "value": 2},
+          {"unit_name": "compose", "start": {"line": 28, "column": 5}, "end": {"line": 31, "column": 69}, "value": 4}
+        ]
+      },
+      "inquirer_textual/common/ChoiceCheckboxLabel.py": {
+        "checksum": "d1da83e86ed119223c3218156e0fca65",
+        "language": "Python",
+        "loc": 13,
+        "profile": [13, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 9, "column": 5}, "end": {"line": 13, "column": 29}, "value": 5},
+          {"unit_name": "check", "start": {"line": 15, "column": 5}, "end": {"line": 17, "column": 44}, "value": 3},
+          {"unit_name": "uncheck", "start": {"line": 19, "column": 5}, "end": {"line": 21, "column": 44}, "value": 3},
+          {"unit_name": "toggle", "start": {"line": 23, "column": 5}, "end": {"line": 24, "column": 57}, "value": 2}
+        ]
+      },
+      "inquirer_textual/common/Answer.py": {
+        "checksum": "3d4bf513348bb972c2c6074481a1cea8",
+        "language": "Python",
+        "loc": 5,
+        "profile": [5, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 17, "column": 5}, "end": {"line": 19, "column": 25}, "value": 3},
+          {"unit_name": "compose", "start": {"line": 21, "column": 5}, "end": {"line": 22, "column": 68}, "value": 2}
+        ]
+      },
+      "inquirer_textual/common/__init__.py": {
+        "checksum": "d41d8cd98f00b204e9800998ecf8427e",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "inquirer_textual/common/Candidate.py": {
+        "checksum": "9391702cd0bf3675951ae573caa069c5",
+        "language": "Python",
+        "loc": 13,
+        "profile": [13, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 12, "column": 5}, "end": {"line": 14, "column": 43}, "value": 3},
+          {"unit_name": "__eq__", "start": {"line": 16, "column": 5}, "end": {"line": 19, "column": 89}, "value": 4},
+          {"unit_name": "render", "start": {"line": 21, "column": 5}, "end": {"line": 26, "column": 22}, "value": 6}
+        ]
+      },
+      "inquirer_textual/common/match_utils.py": {
+        "checksum": "71d44571bb251b68f38e79673f5ad999",
+        "language": "Python",
+        "loc": 116,
+        "profile": [46, 16, 54, 0],
+        "measurements": [
+          {"unit_name": "_rank_task", "start": {"line": 13, "column": 1}, "end": {"line": 27, "column": 18}, "value": 11},
+          {"unit_name": "key_func", "start": {"line": 23, "column": 5}, "end": {"line": 24, "column": 33}, "value": 2},
+          {"unit_name": "fuzzy_match", "start": {"line": 30, "column": 1}, "end": {"line": 32, "column": 75}, "value": 3},
+          {"unit_name": "substr_match", "start": {"line": 35, "column": 1}, "end": {"line": 37, "column": 75}, "value": 3},
+          {"unit_name": "_char_range_with", "start": {"line": 48, "column": 1}, "end": {"line": 55, "column": 22}, "value": 8},
+          {"unit_name": "_bonus", "start": {"line": 74, "column": 1}, "end": {"line": 80, "column": 17}, "value": 7},
+          {"unit_name": "_score", "start": {"line": 83, "column": 1}, "end": {"line": 181, "column": 67}, "value": 54},
+          {"unit_name": "_subsequence", "start": {"line": 184, "column": 1}, "end": {"line": 193, "column": 16}, "value": 10},
+          {"unit_name": "_fzy_scorer", "start": {"line": 196, "column": 1}, "end": {"line": 197, "column": 85}, "value": 2},
+          {"unit_name": "_substr_scorer", "start": {"line": 200, "column": 1}, "end": {"line": 215, "column": 6}, "value": 16}
+        ]
+      },
+      "inquirer_textual/common/Prompt.py": {
+        "checksum": "9c837dd832b771ff7797ff1a14549bf3",
+        "language": "Python",
+        "loc": 7,
+        "profile": [7, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 23, "column": 5}, "end": {"line": 25, "column": 31}, "value": 3},
+          {"unit_name": "compose", "start": {"line": 27, "column": 5}, "end": {"line": 30, "column": 52}, "value": 4}
+        ]
+      },
+      "inquirer_textual/common/Shortcut.py": {
+        "checksum": "a7acb3f988664596c3910060f5bdabf3",
+        "language": "Python",
+        "loc": 3,
+        "profile": [3, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__post_init__", "start": {"line": 13, "column": 5}, "end": {"line": 15, "column": 44}, "value": 3}
+        ]
+      },
+      "inquirer_textual/common/SpinnerWidget.py": {
+        "checksum": "d12099069b2f033aa58359f472180123",
+        "language": "Python",
+        "loc": 20,
+        "profile": [20, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 14, "column": 5}, "end": {"line": 28, "column": 37}, "value": 15},
+          {"unit_name": "on_mount", "start": {"line": 30, "column": 5}, "end": {"line": 31, "column": 52}, "value": 2},
+          {"unit_name": "update_spinner", "start": {"line": 33, "column": 5}, "end": {"line": 35, "column": 93}, "value": 3}
+        ]
+      },
+      "inquirer_textual/common/defaults.py": {
+        "checksum": "3597d4fc0f1ffa6224a037afd6a2df34",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "inquirer_textual/common/Choice.py": {
+        "checksum": "64cd569d1370e6356bd297051ba6862a",
+        "language": "Python",
+        "loc": 2,
+        "profile": [2, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__str__", "start": {"line": 12, "column": 5}, "end": {"line": 13, "column": 25}, "value": 2}
+        ]
+      },
+      "inquirer_textual/common/PromptSettings.py": {
+        "checksum": "7eea942eb886dcfc07bac83010612747",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "inquirer_textual/common/utils.py": {
+        "checksum": "d6955f49a99dc487186b050eab31296e",
+        "language": "Python",
+        "loc": 43,
+        "profile": [2, 0, 41, 0],
+        "measurements": [
+          {"unit_name": "get_cursor_row", "start": {"line": 10, "column": 1}, "end": {"line": 53, "column": 24}, "value": 41},
+          {"unit_name": "clear_screen", "start": {"line": 56, "column": 1}, "end": {"line": 57, "column": 20}, "value": 2}
+        ]
+      },
+      "inquirer_textual/validators/UniqueValidator.py": {
+        "checksum": "9b806c8ff24ae819717656a914e933cc",
+        "language": "Python",
+        "loc": 5,
+        "profile": [5, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 8, "column": 5}, "end": {"line": 10, "column": 71}, "value": 3},
+          {"unit_name": "validate", "start": {"line": 12, "column": 5}, "end": {"line": 13, "column": 82}, "value": 2}
+        ]
+      },
+      "inquirer_textual/validators/__init__.py": {
+        "checksum": "d41d8cd98f00b204e9800998ecf8427e",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "inquirer_textual/validators/NotEmptyValidator.py": {
+        "checksum": "4acfe563df02b9334bc31e38a67cb29a",
+        "language": "Python",
+        "loc": 2,
+        "profile": [2, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "validate", "start": {"line": 6, "column": 5}, "end": {"line": 7, "column": 67}, "value": 2}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerPattern.py": {
+        "checksum": "3c0f7987337dd0075e73ba863f0bf438",
+        "language": "Python",
+        "loc": 84,
+        "profile": [84, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 44, "column": 5}, "end": {"line": 62, "column": 40}, "value": 11},
+          {"unit_name": "on_list_view_highlighted", "start": {"line": 64, "column": 5}, "end": {"line": 77, "column": 34}, "value": 14},
+          {"unit_name": "on_list_view_selected", "start": {"line": 79, "column": 5}, "end": {"line": 80, "column": 36}, "value": 2},
+          {"unit_name": "focus", "start": {"line": 82, "column": 5}, "end": {"line": 86, "column": 49}, "value": 5},
+          {"unit_name": "current_value", "start": {"line": 88, "column": 5}, "end": {"line": 89, "column": 34}, "value": 2},
+          {"unit_name": "_collect_list_items", "start": {"line": 91, "column": 5}, "end": {"line": 96, "column": 21}, "value": 6},
+          {"unit_name": "_find_initial_index", "start": {"line": 98, "column": 5}, "end": {"line": 103, "column": 29}, "value": 6},
+          {"unit_name": "filter_candidates", "start": {"line": 116, "column": 5}, "end": {"line": 121, "column": 54}, "value": 6},
+          {"unit_name": "watch_candidates", "start": {"line": 123, "column": 5}, "end": {"line": 129, "column": 17}, "value": 7},
+          {"unit_name": "on_key", "start": {"line": 131, "column": 5}, "end": {"line": 141, "column": 50}, "value": 11},
+          {"unit_name": "compose_choices_widget", "start": {"line": 149, "column": 5}, "end": {"line": 162, "column": 33}, "value": 14}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerNumber.py": {
+        "checksum": "dde1dd88e0d62738d71af7cfad7daaa2",
+        "language": "Python",
+        "loc": 39,
+        "profile": [39, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 28, "column": 5}, "end": {"line": 44, "column": 39}, "value": 10},
+          {"unit_name": "on_mount", "start": {"line": 46, "column": 5}, "end": {"line": 49, "column": 49}, "value": 4},
+          {"unit_name": "on_input_submitted", "start": {"line": 51, "column": 5}, "end": {"line": 52, "column": 36}, "value": 2},
+          {"unit_name": "focus", "start": {"line": 54, "column": 5}, "end": {"line": 58, "column": 49}, "value": 5},
+          {"unit_name": "current_value", "start": {"line": 65, "column": 5}, "end": {"line": 71, "column": 20}, "value": 7},
+          {"unit_name": "compose", "start": {"line": 73, "column": 5}, "end": {"line": 83, "column": 33}, "value": 11}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerSelect.py": {
+        "checksum": "97898206c2e1ee92ca24f53238184a21",
+        "language": "Python",
+        "loc": 37,
+        "profile": [37, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 20, "column": 5}, "end": {"line": 36, "column": 31}, "value": 9},
+          {"unit_name": "on_list_view_highlighted", "start": {"line": 38, "column": 5}, "end": {"line": 44, "column": 40}, "value": 7},
+          {"unit_name": "on_list_view_selected", "start": {"line": 46, "column": 5}, "end": {"line": 47, "column": 36}, "value": 2},
+          {"unit_name": "focus", "start": {"line": 49, "column": 5}, "end": {"line": 53, "column": 49}, "value": 5},
+          {"unit_name": "current_value", "start": {"line": 55, "column": 5}, "end": {"line": 56, "column": 34}, "value": 2},
+          {"unit_name": "compose_choices_widget", "start": {"line": 65, "column": 5}, "end": {"line": 76, "column": 33}, "value": 12}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerTextArea.py": {
+        "checksum": "e5d9e660a82ab15f1e31f8dcf0151a18",
+        "language": "Python",
+        "loc": 35,
+        "profile": [35, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 25, "column": 5}, "end": {"line": 41, "column": 29}, "value": 10},
+          {"unit_name": "on_mount", "start": {"line": 43, "column": 5}, "end": {"line": 45, "column": 41}, "value": 3},
+          {"unit_name": "on_key", "start": {"line": 47, "column": 5}, "end": {"line": 52, "column": 40}, "value": 6},
+          {"unit_name": "focus", "start": {"line": 54, "column": 5}, "end": {"line": 58, "column": 49}, "value": 5},
+          {"unit_name": "current_value", "start": {"line": 60, "column": 5}, "end": {"line": 61, "column": 63}, "value": 2},
+          {"unit_name": "compose", "start": {"line": 69, "column": 5}, "end": {"line": 77, "column": 33}, "value": 9}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerCheckbox.py": {
+        "checksum": "db5f009970c84d6ecd78ed33ec57822b",
+        "language": "Python",
+        "loc": 36,
+        "profile": [36, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 23, "column": 5}, "end": {"line": 41, "column": 55}, "value": 10},
+          {"unit_name": "action_toggle_selected", "start": {"line": 43, "column": 5}, "end": {"line": 45, "column": 41}, "value": 3},
+          {"unit_name": "on_list_view_highlighted", "start": {"line": 47, "column": 5}, "end": {"line": 50, "column": 40}, "value": 4},
+          {"unit_name": "on_list_view_selected", "start": {"line": 52, "column": 5}, "end": {"line": 53, "column": 36}, "value": 2},
+          {"unit_name": "focus", "start": {"line": 55, "column": 5}, "end": {"line": 59, "column": 49}, "value": 5},
+          {"unit_name": "current_value", "start": {"line": 61, "column": 5}, "end": {"line": 63, "column": 65}, "value": 3},
+          {"unit_name": "compose_choices_widget", "start": {"line": 71, "column": 5}, "end": {"line": 79, "column": 33}, "value": 9}
+        ]
+      },
+      "inquirer_textual/widgets/__init__.py": {
+        "checksum": "d41d8cd98f00b204e9800998ecf8427e",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "inquirer_textual/widgets/InquirerEditor.py": {
+        "checksum": "56fe8db14e2ea289088af7473429c142",
+        "language": "Python",
+        "loc": 38,
+        "profile": [38, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 25, "column": 5}, "end": {"line": 32, "column": 31}, "value": 4},
+          {"unit_name": "on_mount", "start": {"line": 34, "column": 5}, "end": {"line": 37, "column": 34}, "value": 4},
+          {"unit_name": "on_key", "start": {"line": 39, "column": 5}, "end": {"line": 42, "column": 34}, "value": 4},
+          {"unit_name": "_launch_editor", "start": {"line": 44, "column": 5}, "end": {"line": 52, "column": 58}, "value": 9},
+          {"unit_name": "compose", "start": {"line": 54, "column": 5}, "end": {"line": 60, "column": 30}, "value": 7},
+          {"unit_name": "get_editor_command", "start": {"line": 63, "column": 1}, "end": {"line": 72, "column": 27}, "value": 10}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerPath.py": {
+        "checksum": "8d265be576ac68bda4d7dfd3ee5382a9",
+        "language": "Python",
+        "loc": 45,
+        "profile": [28, 17, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 40, "column": 5}, "end": {"line": 53, "column": 35}, "value": 9},
+          {"unit_name": "on_mount", "start": {"line": 55, "column": 5}, "end": {"line": 57, "column": 40}, "value": 3},
+          {"unit_name": "on_input_submitted", "start": {"line": 59, "column": 5}, "end": {"line": 75, "column": 36}, "value": 17},
+          {"unit_name": "_show_validation_error", "start": {"line": 77, "column": 5}, "end": {"line": 79, "column": 38}, "value": 3},
+          {"unit_name": "focus", "start": {"line": 81, "column": 5}, "end": {"line": 85, "column": 49}, "value": 5},
+          {"unit_name": "current_value", "start": {"line": 87, "column": 5}, "end": {"line": 88, "column": 56}, "value": 2},
+          {"unit_name": "compose", "start": {"line": 90, "column": 5}, "end": {"line": 95, "column": 59}, "value": 6}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerConfirm.py": {
+        "checksum": "0ef6ea58c63d5c6e3bc13c243fada3d4",
+        "language": "Python",
+        "loc": 39,
+        "profile": [22, 17, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 24, "column": 5}, "end": {"line": 48, "column": 39}, "value": 17},
+          {"unit_name": "on_key", "start": {"line": 50, "column": 5}, "end": {"line": 59, "column": 40}, "value": 10},
+          {"unit_name": "current_value", "start": {"line": 61, "column": 5}, "end": {"line": 62, "column": 26}, "value": 2},
+          {"unit_name": "compose", "start": {"line": 70, "column": 5}, "end": {"line": 79, "column": 33}, "value": 10}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerWaitForKey.py": {
+        "checksum": "2bc9cb85a1ff0d812d40221952638360",
+        "language": "Python",
+        "loc": 13,
+        "profile": [13, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 21, "column": 5}, "end": {"line": 31, "column": 23}, "value": 5},
+          {"unit_name": "on_key", "start": {"line": 33, "column": 5}, "end": {"line": 35, "column": 40}, "value": 3},
+          {"unit_name": "current_value", "start": {"line": 37, "column": 5}, "end": {"line": 38, "column": 20}, "value": 2},
+          {"unit_name": "compose", "start": {"line": 40, "column": 5}, "end": {"line": 42, "column": 39}, "value": 3}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerMulti.py": {
+        "checksum": "06c4493868760fcf66b1fd5480392b3e",
+        "language": "Python",
+        "loc": 12,
+        "profile": [12, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 17, "column": 5}, "end": {"line": 25, "column": 54}, "value": 6},
+          {"unit_name": "compose", "start": {"line": 40, "column": 5}, "end": {"line": 45, "column": 26}, "value": 6}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerSecret.py": {
+        "checksum": "b6e6f71e5f72cfca2f1b9c5b5b7230da",
+        "language": "Python",
+        "loc": 20,
+        "profile": [20, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 27, "column": 5}, "end": {"line": 34, "column": 40}, "value": 5},
+          {"unit_name": "on_input_submitted", "start": {"line": 36, "column": 5}, "end": {"line": 37, "column": 66}, "value": 2},
+          {"unit_name": "focus", "start": {"line": 39, "column": 5}, "end": {"line": 43, "column": 49}, "value": 5},
+          {"unit_name": "current_value", "start": {"line": 45, "column": 5}, "end": {"line": 46, "column": 56}, "value": 2},
+          {"unit_name": "compose", "start": {"line": 48, "column": 5}, "end": {"line": 53, "column": 29}, "value": 6}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerFuzzy.py": {
+        "checksum": "5ff23c2089978b09940c72201ec41140",
+        "language": "Python",
+        "loc": 11,
+        "profile": [11, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 14, "column": 5}, "end": {"line": 26, "column": 107}, "value": 5},
+          {"unit_name": "filter_candidates", "start": {"line": 28, "column": 5}, "end": {"line": 33, "column": 53}, "value": 6}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerText.py": {
+        "checksum": "34f8d6a31941a2913b7ca6b243e4f7d6",
+        "language": "Python",
+        "loc": 35,
+        "profile": [35, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 32, "column": 5}, "end": {"line": 48, "column": 39}, "value": 11},
+          {"unit_name": "on_mount", "start": {"line": 50, "column": 5}, "end": {"line": 52, "column": 40}, "value": 3},
+          {"unit_name": "on_input_submitted", "start": {"line": 54, "column": 5}, "end": {"line": 56, "column": 40}, "value": 3},
+          {"unit_name": "focus", "start": {"line": 58, "column": 5}, "end": {"line": 62, "column": 49}, "value": 5},
+          {"unit_name": "current_value", "start": {"line": 64, "column": 5}, "end": {"line": 65, "column": 56}, "value": 2},
+          {"unit_name": "compose", "start": {"line": 72, "column": 5}, "end": {"line": 82, "column": 33}, "value": 11}
+        ]
+      },
+      "inquirer_textual/widgets/InquirerAutocomplete.py": {
+        "checksum": "e8237cbee907ea5060ea8cc05b34f475",
+        "language": "Python",
+        "loc": 62,
+        "profile": [36, 26, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 42, "column": 5}, "end": {"line": 56, "column": 48}, "value": 9},
+          {"unit_name": "on_mount", "start": {"line": 58, "column": 5}, "end": {"line": 60, "column": 50}, "value": 3},
+          {"unit_name": "on_key", "start": {"line": 62, "column": 5}, "end": {"line": 87, "column": 54}, "value": 26},
+          {"unit_name": "on_input_changed", "start": {"line": 89, "column": 5}, "end": {"line": 95, "column": 84}, "value": 7},
+          {"unit_name": "current_value", "start": {"line": 97, "column": 5}, "end": {"line": 98, "column": 58}, "value": 2},
+          {"unit_name": "_align_option_list", "start": {"line": 100, "column": 5}, "end": {"line": 103, "column": 83}, "value": 4},
+          {"unit_name": "compose", "start": {"line": 105, "column": 5}, "end": {"line": 115, "column": 33}, "value": 11}
+        ]
+      },
+      "inquirer_textual/widgets/base/InquirerChoicesWidget.py": {
+        "checksum": "934124dd48f8452fd31a9c76cd2a9384",
+        "language": "Python",
+        "loc": 41,
+        "profile": [41, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 23, "column": 5}, "end": {"line": 41, "column": 72}, "value": 12},
+          {"unit_name": "on_mount", "start": {"line": 43, "column": 5}, "end": {"line": 48, "column": 34}, "value": 6},
+          {"unit_name": "_adjust_height", "start": {"line": 50, "column": 5}, "end": {"line": 58, "column": 39}, "value": 9},
+          {"unit_name": "compose_choices_widget", "start": {"line": 69, "column": 5}, "end": {"line": 70, "column": 98}, "value": 2},
+          {"unit_name": "compose", "start": {"line": 72, "column": 5}, "end": {"line": 83, "column": 53}, "value": 12}
+        ]
+      },
+      "inquirer_textual/widgets/base/__init__.py": {
+        "checksum": "d41d8cd98f00b204e9800998ecf8427e",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "inquirer_textual/widgets/base/InquirerWidget.py": {
+        "checksum": "c771fb5b75e9fa872c6bf35bea040927",
+        "language": "Python",
+        "loc": 16,
+        "profile": [16, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 13, "column": 9}, "end": {"line": 16, "column": 35}, "value": 4},
+          {"unit_name": "__init__", "start": {"line": 18, "column": 5}, "end": {"line": 20, "column": 35}, "value": 3},
+          {"unit_name": "on_mount", "start": {"line": 22, "column": 5}, "end": {"line": 24, "column": 66}, "value": 3},
+          {"unit_name": "action_exit_now", "start": {"line": 26, "column": 5}, "end": {"line": 27, "column": 65}, "value": 2},
+          {"unit_name": "current_value", "start": {"line": 29, "column": 5}, "end": {"line": 30, "column": 84}, "value": 2},
+          {"unit_name": "submit_current_value", "start": {"line": 35, "column": 5}, "end": {"line": 36, "column": 80}, "value": 2}
+        ]
+      }
+    }
+  }
+}
