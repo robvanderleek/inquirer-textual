@@ -1,7 +1,7 @@
 {
   "version": "0.21.0",
-  "uuid": "5c6742eb-d3b0-42c3-ae46-0f6997d35e9b",
-  "timestamp": "2026-07-24T14:44:36+00:00",
+  "uuid": "b3973e28-4e4a-4b10-998c-134483f82ac1",
+  "timestamp": "2026-07-25T21:20:17+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "robvanderleek",
@@ -12,7 +12,7 @@
     "totals": {
       "Python": {
         "files": 70,
-        "lines_of_code": 1105,
+        "lines_of_code": 1108,
         "functions": 178,
         "hard_to_maintain": 2,
         "unmaintainable": 0
@@ -25,7 +25,7 @@
           "docs/",
           "inquirer_textual/"
         ],
-        "profile": [910, 100, 95, 0]
+        "profile": [913, 100, 95, 0]
       },
       "examples/": {
         "entries": [
@@ -89,7 +89,7 @@
           "validators/",
           "widgets/"
         ],
-        "profile": [809, 100, 95, 0]
+        "profile": [812, 100, 95, 0]
       },
       "inquirer_textual/common/": {
         "entries": [
@@ -138,7 +138,7 @@
           "InquirerAutocomplete.py",
           "base/"
         ],
-        "profile": [503, 60, 0, 0]
+        "profile": [506, 60, 0, 0]
       },
       "inquirer_textual/widgets/base/": {
         "entries": [
@@ -655,10 +655,10 @@
         ]
       },
       "inquirer_textual/widgets/InquirerPattern.py": {
-        "checksum": "3c0f7987337dd0075e73ba863f0bf438",
+        "checksum": "7146511c702caf89b792e8dfd7058ae8",
         "language": "Python",
-        "loc": 84,
-        "profile": [84, 0, 0, 0],
+        "loc": 87,
+        "profile": [87, 0, 0, 0],
         "measurements": [
           {"unit_name": "__init__", "start": {"line": 44, "column": 5}, "end": {"line": 62, "column": 40}, "value": 11},
           {"unit_name": "on_list_view_highlighted", "start": {"line": 64, "column": 5}, "end": {"line": 77, "column": 34}, "value": 14},
@@ -669,8 +669,8 @@
           {"unit_name": "_find_initial_index", "start": {"line": 98, "column": 5}, "end": {"line": 103, "column": 29}, "value": 6},
           {"unit_name": "filter_candidates", "start": {"line": 116, "column": 5}, "end": {"line": 121, "column": 54}, "value": 6},
           {"unit_name": "watch_candidates", "start": {"line": 123, "column": 5}, "end": {"line": 129, "column": 17}, "value": 7},
-          {"unit_name": "on_key", "start": {"line": 131, "column": 5}, "end": {"line": 141, "column": 50}, "value": 11},
-          {"unit_name": "compose_choices_widget", "start": {"line": 149, "column": 5}, "end": {"line": 162, "column": 33}, "value": 14}
+          {"unit_name": "on_key", "start": {"line": 131, "column": 5}, "end": {"line": 144, "column": 38}, "value": 14},
+          {"unit_name": "compose_choices_widget", "start": {"line": 152, "column": 5}, "end": {"line": 165, "column": 33}, "value": 14}
         ]
       },
       "inquirer_textual/widgets/InquirerNumber.py": {
