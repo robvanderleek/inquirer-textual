@@ -139,6 +139,8 @@ class InquirerPattern(InquirerChoicesWidget):
         elif event.key == 'enter':
             event.stop()
             self.list_view.action_select_cursor()
+        elif event.key == 'escape':
+            self.query.value = ''
 
     async def on_command(self, command: str | None) -> None:
         self.selected_value = self.current_value() if command == COMMAND_SELECT else None
