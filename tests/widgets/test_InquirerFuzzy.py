@@ -24,3 +24,13 @@ def test_snapshot_fuzzy_search(snap_compare):
         await pilot.press('i', 'm')
 
     assert snap_compare(app, run_before=run_before)
+
+def test_escape_clears_input(snap_compare):
+    app = InquirerApp()
+    app.widget = InquirerFuzzy('Environment:', ['Hydrogen', 'Helium', 'Lithium', 'Beryllium', 'Boron', 'Carbon'])
+
+    async def run_before(pilot) -> None:
+        await pilot.press('i', 'm')
+        await pilot.press('escape')
+
+    assert snap_compare(app, run_before=run_before)
