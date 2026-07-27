@@ -1,7 +1,7 @@
 {
   "version": "0.21.0",
-  "uuid": "8d4d1958-e929-4b32-b08a-3a1d120d04c6",
-  "timestamp": "2026-07-25T21:19:53+00:00",
+  "uuid": "9271cbf6-2efa-46e6-925d-f3770b0e7646",
+  "timestamp": "2026-07-27T12:54:18+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "robvanderleek",
@@ -11,9 +11,9 @@
   "codebase": {
     "totals": {
       "Python": {
-        "files": 68,
-        "lines_of_code": 1080,
-        "functions": 172,
+        "files": 70,
+        "lines_of_code": 1108,
+        "functions": 178,
         "hard_to_maintain": 2,
         "unmaintainable": 0
       }
@@ -25,7 +25,7 @@
           "docs/",
           "inquirer_textual/"
         ],
-        "profile": [848, 137, 95, 0]
+        "profile": [913, 100, 95, 0]
       },
       "examples/": {
         "entries": [
@@ -45,6 +45,7 @@
           "app_header.py",
           "prompt_secret.py",
           "themes.py",
+          "prompt_choices_factory.py",
           "shortcuts.py",
           "prompt_path.py",
           "prompt_number.py",
@@ -88,7 +89,7 @@
           "validators/",
           "widgets/"
         ],
-        "profile": [747, 137, 95, 0]
+        "profile": [812, 100, 95, 0]
       },
       "inquirer_textual/common/": {
         "entries": [
@@ -102,12 +103,13 @@
           "match_utils.py",
           "Prompt.py",
           "Shortcut.py",
+          "SpinnerWidget.py",
           "defaults.py",
           "Choice.py",
           "PromptSettings.py",
           "utils.py"
         ],
-        "profile": [125, 16, 95, 0]
+        "profile": [145, 16, 95, 0]
       },
       "inquirer_textual/validators/": {
         "entries": [
@@ -136,7 +138,7 @@
           "InquirerAutocomplete.py",
           "base/"
         ],
-        "profile": [465, 97, 0, 0]
+        "profile": [506, 60, 0, 0]
       },
       "inquirer_textual/widgets/base/": {
         "entries": [
@@ -144,7 +146,7 @@
           "__init__.py",
           "InquirerWidget.py"
         ],
-        "profile": [32, 0, 0, 0]
+        "profile": [57, 0, 0, 0]
       }
     },
     "files": {
@@ -183,7 +185,7 @@
         ]
       },
       "examples/prompt_select.py": {
-        "checksum": "2622a4a66fd6139a7e74fef4b4c5874b",
+        "checksum": "8e9a671ee7d3d95d159dd5d9d171cc36",
         "language": "Python",
         "loc": 0,
         "profile": [0, 0, 0, 0],
@@ -282,6 +284,14 @@
       },
       "examples/themes.py": {
         "checksum": "b697053b664a82ae0629649a23b389d8",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "examples/prompt_choices_factory.py": {
+        "checksum": "0c882a3b75bfb1ffcc6aa5446ca62dff",
         "language": "Python",
         "loc": 0,
         "profile": [0, 0, 0, 0],
@@ -409,26 +419,26 @@
         ]
       },
       "inquirer_textual/prompts.py": {
-        "checksum": "72297c23f8a9d906869814762e7e9fbc",
+        "checksum": "811331261d74793593218cbd40d223b1",
         "language": "Python",
-        "loc": 72,
-        "profile": [72, 0, 0, 0],
+        "loc": 76,
+        "profile": [76, 0, 0, 0],
         "measurements": [
           {"unit_name": "autocomplete", "start": {"line": 28, "column": 1}, "end": {"line": 32, "column": 43}, "value": 5},
-          {"unit_name": "checkbox", "start": {"line": 35, "column": 1}, "end": {"line": 40, "column": 43}, "value": 6},
-          {"unit_name": "confirm", "start": {"line": 43, "column": 1}, "end": {"line": 46, "column": 43}, "value": 4},
-          {"unit_name": "editor", "start": {"line": 49, "column": 1}, "end": {"line": 52, "column": 65}, "value": 4},
-          {"unit_name": "external", "start": {"line": 55, "column": 1}, "end": {"line": 58, "column": 43}, "value": 4},
-          {"unit_name": "fuzzy", "start": {"line": 61, "column": 1}, "end": {"line": 65, "column": 43}, "value": 5},
-          {"unit_name": "multi", "start": {"line": 68, "column": 1}, "end": {"line": 72, "column": 43}, "value": 5},
-          {"unit_name": "number", "start": {"line": 75, "column": 1}, "end": {"line": 79, "column": 43}, "value": 5},
-          {"unit_name": "path", "start": {"line": 82, "column": 1}, "end": {"line": 86, "column": 43}, "value": 5},
-          {"unit_name": "pattern", "start": {"line": 89, "column": 1}, "end": {"line": 94, "column": 43}, "value": 6},
-          {"unit_name": "secret", "start": {"line": 97, "column": 1}, "end": {"line": 100, "column": 43}, "value": 4},
-          {"unit_name": "select", "start": {"line": 103, "column": 1}, "end": {"line": 108, "column": 43}, "value": 6},
-          {"unit_name": "text", "start": {"line": 111, "column": 1}, "end": {"line": 115, "column": 43}, "value": 5},
-          {"unit_name": "text_area", "start": {"line": 118, "column": 1}, "end": {"line": 121, "column": 43}, "value": 4},
-          {"unit_name": "wait_for_key", "start": {"line": 124, "column": 1}, "end": {"line": 127, "column": 43}, "value": 4}
+          {"unit_name": "checkbox", "start": {"line": 35, "column": 1}, "end": {"line": 41, "column": 43}, "value": 7},
+          {"unit_name": "confirm", "start": {"line": 44, "column": 1}, "end": {"line": 47, "column": 43}, "value": 4},
+          {"unit_name": "editor", "start": {"line": 50, "column": 1}, "end": {"line": 53, "column": 65}, "value": 4},
+          {"unit_name": "external", "start": {"line": 56, "column": 1}, "end": {"line": 59, "column": 43}, "value": 4},
+          {"unit_name": "fuzzy", "start": {"line": 62, "column": 1}, "end": {"line": 67, "column": 43}, "value": 6},
+          {"unit_name": "multi", "start": {"line": 70, "column": 1}, "end": {"line": 74, "column": 43}, "value": 5},
+          {"unit_name": "number", "start": {"line": 77, "column": 1}, "end": {"line": 81, "column": 43}, "value": 5},
+          {"unit_name": "path", "start": {"line": 84, "column": 1}, "end": {"line": 88, "column": 43}, "value": 5},
+          {"unit_name": "pattern", "start": {"line": 91, "column": 1}, "end": {"line": 97, "column": 43}, "value": 7},
+          {"unit_name": "secret", "start": {"line": 100, "column": 1}, "end": {"line": 103, "column": 43}, "value": 4},
+          {"unit_name": "select", "start": {"line": 106, "column": 1}, "end": {"line": 112, "column": 43}, "value": 7},
+          {"unit_name": "text", "start": {"line": 115, "column": 1}, "end": {"line": 119, "column": 43}, "value": 5},
+          {"unit_name": "text_area", "start": {"line": 122, "column": 1}, "end": {"line": 125, "column": 43}, "value": 4},
+          {"unit_name": "wait_for_key", "start": {"line": 128, "column": 1}, "end": {"line": 131, "column": 43}, "value": 4}
         ]
       },
       "inquirer_textual/version.py": {
@@ -571,6 +581,17 @@
           {"unit_name": "__post_init__", "start": {"line": 13, "column": 5}, "end": {"line": 15, "column": 44}, "value": 3}
         ]
       },
+      "inquirer_textual/common/SpinnerWidget.py": {
+        "checksum": "d12099069b2f033aa58359f472180123",
+        "language": "Python",
+        "loc": 20,
+        "profile": [20, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 14, "column": 5}, "end": {"line": 28, "column": 37}, "value": 15},
+          {"unit_name": "on_mount", "start": {"line": 30, "column": 5}, "end": {"line": 31, "column": 52}, "value": 2},
+          {"unit_name": "update_spinner", "start": {"line": 33, "column": 5}, "end": {"line": 35, "column": 93}, "value": 3}
+        ]
+      },
       "inquirer_textual/common/defaults.py": {
         "checksum": "3597d4fc0f1ffa6224a037afd6a2df34",
         "language": "Python",
@@ -634,22 +655,22 @@
         ]
       },
       "inquirer_textual/widgets/InquirerPattern.py": {
-        "checksum": "691e7e2bcef27e47c383acdb046c9e7c",
+        "checksum": "7146511c702caf89b792e8dfd7058ae8",
         "language": "Python",
-        "loc": 94,
-        "profile": [75, 19, 0, 0],
+        "loc": 87,
+        "profile": [87, 0, 0, 0],
         "measurements": [
-          {"unit_name": "__init__", "start": {"line": 43, "column": 5}, "end": {"line": 63, "column": 39}, "value": 13},
-          {"unit_name": "on_list_view_highlighted", "start": {"line": 65, "column": 5}, "end": {"line": 78, "column": 34}, "value": 14},
-          {"unit_name": "on_list_view_selected", "start": {"line": 80, "column": 5}, "end": {"line": 81, "column": 36}, "value": 2},
-          {"unit_name": "focus", "start": {"line": 83, "column": 5}, "end": {"line": 87, "column": 49}, "value": 5},
-          {"unit_name": "current_value", "start": {"line": 89, "column": 5}, "end": {"line": 90, "column": 34}, "value": 2},
-          {"unit_name": "_collect_list_items", "start": {"line": 92, "column": 5}, "end": {"line": 97, "column": 21}, "value": 6},
-          {"unit_name": "_find_initial_index", "start": {"line": 99, "column": 5}, "end": {"line": 104, "column": 29}, "value": 6},
-          {"unit_name": "filter_candidates", "start": {"line": 117, "column": 5}, "end": {"line": 122, "column": 54}, "value": 6},
-          {"unit_name": "watch_candidates", "start": {"line": 124, "column": 5}, "end": {"line": 130, "column": 17}, "value": 7},
-          {"unit_name": "on_key", "start": {"line": 132, "column": 5}, "end": {"line": 145, "column": 38}, "value": 14},
-          {"unit_name": "compose", "start": {"line": 153, "column": 5}, "end": {"line": 171, "column": 37}, "value": 19}
+          {"unit_name": "__init__", "start": {"line": 44, "column": 5}, "end": {"line": 62, "column": 40}, "value": 11},
+          {"unit_name": "on_list_view_highlighted", "start": {"line": 64, "column": 5}, "end": {"line": 77, "column": 34}, "value": 14},
+          {"unit_name": "on_list_view_selected", "start": {"line": 79, "column": 5}, "end": {"line": 80, "column": 36}, "value": 2},
+          {"unit_name": "focus", "start": {"line": 82, "column": 5}, "end": {"line": 86, "column": 49}, "value": 5},
+          {"unit_name": "current_value", "start": {"line": 88, "column": 5}, "end": {"line": 89, "column": 34}, "value": 2},
+          {"unit_name": "_collect_list_items", "start": {"line": 91, "column": 5}, "end": {"line": 96, "column": 21}, "value": 6},
+          {"unit_name": "_find_initial_index", "start": {"line": 98, "column": 5}, "end": {"line": 103, "column": 29}, "value": 6},
+          {"unit_name": "filter_candidates", "start": {"line": 116, "column": 5}, "end": {"line": 121, "column": 54}, "value": 6},
+          {"unit_name": "watch_candidates", "start": {"line": 123, "column": 5}, "end": {"line": 129, "column": 17}, "value": 7},
+          {"unit_name": "on_key", "start": {"line": 131, "column": 5}, "end": {"line": 144, "column": 38}, "value": 14},
+          {"unit_name": "compose_choices_widget", "start": {"line": 152, "column": 5}, "end": {"line": 165, "column": 33}, "value": 14}
         ]
       },
       "inquirer_textual/widgets/InquirerNumber.py": {
@@ -667,17 +688,17 @@
         ]
       },
       "inquirer_textual/widgets/InquirerSelect.py": {
-        "checksum": "a0365a9a1e55f438f010ae669b9c2437",
+        "checksum": "97898206c2e1ee92ca24f53238184a21",
         "language": "Python",
-        "loc": 45,
-        "profile": [27, 18, 0, 0],
+        "loc": 37,
+        "profile": [37, 0, 0, 0],
         "measurements": [
-          {"unit_name": "__init__", "start": {"line": 18, "column": 5}, "end": {"line": 36, "column": 39}, "value": 11},
+          {"unit_name": "__init__", "start": {"line": 20, "column": 5}, "end": {"line": 36, "column": 31}, "value": 9},
           {"unit_name": "on_list_view_highlighted", "start": {"line": 38, "column": 5}, "end": {"line": 44, "column": 40}, "value": 7},
           {"unit_name": "on_list_view_selected", "start": {"line": 46, "column": 5}, "end": {"line": 47, "column": 36}, "value": 2},
           {"unit_name": "focus", "start": {"line": 49, "column": 5}, "end": {"line": 53, "column": 49}, "value": 5},
           {"unit_name": "current_value", "start": {"line": 55, "column": 5}, "end": {"line": 56, "column": 34}, "value": 2},
-          {"unit_name": "compose", "start": {"line": 65, "column": 5}, "end": {"line": 82, "column": 37}, "value": 18}
+          {"unit_name": "compose_choices_widget", "start": {"line": 65, "column": 5}, "end": {"line": 76, "column": 33}, "value": 12}
         ]
       },
       "inquirer_textual/widgets/InquirerTextArea.py": {
@@ -695,18 +716,18 @@
         ]
       },
       "inquirer_textual/widgets/InquirerCheckbox.py": {
-        "checksum": "ad34b64dd4579e4ad4cf0206b283e11a",
+        "checksum": "db5f009970c84d6ecd78ed33ec57822b",
         "language": "Python",
-        "loc": 43,
-        "profile": [43, 0, 0, 0],
+        "loc": 36,
+        "profile": [36, 0, 0, 0],
         "measurements": [
-          {"unit_name": "__init__", "start": {"line": 22, "column": 5}, "end": {"line": 41, "column": 39}, "value": 11},
+          {"unit_name": "__init__", "start": {"line": 23, "column": 5}, "end": {"line": 41, "column": 55}, "value": 10},
           {"unit_name": "action_toggle_selected", "start": {"line": 43, "column": 5}, "end": {"line": 45, "column": 41}, "value": 3},
           {"unit_name": "on_list_view_highlighted", "start": {"line": 47, "column": 5}, "end": {"line": 50, "column": 40}, "value": 4},
           {"unit_name": "on_list_view_selected", "start": {"line": 52, "column": 5}, "end": {"line": 53, "column": 36}, "value": 2},
           {"unit_name": "focus", "start": {"line": 55, "column": 5}, "end": {"line": 59, "column": 49}, "value": 5},
           {"unit_name": "current_value", "start": {"line": 61, "column": 5}, "end": {"line": 63, "column": 65}, "value": 3},
-          {"unit_name": "compose", "start": {"line": 71, "column": 5}, "end": {"line": 85, "column": 37}, "value": 15}
+          {"unit_name": "compose_choices_widget", "start": {"line": 71, "column": 5}, "end": {"line": 79, "column": 33}, "value": 9}
         ]
       },
       "inquirer_textual/widgets/__init__.py": {
@@ -794,13 +815,13 @@
         ]
       },
       "inquirer_textual/widgets/InquirerFuzzy.py": {
-        "checksum": "d4bfdfec2dfe1ebeb481bf3de6d66aa7",
+        "checksum": "5ff23c2089978b09940c72201ec41140",
         "language": "Python",
-        "loc": 10,
-        "profile": [10, 0, 0, 0],
+        "loc": 11,
+        "profile": [11, 0, 0, 0],
         "measurements": [
-          {"unit_name": "__init__", "start": {"line": 12, "column": 5}, "end": {"line": 22, "column": 107}, "value": 4},
-          {"unit_name": "filter_candidates", "start": {"line": 24, "column": 5}, "end": {"line": 29, "column": 53}, "value": 6}
+          {"unit_name": "__init__", "start": {"line": 14, "column": 5}, "end": {"line": 26, "column": 107}, "value": 5},
+          {"unit_name": "filter_candidates", "start": {"line": 28, "column": 5}, "end": {"line": 33, "column": 53}, "value": 6}
         ]
       },
       "inquirer_textual/widgets/InquirerText.py": {
@@ -833,13 +854,16 @@
         ]
       },
       "inquirer_textual/widgets/base/InquirerChoicesWidget.py": {
-        "checksum": "97ebb4482fb375ac12255c9818a3ba9c",
+        "checksum": "934124dd48f8452fd31a9c76cd2a9384",
         "language": "Python",
-        "loc": 16,
-        "profile": [16, 0, 0, 0],
+        "loc": 41,
+        "profile": [41, 0, 0, 0],
         "measurements": [
-          {"unit_name": "__init__", "start": {"line": 10, "column": 5}, "end": {"line": 22, "column": 29}, "value": 6},
-          {"unit_name": "on_mount", "start": {"line": 24, "column": 5}, "end": {"line": 33, "column": 39}, "value": 10}
+          {"unit_name": "__init__", "start": {"line": 23, "column": 5}, "end": {"line": 41, "column": 72}, "value": 12},
+          {"unit_name": "on_mount", "start": {"line": 43, "column": 5}, "end": {"line": 48, "column": 34}, "value": 6},
+          {"unit_name": "_adjust_height", "start": {"line": 50, "column": 5}, "end": {"line": 58, "column": 39}, "value": 9},
+          {"unit_name": "compose_choices_widget", "start": {"line": 69, "column": 5}, "end": {"line": 70, "column": 98}, "value": 2},
+          {"unit_name": "compose", "start": {"line": 72, "column": 5}, "end": {"line": 83, "column": 53}, "value": 12}
         ]
       },
       "inquirer_textual/widgets/base/__init__.py": {
