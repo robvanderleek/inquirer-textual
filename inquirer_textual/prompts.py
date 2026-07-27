@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Iterable, Literal
+from typing import Any, Iterable, Literal, Callable, Awaitable
 
 from textual.validation import Validator
 
@@ -32,8 +32,9 @@ def autocomplete(message: str, completions: list[str], settings: PromptSettings 
     return app.run_with_settings(settings)
 
 
-def checkbox(message: str, choices: list[str | Choice], enabled: list[str | Choice] | None = None,
-             height: int | str | None = None, settings: PromptSettings = PromptSettings()) -> InquirerResult[
+def checkbox(message: str, choices: list[str | Choice] | Callable[[], Awaitable[list[str | Choice]]],
+             enabled: list[str | Choice] | None = None, height: int | str | None = None,
+             settings: PromptSettings = PromptSettings()) -> InquirerResult[
     list[str | Choice]]:
     app: InquirerApp[list[str | Choice]] = InquirerApp(theme=settings.theme)
     app.widget = InquirerCheckbox(message, choices, enabled=enabled, mandatory=settings.mandatory, height=height)
@@ -58,8 +59,9 @@ def external(widget: InquirerWidget, settings: PromptSettings = PromptSettings()
     return app.run_with_settings(settings)
 
 
-def fuzzy(message: str, choices: list[str | Choice], default: str | Choice | None = None,
-          height: int | str | None = None, settings: PromptSettings = PromptSettings()) -> InquirerResult[str | Choice]:
+def fuzzy(message: str, choices: list[str | Choice] | Callable[[], Awaitable[list[str | Choice]]],
+          default: str | Choice | None = None, height: int | str | None = None,
+          settings: PromptSettings = PromptSettings()) -> InquirerResult[str | Choice]:
     app: InquirerApp[str | Choice] = InquirerApp(theme=settings.theme)
     app.widget = InquirerFuzzy(message, choices, default=default, mandatory=settings.mandatory, height=height)
     return app.run_with_settings(settings)
@@ -86,8 +88,9 @@ def path(message: str, exists: bool = False, path_type: PathType = PathType.ANY,
     return app.run_with_settings(settings)
 
 
-def pattern(message: str, choices: list[str | Choice], default: str | Choice | None = None,
-            height: int | str | None = None, settings: PromptSettings = PromptSettings()) -> InquirerResult[
+def pattern(message: str, choices: list[str | Choice] | Callable[[], Awaitable[list[str | Choice]]],
+            default: str | Choice | None = None, height: int | str | None = None,
+            settings: PromptSettings = PromptSettings()) -> InquirerResult[
     str | Choice]:
     app: InquirerApp[str | Choice] = InquirerApp(theme=settings.theme)
     app.widget = InquirerPattern(message, choices, default=default, mandatory=settings.mandatory, height=height)
@@ -100,8 +103,9 @@ def secret(message: str, settings: PromptSettings = PromptSettings()) -> Inquire
     return app.run_with_settings(settings)
 
 
-def select(message: str, choices: list[str | Choice], default: str | Choice | None = None,
-           height: int | str | None = None, settings: PromptSettings = PromptSettings()) -> InquirerResult[
+def select(message: str, choices: list[str | Choice] | Callable[[], Awaitable[list[str | Choice]]],
+           default: str | Choice | None = None, height: int | str | None = None,
+           settings: PromptSettings = PromptSettings()) -> InquirerResult[
     str | Choice]:
     app: InquirerApp[str | Choice] = InquirerApp(theme=settings.theme)
     app.widget = InquirerSelect(message, choices, default=default, mandatory=settings.mandatory, height=height)

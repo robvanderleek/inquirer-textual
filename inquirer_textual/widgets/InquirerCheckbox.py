@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+from typing import Callable, Awaitable
+
 from textual.app import ComposeResult
-from textual.containers import VerticalGroup, HorizontalGroup
+from textual.containers import VerticalGroup
 from textual.widgets import ListItem, ListView
 from typing_extensions import Self
 
-from inquirer_textual.common.Answer import Answer
 from inquirer_textual.common.Choice import Choice, COMMAND_SELECT
 from inquirer_textual.common.ChoiceCheckboxLabel import ChoiceCheckboxLabel
 from inquirer_textual.common.Prompt import Prompt
@@ -19,8 +20,9 @@ class InquirerCheckbox(InquirerChoicesWidget):
         ("space", "toggle_selected", "Toggle selection"),
     ]
 
-    def __init__(self, message: str, choices: list[str | Choice], name: str | None = None,
-                 enabled: list[str | Choice] | None = None, mandatory: bool = False, height: int | str | None = None):
+    def __init__(self, message: str, choices: list[str | Choice] | Callable[[], Awaitable[list[str | Choice]]],
+                 name: str | None = None, enabled: list[str | Choice] | None = None, mandatory: bool = False,
+                 height: int | str | None = None):
         """
         Args:
             message (str): The prompt message to display.
@@ -31,14 +33,12 @@ class InquirerCheckbox(InquirerChoicesWidget):
             height (int | str | None): If None, for inline apps the height will be determined based on the number of \
             choices.
         """
-        super().__init__(choices, name, mandatory, height)
+        super().__init__(message, choices, name, mandatory, height)
         self.message = message
         self.enabled = enabled
         self.list_view: ListView | None = None
         self.selected_label: ChoiceCheckboxLabel | None = None
         self.selected_item: str | Choice | None = None
-        self.selected_value: list[str | Choice] | None = None
-        self.show_result: bool = False
 
     def action_toggle_selected(self) -> None:
         if self.selected_label:
@@ -68,18 +68,12 @@ class InquirerCheckbox(InquirerChoicesWidget):
         self.show_result = True
         await self.recompose()
 
-    def compose(self) -> ComposeResult:
-        if self.show_result:
-            with HorizontalGroup():
-                yield Prompt(self.message)
-                if self.selected_value is not None:
-                    yield Answer(str(self.selected_value))
-        else:
-            with VerticalGroup():
-                items: list[ListItem] = []
-                for idx, choice in enumerate(self._choices):
-                    list_item = ListItem(ChoiceCheckboxLabel(choice))
-                    items.append(list_item)
-                self.list_view = ListView(*items, id='inquirer-checkbox-list-view')
-                yield Prompt(self.message)
-                yield self.list_view
+    def compose_choices_widget(self) -> ComposeResult:
+        with VerticalGroup():
+            items: list[ListItem] = []
+            for idx, choice in enumerate(self._choices):
+                list_item = ListItem(ChoiceCheckboxLabel(choice))
+                items.append(list_item)
+            self.list_view = ListView(*items, id='inquirer-checkbox-list-view')
+            yield Prompt(self.message)
+            yield self.list_view
