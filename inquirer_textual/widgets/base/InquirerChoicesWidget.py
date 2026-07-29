@@ -34,7 +34,7 @@ class InquirerChoicesWidget(InquirerWidget):
         super().__init__(name=name, mandatory=mandatory)
         self.message = message
         self._choices_factory = choices_factory
-        self._choices: list[str | Choice] = [] if callable(choices_factory) else choices_factory
+        self.choices: list[str | Choice] = [] if callable(choices_factory) else choices_factory
         self.height = height
         self.show_result: bool = False
         self.selected_value: str | Choice | None = None
@@ -52,15 +52,15 @@ class InquirerChoicesWidget(InquirerWidget):
             if self.height == 'auto':
                 self.styles.min_height = 10
             self.styles.height = self.height
-        elif self.app.is_inline and self._choices is not None:
-            self.styles.height = min(10, len(self._choices) + 1)
+        elif self.app.is_inline and self.choices is not None:
+            self.styles.height = min(10, len(self.choices) + 1)
         else:
             self.styles.height = '1fr'
 
     @work
     async def _load_choices(self) -> None:
         if callable(self._choices_factory):
-            self._choices = await self._choices_factory()
+            self.choices = await self._choices_factory()
         self._adjust_height()
         self._is_loading = False
         await self.recompose()

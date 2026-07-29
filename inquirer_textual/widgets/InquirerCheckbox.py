@@ -71,7 +71,7 @@ class InquirerCheckbox(InquirerChoicesWidget):
     def compose_choices_widget(self) -> ComposeResult:
         with VerticalGroup():
             items: list[ListItem] = []
-            for idx, choice in enumerate(self._choices):
+            for idx, choice in enumerate(self.choices):
                 list_item = ListItem(ChoiceCheckboxLabel(choice))
                 items.append(list_item)
             self.list_view = ListView(*items, id='inquirer-checkbox-list-view')

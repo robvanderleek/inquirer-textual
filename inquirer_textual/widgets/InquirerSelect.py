@@ -66,7 +66,7 @@ class InquirerSelect(InquirerChoicesWidget):
         with VerticalGroup():
             initial_index = 0
             items: list[ListItem] = []
-            for idx, choice in enumerate(self._choices):
+            for idx, choice in enumerate(self.choices):
                 list_item = ListItem(ChoiceLabel(choice))
                 items.append(list_item)
                 if self.default and choice == self.default:

@@ -76,6 +76,13 @@ class InquirerApp(App[InquirerResult[T]], inherit_bindings=False):  # type: igno
                                     description=shortcut.description,
                                     show=shortcut.show)
 
+    def check_action(self, action: str, parameters: tuple[object, ...]) -> bool | None:
+        if action == 'shortcut' and isinstance(self._shortcuts, list) and self.widget:
+            for s in self._shortcuts:
+                if len(parameters) > 0 and parameters[0] == s.command:
+                    return s.check(self.widget)
+        return True
+
     def inquiry_func_worker(self):
         if self.inquiry_func:
             self.inquiry_func(self)

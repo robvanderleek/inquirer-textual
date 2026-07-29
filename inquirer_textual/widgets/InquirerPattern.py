@@ -97,7 +97,7 @@ class InquirerPattern(InquirerChoicesWidget):
 
     def _find_initial_index(self):
         initial_index = 0
-        for idx, choice in enumerate(self._choices):
+        for idx, choice in enumerate(self.choices):
             if self.default and choice == self.default:
                 initial_index = idx
         return initial_index
@@ -116,12 +116,12 @@ class InquirerPattern(InquirerChoicesWidget):
     def filter_candidates(self, query: str) -> list[Candidate]:
         query = query.lower()
         if query == '':
-            return [Candidate(c) for c in self._choices]
+            return [Candidate(c) for c in self.choices]
         else:
-            return substr_match(query, self._choices)
+            return substr_match(query, self.choices)
 
     def watch_candidates(self, candidates: list[str | Choice]) -> None:
-        count_suffix = f'[{len(candidates)}/{len(self._choices)}]'
+        count_suffix = f'[{len(candidates)}/{len(self.choices)}]'
         try:
             count_widget = self.query_one('#inquirer-pattern-query-count-suffix', Static)
             count_widget.update(count_suffix)
@@ -151,12 +151,12 @@ class InquirerPattern(InquirerChoicesWidget):
 
     def compose_choices_widget(self) -> ComposeResult:
         with VerticalGroup():
-            self.candidates = [Candidate(c) for c in self._choices]
+            self.candidates = [Candidate(c) for c in self.choices]
             self.list_view = ListView(*self._collect_list_items(), id='inquirer-pattern-list-view',
                                       initial_index=self._find_initial_index())
             with HorizontalGroup():
                 yield Prompt(self.message)
-                yield Static(f'[{len(self.candidates)}/{len(self._choices)}]',
+                yield Static(f'[{len(self.candidates)}/{len(self.choices)}]',
                              id='inquirer-pattern-query-count-suffix')
             with HorizontalGroup(id='inquirer-pattern-query-container'):
                 yield Static(f'{POINTER_CHARACTER} ', id='inquirer-pattern-query-pointer')
