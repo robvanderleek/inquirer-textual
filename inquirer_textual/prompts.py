@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Iterable, Literal, Callable, Awaitable
 
 from textual.validation import Validator
+from textual.visual import VisualType
 
 from inquirer_textual.InquirerApp import InquirerApp
 from inquirer_textual.common.Choice import Choice
@@ -11,6 +12,7 @@ from inquirer_textual.common.PromptSettings import PromptSettings
 from inquirer_textual.widgets.InquirerAutocomplete import InquirerAutocomplete
 from inquirer_textual.widgets.InquirerCheckbox import InquirerCheckbox
 from inquirer_textual.widgets.InquirerConfirm import InquirerConfirm
+from inquirer_textual.widgets.InquirerEcho import InquirerEcho
 from inquirer_textual.widgets.InquirerEditor import InquirerEditor
 from inquirer_textual.widgets.InquirerFuzzy import InquirerFuzzy
 from inquirer_textual.widgets.InquirerMulti import InquirerMulti
@@ -44,6 +46,12 @@ def checkbox(message: str, choices: list[str | Choice] | Callable[[], Awaitable[
 def confirm(message: str, default: bool = False, settings: PromptSettings = PromptSettings()) -> InquirerResult[bool]:
     app: InquirerApp[bool] = InquirerApp(theme=settings.theme)
     app.widget = InquirerConfirm(message, default=default, mandatory=settings.mandatory)
+    return app.run_with_settings(settings)
+
+
+def echo(content: VisualType, settings: PromptSettings = PromptSettings()) -> InquirerResult[None]:
+    app: InquirerApp[None] = InquirerApp(theme=settings.theme)
+    app.widget = InquirerEcho(content, mandatory=settings.mandatory)
     return app.run_with_settings(settings)
 
 

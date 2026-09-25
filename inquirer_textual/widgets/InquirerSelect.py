@@ -23,7 +23,8 @@ class InquirerSelect(InquirerChoicesWidget):
         """
         Args:
             message (str): The prompt message to display.
-            choices (list[str | Choice]): A list of choices to present to the user.
+            choices_factory (list[str | Choice] | Callable[[], Awaitable[list[str | Choice]]]): A list of choices or \
+            a callable that returns a list of choices.
             default (str | Choice | None): The default choice to pre-select.
             mandatory (bool): Whether a response is mandatory.
             height (int | str | None): If None, for inline apps the height will be determined based on the number of \
