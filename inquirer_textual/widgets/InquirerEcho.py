@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from textual.app import ComposeResult
-from textual.containers import HorizontalGroup
+from textual.containers import VerticalScroll
 from textual.visual import VisualType
 from textual.widgets import Static
 
@@ -29,11 +29,17 @@ class InquirerEcho(InquirerWidget):
 
     def on_mount(self):
         super().on_mount()
-        self.submit_current_value()
+        self._adjust_height()
+
+    def _adjust_height(self):
+        if self.app.is_inline:
+            self.styles.height = 10
+        else:
+            self.styles.height = '1fr'
 
     def current_value(self):
         return None
 
     def compose(self) -> ComposeResult:
-        with HorizontalGroup():
+        with VerticalScroll():
             yield Static(self.content)
