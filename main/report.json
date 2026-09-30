@@ -1,7 +1,7 @@
 {
   "version": "0.21.0",
-  "uuid": "fe65c5e2-bedc-452c-af28-116fd0c742dd",
-  "timestamp": "2026-09-25T12:38:07+00:00",
+  "uuid": "9b4ea477-20af-4d18-9ab1-0e8ec579c8eb",
+  "timestamp": "2026-09-30T12:32:29+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "robvanderleek",
@@ -12,8 +12,8 @@
     "totals": {
       "Python": {
         "files": 72,
-        "lines_of_code": 1132,
-        "functions": 184,
+        "lines_of_code": 1137,
+        "functions": 185,
         "hard_to_maintain": 2,
         "unmaintainable": 0
       }
@@ -25,7 +25,7 @@
           "inquirer_textual/",
           "docs/"
         ],
-        "profile": [937, 100, 95, 0]
+        "profile": [942, 100, 95, 0]
       },
       "examples/": {
         "entries": [
@@ -76,7 +76,7 @@
           "common/",
           "widgets/"
         ],
-        "profile": [836, 100, 95, 0]
+        "profile": [841, 100, 95, 0]
       },
       "inquirer_textual/validators/": {
         "entries": [
@@ -126,7 +126,7 @@
           "InquirerPattern.py",
           "base/"
         ],
-        "profile": [518, 60, 0, 0]
+        "profile": [523, 60, 0, 0]
       },
       "inquirer_textual/widgets/base/": {
         "entries": [
@@ -177,7 +177,7 @@
         ]
       },
       "examples/prompt_echo.py": {
-        "checksum": "dc4cfb8c854da46ccd0c9af3cc3eec80",
+        "checksum": "dcf1385bdb971e27e72e9342e8013f1d",
         "language": "Python",
         "loc": 0,
         "profile": [0, 0, 0, 0],
@@ -419,7 +419,7 @@
         ]
       },
       "inquirer_textual/version.py": {
-        "checksum": "bb2df6f9d12527111bd21a303a52756d",
+        "checksum": "be2aacc3b50aec5a56d719cd1d44cb52",
         "language": "Python",
         "loc": 0,
         "profile": [0, 0, 0, 0],
@@ -700,15 +700,16 @@
         ]
       },
       "inquirer_textual/widgets/InquirerEcho.py": {
-        "checksum": "7135553a5c2a81432216007b7f85adee",
+        "checksum": "ab0640ca7fe04abb7032c7c7fdb1ca06",
         "language": "Python",
-        "loc": 12,
-        "profile": [12, 0, 0, 0],
+        "loc": 17,
+        "profile": [17, 0, 0, 0],
         "measurements": [
           {"unit_name": "__init__", "start": {"line": 20, "column": 5}, "end": {"line": 28, "column": 31}, "value": 4},
-          {"unit_name": "on_mount", "start": {"line": 30, "column": 5}, "end": {"line": 32, "column": 36}, "value": 3},
-          {"unit_name": "current_value", "start": {"line": 34, "column": 5}, "end": {"line": 35, "column": 20}, "value": 2},
-          {"unit_name": "compose", "start": {"line": 37, "column": 5}, "end": {"line": 39, "column": 39}, "value": 3}
+          {"unit_name": "on_mount", "start": {"line": 30, "column": 5}, "end": {"line": 32, "column": 30}, "value": 3},
+          {"unit_name": "_adjust_height", "start": {"line": 34, "column": 5}, "end": {"line": 38, "column": 39}, "value": 5},
+          {"unit_name": "current_value", "start": {"line": 40, "column": 5}, "end": {"line": 41, "column": 20}, "value": 2},
+          {"unit_name": "compose", "start": {"line": 43, "column": 5}, "end": {"line": 45, "column": 39}, "value": 3}
         ]
       },
       "inquirer_textual/widgets/InquirerFuzzy.py": {
