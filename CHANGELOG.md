@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.8.5 (2026-10-16)
+
+### Bug Fixes
+
+- 🐛 Trigger release
+  ([`b1ba8ee`](https://github.com/robvanderleek/inquirer-textual/commit/b1ba8eeac533bac18c7b976130636bd089acb71a))
+
+
 ## v0.8.4 (2026-10-16)
 
 ### Bug Fixes
