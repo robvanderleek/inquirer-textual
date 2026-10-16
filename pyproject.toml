@@ -1,6 +1,6 @@
 [project]
 name = "inquirer-textual"
-version = "0.8.3"
+version = "0.8.4"
 description = "Inquirer based on Textual"
 authors = [{ name = "Rob van der Leek", email = "robvanderleek@gmail.com" }]
 readme = "README.md"
@@ -50,6 +50,9 @@ version_variables = [ "inquirer_textual/version.py:version" ]
 upload_to_repository = false
 upload_to_release = false
 allow_zero_version = true
+
+[tool.semantic_release.changelog]
+mode = "init"
 
 [tool.poe.tasks.gifs]
 help = "Generate documentation gifs"
