@@ -8,8 +8,11 @@ license = "MIT"
 requires-python = ">=3.9,<3.15"
 
 dependencies = [
-    "textual>=8.2.6",
+    "textual",
 ]
+
+[tool.uv.sources]
+textual = { git = "https://github.com/robvanderleek/textual", branch = "add-windows-inline-support" }
 
 [project.optional-dependencies]
 examples = [
