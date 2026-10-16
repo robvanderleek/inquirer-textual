@@ -1,4 +1,8 @@
 packages:
 - id: codelimit
+- id: codelimit
+  args: 'scan {workspace}'
+- id: codelimit
+  args: 'findings --full --format markdown {workspace}'
 - id: mypy
 - id: ruff
