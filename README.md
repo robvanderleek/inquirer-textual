@@ -81,7 +81,7 @@ Generating the static documentation:
 uv run mkdocs build
 ```
 
-Viewing the static documentation:
+View the static documentation:
 
 ```shell
 uv run mkdocs serve
